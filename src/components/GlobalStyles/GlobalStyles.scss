@@ -1,16 +1,25 @@
 @import 'normalize.css';
 @import url('https://fonts.googleapis.com/css2?family=Rhodium+Libre&display=swap');
 
-* {
+html {
+  font-size: 62.5%;
+  font-family: 'Rhodium Libre', serif;
   box-sizing: border-box;
 }
 
-html {
-  font-size: 62.5%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
 body {
-  font-family: 'Rhodium Libre', serif;
   font-size: 1.6rem;
   text-rendering: optimizeSpeed;
+}
+
+:root {
+  --white-color: #fff;
+  --black-color: #000;
+  --green-color: #1b4c29db;
 }
