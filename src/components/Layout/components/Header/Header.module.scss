@@ -1,8 +1,7 @@
 .wrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
-
+  justify-content: center;
   background-color: var(---white-color);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
@@ -19,9 +18,10 @@
 .navbarList {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   align-items: center;
+  justify-content: center;
   list-style: none;
+  line-height: 0px;
 }
 
 .navbarLink {
@@ -30,4 +30,7 @@
   font-size: 1.6rem;
   font-weight: 400;
   margin: 0 30px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
