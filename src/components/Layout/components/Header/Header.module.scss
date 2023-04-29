@@ -22,15 +22,17 @@
   justify-content: center;
   list-style: none;
   line-height: 0px;
-}
 
-.navbarLink {
-  text-decoration: none;
-  color: var(--black-color);
-  font-size: 1.6rem;
-  font-weight: 400;
-  margin: 0 30px;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+  .navbarLink {
+    text-decoration: none;
+    color: var(--black-color);
+    font-size: 1.6rem;
+    font-weight: 400;
+
+    margin: 0 30px;
+
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
 }

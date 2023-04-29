@@ -1,49 +1,105 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  background-color: var(--green-color);
-}
-
-.companyInfo {
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-}
-
-.socialList {
-  list-style: none;
-}
-
-.socialLink {
-  display: flex;
   align-items: center;
-
-  font-size: 1.6rem;
-  text-decoration: none;
-  color: var(--white-color);
-
-  margin: 8px 0;
-}
-
-.socialIcons {
-  min-width: 50px;
-}
-
-.feedback {
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-}
-
-.feedbackInput {
-  margin-bottom: 10px;
+  background-color: var(--green-color);
 }
 
 .inner {
   display: flex;
   flex-direction: row;
+  padding-top: 40px;
   justify-content: space-between;
-  width: 100%;
+  width: 90%;
+}
+
+.companyInfo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  .logo {
+    margin: 20px 0 40px 38px;
+  }
+
+  .socialList {
+    list-style: none;
+
+    .socialLink {
+      display: flex;
+      align-items: center;
+
+      font-size: 1.6rem;
+      text-decoration: none;
+      color: var(--white-color);
+
+      margin: 8px 0;
+
+      &:hover {
+        color: var(--primary-color);
+      }
+
+      .socialIcons {
+        min-width: 40px;
+      }
+    }
+  }
+}
+
+.feedback {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+
+  .feedbackTitle {
+    font-size: 3rem;
+    color: var(--white-color);
+  }
+
+  .feedbackInput {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+
+    font-size: 1.6rem;
+
+    border-radius: 5px;
+    margin: 10px 0;
+  }
+
+  .submitBtn {
+    width: 100%;
+    height: 45px;
+
+    font-size: 2rem;
+
+    border-radius: 5px;
+  }
+}
+
+.language {
+  width: 170px;
+  height: 48px;
+  border: 1px solid var(--white-color);
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--white-color);
+
+  cursor: pointer;
+
+  .languageIcon {
+    margin: 0 10px;
+  }
+
+  .languageTitle {
+    margin-top: 4px;
+  }
 }
 
 .copyRight {

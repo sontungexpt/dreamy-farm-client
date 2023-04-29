@@ -1,8 +1,9 @@
-function Logo({ width = 74, height = 51, color = '#000000', ...props }) {
+function Logo({ color = '#000000', transform = 'none', ...props }) {
   return (
     <svg
-      width={width}
-      height={height}
+      style={{ transform: transform, ...props }}
+      width="74"
+      height="51"
       viewBox="0 0 74 51"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
