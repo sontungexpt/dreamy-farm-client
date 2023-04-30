@@ -35,17 +35,16 @@
 
   animation: fadeIn 0.2s linear, growth 0.2s linear;
 
-  .closeBtn {
-    display: block;
-  }
-
   .closeIcon {
     position: absolute;
     top: 14px;
     right: 14px;
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
+  }
 
+  .closeBtn {
+    display: block;
     cursor: pointer;
   }
 }

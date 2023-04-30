@@ -27,7 +27,7 @@ function LanguageBtn() {
       </Button>
 
       {isOpen && (
-        <Modal closeModal={() => setIsOpen(false)}>
+        <Modal closeBtn closeModal={() => setIsOpen(false)}>
           <div className={styles.innerModal}>
             <h3 className={styles.modalTitle}>Choose a language</h3>
             <ul className={styles.languageList}>

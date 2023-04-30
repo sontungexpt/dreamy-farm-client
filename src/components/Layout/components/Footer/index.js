@@ -2,6 +2,8 @@ import styles from './Footer.module.scss';
 import { clsx } from 'clsx';
 import Logo from '~/components/Layout/components/Logo';
 import icons from '~/assets/images/icons';
+import LanguageBtn from '~/components/Layout/components/Footer/LanguageBtn';
+import Button from '~/components/Button';
 
 function Footer() {
   return (
@@ -68,16 +70,11 @@ function Footer() {
             placeholder="Enter your feedback"
             className={clsx([styles.feedbackInput])}
           />
-          <button className={styles.submitBtn}>Submit</button>
+          <Button primary className={styles.submitBtn}>
+            Submit
+          </Button>
         </div>
-        <div className={styles.language}>
-          <img
-            className={styles.languageIcon}
-            src={icons.language}
-            alt="choose language"
-          />
-          <span className={styles.languageTitle}>English</span>
-        </div>
+        <LanguageBtn />
       </div>
       <p className={styles.copyRight}>Dreamy Farm © 2023. All Right Served.</p>
     </footer>

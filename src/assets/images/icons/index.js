@@ -8,6 +8,7 @@ const icons = {
   favorite: require('./favorite-icon.svg').default,
   cart: require('./cart-icon.svg').default,
   language: require('./language-icon.svg').default,
+  close: require('./close-icon.svg').default,
 };
 
 export default icons;

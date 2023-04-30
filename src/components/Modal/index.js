@@ -12,11 +12,9 @@ function Modal({ children, closeBtn, closeModal }) {
       }
     }
 
-    console.log('modal mounted add click');
     window.addEventListener('click', handleClickOutside);
 
     return () => {
-      console.log('modal unmounted remove click');
       window.removeEventListener('click', handleClickOutside);
     };
   });
@@ -29,11 +27,7 @@ function Modal({ children, closeBtn, closeModal }) {
             {closeBtn.icon ? (
               closeBtn.icon
             ) : (
-              <img
-                src={icons.close}
-                className={styles.closeIcon}
-                alt="close modal"
-              />
+              <img src={icons.close} className={styles.closeIcon} alt="close" />
             )}
           </button>
         )}

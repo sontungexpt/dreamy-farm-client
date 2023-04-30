@@ -58,10 +58,10 @@
 
   .feedbackInput {
     width: 100%;
-    height: 50px;
-    padding: 10px;
+    height: 55px;
+    padding: 12px;
 
-    font-size: 1.6rem;
+    font-size: 1.8rem;
 
     border-radius: 5px;
     margin: 10px 0;
@@ -69,9 +69,9 @@
 
   .submitBtn {
     width: 100%;
-    height: 45px;
+    height: 50px;
 
-    font-size: 2rem;
+    font-size: 2.4rem;
 
     border-radius: 5px;
   }
@@ -92,14 +92,6 @@
   color: var(--white-color);
 
   cursor: pointer;
-
-  .languageIcon {
-    margin: 0 10px;
-  }
-
-  .languageTitle {
-    margin-top: 4px;
-  }
 }
 
 .copyRight {

@@ -19,6 +19,8 @@
   .title + .icon {
     margin-left: 10px;
   }
+
+  font-family: 'Rhodium Libre', serif;
 }
 
 .button.alignLeft {
@@ -28,9 +30,8 @@
 }
 
 .button.primary {
-  background-color: var(--primary-color);
+  background-color: var(--primary-color) !important;
   color: var(--white-color);
-  font-size: 2.2rem;
   border-radius: 5px;
 
   &:hover {
