@@ -1,0 +1,51 @@
+@use '../GlobalStyles/Animations.scss';
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.body {
+  position: fixed;
+  z-index: 100;
+  min-width: 30px;
+  min-height: 30px;
+
+  background-color: var(--white-color);
+  border-radius: 10px;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+
+  animation: fadeIn 0.2s linear, growth 0.2s linear;
+
+  .closeBtn {
+    display: block;
+  }
+
+  .closeIcon {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 14px;
+    height: 14px;
+
+    cursor: pointer;
+  }
+}
