@@ -26,7 +26,7 @@
   .navbarLink {
     text-decoration: none;
     color: var(--black-color);
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 400;
 
     padding: 0 12px;
@@ -54,7 +54,7 @@
   align-items: center;
   justify-content: space-between;
   height: 40px;
-  width: 250px;
+  width: 260px;
 
   border: 1px solid var(--black-color);
   border-radius: 20px;
@@ -62,11 +62,11 @@
   input {
     padding: 0 10px;
     border-radius: 20px;
-
+    width: 100%;
     font-size: 1.8rem;
   }
 
   img {
-    margin-right: 10px;
+    margin-right: 16px;
   }
 }

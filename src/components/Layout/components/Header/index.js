@@ -32,10 +32,8 @@ function Header() {
         <ul className={clsx([styles.navbarList])}>
           <li>
             <div className={clsx([styles.search])}>
-              <input id="search" type="text" placeholder="Search" />
-              <label htmlFor="search">
-                <img src={icons.search} alt="search" />
-              </label>
+              <input type="text" placeholder="Search" />
+              <img src={icons.search} alt="search" />
             </div>
           </li>
           <li>
