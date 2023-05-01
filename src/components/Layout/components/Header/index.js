@@ -1,55 +1,55 @@
-import { clsx } from 'clsx';
 import styles from './Header.module.scss';
 import Logo from '~/components/Layout/components/Logo';
 import icons from '~/assets/images/icons';
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
-    <header className={clsx([styles.wrapper])}>
-      <nav className={clsx([styles.navbar])}>
-        <ul className={clsx([styles.navbarList])}>
+    <header className={styles.wrapper}>
+      <nav className={styles.navbar}>
+        <ul className={styles.navbarList}>
           <li>
-            <a href="/" className={clsx([styles.navbarLink])}>
+            <Link to="/" className={styles.navbarLink}>
               <Logo />
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/" className={clsx([styles.navbarLink])}>
+            <Link to="/products" className={styles.navbarLink}>
               Products
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/" className={clsx([styles.navbarLink])}>
+            <Link to="/recipes" className={styles.navbarLink}>
               Recipes
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/" className={clsx([styles.navbarLink])}>
+            <Link to="/aboutUs" className={styles.navbarLink}>
               About us
-            </a>
+            </Link>
           </li>
         </ul>
-        <ul className={clsx([styles.navbarList])}>
+        <ul className={styles.navbarList}>
           <li>
-            <div className={clsx([styles.search])}>
+            <div className={styles.search}>
               <input type="text" placeholder="Search" />
               <img src={icons.search} alt="search" />
             </div>
           </li>
           <li>
-            <a href="/" className={clsx([styles.navbarLink])}>
+            <Link to="/favorite" className={styles.navbarLink}>
               <img src={icons.favorite} alt="favorite" />
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/" className={clsx([styles.navbarLink])}>
+            <Link to="/shoppingCart" className={styles.navbarLink}>
               <img src={icons.cart} alt="cart" />
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/" className={clsx([styles.navbarLink])}>
+            <Link to="/accounts" className={styles.navbarLink}>
               <img style={{ marginTop: '8px' }} src={icons.user} alt="user" />
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

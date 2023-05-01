@@ -12,7 +12,7 @@
   align-items: center;
   justify-content: space-between;
   width: 85%;
-  height: 62px;
+  height: var(--header-height);
 }
 
 .navbarList {
@@ -34,6 +34,10 @@
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+
+    &:hover {
+      color: var(--primary-color);
+    }
   }
 
   &:first-child {
@@ -53,15 +57,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 40px;
   width: 260px;
 
   border: 1px solid var(--black-color);
-  border-radius: 20px;
+  border-radius: 30px;
 
   input {
-    padding: 0 10px;
-    border-radius: 20px;
+    padding: 10px 10px;
+    border-radius: inherit;
+
     width: 100%;
     font-size: 1.8rem;
   }

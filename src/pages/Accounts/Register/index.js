@@ -1,4 +1,7 @@
+import styles from './Register.module.scss';
+
 function Register() {
-  return <h1>Login</h1>;
+  return <div className={styles.wrapper}>Register</div>;
 }
+
 export default Register;

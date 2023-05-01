@@ -1,4 +1,6 @@
+import styles from './ForgotPassword.module.scss';
+
 function ForgotPassword() {
-  return <h1>ForgotPassword</h1>;
+  return <div className={styles.wrapper}>Forgot password</div>;
 }
 export default ForgotPassword;
