@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom';
+
 import styles from './Header.module.scss';
 import Logo from '~/components/Layout/components/Logo';
 import icons from '~/assets/images/icons';
-import { Link } from 'react-router-dom';
+import { Floater } from '~/components/Floater';
 
 function Header() {
   return (
@@ -31,11 +33,17 @@ function Header() {
         </ul>
         <ul className={styles.navbarList}>
           <li>
-            <div className={styles.search}>
-              <input type="text" placeholder="Search" />
-              <img src={icons.search} alt="search" />
-            </div>
+            <Floater
+              anchor={
+                <div className={styles.search}>
+                  <input type="text" placeholder="Search products" />
+                  <img src={icons.search} alt="search" />
+                </div>
+              }
+              render={'tooltip'}
+            />
           </li>
+
           <li>
             <Link to="/favorite" className={styles.navbarLink}>
               <img src={icons.favorite} alt="favorite" />
