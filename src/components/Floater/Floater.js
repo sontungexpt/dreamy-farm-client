@@ -10,30 +10,44 @@ import {
   useRole,
   useClick,
   useInteractions,
+  safePolygon,
 } from '@floating-ui/react';
 import { useState } from 'react';
 
 function Floater({
   anchor,
   render,
-  renderProps = { placement: 'bottom-start', offset: 10 },
-  onHover = false,
+  whenHover = false,
+  whenFocus = false,
+  whenClick = false,
+  floatingProps = {},
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const { refs, floatingStyles, context } = useFloating({
     whileElementsMounted: autoUpdate,
     open: isOpen,
     onOpenChange: setIsOpen,
-    placement: renderProps.placement,
-    middleware: [offset(renderProps.offset), flip(), shift()],
+    placement: 'bottom-start',
+    middleware: [offset(10), flip(), shift()],
+    ...floatingProps,
   });
 
   const hover = useHover(context, {
     move: false,
-    enabled: onHover,
+    enabled: whenHover,
+    delay: 0,
+    handleClose: safePolygon({
+      blockPointerEvents: true,
+      buffer: 1,
+    }),
   });
-  const click = useClick(context);
-  const focus = useFocus(context);
+  const click = useClick(context, {
+    enabled: whenClick,
+  });
+  const focus = useFocus(context, {
+    enabled: whenFocus,
+  });
+
   const dismiss = useDismiss(context);
   const role = useRole(context);
 
@@ -46,7 +60,7 @@ function Floater({
     role,
   ]);
   return (
-    <>
+    <div>
       <span ref={refs.setReference} {...getReferenceProps()}>
         {anchor}
       </span>
@@ -59,7 +73,7 @@ function Floater({
           {render}
         </span>
       )}
-    </>
+    </div>
   );
 }
 
