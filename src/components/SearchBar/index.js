@@ -34,8 +34,17 @@ function SearchBar({
   largeHeight, //optional
 
   onEnter,
+
+  //array of objects to be searched
   data, //required
+
+  //function to get the data to be compared with the input value
+  // example comparativeData(item) {return item.name}
   comparativeData, //required
+
+  //function to render the item searched
+  // example renderItem(item, active) {
+  // return <div className={active ? 'active' : ''}>{item.name}</div>}
   renderItem, //required
 }) {
   const [isOpen, setIsOpen] = useState(false);

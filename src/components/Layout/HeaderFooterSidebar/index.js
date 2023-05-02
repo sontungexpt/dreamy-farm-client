@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 
 function DefaultLayout({ children }) {
   return (
-    <div className="default-layout">
+    <div className="layout">
       <Header />
       <Sidebar />
       <div className="main">{children}</div>

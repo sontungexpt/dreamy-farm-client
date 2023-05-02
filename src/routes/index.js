@@ -8,8 +8,7 @@ import ShoppingCart from '~/pages/ShoppingCart';
 import { Login, Register, ForgotPassword } from '~/pages/Accounts';
 
 // Layouts
-import { HeaderFooterSidebar } from '~/components/Layout';
-import { HeaderOnly } from '~/components/Layout';
+import { AccountLayout, HeaderFooterSidebar } from '~/components/Layout';
 
 const publicRoutes = [
   // Header
@@ -21,12 +20,12 @@ const publicRoutes = [
   { path: '/shoppingCart', element: ShoppingCart },
 
   // Accounts
-  { path: '/accounts/', element: Login, layout: HeaderOnly },
-  { path: '/accounts/register', element: Register, layout: HeaderOnly },
+  { path: '/accounts/', element: Login, layout: AccountLayout },
+  { path: '/accounts/register', element: Register, layout: AccountLayout },
   {
     path: '/accounts/forgotPassword',
     element: ForgotPassword,
-    layout: HeaderOnly,
+    layout: AccountLayout,
   },
 ];
 
