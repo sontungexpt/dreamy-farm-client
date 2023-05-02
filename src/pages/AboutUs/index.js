@@ -1,4 +1,6 @@
+import styles from './AboutUs.module.css';
+
 function AboutUs() {
-  return <h1>AboutUs</h1>;
+  return <div>AboutUs</div>;
 }
 export default AboutUs;
