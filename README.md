@@ -35,6 +35,9 @@
   git checkout develop
   ```
 
+  NOTE: Make sure that you are in the folder that has the .git folder, if not
+  then you can use the command cd to change the directory to the folder that has the .git folder
+
 - **3. Create a new branch from develop branch**
 
   ```
