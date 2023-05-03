@@ -6,24 +6,33 @@ import Recipes from '~/pages/Recipes';
 import Favorite from '~/pages/Favorite';
 import ShoppingCart from '~/pages/ShoppingCart';
 import { Login, Register, ForgotPassword } from '~/pages/Accounts';
+import routesConfig from '~/configs/routes';
 
 // Layouts
 import { AccountLayout, HeaderFooterSidebar } from '~/components/Layout';
 
 const publicRoutes = [
   // Header
-  { path: '/', element: Home },
-  { path: '/products', element: Products, layout: HeaderFooterSidebar },
-  { path: '/recipes', element: Recipes },
-  { path: '/aboutUs', element: AboutUs },
-  { path: '/favorite', element: Favorite },
-  { path: '/shoppingCart', element: ShoppingCart },
+  { path: routesConfig.root, element: Home },
+  {
+    path: routesConfig.products,
+    element: Products,
+    layout: HeaderFooterSidebar,
+  },
+  { path: routesConfig.recipes, element: Recipes },
+  { path: routesConfig.aboutUs, element: AboutUs },
+  { path: routesConfig.favorite, element: Favorite },
+  { path: routesConfig.shoppingCart, element: ShoppingCart },
 
   // Accounts
-  { path: '/accounts/', element: Login, layout: AccountLayout },
-  { path: '/accounts/register', element: Register, layout: AccountLayout },
   {
-    path: '/accounts/forgotPassword',
+    path: routesConfig.login,
+    element: Login,
+    layout: AccountLayout,
+  },
+  { path: routesConfig.register, element: Register, layout: AccountLayout },
+  {
+    path: routesConfig.forgotPassword,
     element: ForgotPassword,
     layout: AccountLayout,
   },
