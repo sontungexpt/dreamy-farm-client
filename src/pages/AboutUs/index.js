@@ -1,5 +1,4 @@
-import styles from './AboutUs.module.css';
-
+import styles from './AboutUs.module.scss';
 function AboutUs() {
   return <div>AboutUs</div>;
 }

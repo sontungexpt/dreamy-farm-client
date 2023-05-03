@@ -10,3 +10,4 @@
 - [css-normalize](https://www.npmjs.com/package/css-normalize)
 - [sass](https://www.npmjs.com/package/sass)
 - [prettier](https://www.npmjs.com/package/prettier)
+- [floating-ui](https://floating-ui.com/docs/getting-started)
