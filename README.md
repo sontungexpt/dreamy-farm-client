@@ -31,7 +31,13 @@
   git clone https://github.com/sontungexpt/dreamy-farm-client.git
   ```
 
-- **Step 2. Checkout to develop branch**
+- **Step 2. Make sure you are in develop branch**
+
+  ```
+  git branch
+  ```
+
+  NOTE: If the current branch is not develop then you can use the command below to switch to develop branch
 
   ```
   git checkout develop
