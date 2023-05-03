@@ -121,19 +121,19 @@
 
     Example:
 
-    **1. The account layout structure**
+    **1. The component structure**
 
     ![Component Example](./gitsources/component-example.png)
 
-    **2. The account layout component.js code**
+    **2. The [Component name].js code**
 
     ![Component.js Example](./gitsources/component-file-example.png)
 
-    **3. The account layout scss code**
+    **3. The [Component name].module.scss code**
 
     ![Component Scss Example](./gitsources/scss-file-example.png)
 
-    **4. The index file to export the component**
+    **4. The index.js file to export the component**
 
     ![Component Index Example](./gitsources/index-file-example.png)
 
