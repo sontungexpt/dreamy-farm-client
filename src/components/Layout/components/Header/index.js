@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
 
 import styles from './Header.module.scss';
-import Logo from '~/components/Layout/components/Logo';
-import icons from '~/assets/images/icons';
+import Logo from '~/assets/images/icons/Logo';
+import {
+  Favorite as FavoriteIcon,
+  Cart as CartIcon,
+  User as UserIcon,
+} from '~/assets/images/icons/SvgIcons';
 import SearchBar from '~/components/SearchBar';
 import Product from '~/components/SearchBar/Product';
 
@@ -74,17 +78,17 @@ function Header() {
 
           <li>
             <Link to="/favorite" className={styles.navbarLink}>
-              <img src={icons.favorite} alt="favorite" />
+              <FavoriteIcon />
             </Link>
           </li>
           <li>
             <Link to="/shoppingCart" className={styles.navbarLink}>
-              <img src={icons.cart} alt="cart" />
+              <CartIcon />
             </Link>
           </li>
           <li>
             <Link to="/accounts" className={styles.navbarLink}>
-              <img style={{ marginTop: '8px' }} src={icons.user} alt="user" />
+              <UserIcon style={{ marginTop: '7px' }} />
             </Link>
           </li>
         </ul>
