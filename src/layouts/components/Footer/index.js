@@ -6,7 +6,7 @@ import styles from './Footer.module.scss';
 
 //components
 import Logo from '~/assets/images/icons/Logo';
-import LanguageBtn from '~/components/Layout/components/Footer/LanguageBtn';
+import LanguageBtn from './LanguageBtn';
 import Button from '~/components/Button';
 import {
   Facebook as FacebookIcon,

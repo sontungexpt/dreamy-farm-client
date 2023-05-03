@@ -11,7 +11,7 @@ import { Login, Register, ForgotPassword } from '~/pages/Accounts';
 import routesConfig from '~/configs/routes';
 
 // Layouts
-import { AccountLayout, HeaderFooterSidebar } from '~/components/Layout';
+import { AccountLayout, HeaderFooterSidebar } from '~/layouts';
 
 const publicRoutes = [
   // Header
