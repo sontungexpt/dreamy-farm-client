@@ -125,7 +125,7 @@
 
     ![Component Example](./gitsources/component-example.png)
 
-    **2. The account layout index.js code**
+    **2. The account layout component.js code**
 
     ![Component.js Example](./gitsources/component-file-example.png)
 
