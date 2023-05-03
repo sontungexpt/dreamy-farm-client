@@ -2,16 +2,18 @@
 
 ## 1. Packages used in this project
 
-| Library Name                                                                                       | Purpose                                       |
-| -------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| [clsx](https://www.npmjs.com/package/clsx)                                                         | To work better with className                 |
-| [react](https://www.npmjs.com/package/react), [react-dom](https://www.npmjs.com/package/react-dom) | Reactjs library                               |
-| [react-router-dom](https://www.npmjs.com/package/react-router-dom)                                 | To routing your website                       |
-| [customize-cra](https://www.npmjs.com/package/customize-cra)                                       | To config webpack                             |
-| [css-normalize](https://www.npmjs.com/package/css-normalize)                                       | Reset css and make it sync with multi browser |
-| [sass](https://www.npmjs.com/package/sass)                                                         | Scss syntax                                   |
-| [prettier](https://www.npmjs.com/package/prettier)                                                 | Make your code beautiful                      |
-| [floating-ui](https://floating-ui.com/docs/getting-started)                                        | To make the floating component                |
+| Library Name                                                                            | Purpose                                       |
+| --------------------------------------------------------------------------------------- | --------------------------------------------- |
+| [clsx](https://www.npmjs.com/package/clsx)                                              | To work better with className                 |
+| [react](https://www.npmjs.com/package/react)                                            | Reactjs library                               |
+| [react-dom](https://www.npmjs.com/package/react-dom)                                    | Reactjs library                               |
+| [react-router-dom](https://www.npmjs.com/package/react-router-dom)                      | To routing your website                       |
+| [customize-cra](https://www.npmjs.com/package/customize-cra)                            | To config webpack                             |
+| [css-normalize](https://www.npmjs.com/package/css-normalize)                            | Reset css and make it sync with multi browser |
+| [sass](https://www.npmjs.com/package/sass)                                              | Scss syntax                                   |
+| [prettier](https://www.npmjs.com/package/prettier)                                      | Make your code beautiful                      |
+| [floating-ui](https://floating-ui.com/docs/getting-started)                             | To make the floating component                |
+| [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver) | Convert jsx syntax                            |
 
 ## 2. How to works with this repo
 
