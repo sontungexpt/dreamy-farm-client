@@ -1,4 +1,3 @@
-@use '../../GlobalStyles/Animations.scss';
 .modal {
   position: fixed;
   top: 0;
@@ -46,5 +45,23 @@
   .closeBtn {
     display: block;
     cursor: pointer;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes growth {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
   }
 }

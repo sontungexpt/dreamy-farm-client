@@ -1,15 +1,19 @@
+// libabry
 import { Link } from 'react-router-dom';
 
+// configs
 import styles from './Header.module.scss';
+import routesConfig from '~/configs/routes';
+
+//components
+import SearchBar from '~/components/SearchBar';
+import Product from '~/components/SearchBar/Product';
 import Logo from '~/assets/images/icons/Logo';
 import {
   Favorite as FavoriteIcon,
   Cart as CartIcon,
   User as UserIcon,
 } from '~/assets/images/icons/SvgIcons';
-import SearchBar from '~/components/SearchBar';
-import Product from '~/components/SearchBar/Product';
-import routesConfig from '~/configs/routes';
 
 function Header() {
   return (
@@ -40,7 +44,6 @@ function Header() {
         <ul className={styles.navbarList}>
           <li>
             <SearchBar
-              onEnter={() => console.log('onKeyDown')}
               data={[
                 {
                   image:

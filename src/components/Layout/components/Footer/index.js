@@ -1,5 +1,10 @@
-import styles from './Footer.module.scss';
+// libabry
 import { clsx } from 'clsx';
+
+// configs
+import styles from './Footer.module.scss';
+
+//components
 import Logo from '~/assets/images/icons/Logo';
 import LanguageBtn from '~/components/Layout/components/Footer/LanguageBtn';
 import Button from '~/components/Button';

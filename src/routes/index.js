@@ -6,6 +6,8 @@ import Recipes from '~/pages/Recipes';
 import Favorite from '~/pages/Favorite';
 import ShoppingCart from '~/pages/ShoppingCart';
 import { Login, Register, ForgotPassword } from '~/pages/Accounts';
+
+//configs
 import routesConfig from '~/configs/routes';
 
 // Layouts
