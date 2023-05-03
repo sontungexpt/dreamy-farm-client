@@ -52,25 +52,3 @@
     }
   }
 }
-
-.search {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 260px;
-
-  border: 1px solid var(--black-color);
-  border-radius: 30px;
-
-  input {
-    padding: 10px 14px;
-    border-radius: inherit;
-
-    width: 100%;
-    font-size: 1.8rem;
-  }
-
-  img {
-    margin-right: 16px;
-  }
-}
