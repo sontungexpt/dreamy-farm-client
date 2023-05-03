@@ -20,13 +20,13 @@
   NOTE : Ssh method (recommended)
 
   ```
-  git@github.com:sontungexpt/dreamy-farm-client.git
+  git clone git@github.com:sontungexpt/dreamy-farm-client.git
   ```
 
   NOTE : Https method (may no longer be supported from git)
 
   ```
-  https://github.com/sontungexpt/dreamy-farm-client.git
+  git clone https://github.com/sontungexpt/dreamy-farm-client.git
   ```
 
 - **Step 2. Checkout to develop branch**
