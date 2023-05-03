@@ -59,7 +59,7 @@ function Header() {
               mediumLength
               placeholder="Search products"
               floaterWrapperTitle="Products"
-              comparativeData={(item) => item.title}
+              searchValue={(item) => item.title}
               renderItem={(item, active) => (
                 <Product
                   key={item.title}

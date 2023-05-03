@@ -40,7 +40,7 @@ function SearchBar({
 
   //function to get the data to be compared with the input value
   // example comparativeData(item) {return item.name}
-  comparativeData, //required
+  searchValue, //required
 
   //function to render the item searched
   // example renderItem(item, active) {
@@ -99,7 +99,7 @@ function SearchBar({
       if (data) {
         setItems(
           data.filter((item) =>
-            comparativeData(item).toLowerCase().includes(value.toLowerCase()),
+            searchValue(item).toLowerCase().includes(value.toLowerCase()),
           ),
         );
       }
@@ -154,7 +154,7 @@ function SearchBar({
               activeIndex != null &&
               items[activeIndex]
             ) {
-              setInputValue(comparativeData(items[activeIndex]));
+              setInputValue(searchValue(items[activeIndex]));
               setActiveIndex(null);
               setIsOpen(false);
               onEnter && onEnter();
@@ -198,7 +198,7 @@ function SearchBar({
                         listRef.current[index] = node;
                       },
                       onClick() {
-                        setInputValue(comparativeData(item));
+                        setInputValue(searchValue(item));
                         setIsOpen(false);
                         refs.domReference.current?.focus();
                         onEnter && onEnter();
