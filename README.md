@@ -1,13 +1,126 @@
 # The development branch of the dreamy farm website
 
-## Packages
+## 1. Packages used in this project
 
-- [clsx](https://www.npmjs.com/package/clsx)
-- [react](https://www.npmjs.com/package/react)
-- [react-dom](https://www.npmjs.com/package/react-dom)
-- [react-router-dom](https://www.npmjs.com/package/react-router-dom)
-- [customize-cra](https://www.npmjs.com/package/customize-cra)
-- [css-normalize](https://www.npmjs.com/package/css-normalize)
-- [sass](https://www.npmjs.com/package/sass)
-- [prettier](https://www.npmjs.com/package/prettier)
-- [floating-ui](https://floating-ui.com/docs/getting-started)
+| Library Name                                                                                       | Purpose                                       |
+| -------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| [clsx](https://www.npmjs.com/package/clsx)                                                         | To work better with className                 |
+| [react](https://www.npmjs.com/package/react), [react-dom](https://www.npmjs.com/package/react-dom) | Reactjs library                               |
+| [react-router-dom](https://www.npmjs.com/package/react-router-dom)                                 | To routing your website                       |
+| [customize-cra](https://www.npmjs.com/package/customize-cra)                                       | To config webpack                             |
+| [css-normalize](https://www.npmjs.com/package/css-normalize)                                       | Reset css and make it sync with multi browser |
+| [sass](https://www.npmjs.com/package/sass)                                                         | Scss syntax                                   |
+| [prettier](https://www.npmjs.com/package/prettier)                                                 | Make your code beautiful                      |
+| [floating-ui](https://floating-ui.com/docs/getting-started)                                        | To make the floating component                |
+
+## 2. How to works with this repo
+
+- **Step 1. Clone this repo (if not yet)**
+
+  NOTE : Ssh method (recommended)
+
+  ```
+  git@github.com:sontungexpt/dreamy-farm-client.git
+  ```
+
+  NOTE : Https method (may no longer be supported from git)
+
+  ```
+  https://github.com/sontungexpt/dreamy-farm-client.git
+  ```
+
+- **Step 2. Checkout to develop branch**
+
+  ```
+  git checkout develop
+  ```
+
+- **3. Create a new branch from develop branch**
+
+  ```
+  git checkout -b <your-branch-name>
+  ```
+
+  NOTE: The branch name should be related to the feature you are working on. 4. After you finish your work, push your branch to remote
+
+- **4. Start working on your branch and push it to remote if done**
+
+  ```
+  git push -u origin <your-branch-name>
+  ```
+
+  NOTE: The -u flag help you to set up the upstream branch. After that, you can use git push without any flag.
+
+- **5. Create a pull request to develop branch**
+
+## 3. How to run this project
+
+- **Step 1. Make sure installed all dependencies packages when pull from the
+  remote**
+
+  ```
+  npm install
+  ```
+
+- **Step 2. Run the project**
+
+  NOTE: Make sure you are in the root folder of the project
+
+  ```
+    npm start
+  ```
+
+## 4. Some syntax rules for this project (important)
+
+- **1. For scss module file**
+
+  - The className should be in camelCase
+
+    Example:
+
+    ```
+    .containerStyle {
+        background-color: red;
+    }
+    ```
+
+  - The file name should be begin with the name of the component
+
+    Example: Button.module.scss
+
+    ![Scss FileName Example](./gitsources/scss-file-name-example.png)
+
+- **2. For js component file**
+
+  - Import the styles from the scss module file (shouldn't code with inline
+    styles)
+
+    Example:
+
+    ```
+    import styles from "./styles.module.scss";
+    ```
+
+  - The className will be something like this: className={styles.container} or
+    if you work with multi class you can use the syntax of [clsx](https://www.npmjs.com/package/clsx) library, it
+    will not work if you use className="container" like in html file
+
+  - When you want to create a component you should create a folder with the name
+    of the component and put the index.js file and the scss file in it
+
+    Example:
+
+    **1. The account layout structure**
+    ![Component Example](./gitsources/component-example.png)
+
+    **2. The account layout index.js code**
+    ![Index.js Example](./gitsources/index-file-example.png)
+
+    **3. The account layout scss code**
+    ![Scss Example](./gitsources/scss-file-example.png)
+
+## 5. The authors of this project
+
+- **1. [Tran Vo Son Tung](https://github.com/sontungexpt)**
+- **2. [Pham Nguyet Quynh](https://github.com/PhamNguyetQuynh)**
+- **3. [Vo Nhu Phi](https://github.com/phifin)**
