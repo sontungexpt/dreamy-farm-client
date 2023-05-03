@@ -8,7 +8,7 @@ import ShoppingCart from '~/pages/ShoppingCart';
 import { Login, Register, ForgotPassword } from '~/pages/Accounts';
 
 //configs
-import routesConfig from '~/configs/routes';
+import { routes as routesConfig } from '~/configs';
 
 // Layouts
 import { AccountLayout, HeaderFooterSidebar } from '~/layouts';
