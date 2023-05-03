@@ -1,5 +1,5 @@
 import styles from './Modal.module.scss';
-import icons from '~/assets/images/icons';
+import { Close as CloseIcon } from '~/assets/images/icons/SvgIcons';
 import { useEffect, useRef } from 'react';
 
 function Modal({ children, closeBtn, closeModal }) {
@@ -27,7 +27,7 @@ function Modal({ children, closeBtn, closeModal }) {
             {closeBtn.icon ? (
               closeBtn.icon
             ) : (
-              <img src={icons.close} className={styles.closeIcon} alt="close" />
+              <CloseIcon className={styles.closeIcon} />
             )}
           </button>
         )}

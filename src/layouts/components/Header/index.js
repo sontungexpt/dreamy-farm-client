@@ -1,10 +1,19 @@
+// libabry
 import { Link } from 'react-router-dom';
 
+// configs
 import styles from './Header.module.scss';
-import Logo from '~/components/Layout/components/Logo';
-import icons from '~/assets/images/icons';
+import routesConfig from '~/configs/routes';
+
+//components
 import SearchBar from '~/components/SearchBar';
 import Product from '~/components/SearchBar/Product';
+import Logo from '~/assets/images/icons/Logo';
+import {
+  Favorite as FavoriteIcon,
+  Cart as CartIcon,
+  User as UserIcon,
+} from '~/assets/images/icons/SvgIcons';
 
 function Header() {
   return (
@@ -12,22 +21,22 @@ function Header() {
       <nav className={styles.navbar}>
         <ul className={styles.navbarList}>
           <li>
-            <Link to="/" className={styles.navbarLink}>
+            <Link to={routesConfig.root} className={styles.navbarLink}>
               <Logo />
             </Link>
           </li>
           <li>
-            <Link to="/products" className={styles.navbarLink}>
+            <Link to={routesConfig.products} className={styles.navbarLink}>
               Products
             </Link>
           </li>
           <li>
-            <Link to="/recipes" className={styles.navbarLink}>
+            <Link to={routesConfig.recipes} className={styles.navbarLink}>
               Recipes
             </Link>
           </li>
           <li>
-            <Link to="/aboutUs" className={styles.navbarLink}>
+            <Link to={routesConfig.aboutUs} className={styles.navbarLink}>
               About us
             </Link>
           </li>
@@ -35,7 +44,6 @@ function Header() {
         <ul className={styles.navbarList}>
           <li>
             <SearchBar
-              onEnter={() => console.log('onKeyDown')}
               data={[
                 {
                   image:
@@ -73,18 +81,18 @@ function Header() {
           </li>
 
           <li>
-            <Link to="/favorite" className={styles.navbarLink}>
-              <img src={icons.favorite} alt="favorite" />
+            <Link to={routesConfig.favorite} className={styles.navbarLink}>
+              <FavoriteIcon />
             </Link>
           </li>
           <li>
-            <Link to="/shoppingCart" className={styles.navbarLink}>
-              <img src={icons.cart} alt="cart" />
+            <Link to={routesConfig.shoppingCart} className={styles.navbarLink}>
+              <CartIcon />
             </Link>
           </li>
           <li>
-            <Link to="/accounts" className={styles.navbarLink}>
-              <img style={{ marginTop: '8px' }} src={icons.user} alt="user" />
+            <Link to={routesConfig.login} className={styles.navbarLink}>
+              <UserIcon style={{ marginTop: '7px' }} />
             </Link>
           </li>
         </ul>

@@ -1,4 +1,4 @@
-import Header from '~/components/Layout/components/Header';
+import Header from '~/layouts/components/Header';
 import styles from './AccountLayout.module.scss';
 import { useRef, useEffect } from 'react';
 

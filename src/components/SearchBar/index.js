@@ -16,7 +16,7 @@ import {
 } from '@floating-ui/react';
 
 import styles from './SearchBar.module.scss';
-import icons from '~/assets/images/icons';
+import { Search as SearchIcon } from '~/assets/images/icons/SvgIcons';
 import ItemWrapper from './ItemWrapper';
 
 function SearchBar({
@@ -33,7 +33,8 @@ function SearchBar({
   mediumHeight, //optional
   largeHeight, //optional
 
-  onEnter,
+  // the function to be executed when the user presses enter
+  onEnter, //optional
 
   //array of objects to be searched
   data, //required
@@ -157,14 +158,14 @@ function SearchBar({
               setInputValue(searchValue(items[activeIndex]));
               setActiveIndex(null);
               setIsOpen(false);
-              onEnter && onEnter();
+              onEnter && onEnter(event);
             }
           },
         })}
         type="text"
         placeholder={placeholder}
       />
-      <img src={icons.search} alt="search" />
+      <SearchIcon className={styles.searchIcon} />
       <div className={styles.floater}>
         <FloatingPortal>
           {isOpen && (
@@ -197,11 +198,11 @@ function SearchBar({
                       ref(node) {
                         listRef.current[index] = node;
                       },
-                      onClick() {
+                      onClick(event) {
                         setInputValue(searchValue(item));
                         setIsOpen(false);
                         refs.domReference.current?.focus();
-                        onEnter && onEnter();
+                        onEnter && onEnter(event);
                       },
                     })}
                     active={activeIndex === index}

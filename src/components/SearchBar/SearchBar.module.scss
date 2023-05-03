@@ -15,7 +15,7 @@
     font-size: 1.8rem;
   }
 
-  img {
+  .searchIcon {
     margin-right: 16px;
   }
 }
@@ -23,7 +23,7 @@
 .wrapper.iconLeft {
   flex-direction: row-reverse;
 
-  img {
+  .searchIcon {
     margin-right: 0px;
     margin-left: 16px;
   }
@@ -38,7 +38,7 @@
 }
 
 .wrapper.noIcon {
-  img {
+  .searchIcon {
     display: none;
   }
 }

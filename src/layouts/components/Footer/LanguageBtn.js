@@ -1,7 +1,7 @@
 import styles from './LanguageBtn.module.scss';
-import icons from '~/assets/images/icons';
 import Button from '~/components/Button';
 import ModalButton from '~/components/ModalButton';
+import { Language as LanguageIcon } from '~/assets/images/icons/SvgIcons';
 
 function LanguageBtn() {
   return (
@@ -12,13 +12,7 @@ function LanguageBtn() {
           alignLeft
           whiteOutline
           whiteText
-          leftIcon={
-            <img
-              className={styles.languageIcon}
-              src={icons.language}
-              alt="choose language"
-            />
-          }
+          leftIcon={<LanguageIcon className={styles.languageIcon} />}
         >
           <span className={styles.languageTitle}>English</span>
         </Button>

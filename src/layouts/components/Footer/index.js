@@ -1,9 +1,19 @@
-import styles from './Footer.module.scss';
+// libabry
 import { clsx } from 'clsx';
-import Logo from '~/components/Layout/components/Logo';
-import icons from '~/assets/images/icons';
-import LanguageBtn from '~/components/Layout/components/Footer/LanguageBtn';
+
+// configs
+import styles from './Footer.module.scss';
+
+//components
+import Logo from '~/assets/images/icons/Logo';
+import LanguageBtn from './LanguageBtn';
 import Button from '~/components/Button';
+import {
+  Facebook as FacebookIcon,
+  Instagram as InstagramIcon,
+  Mail as MailIcon,
+  Phone as PhoneIcon,
+} from '~/assets/images/icons/SvgIcons';
 
 function Footer() {
   return (
@@ -22,7 +32,7 @@ function Footer() {
                 rel="noreferrer"
               >
                 <span className={clsx([styles.socialIcons])}>
-                  <img src={icons.facebook} alt="facebook" />
+                  <FacebookIcon />
                 </span>
                 https://www.facebook.com/DreamyFarm/
               </a>
@@ -35,7 +45,7 @@ function Footer() {
                 className={clsx([styles.socialLink])}
               >
                 <span className={clsx([styles.socialIcons])}>
-                  <img src={icons.instagram} alt="instagram" />
+                  <InstagramIcon />
                 </span>
                 Instagram
               </a>
@@ -48,7 +58,7 @@ function Footer() {
                 rel="noreferrer"
               >
                 <span className={clsx([styles.socialIcons])}>
-                  <img src={icons.email} alt="email" />
+                  <MailIcon />
                 </span>
                 dreamyfarmcustomerservice@gmail.com
               </a>
@@ -56,7 +66,7 @@ function Footer() {
             <li>
               <a href="/" className={clsx([styles.socialLink])}>
                 <span className={clsx([styles.socialIcons])}>
-                  <img src={icons.phone} alt="phone" />
+                  <PhoneIcon />
                 </span>
                 0392211343
               </a>
