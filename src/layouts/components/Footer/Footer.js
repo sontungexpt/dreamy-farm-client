@@ -34,7 +34,7 @@ function Footer() {
                 <span className={clsx([styles.socialIcons])}>
                   <FacebookIcon />
                 </span>
-                https://www.facebook.com/DreamyFarm/
+                Facebook
               </a>
             </li>
             <li>
