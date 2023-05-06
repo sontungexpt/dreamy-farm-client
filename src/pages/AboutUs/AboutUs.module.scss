@@ -1,0 +1,49 @@
+img{
+    width: 100%;
+    height: 100%;
+}
+
+.whyDreamyFarm{
+    position: relative;
+    display: flex;
+    margin-top: 80px;
+    margin-bottom: 210px;
+    margin-left: 180px;
+    margin-right: 580px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.whyDreamyFarm h1{
+    padding-bottom: 39px;
+}
+.whatSetsUsApart{
+    display: flex;
+    margin-left: 615px;
+    margin-right: 180px;
+    margin-bottom: 175px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.whatSetsUsApart h1{
+    padding-bottom: 39px;
+    text-align: right;
+    flex-basis: 90%;
+}
+.background{
+    width: 100%;
+    height: 100%;
+    background-image: url('../../assets/img/AboutUsBG.jpg');
+    background-size: cover;
+    background-position: center;
+    // filter: blur(10px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.fullPage {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
