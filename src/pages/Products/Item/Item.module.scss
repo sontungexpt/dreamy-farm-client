@@ -69,13 +69,38 @@
 
 //mobile
 .innerModal {
-  width: 100vw;
+  max-width: 85vw;
   padding: 20px;
 }
 
 @media (min-width: 740px) {
   .innerModal {
-    width: 80vw;
+    width: 70vw;
     padding: 40px;
+  }
+}
+@media (min-width: 740px) and (max-width: 1023px) {
+  .innerModal {
+    width: 80vw;
+    padding: 20px;
+  }
+}
+
+/* > PC low resolution */
+@media (min-width: 1024px) and (max-width: 1239px) {
+  .innerModal {
+    width: 80vw;
+  }
+}
+
+@media (min-width: 1240px) and (max-width: 1549px) {
+  .innerModal {
+    width: 65vw;
+  }
+}
+
+@media (min-width: 1550px) {
+  .innerModal {
+    width: 55vw;
   }
 }

@@ -28,7 +28,9 @@ function Counter({ className, ...props }, ref) {
 
   function handleChangeInput(e) {
     const re = /^[0-9\b]+$/; //rules
-    if (e.target.value === '' || re.test(e.target.value)) {
+    if (e.target.value === '') {
+      setValue(1);
+    } else if (re.test(e.target.value)) {
       setValue(Number.parseInt(e.target.value));
     }
   }

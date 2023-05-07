@@ -46,7 +46,11 @@ function Detail({ image, name, price, description }) {
               <Button className={styles.typeButton}>1kg</Button>
             </div>
             <Counter ref={counterRef} className={styles.quantity} />
-            <Button primary className={styles.addBtn}>
+            <Button
+              onClick={() => console.log(counterRef.current.value)}
+              primary
+              className={styles.addBtn}
+            >
               Add to cart
             </Button>
           </div>
