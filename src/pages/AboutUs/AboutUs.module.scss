@@ -4,17 +4,18 @@ img{
 }
 
 .whyDreamyFarm{
-    position: relative;
     display: flex;
-    margin-top: 80px;
+    padding: 80px;
     margin-bottom: 210px;
     margin-left: 180px;
     margin-right: 580px;
     justify-content: space-between;
     flex-wrap: wrap;
+    font-size: 20px;
 }
 .whyDreamyFarm h1{
     padding-bottom: 39px;
+    font-size: 30px;
 }
 .whatSetsUsApart{
     display: flex;
@@ -23,27 +24,22 @@ img{
     margin-bottom: 175px;
     justify-content: space-between;
     flex-wrap: wrap;
+    font-size: 20px;
 }
 .whatSetsUsApart h1{
     padding-bottom: 39px;
     text-align: right;
-    flex-basis: 90%;
+    flex-basis: 100%;
+    font-size: 30px;
 }
 .background{
-    width: 100%;
-    height: 100%;
     background-image: url('../../assets/img/AboutUsBG.jpg');
     background-size: cover;
-    background-position: center;
-    // filter: blur(10px);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
+    background-repeat: no-repeat;
+    position: relative;
 }
 .fullPage {
     width: 100%;
-    height: 100vh;
-    position: relative;
+    height: 100%;
     overflow: hidden;
   }

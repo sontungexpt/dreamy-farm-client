@@ -1,16 +1,12 @@
 import styles from './AboutUs.module.scss';
-import {Hero, WhatSetsUsApart, WhyDreamyFarm} from './Hero.js';
+import {Hero} from './Hero.js';
 
 function AboutUs() {
-  return (
-    <>
-     <Hero 
+  return <div> 
+    <Hero 
       cName="hero"
       heroImg={require('../../assets/img/AboutUs.jpg')}
-     />
-     <WhyDreamyFarm />
-     <WhatSetsUsApart />
-    </>
-  );
+    />
+ </div>
 }
 export default AboutUs;
