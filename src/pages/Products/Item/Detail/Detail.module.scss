@@ -4,16 +4,17 @@
 
 .info {
   img {
-    border: 1px solid #ccc;
-    border-radius: 10px;
     object-position: center;
     object-fit: contain;
+    border: 1px solid #ccc;
+    border-radius: 10px;
   }
 
   .container {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 300px;
 
     .header {
       display: flex;
@@ -55,7 +56,7 @@
     }
 
     .quantity {
-      // margin-top: 30px;
+      width: 160px;
     }
 
     .addBtn {

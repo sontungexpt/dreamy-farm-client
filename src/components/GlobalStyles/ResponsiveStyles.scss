@@ -429,15 +429,16 @@
 
 /* Tablet - PC low resolution */
 @media (min-width: 740px) and (max-width: 1023px) {
-  .wide {
+  .grid.wide {
     width: 767px;
   }
 }
 
 /* > PC low resolution */
 @media (min-width: 1024px) and (max-width: 1239px) {
-  .wide {
+  .grid.wide {
     width: 1100px;
+
     .row {
       margin-left: -12px;
       margin-right: -12px;
