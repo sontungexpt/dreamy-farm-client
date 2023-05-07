@@ -1,18 +1,15 @@
 .wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: var(---white-color);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
 
-.navbar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 85%;
-  height: var(--header-height);
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    background-color: var(---white-color);
+  }
 }
 
 .navbarList {

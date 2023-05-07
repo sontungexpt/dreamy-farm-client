@@ -1,0 +1,10 @@
+.wrapper {
+  margin: 0 -10px;
+  &:hover {
+    cursor: pointer;
+  }
+
+  span {
+    padding: 0 10px;
+  }
+}

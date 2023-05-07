@@ -17,8 +17,8 @@ import {
 
 function Footer() {
   return (
-    <footer className={styles.wrapper}>
-      <div className={styles.inner}>
+    <footer className={clsx([styles.wrapper])}>
+      <div className={clsx(['grid', 'wide', styles.inner])}>
         <div className={styles.companyInfo}>
           <ul className={styles.socialList}>
             <li>
@@ -51,6 +51,14 @@ function Footer() {
               </a>
             </li>
             <li>
+              <a href="/" className={clsx([styles.socialLink])}>
+                <span className={clsx([styles.socialIcons])}>
+                  <PhoneIcon />
+                </span>
+                0392211343
+              </a>
+            </li>
+            <li>
               <a
                 href="mailto:dreamyfarmcustomerservice@gmail.com"
                 className={clsx([styles.socialLink])}
@@ -61,14 +69,6 @@ function Footer() {
                   <MailIcon />
                 </span>
                 dreamyfarmcustomerservice@gmail.com
-              </a>
-            </li>
-            <li>
-              <a href="/" className={clsx([styles.socialLink])}>
-                <span className={clsx([styles.socialIcons])}>
-                  <PhoneIcon />
-                </span>
-                0392211343
               </a>
             </li>
           </ul>

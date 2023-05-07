@@ -1,6 +1,7 @@
-import styles from './Button.module.scss';
 import { Link } from 'react-router-dom';
 import { clsx } from 'clsx';
+
+import styles from './Button.module.scss';
 
 function Button({
   alignLeft,

@@ -1,6 +1,7 @@
+import { useEffect, useRef } from 'react';
+
 import styles from './Modal.module.scss';
 import { Close as CloseIcon } from '~/assets/images/icons/SvgIcons';
-import { useEffect, useRef } from 'react';
 
 function Modal({ children, closeBtn, closeModal }) {
   const overlay = useRef();
@@ -31,7 +32,6 @@ function Modal({ children, closeBtn, closeModal }) {
             )}
           </button>
         )}
-
         {children}
       </div>
     </div>

@@ -29,6 +29,14 @@ button {
   cursor: pointer;
 }
 
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
 //variable
 :root {
   --white-color: #fff;
@@ -37,7 +45,8 @@ button {
 
   --text-color: #000;
   --primary-color: #fb9701;
-  --button-hover-color: #fb9701db;
+  --button-hover-color: #e88b39db;
+  --button-hover-color2: #ccc;
 
   --header-height: 62px;
 }

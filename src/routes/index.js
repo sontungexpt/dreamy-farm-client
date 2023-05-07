@@ -11,16 +11,12 @@ import { Login, Register, ForgotPassword } from '~/pages/Accounts';
 import { routes as routesConfig } from '~/configs';
 
 // Layouts
-import { AccountLayout, HeaderFooterSidebar } from '~/layouts';
+import { AccountLayout } from '~/layouts';
 
 const publicRoutes = [
   // Header
   { path: routesConfig.root, element: Home },
-  {
-    path: routesConfig.products,
-    element: Products,
-    layout: HeaderFooterSidebar,
-  },
+  { path: routesConfig.products, element: Products },
   { path: routesConfig.recipes, element: Recipes },
   { path: routesConfig.aboutUs, element: AboutUs },
   { path: routesConfig.favorite, element: Favorite },

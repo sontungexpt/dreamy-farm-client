@@ -36,6 +36,7 @@ function SearchBar({
   // the function to be executed when the user presses enter
   onEnter, //optional
 
+  api,
   //array of objects to be searched
   data, //required
 
@@ -51,7 +52,6 @@ function SearchBar({
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [activeIndex, setActiveIndex] = useState(null);
-
   const [items, setItems] = useState([]);
 
   const listRef = useRef([]);
