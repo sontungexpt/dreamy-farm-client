@@ -1,5 +1,6 @@
 import { clsx } from 'clsx';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import styles from './ToggleIcon.module.scss';
 
 function ToggleIcon({ className, clickIcon, unClickIcon, onClick, onUnClick }) {
@@ -22,5 +23,13 @@ function ToggleIcon({ className, clickIcon, unClickIcon, onClick, onUnClick }) {
     </div>
   );
 }
+
+ToggleIcon.propTypes = {
+  className: PropTypes.string,
+  clickIcon: PropTypes.node.isRequired,
+  unClickIcon: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
+  onUnClick: PropTypes.func,
+};
 
 export default ToggleIcon;

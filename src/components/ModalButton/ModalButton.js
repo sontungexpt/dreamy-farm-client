@@ -1,12 +1,10 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import Modal from './Modal';
 
 function ModalButton({ button, innerModal, onOpen, onClose, closeBtn }) {
   const [isOpen, setIsOpen] = useState(false);
-
-  if (!button || !innerModal) {
-    throw new Error('ModalButton requires both a button and innerModal prop)');
-  }
 
   function handleButtonClick() {
     setIsOpen(true);
@@ -32,5 +30,13 @@ function ModalButton({ button, innerModal, onOpen, onClose, closeBtn }) {
     </>
   );
 }
+
+ModalButton.propTypes = {
+  button: PropTypes.node.isRequired,
+  innerModal: PropTypes.node.isRequired,
+  onOpen: PropTypes.func,
+  onClose: PropTypes.func,
+  closeBtn: PropTypes.bool,
+};
 
 export default ModalButton;

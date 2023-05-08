@@ -1,23 +1,24 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { clsx } from 'clsx';
 
 import styles from './Button.module.scss';
 
 function Button({
-  alignLeft,
-  leftIcon,
-  rightIcon,
-  small,
-  primary,
-  to,
-  href,
-  onClick,
-  children,
-  className,
-  whiteOutline,
-  blackOutline,
-  primaryOutline,
-  whiteText,
+  alignLeft, //optional
+  leftIcon, //optional
+  rightIcon, //optional
+  small, //optional
+  primary, //optional
+  to, //optional
+  href, //optional
+  onClick, //optional
+  children, //optional
+  className, //optional
+  whiteOutline, //optional
+  blackOutline, //optional
+  primaryOutline, //optional
+  whiteText, //optional
 }) {
   let Component = 'button';
   let props = {
@@ -69,4 +70,10 @@ function Button({
     </Component>
   );
 }
+
+Button.propTypes = {
+  leftIcon: PropTypes.node,
+  rightIcon: PropTypes.node,
+};
+
 export default Button;

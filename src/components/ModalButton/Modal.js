@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './Modal.module.scss';
 import { Close as CloseIcon } from '~/assets/images/icons/SvgIcons';
@@ -37,5 +38,16 @@ function Modal({ children, closeBtn, closeModal }) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  children: PropTypes.node.isRequired,
+  closeBtn: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      icon: PropTypes.node,
+    }),
+  ]),
+  closeModal: PropTypes.func.isRequired,
+};
 
 export default Modal;

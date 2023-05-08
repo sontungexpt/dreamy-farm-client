@@ -28,12 +28,16 @@
         font-size: 3rem;
         font-weight: 700;
         color: var(--black-color);
+
+        &:hover {
+          color: var(--primary-color);
+        }
       }
     }
 
     .price {
       font-size: 2.4rem;
-      color: var(--primary-color);
+      color: var(--text-color2);
     }
 
     .type {

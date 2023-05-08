@@ -1,9 +1,11 @@
 import { clsx } from 'clsx';
+import { Link } from 'react-router-dom';
 import { useRef } from 'react';
 
 import styles from './Detail.module.scss';
+import { routes as routeConfigs } from '~/configs';
 
-import Counter from './Counter';
+import Counter from '~/components/Counter';
 import Button from '~/components/Button';
 import ToggleIcon from '~/components/ToggleIcon';
 import {
@@ -11,7 +13,7 @@ import {
   EmptyHeart as EmptyHeartIcon,
 } from '~/assets/images/icons/SvgIcons';
 
-function Detail({ image, name, price, description }) {
+function Detail({ id = 1, image, name, price, description }) {
   const counterRef = useRef();
 
   return (
@@ -31,7 +33,9 @@ function Detail({ image, name, price, description }) {
           >
             <div>
               <div className={styles.header}>
-                <h3 className={styles.name}>{name}</h3>
+                <Link to={routeConfigs.moveProductDetail(id)}>
+                  <h3 className={styles.name}>{name}</h3>
+                </Link>
                 <ToggleIcon
                   className={styles.favorite}
                   clickIcon={<FilledHeartIcon />}

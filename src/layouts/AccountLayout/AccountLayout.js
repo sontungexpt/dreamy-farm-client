@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Header from '~/layouts/components/Header';
 import styles from './AccountLayout.module.scss';
 import { useRef, useEffect } from 'react';
@@ -20,5 +21,9 @@ function AccountLayout({ children }) {
     </div>
   );
 }
+
+AccountLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default AccountLayout;

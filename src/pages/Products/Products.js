@@ -36,10 +36,10 @@ function Products() {
           <h2 className={styles.title}>Products</h2>
           <div className={clsx(['row', styles.container])}>
             <div className={clsx(['col', 'l-3', 'm-4', 'c-6'])}>
-              <Item price="100" name="apple" />
+              <Item price="100" name="Apple" />
             </div>
             <div className={clsx(['col', 'l-3', 'm-4', 'c-6'])}>
-              <Item price="100" name="apple" />
+              <Item price="100" name="Apple" />
             </div>
           </div>
         </div>
