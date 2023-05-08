@@ -43,7 +43,35 @@ img{
     height: 100%;
     overflow: hidden;
 }
-@media (max-width: 800px){
+@media (max-width: 1300px){
+    .whyDreamyFarm h1
+    {
+        font-size: 25px;
+        padding-bottom: 20px;
+    }
+    .whatSetsUsApart h1{
+        font-size: 25px;
+        padding-bottom: 20px;
+        margin-right: 25px;
+        text-align: right;
+        flex-basis: 100%;
+    }
+    .whyDreamyFarm
+    {
+        font-size: 15px;
+        padding: 39px;
+        margin-bottom: 118px;
+        margin-left: 41px;
+        margin-right: 421px;
+    }
+    .whatSetsUsApart{
+        font-size: 15px;
+        margin-left: 535px;
+        margin-right: 31px;
+        margin-bottom: 113px;
+    }
+}
+@media (max-width: 900px){
     .whyDreamyFarm h1
     {
         font-size: 20px;
@@ -52,21 +80,21 @@ img{
     .whatSetsUsApart h1{
         font-size: 20px;
         padding-bottom: 22px;
-        margin-right: 31px;
+        // margin-right: 31px;
         text-align: right;
         flex-basis: 100%;
     }
     .whyDreamyFarm
     {
-        font-size: 10px;
+        font-size: 13px;
         padding: 39px;
         margin-bottom: 118px;
         margin-left: 41px;
         margin-right: 121px;
     }
     .whatSetsUsApart{
-        font-size: 10px;
-        margin-left: 135px;
+        font-size: 13px;
+        margin-left: 235px;
         margin-right: 31px;
         margin-bottom: 113px;
     }
