@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
 import { clsx } from 'clsx';
 import {
@@ -218,5 +219,24 @@ function SearchBar({
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  placeholder: PropTypes.string,
+  noIcon: PropTypes.bool,
+  onlyIcon: PropTypes.bool,
+  iconLeft: PropTypes.bool,
+  smallLength: PropTypes.bool,
+  mediumLength: PropTypes.bool,
+  largeLength: PropTypes.bool,
+  floaterWrapperClassName: PropTypes.string,
+  floaterWrapperTitle: PropTypes.string,
+  mediumHeight: PropTypes.bool,
+  smallHeight: PropTypes.bool,
+  largeHeight: PropTypes.bool,
+  onEnter: PropTypes.func,
+  data: PropTypes.array.isRequired,
+  searchValue: PropTypes.func.isRequired,
+  renderItem: PropTypes.func.isRequired,
+};
 
 export default SearchBar;
