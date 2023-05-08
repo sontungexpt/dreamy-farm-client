@@ -19,6 +19,7 @@ function Button({
   blackOutline, //optional
   primaryOutline, //optional
   whiteText, //optional
+  disabled, //optional
 }) {
   let Component = 'button';
   let props = {
@@ -60,6 +61,9 @@ function Button({
         {
           [styles.whiteText]: whiteText,
         },
+        {
+          [styles.disabled]: disabled,
+        },
         styles.button,
       ])}
       {...props}
@@ -72,8 +76,21 @@ function Button({
 }
 
 Button.propTypes = {
-  leftIcon: PropTypes.node,
-  rightIcon: PropTypes.node,
+  alignLeft: PropTypes.bool, //optional
+  leftIcon: PropTypes.node, //optional
+  rightIcon: PropTypes.node, //optional
+  small: PropTypes.bool, //optional
+  primary: PropTypes.bool, //optional
+  to: PropTypes.string, //optional
+  href: PropTypes.string, //optional
+  onClick: PropTypes.func, //optional
+  children: PropTypes.node.isRequired, //optional
+  className: PropTypes.string, //optional
+  whiteOutline: PropTypes.bool, //optional
+  blackOutline: PropTypes.bool, //optional
+  primaryOutline: PropTypes.bool, //optional
+  whiteText: PropTypes.bool, //optional
+  disabled: PropTypes.bool, //optional
 };
 
 export default Button;

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 import { useId } from '@floating-ui/react';
 
@@ -10,10 +9,5 @@ function ItemWrapper({ children, active, ...props }, ref) {
     </div>
   );
 }
-
-ItemWrapper.propTypes = {
-  children: PropTypes.node.isRequired,
-  active: PropTypes.bool,
-};
 
 export default forwardRef(ItemWrapper);
