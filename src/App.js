@@ -22,11 +22,11 @@ function App() {
           key={index}
           path={route.path}
           element={
-            <Layout>
-              <ProtectedRoute isAllowed={!isProtected}>
+            <ProtectedRoute isAllowed={!isProtected}>
+              <Layout>
                 <Page />
-              </ProtectedRoute>
-            </Layout>
+              </Layout>
+            </ProtectedRoute>
           }
         />
       );
