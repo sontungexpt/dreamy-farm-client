@@ -82,7 +82,7 @@ function Header() {
           </li>
 
           <li>
-            <Link to={routesConfig.favorite} className={styles.navbarLink}>
+            <Link to={routesConfig.wishList} className={styles.navbarLink}>
               <EmptyHeartIcon />
             </Link>
           </li>

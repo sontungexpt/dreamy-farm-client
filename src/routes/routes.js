@@ -3,7 +3,7 @@ import Home from '~/pages/Home';
 import AboutUs from '~/pages/AboutUs';
 import Products from '~/pages/Products';
 import Recipes from '~/pages/Recipes';
-import Favorite from '~/pages/Favorite';
+import WishList from '~/pages/WishList';
 import ShoppingCart from '~/pages/ShoppingCart';
 import ProductDetail from '~/pages/Products/ProductDetail';
 import { Login, Register, ForgotPassword } from '~/pages/Accounts';
@@ -39,8 +39,8 @@ const publicRoutes = [
 
 const privateRoutes = [
   {
-    path: routesConfig.favorite,
-    element: Favorite,
+    path: routesConfig.wishList,
+    element: WishList,
     // redirectPath: routesConfig.login,
   },
 ];
