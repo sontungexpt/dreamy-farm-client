@@ -62,6 +62,8 @@
 
       .typeButton.active {
         background-color: var(--primary-color);
+
+        border: none;
         color: var(--white-color);
       }
     }
