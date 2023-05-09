@@ -1,12 +1,11 @@
-import styles from './AboutUs.module.scss';
-import {Hero} from './Hero.js';
+import { Hero } from './Hero.js';
+import jpgImages from '~/assets/images/jpgs';
 
 function AboutUs() {
-  return <div> 
-    <Hero 
-      cName="hero"
-      heroImg={require('../../assets/img/AboutUs.jpg')}
-    />
- </div>
+  return (
+    <div>
+      <Hero cName="hero" heroImg={jpgImages.aboutUs} />
+    </div>
+  );
 }
 export default AboutUs;
