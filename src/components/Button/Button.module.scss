@@ -19,8 +19,6 @@
   .title + .icon {
     margin-left: 10px;
   }
-
-  font-family: 'Rhodium Libre', serif;
 }
 
 .button.alignLeft {
@@ -32,18 +30,24 @@
 .button.primary {
   background-color: var(--primary-color);
   color: var(--white-color);
-  border-radius: 5px;
+  // border-radius: 5px;
 
   &:hover {
     background-color: var(--button-hover-color);
   }
 }
 
+.button.disabled {
+  background-color: var(--disabled-color);
+  color: var(--white-color);
+  cursor: not-allowed;
+}
+
 .button.small {
   width: 50px;
   height: 0px;
   font-size: 1.6rem;
-  border-radius: 10px;
+  // border-radius: 10px;
 }
 
 .button.whiteOutline {

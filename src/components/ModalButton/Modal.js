@@ -1,6 +1,8 @@
+import { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+
 import styles from './Modal.module.scss';
 import { Close as CloseIcon } from '~/assets/images/icons/SvgIcons';
-import { useEffect, useRef } from 'react';
 
 function Modal({ children, closeBtn, closeModal }) {
   const overlay = useRef();
@@ -31,11 +33,21 @@ function Modal({ children, closeBtn, closeModal }) {
             )}
           </button>
         )}
-
         {children}
       </div>
     </div>
   );
 }
+
+Modal.propTypes = {
+  children: PropTypes.node.isRequired,
+  closeBtn: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      icon: PropTypes.node,
+    }),
+  ]),
+  closeModal: PropTypes.func.isRequired,
+};
 
 export default Modal;

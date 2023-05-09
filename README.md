@@ -52,7 +52,7 @@
   git checkout -b <your-branch-name>
   ```
 
-  NOTE: The branch name should be related to the feature you are working on. 4. After you finish your work, push your branch to remote
+  NOTE: The branch name should be related to the feature you are working on.
 
 - **4. Start working on your branch and push it to remote if done**
 

@@ -1,6 +1,8 @@
 const routes = {
   root: '/',
   products: '/products',
+  productDetail: '/products/:id/about',
+  moveProductDetail: (id) => `/products/${id}/about`,
   recipes: '/recipes',
   aboutUs: '/aboutUs',
   favorite: '/favorite',

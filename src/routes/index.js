@@ -5,22 +5,20 @@ import Products from '~/pages/Products';
 import Recipes from '~/pages/Recipes';
 import Favorite from '~/pages/Favorite';
 import ShoppingCart from '~/pages/ShoppingCart';
+import ProductDetail from '~/pages/Products/ProductDetail';
 import { Login, Register, ForgotPassword } from '~/pages/Accounts';
 
 //configs
 import { routes as routesConfig } from '~/configs';
 
 // Layouts
-import { AccountLayout, HeaderFooterSidebar } from '~/layouts';
+import { AccountLayout } from '~/layouts';
 
 const publicRoutes = [
   // Header
   { path: routesConfig.root, element: Home },
-  {
-    path: routesConfig.products,
-    element: Products,
-    layout: HeaderFooterSidebar,
-  },
+  { path: routesConfig.products, element: Products },
+  { path: routesConfig.productDetail, element: ProductDetail },
   { path: routesConfig.recipes, element: Recipes },
   { path: routesConfig.aboutUs, element: AboutUs },
   { path: routesConfig.favorite, element: Favorite },

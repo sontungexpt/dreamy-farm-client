@@ -1,5 +1,6 @@
 // libabry
 import { Link } from 'react-router-dom';
+import { clsx } from 'clsx';
 
 // configs
 import styles from './Header.module.scss';
@@ -10,7 +11,7 @@ import SearchBar from '~/components/SearchBar';
 import Product from '~/components/SearchBar/Product';
 import Logo from '~/assets/images/icons/Logo';
 import {
-  Favorite as FavoriteIcon,
+  EmptyHeart as EmptyHeartIcon,
   Cart as CartIcon,
   User as UserIcon,
 } from '~/assets/images/icons/SvgIcons';
@@ -18,7 +19,7 @@ import {
 function Header() {
   return (
     <header className={styles.wrapper}>
-      <nav className={styles.navbar}>
+      <nav className={clsx(['grid', 'wide', styles.navbar])}>
         <ul className={styles.navbarList}>
           <li>
             <Link to={routesConfig.root} className={styles.navbarLink}>
@@ -82,7 +83,7 @@ function Header() {
 
           <li>
             <Link to={routesConfig.favorite} className={styles.navbarLink}>
-              <FavoriteIcon />
+              <EmptyHeartIcon />
             </Link>
           </li>
           <li>

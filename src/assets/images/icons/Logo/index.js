@@ -1,11 +1,21 @@
-function Logo({ color = '#000000', transform = 'none', ...props }) {
+function Logo({
+  className,
+  width = '74',
+  height = '51',
+  fill = 'none',
+  color = '#000000',
+  transform = 'none',
+  ...props
+}) {
   return (
     <svg
-      style={{ transform: transform, ...props }}
-      width="74"
-      height="51"
+      className={className}
+      style={{ transform: transform }}
+      width={width}
+      height={height}
       viewBox="0 0 74 51"
-      fill="none"
+      fill={fill}
+      {...props}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

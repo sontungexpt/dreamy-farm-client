@@ -1,0 +1,28 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-width: 160px;
+
+  input {
+    display: block;
+    width: 80%;
+    font-size: 2.2rem;
+
+    // Remove arrows
+    appearance: none;
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  span {
+    display: block;
+    padding: 0 10px;
+    cursor: pointer;
+    line-height: 0;
+  }
+}
