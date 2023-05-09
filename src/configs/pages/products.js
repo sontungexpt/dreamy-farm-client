@@ -20,6 +20,7 @@ const configs = {
       title: 'Dairy & Eggs',
     },
   ],
+  priceRanges: ['100g', '300g', '1kg'],
 };
 
 export default configs;

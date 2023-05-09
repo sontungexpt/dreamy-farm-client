@@ -43,6 +43,7 @@
     .type {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       justify-content: space-between;
 
       width: 100%;
@@ -51,11 +52,17 @@
         width: 32%;
         border: 1px solid #ccc;
         height: 45px;
+        margin-top: 20px;
         font-size: 2rem;
 
         &:hover {
-          background-color: var(--button-hover-color2);
+          background-color: var(--button-hover-color1);
         }
+      }
+
+      .typeButton.active {
+        background-color: var(--primary-color);
+        color: var(--white-color);
       }
     }
 

@@ -1,9 +1,10 @@
 import { clsx } from 'clsx';
 import { Link } from 'react-router-dom';
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 
 import styles from './Detail.module.scss';
 import { routes as routeConfigs } from '~/configs';
+import { productsPageConfigs as configs } from '~/configs/pages';
 
 import Counter from '~/components/Counter';
 import Button from '~/components/Button';
@@ -14,6 +15,9 @@ import {
 } from '~/assets/images/icons/SvgIcons';
 
 function Detail({ id = 1, image, name, price, description }) {
+  const [priceRangeSelected, setPriceRangeSelected] = useState(
+    configs.priceRanges[0],
+  );
   const counterRef = useRef();
 
   return (
@@ -45,9 +49,20 @@ function Detail({ id = 1, image, name, price, description }) {
               <p className={styles.price}>{price} đ</p>
             </div>
             <div className={clsx([styles.type])}>
-              <Button className={styles.typeButton}>100g</Button>
-              <Button className={styles.typeButton}>300g</Button>
-              <Button className={styles.typeButton}>1kg</Button>
+              {configs.priceRanges.map((priceRange) => (
+                <Button
+                  key={priceRange}
+                  onClick={() => setPriceRangeSelected(priceRange)}
+                  className={clsx([
+                    styles.typeButton,
+                    {
+                      [styles.active]: priceRange === priceRangeSelected,
+                    },
+                  ])}
+                >
+                  {priceRange}
+                </Button>
+              ))}
             </div>
             <Counter ref={counterRef} className={styles.quantity} />
             <Button

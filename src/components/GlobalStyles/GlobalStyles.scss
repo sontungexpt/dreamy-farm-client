@@ -3,7 +3,7 @@
 
 html {
   font-size: 62.5%;
-  font-family: 'Rhodium Libre', serif;
+  font-family: 'Rhodium Libre', sans-serif;
   box-sizing: border-box;
 }
 
@@ -26,6 +26,7 @@ input {
 }
 
 button {
+  font-family: 'Rhodium Libre', serif;
   cursor: pointer;
 }
 
@@ -47,7 +48,8 @@ a {
   --text-color2: #666;
   --primary-color: #fb9701;
   --button-hover-color: #e88b39db;
-  --disabled-color: #e8e8e8;
+  --button-hover-color1: #949cb4;
+  --disabled-color: #b7bec6;
 
   --header-height: 62px;
 }

@@ -16,16 +16,21 @@
   .list {
     margin-top: 30px;
     height: 100%;
-  }
 
-  .link {
-    display: block;
-    color: var(--black-color);
-    text-decoration: none;
-    font-size: 2.2rem;
-    margin-bottom: 16px;
+    .item {
+      display: block;
+      color: var(--black-color);
+      text-decoration: none;
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      cursor: pointer;
 
-    &:hover {
+      &:hover {
+        color: var(--button-hover-color1);
+      }
+    }
+
+    .item.active {
       color: var(--primary-color);
     }
   }
@@ -37,5 +42,67 @@
   }
   .container {
     margin-top: 30px;
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 30px;
+
+  .page {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+    border-radius: 50%;
+
+    color: var(--black-color);
+    vertical-align: middle;
+
+    font-size: 2.6rem;
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--button-hover-color1);
+      color: var(--white-color);
+    }
+  }
+
+  .active {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+
+    &:hover {
+      cursor: default;
+      background-color: var(--primary-color);
+      color: var(--white-color);
+    }
+  }
+
+  .control {
+    margin: 0 20px;
+
+    color: var(--black-color);
+    font-size: 2.2rem;
+
+    &:hover {
+      cursor: pointer;
+      color: var(--primary-color);
+    }
+  }
+
+  .disabledControl {
+    color: var(--disabled-color);
+
+    &:hover {
+      cursor: default;
+      color: var(--disabled-color);
+    }
   }
 }
