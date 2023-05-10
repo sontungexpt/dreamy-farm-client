@@ -4,9 +4,6 @@ import { lazy } from 'react';
 //configs
 import { routes as routesConfig } from '~/configs';
 
-// Layouts
-import { AccountLayout } from '~/layouts';
-
 // Pages components
 // import Home from '~/pages/Home';
 // import AboutUs from '~/pages/AboutUs';
@@ -16,6 +13,20 @@ import { AccountLayout } from '~/layouts';
 // import ShoppingCart from '~/pages/ShoppingCart';
 // import ProductDetail from '~/pages/Products/ProductDetail';
 // import { Login, Register, ForgotPassword } from '~/pages/Accounts';
+
+// Layouts
+// import { UserInfoLayout, AccountLayout } from '~/layouts';
+const AccountLayout = lazy(() =>
+  import('~/layouts').then((module) => ({
+    default: module.AccountLayout,
+  })),
+);
+
+const UserInfoLayout = lazy(() =>
+  import('~/layouts').then((module) => ({
+    default: module.UserInfoLayout,
+  })),
+);
 
 // Pages lazy load
 const Home = lazy(() => import('~/pages/Home'));
@@ -41,8 +52,16 @@ const ForgotPassword = lazy(() =>
   })),
 );
 
+// error pages
+const E404 = lazy(() =>
+  import('~/pages/Errors').then((module) => ({
+    default: module.E404,
+  })),
+);
+
 const publicRoutes = [
   // Header
+  // { path: routesConfig.root, element: Home },
   { path: routesConfig.root, element: Home },
   { path: routesConfig.products, element: Products },
   { path: routesConfig.productDetail, element: ProductDetail },
@@ -62,12 +81,19 @@ const publicRoutes = [
     element: ForgotPassword,
     layout: AccountLayout,
   },
+
+  {
+    path: routesConfig.e404,
+    element: E404,
+    layout: null,
+  },
 ];
 
 const privateRoutes = [
   {
     path: routesConfig.wishList,
     element: WishList,
+    layout: UserInfoLayout,
     redirectPath: routesConfig.login,
   },
 ];

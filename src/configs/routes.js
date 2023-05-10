@@ -10,6 +10,7 @@ const routes = {
   login: '/accounts/',
   register: '/accounts/register',
   forgotPassword: '/accounts/forgotPassword',
+  e404: '/404',
 };
 
 export default routes;

@@ -1,0 +1,32 @@
+.sidebar {
+  background-color: #fff;
+  border-right: 1px solid #e0e0e0;
+
+  .title {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .list {
+    margin-top: 30px;
+    height: 100%;
+
+    .item {
+      display: block;
+      color: var(--black-color);
+      text-decoration: none;
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--button-hover-color1);
+      }
+    }
+
+    .item.active {
+      color: var(--primary-color);
+    }
+  }
+}

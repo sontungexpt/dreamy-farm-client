@@ -2,9 +2,10 @@ import { clsx } from 'clsx';
 import PropTypes from 'prop-types';
 import styles from './Loader.module.scss';
 
-function Loader({ r = '100px', borderWidth = '5px', className }) {
+function Loader({ r = '100px', borderWidth = '5px', className, ...props }) {
   return (
     <div
+      {...props}
       className={clsx([
         {
           [className]: className,

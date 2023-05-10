@@ -20,6 +20,7 @@ function Button({
   primaryOutline, //optional
   whiteText, //optional
   disabled, //optional
+  ...rest
 }) {
   let Component = 'button';
   let props = {
@@ -67,6 +68,7 @@ function Button({
         styles.button,
       ])}
       {...props}
+      {...rest}
     >
       {leftIcon && <span className={styles.icon}>{leftIcon}</span>}
       <span className={styles.title}>{children}</span>

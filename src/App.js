@@ -1,17 +1,22 @@
 //librabry
-import { Fragment, Suspense } from 'react';
+import { lazy, Fragment, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // routes
-import styles from './App.module.scss';
 import { publicRoutes, privateRoutes } from '~/routes';
 
-//layouts
-import { DefaultLayout } from '~/layouts';
-
 //components
-import ProtectedRoute from '~/components/ProtectedRoute';
 import Loader from '~/components/Loader';
+import ProtectedRoute from '~/components/Routes/ProtectedRoute';
+import ErroredRoute from '~/components/Routes/ErroredRoute';
+
+//layouts
+// import { DefaultLayout } from '~/layouts';
+const DefaultLayout = lazy(() =>
+  import('~/layouts').then((module) => ({
+    default: module.DefaultLayout,
+  })),
+);
 
 function App() {
   function handleRoutes(routes, isProtected = false) {
@@ -30,14 +35,16 @@ function App() {
           key={index}
           path={route.path}
           element={
-            <ProtectedRoute
-              isAllowed={!isProtected}
-              redirectPath={route.redirectPath}
-            >
-              <Layout>
-                <Page />
-              </Layout>
-            </ProtectedRoute>
+            <ErroredRoute>
+              <ProtectedRoute
+                isAllowed={!isProtected}
+                redirectPath={route.redirectPath}
+              >
+                <Layout>
+                  <Page />
+                </Layout>
+              </ProtectedRoute>
+            </ErroredRoute>
           }
         />
       );
@@ -47,10 +54,21 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Suspense fallback={<Loader className={styles.loader} />}>
+        <Suspense
+          fallback={
+            <Loader
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50 %, -50 %)',
+              }}
+            />
+          }
+        >
           <Routes>
             {handleRoutes(publicRoutes)}
-            {handleRoutes(privateRoutes, true)}
+            {handleRoutes(privateRoutes)}
           </Routes>
         </Suspense>
       </div>
