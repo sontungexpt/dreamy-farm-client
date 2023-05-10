@@ -1,4 +1,5 @@
+import Loader from '~/components/Loader';
 function Home() {
-  return <h1>Home</h1>;
+  return <div>Home</div>;
 }
 export default Home;
