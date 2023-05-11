@@ -32,6 +32,7 @@ const configs = {
       icon: LocationIcon,
       colorIcon: 'var(--blue-color)',
       to: routeConfigs.userInfos.address,
+      separator: true,
     },
     {
       title: 'Logout',

@@ -38,6 +38,10 @@ a {
   text-decoration: none;
 }
 
+label {
+  border: none;
+}
+
 //variable
 :root {
   --white-color: #fff;
@@ -49,6 +53,10 @@ a {
   --yellow-color: #eda500;
   --blue-color: #0046ab;
   --gray-color: #ccc;
+  --medium-gray-color: #ccc;
+  --darker-gray-color: #999;
+
+  --gray-background-color: #f5f5f5;
 
   --text-color: #000;
   --text-color2: #666;

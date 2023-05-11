@@ -1,7 +1,7 @@
 .sidebar {
-  background-color: #fff;
-  border-right: 1px solid #e0e0e0;
-  margin-top: 24px;
+  background-color: var(--gray-background-color);
+  // border-right: 1px solid #e0e0e0;
+  margin-top: 50px;
 
   .title {
     display: flex;
@@ -32,8 +32,8 @@
     display: flex;
     align-items: center;
 
-    padding: 18px 10px;
-    // margin: 0 20px;
+    padding: 15px 10px;
+    margin: 7px 0px;
 
     color: var(--text-color2);
     font-size: 2.4rem;
@@ -43,16 +43,11 @@
       cursor: pointer;
       color: var(--button-hover-color1);
     }
+  }
 
-    &:last-child {
-      padding-top: 40px;
-      border-top: 1px solid #e0e0e0;
-      // color: #ee2c4a;
-
-      // &:hover {
-      //   color: #e16857;
-      // }
-    }
+  .menuItem.separator {
+    padding-bottom: 40px;
+    border-bottom: 1px solid #e0e0e0;
   }
 
   .menuItem.active {

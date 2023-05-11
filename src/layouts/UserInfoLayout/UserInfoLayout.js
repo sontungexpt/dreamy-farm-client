@@ -8,12 +8,14 @@ import Sidebar from './Sidebar';
 
 function UserInfoLayout({ children }) {
   return (
-    <div className="wrapper">
+    <div className={styles.wrapper}>
       <Header />
-      <div className={clsx(['grid', 'wide', styles.content])}>
-        <div className="row">
-          <Sidebar className="col l-3 m-3 c-12" />
-          <div className="col l-9 m-9 c-12">{children}</div>
+      <div className={styles.background}>
+        <div className={clsx(['grid', 'wide', styles.content])}>
+          <div className="row">
+            <Sidebar className="col l-3 m-3 c-12" />
+            <div className="col l-9 m-9 c-12">{children}</div>
+          </div>
         </div>
       </div>
       <Footer />

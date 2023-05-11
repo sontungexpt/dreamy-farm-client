@@ -6,6 +6,7 @@ function MenuItem({
   className,
   activeClassName,
   pendingClassName,
+  separatorClassName,
   to,
   icon,
   title,
@@ -13,16 +14,19 @@ function MenuItem({
 }) {
   return (
     <NavLink
-      className={(nav) =>
+      className={({ isActive, isPending }) =>
         clsx([
           {
             [className]: className,
           },
           {
-            [activeClassName]: nav.isActive,
+            [activeClassName]: isActive,
           },
           {
-            [pendingClassName]: nav.isPending,
+            [separatorClassName]: separatorClassName,
+          },
+          {
+            [pendingClassName]: isPending,
           },
         ])
       }

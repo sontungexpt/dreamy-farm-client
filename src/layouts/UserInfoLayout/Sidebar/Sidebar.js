@@ -26,11 +26,12 @@ function Sidebar({ className, ...props }) {
       </div>
       <Menu className={styles.menu}>
         {configs.categories.map(
-          ({ title, icon: Icon, to, colorIcon }, index) => (
+          ({ title, icon: Icon, to, colorIcon, separator }, index) => (
             <MenuItem
               to={to}
               className={styles.menuItem}
               activeClassName={styles.active}
+              separatorClassName={clsx([{ [styles.separator]: separator }])}
               key={index}
               title={title}
               icon={<Icon color={colorIcon} className={styles.icon} />}
