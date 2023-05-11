@@ -1,48 +1,44 @@
 import { clsx } from 'clsx';
 import PropTypes from 'prop-types';
-import Button from '~/components/Button';
+
 import styles from './Sidebar.module.scss';
-import {
-  memo,
-  forwardRef,
-  useState,
-  useEffect,
-  useImperativeHandle,
-} from 'react';
+import { userInfoConfigs as configs } from '~/configs/pages';
+
+import Menu, { MenuItem } from './Menu';
+import { Setting as SettingIcon } from '~/assets/images/icons/SvgIcons';
 
 function Sidebar({ className, ...props }) {
   return (
-    <nav
+    <aside
       {...props}
       className={clsx([
+        styles.sidebar,
         {
           [className]: className,
         },
-        styles.sidebar,
       ])}
     >
-      <h2 className={styles.title}>Products</h2>
-      <ul className={styles.list}>
-        <li className={clsx([styles.item])}>
-          <Button to="/products">abc</Button>
-        </li>
-        <li className={clsx([styles.item])}>
-          <Button to="/">abc</Button>
-        </li>
-        <li className={clsx([styles.item])}>
-          <Button>abc</Button>
-        </li>
-        <li className={clsx([styles.item])}>
-          <Button>abc</Button>
-        </li>
-        <li className={clsx([styles.item])}>
-          <Button>abc</Button>
-        </li>
-        <li className={clsx([styles.item])}>
-          <Button>abc</Button>
-        </li>
-      </ul>
-    </nav>
+      <div className={styles.title}>
+        <span>
+          <SettingIcon width="30px" />
+        </span>
+        <h2>Informations</h2>
+      </div>
+      <Menu className={styles.menu}>
+        {configs.categories.map(
+          ({ title, icon: Icon, to, colorIcon }, index) => (
+            <MenuItem
+              to={to}
+              className={styles.menuItem}
+              activeClassName={styles.active}
+              key={index}
+              title={title}
+              icon={<Icon color={colorIcon} className={styles.icon} />}
+            />
+          ),
+        )}
+      </Menu>
+    </aside>
   );
 }
 
@@ -50,4 +46,4 @@ Sidebar.propTypes = {
   className: PropTypes.string,
 };
 
-export default memo(forwardRef(Sidebar));
+export default Sidebar;

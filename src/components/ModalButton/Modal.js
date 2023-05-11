@@ -8,6 +8,20 @@ function Modal({ children, closeBtn, closeModal }) {
   const overlay = useRef();
 
   useEffect(() => {
+    function handleEsc(event) {
+      if (event.keyCode === 27) {
+        closeModal();
+      }
+    }
+
+    window.addEventListener('keydown', handleEsc);
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [closeModal]);
+
+  useEffect(() => {
     function handleClickOutside(event) {
       if (overlay.current && overlay.current.contains(event.target)) {
         closeModal();
@@ -19,7 +33,8 @@ function Modal({ children, closeBtn, closeModal }) {
     return () => {
       window.removeEventListener('click', handleClickOutside);
     };
-  });
+  }, [closeModal]);
+
   return (
     <div className={styles.modal}>
       <div ref={overlay} className={styles.overlay}></div>

@@ -4,18 +4,7 @@ import { lazy } from 'react';
 //configs
 import { routes as routesConfig } from '~/configs';
 
-// Pages components
-// import Home from '~/pages/Home';
-// import AboutUs from '~/pages/AboutUs';
-// import Products from '~/pages/Products';
-// import Recipes from '~/pages/Recipes';
-// import WishList from '~/pages/WishList';
-// import ShoppingCart from '~/pages/ShoppingCart';
-// import ProductDetail from '~/pages/Products/ProductDetail';
-// import { Login, Register, ForgotPassword } from '~/pages/Accounts';
-
 // Layouts
-// import { UserInfoLayout, AccountLayout } from '~/layouts';
 const AccountLayout = lazy(() =>
   import('~/layouts').then((module) => ({
     default: module.AccountLayout,
@@ -33,9 +22,10 @@ const Home = lazy(() => import('~/pages/Home'));
 const AboutUs = lazy(() => import('~/pages/AboutUs'));
 const Products = lazy(() => import('~/pages/Products'));
 const Recipes = lazy(() => import('~/pages/Recipes'));
-const WishList = lazy(() => import('~/pages/WishList'));
 const ShoppingCart = lazy(() => import('~/pages/ShoppingCart'));
 const ProductDetail = lazy(() => import('~/pages/Products/ProductDetail'));
+
+// Accounts lazy load
 const Login = lazy(() =>
   import('~/pages/Accounts').then((module) => ({
     default: module.Login,
@@ -52,6 +42,31 @@ const ForgotPassword = lazy(() =>
   })),
 );
 
+// UserInfos lazy load
+const Account = lazy(() =>
+  import('~/pages/UserInfos').then((module) => ({
+    default: module.Account,
+  })),
+);
+
+const WishList = lazy(() =>
+  import('~/pages/UserInfos').then((module) => ({
+    default: module.WishList,
+  })),
+);
+
+const Orders = lazy(() =>
+  import('~/pages/UserInfos').then((module) => ({
+    default: module.Orders,
+  })),
+);
+
+const Address = lazy(() =>
+  import('~/pages/UserInfos').then((module) => ({
+    default: module.Address,
+  })),
+);
+
 // error pages
 const E404 = lazy(() =>
   import('~/pages/Errors').then((module) => ({
@@ -61,7 +76,6 @@ const E404 = lazy(() =>
 
 const publicRoutes = [
   // Header
-  // { path: routesConfig.root, element: Home },
   { path: routesConfig.root, element: Home },
   { path: routesConfig.products, element: Products },
   { path: routesConfig.productDetail, element: ProductDetail },
@@ -75,7 +89,13 @@ const publicRoutes = [
     element: Login,
     layout: AccountLayout,
   },
-  { path: routesConfig.register, element: Register, layout: AccountLayout },
+
+  {
+    path: routesConfig.register,
+    element: Register,
+    layout: AccountLayout,
+  },
+
   {
     path: routesConfig.forgotPassword,
     element: ForgotPassword,
@@ -91,8 +111,29 @@ const publicRoutes = [
 
 const privateRoutes = [
   {
-    path: routesConfig.wishList,
+    path: routesConfig.userInfos.wishlist,
     element: WishList,
+    layout: UserInfoLayout,
+    redirectPath: routesConfig.login,
+  },
+
+  {
+    path: routesConfig.userInfos.root,
+    element: Account,
+    layout: UserInfoLayout,
+    redirectPath: routesConfig.login,
+  },
+
+  {
+    path: routesConfig.userInfos.orders,
+    element: Orders,
+    layout: UserInfoLayout,
+    redirectPath: routesConfig.login,
+  },
+
+  {
+    path: routesConfig.userInfos.address,
+    element: Address,
     layout: UserInfoLayout,
     redirectPath: routesConfig.login,
   },
