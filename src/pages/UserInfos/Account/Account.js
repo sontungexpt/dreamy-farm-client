@@ -3,15 +3,20 @@ import styles from './Account.module.scss';
 import Input from './Input';
 
 import {
+  Pencil as PencilIcon,
   NoFilledUser as NoFilledUserIcon,
   Mail as MailIcon,
   Phone as PhoneIcon,
   Camera as CameraIcon,
+  Gender as GenderIcon,
 } from '~/assets/images/icons/SvgIcons';
 function Account() {
   return (
     <div className={clsx(['grid', styles.wrapper])}>
-      <h2 className={styles.header}> Account</h2>
+      <div className={styles.header}>
+        <h2>Account Informations</h2>
+        <PencilIcon className={styles.pencilIcon} />
+      </div>
       <div className={clsx([styles.content])}>
         <div className={clsx(['row', styles.row])}>
           <div className={clsx(['col l-4 m-4 c-12', styles.avatar])}>
@@ -20,9 +25,8 @@ function Account() {
                 src="https://i.pinimg.com/564x/17/d0/e3/17d0e35d3566f6fd5d643ff21b513220.jpg"
                 alt="avatar"
               />
-              <div className={styles.avatarOverlay} />
-              <div className={styles.avatarChange}>
-                <CameraIcon />
+              <div className={styles.avatarOverlay}>
+                <CameraIcon className={styles.cameraIcon} />
               </div>
             </div>
             <h3 className={styles.title}>Your Avatar</h3>
@@ -53,6 +57,7 @@ function Account() {
               name="phone"
             />
             <Input
+              labelIcon={<GenderIcon color="var(--green-color)" />}
               className={styles.input}
               label="Gender"
               type="text"
