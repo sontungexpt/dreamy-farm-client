@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import { clsx } from 'clsx';
 import PropTypes from 'prop-types';
 
@@ -13,17 +13,7 @@ function ModalButton({
   onClose,
   closeBtn,
 }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  function handleButtonClick() {
-    setIsOpen(true);
-    onOpen && onOpen();
-  }
-
-  function handleModalClose() {
-    setIsOpen(false);
-    onClose && onClose();
-  }
+  const modalRef = useRef();
 
   return (
     <>
@@ -33,27 +23,19 @@ function ModalButton({
             [className]: className,
           },
         ])}
-        onClick={handleButtonClick}
+        onClick={() => modalRef.current.open()}
       >
         {button}
       </span>
-      {isOpen &&
-        (closeBtn ? (
-          <Modal
-            className={clsx([{ [modalClassName]: modalClassName }])}
-            closeBtn
-            closeModal={handleModalClose}
-          >
-            {innerModal}
-          </Modal>
-        ) : (
-          <Modal
-            className={clsx([{ [modalClassName]: modalClassName }])}
-            closeModal={handleModalClose}
-          >
-            {innerModal}
-          </Modal>
-        ))}
+      <Modal
+        ref={modalRef}
+        className={clsx([{ [modalClassName]: modalClassName }])}
+        closeBtn={closeBtn}
+        onClose={onClose}
+        onOpen={onOpen}
+      >
+        {innerModal}
+      </Modal>
     </>
   );
 }

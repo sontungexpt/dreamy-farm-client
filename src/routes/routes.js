@@ -102,11 +102,11 @@ const publicRoutes = [
     layout: AccountLayout,
   },
 
-  {
-    path: routesConfig.e404,
-    element: E404,
-    layout: null,
-  },
+  // {
+  //   path: routesConfig.e404,
+  //   element: E404,
+  //   layout: null,
+  // },
 ];
 
 const privateRoutes = [
