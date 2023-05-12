@@ -9,6 +9,7 @@ function Modal({ children, closeBtn, closeModal }) {
 
   useEffect(() => {
     function handleEsc(event) {
+      event.stopPropagation();
       if (event.keyCode === 27) {
         closeModal();
       }
@@ -23,6 +24,7 @@ function Modal({ children, closeBtn, closeModal }) {
 
   useEffect(() => {
     function handleClickOutside(event) {
+      event.stopPropagation();
       if (overlay.current && overlay.current.contains(event.target)) {
         closeModal();
       }
@@ -40,7 +42,13 @@ function Modal({ children, closeBtn, closeModal }) {
       <div ref={overlay} className={styles.overlay}></div>
       <div className={styles.body}>
         {closeBtn && (
-          <button onClick={closeModal} className={styles.closeBtn}>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              closeModal();
+            }}
+            className={styles.closeBtn}
+          >
             {closeBtn.icon ? (
               closeBtn.icon
             ) : (

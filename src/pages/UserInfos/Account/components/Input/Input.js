@@ -59,10 +59,16 @@ function Input({
 }
 
 Input.propTypes = {
-  label: PropTypes.string,
+  className: PropTypes.string,
+  labelClassName: PropTypes.string,
+  labelIcon: PropTypes.node,
+  inputClassName: PropTypes.string,
+  inputIcon: PropTypes.node,
+  label: PropTypes.node,
   type: PropTypes.string,
   name: PropTypes.string,
   value: PropTypes.string,
+  id: PropTypes.string,
   onChange: PropTypes.func,
 };
 

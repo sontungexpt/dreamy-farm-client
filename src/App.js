@@ -11,7 +11,6 @@ import ProtectedRoute from '~/components/Routes/ProtectedRoute';
 import ErroredRoute from '~/components/Routes/ErroredRoute';
 
 //layouts
-// import { DefaultLayout } from '~/layouts';
 const DefaultLayout = lazy(() =>
   import('~/layouts').then((module) => ({
     default: module.DefaultLayout,
