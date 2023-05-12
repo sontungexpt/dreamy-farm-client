@@ -5,7 +5,7 @@ import ReactPaginate from 'react-paginate';
 import styles from './Products.module.scss';
 import { productsPageConfigs as configs } from '~/configs/pages';
 
-import Item from './Item';
+import AddableItem from '~/components/AddableItem';
 
 function Products() {
   const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
@@ -107,7 +107,7 @@ function Products() {
           <div className={clsx(['row', styles.container])}>
             {displayItems.map((item, index) => (
               <div key={index} className={clsx(['col', 'l-3', 'm-4', 'c-6'])}>
-                <Item price="100" name={item} />
+                <AddableItem price="100" name={item} />
               </div>
             ))}
           </div>
