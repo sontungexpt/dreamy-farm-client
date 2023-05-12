@@ -1,9 +1,21 @@
-import { Fragment } from 'react';
+//librabry
+import { lazy, Fragment, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+// routes
 import { publicRoutes, privateRoutes } from '~/routes';
-import { DefaultLayout } from '~/layouts';
-import ProtectedRoute from '~/components/ProtectedRoute';
+
+//components
+import Loader from '~/components/Loader';
+import ProtectedRoute from '~/components/Routes/ProtectedRoute';
+import ErroredRoute from '~/components/Routes/ErroredRoute';
+
+//layouts
+const DefaultLayout = lazy(() =>
+  import('~/layouts').then((module) => ({
+    default: module.DefaultLayout,
+  })),
+);
 
 function App() {
   function handleRoutes(routes, isProtected = false) {
@@ -22,11 +34,16 @@ function App() {
           key={index}
           path={route.path}
           element={
-            <Layout>
-              <ProtectedRoute isAllowed={!isProtected}>
-                <Page />
+            <ErroredRoute>
+              <ProtectedRoute
+                isAllowed={!isProtected}
+                redirectPath={route.redirectPath}
+              >
+                <Layout>
+                  <Page />
+                </Layout>
               </ProtectedRoute>
-            </Layout>
+            </ErroredRoute>
           }
         />
       );
@@ -36,10 +53,23 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Routes>
-          {handleRoutes(publicRoutes)}
-          {handleRoutes(privateRoutes, true)}
-        </Routes>
+        <Suspense
+          fallback={
+            <Loader
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            />
+          }
+        >
+          <Routes>
+            {handleRoutes(publicRoutes)}
+            {handleRoutes(privateRoutes)}
+          </Routes>
+        </Suspense>
       </div>
     </Router>
   );

@@ -95,6 +95,10 @@
   max-width: 100%;
 }
 
+.c-o-0 {
+  margin: 0 auto;
+}
+
 .c-o-1 {
   margin-left: 8.33333%;
 }
@@ -228,6 +232,10 @@
   .m-12 {
     flex: 0 0 100%;
     max-width: 100%;
+  }
+
+  .m-o-0 {
+    margin: 0 auto;
   }
 
   .m-o-1 {
@@ -382,6 +390,10 @@
     max-width: 100%;
   }
 
+  .l-o-0 {
+    margin: 0 auto;
+  }
+
   .l-o-1 {
     margin-left: 8.33333%;
   }
@@ -428,12 +440,12 @@
 }
 
 /* Tablet - PC low resolution */
-@media (min-width: 800px) and (max-width: 919px) {
+@media (min-width: 800px) and (max-width: 925px) {
   .grid.wide {
-    width: 767px;
+    width: 790px;
   }
 }
-@media (min-width: 920px) and (max-width: 1099px) {
+@media (min-width: 926px) and (max-width: 1099px) {
   .grid.wide {
     width: 915px;
   }

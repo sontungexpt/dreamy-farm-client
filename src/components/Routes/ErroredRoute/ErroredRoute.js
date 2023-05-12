@@ -2,18 +2,18 @@ import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { routes as routesConfig } from '~/configs';
 
-const ProtectedRoute = ({ isAllowed, redirectPath, children }) => {
-  if (!isAllowed) {
-    return <Navigate to={redirectPath || routesConfig.login} replace />;
+const ErroredRoute = ({ isErrored, redirectPath, children }) => {
+  if (isErrored) {
+    return <Navigate to={redirectPath || routesConfig.e404} replace />;
   }
 
   return children;
 };
 
-ProtectedRoute.propTypes = {
+ErroredRoute.propTypes = {
   isAllowed: PropTypes.bool,
   redirectPath: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 
-export default ProtectedRoute;
+export default ErroredRoute;

@@ -1,16 +1,44 @@
-import { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import {
+  useImperativeHandle,
+  useState,
+  forwardRef,
+  useEffect,
+  useRef,
+} from 'react';
+import { clsx } from 'clsx';
 
 import styles from './Modal.module.scss';
 import { Close as CloseIcon } from '~/assets/images/icons/SvgIcons';
 
-function Modal({ children, closeBtn, closeModal }) {
+function Modal({ className, children, closeBtn, onClose, onOpen }, ref) {
   const overlay = useRef();
+  const [isOpen, setIsOpen] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    open: () => setIsOpen(true),
+    close: () => setIsOpen(false),
+  }));
+
+  useEffect(() => {
+    function handleEsc(event) {
+      event.stopPropagation();
+      if (event.keyCode === 27) {
+        setIsOpen(false);
+      }
+    }
+
+    window.addEventListener('keydown', handleEsc);
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     function handleClickOutside(event) {
+      event.stopPropagation();
       if (overlay.current && overlay.current.contains(event.target)) {
-        closeModal();
+        setIsOpen(false);
       }
     }
 
@@ -19,35 +47,49 @@ function Modal({ children, closeBtn, closeModal }) {
     return () => {
       window.removeEventListener('click', handleClickOutside);
     };
-  });
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen) {
+      onOpen && onOpen();
+    } else {
+      onClose && onClose();
+    }
+  }, [isOpen, onClose, onOpen]);
   return (
-    <div className={styles.modal}>
-      <div ref={overlay} className={styles.overlay}></div>
-      <div className={styles.body}>
-        {closeBtn && (
-          <button onClick={closeModal} className={styles.closeBtn}>
-            {closeBtn.icon ? (
-              closeBtn.icon
-            ) : (
-              <CloseIcon className={styles.closeIcon} />
+    <>
+      {isOpen && (
+        <div className={styles.modal}>
+          <div ref={overlay} className={styles.overlay}></div>
+          <div
+            className={clsx([
+              styles.body,
+              {
+                [className]: className,
+              },
+            ])}
+          >
+            {closeBtn && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsOpen(false);
+                }}
+                className={styles.closeBtn}
+              >
+                {closeBtn.icon ? (
+                  closeBtn.icon
+                ) : (
+                  <CloseIcon className={styles.closeIcon} />
+                )}
+              </button>
             )}
-          </button>
-        )}
-        {children}
-      </div>
-    </div>
+            {children}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
-Modal.propTypes = {
-  children: PropTypes.node.isRequired,
-  closeBtn: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.shape({
-      icon: PropTypes.node,
-    }),
-  ]),
-  closeModal: PropTypes.func.isRequired,
-};
-
-export default Modal;
+export default forwardRef(Modal);

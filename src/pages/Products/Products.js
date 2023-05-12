@@ -3,10 +3,7 @@ import { useMemo, useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 
 import styles from './Products.module.scss';
-import {
-  productsPageConfigs as configs,
-  productsPageConfigs,
-} from '~/configs/pages';
+import { productsPageConfigs as configs } from '~/configs/pages';
 
 import Item from './Item';
 
@@ -123,7 +120,6 @@ function Products() {
             onPageChange={({ selected }) => {
               setPageOffset(selected);
             }}
-            initialPage={0}
             previousLabel="Prev"
             renderOnZeroPageCount={null}
             className={styles.pagination}

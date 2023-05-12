@@ -1,37 +1,48 @@
-import { useState } from 'react';
+import { useRef } from 'react';
+import { clsx } from 'clsx';
 import PropTypes from 'prop-types';
 
 import Modal from './Modal';
 
-function ModalButton({ button, innerModal, onOpen, onClose, closeBtn }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  function handleButtonClick() {
-    setIsOpen(true);
-    onOpen && onOpen();
-  }
-
-  function handleModalClose() {
-    setIsOpen(false);
-    onClose && onClose();
-  }
+function ModalButton({
+  className,
+  modalClassName,
+  button,
+  innerModal,
+  onOpen,
+  onClose,
+  closeBtn,
+}) {
+  const modalRef = useRef();
 
   return (
     <>
-      <span onClick={handleButtonClick}>{button}</span>
-      {isOpen &&
-        (closeBtn ? (
-          <Modal closeBtn closeModal={handleModalClose}>
-            {innerModal}
-          </Modal>
-        ) : (
-          <Modal closeModal={handleModalClose}>{innerModal}</Modal>
-        ))}
+      <span
+        className={clsx([
+          {
+            [className]: className,
+          },
+        ])}
+        onClick={() => modalRef.current.open()}
+      >
+        {button}
+      </span>
+      <Modal
+        ref={modalRef}
+        className={clsx([{ [modalClassName]: modalClassName }])}
+        closeBtn={closeBtn}
+        onClose={onClose}
+        onOpen={onOpen}
+      >
+        {innerModal}
+      </Modal>
     </>
   );
 }
 
 ModalButton.propTypes = {
+  className: PropTypes.string,
+  modalClassName: PropTypes.string,
   button: PropTypes.node.isRequired,
   innerModal: PropTypes.node.isRequired,
   onOpen: PropTypes.func,
