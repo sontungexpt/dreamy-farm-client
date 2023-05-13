@@ -19,7 +19,7 @@ function AboutUs() {
         <div className="grid wide">
           <div className="row">
             <div
-              className={clsx(['col', 'l-7', 'm-7', 'c-12', styles.content])}
+              className={clsx(['col', 'l-7', 'm-12', 'c-12', styles.content])}
             >
               <h1>Why Dreamy Farm</h1>
               <p>
@@ -39,7 +39,7 @@ function AboutUs() {
 
           <div className={clsx(['row', styles.row2])}>
             <div
-              className={clsx(['col', 'l-7', 'm-7', 'c-12', styles.content])}
+              className={clsx(['col', 'l-7', 'm-12', 'c-12', styles.content])}
             >
               <h1>What Sets Us Apart</h1>
               <p>
