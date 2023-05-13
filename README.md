@@ -56,12 +56,20 @@
 
   NOTE: The branch name should be related to the feature you are working on.
 
-- **4. Start working on your branch and push it to remote if done**
-
+- **4. Start working on your branch and push it to remote when you finished some new feature or end of day**
+  
+  NOTE:For the first time you create a new branch and push it to remote do this
+ 
   ```
   git push -u origin <your-branch-name>
   ```
-
+  
+  After that you can push it with the shorter syntax
+  
+  ```
+  git push
+  ```
+  
   NOTE: The -u flag help you to set up the upstream branch. After that, you can use git push without any flag.
 
 - **5. Create a pull request to develop branch**
