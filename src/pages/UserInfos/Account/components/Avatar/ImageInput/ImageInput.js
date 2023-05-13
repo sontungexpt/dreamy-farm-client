@@ -70,7 +70,7 @@ function ImageInput({
             ref={avatarEditorRef}
           />
         ) : (
-          <Image className={styles.avatarEditorAlt} />
+          <Image className={styles.avatarEditorAlt} alt="noavatar" />
         )}
       </div>
       <label htmlFor="upload-avatar" className={styles.uploadLabel}>

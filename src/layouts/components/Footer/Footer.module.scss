@@ -10,7 +10,6 @@
     padding-top: 40px;
     justify-content: space-between;
     align-items: flex-start;
-    // width: 90%;
   }
 }
 
@@ -103,6 +102,6 @@
   line-height: 56px;
   color: var(--white-color);
 
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid var(--separator-color);
   padding-right: 20px;
 }

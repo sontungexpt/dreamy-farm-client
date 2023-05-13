@@ -5,6 +5,11 @@ import { clsx } from 'clsx';
 import styles from './Button.module.scss';
 
 function Button({
+  className, //optional
+  children, //optional
+  childrenClassName, //optional
+  iconClassName, //optional
+
   alignLeft, //optional
   leftIcon, //optional
   rightIcon, //optional
@@ -13,13 +18,13 @@ function Button({
   to, //optional
   href, //optional
   onClick, //optional
-  children, //optional
-  className, //optional
   whiteOutline, //optional
   blackOutline, //optional
   primaryOutline, //optional
   whiteText, //optional
   disabled, //optional
+  disabledText, //optional
+  primaryText, //optional
   ...rest
 }) {
   let Component = 'button';
@@ -38,6 +43,7 @@ function Button({
   return (
     <Component
       className={clsx([
+        styles.button,
         {
           [className]: className,
         },
@@ -65,14 +71,50 @@ function Button({
         {
           [styles.disabled]: disabled,
         },
-        styles.button,
+        {
+          [styles.disabledText]: disabledText,
+        },
+        {
+          [styles.primaryText]: primaryText,
+        },
       ])}
       {...props}
       {...rest}
     >
-      {leftIcon && <span className={styles.icon}>{leftIcon}</span>}
-      <span className={styles.title}>{children}</span>
-      {rightIcon && <span className={styles.icon}>{rightIcon}</span>}
+      {leftIcon && (
+        <span
+          className={clsx([
+            styles.icon,
+            {
+              [iconClassName]: iconClassName,
+            },
+          ])}
+        >
+          {leftIcon}
+        </span>
+      )}
+      <span
+        className={clsx([
+          styles.title,
+          {
+            [childrenClassName]: childrenClassName,
+          },
+        ])}
+      >
+        {children}
+      </span>
+      {rightIcon && (
+        <span
+          className={clsx([
+            styles.icon,
+            {
+              [iconClassName]: iconClassName,
+            },
+          ])}
+        >
+          {rightIcon}
+        </span>
+      )}
     </Component>
   );
 }
@@ -93,6 +135,7 @@ Button.propTypes = {
   primaryOutline: PropTypes.bool, //optional
   whiteText: PropTypes.bool, //optional
   disabled: PropTypes.bool, //optional
+  disabledText: PropTypes.bool, //optional
 };
 
 export default Button;

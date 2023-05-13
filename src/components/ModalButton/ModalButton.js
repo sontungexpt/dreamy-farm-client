@@ -17,7 +17,7 @@ function ModalButton({
 
   return (
     <>
-      <span
+      <div
         className={clsx([
           {
             [className]: className,
@@ -26,7 +26,7 @@ function ModalButton({
         onClick={() => modalRef.current.open()}
       >
         {button}
-      </span>
+      </div>
       <Modal
         ref={modalRef}
         className={clsx([{ [modalClassName]: modalClassName }])}

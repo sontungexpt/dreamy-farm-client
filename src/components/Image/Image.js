@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { clsx } from 'clsx';
 
 import styles from './Image.module.scss';
-
 import jpgImages from '~/assets/images/jpgs';
 
 function Image({
@@ -17,7 +16,6 @@ function Image({
   const [fallback, setFallback] = useState('');
 
   const handleError = () => {
-    console.log('error');
     setFallback(customFallback);
   };
 

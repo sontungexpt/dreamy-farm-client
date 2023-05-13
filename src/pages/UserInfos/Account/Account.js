@@ -4,6 +4,7 @@ import styles from './Account.module.scss';
 
 import Input from './components/Input';
 import Avatar from './components/Avatar';
+import Button from '~/components/Button/Button';
 import {
   Pencil as PencilIcon,
   NoFilledUser as NoFilledUserIcon,
@@ -17,7 +18,13 @@ function Account() {
     <div className={clsx(['grid', styles.wrapper])}>
       <div className={styles.header}>
         <h2>Account Informations</h2>
-        <PencilIcon className={styles.pencilIcon} />
+        <Button
+          leftIcon={<PencilIcon className={styles.pencilIcon} />}
+          className={styles.updateBtn}
+          primaryText
+        >
+          Update
+        </Button>
       </div>
       <div className={clsx([styles.content])}>
         <div className={clsx(['row', styles.row])}>

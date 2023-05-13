@@ -12,12 +12,12 @@ import { Close as CloseIcon } from '~/assets/images/icons/SvgIcons';
 
 function Modal(
   {
-    className,
-    wrapperClassName,
-    closeBtnClassName,
-    closeIconClassName,
+    className, // className for the body of the modal
+    wrapperClassName, // className for the wrapper of the modal
+    closeBtnClassName, // className for the close button
+    closeIconClassName, // className for the close icon
     children,
-    closeBtn,
+    closeBtn, // closeBtn = {icon: <Icon />, className: 'className'} or true or false
     onClose,
     onOpen,
   },
