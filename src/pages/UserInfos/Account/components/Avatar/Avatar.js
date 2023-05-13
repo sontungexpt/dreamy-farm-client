@@ -1,9 +1,13 @@
+//librairies
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
 import { clsx } from 'clsx';
 
+//styles and images
 import styles from './Avatar.module.scss';
 import jpgImages from '~/assets/images/jpgs';
+
+//components
 import { Modal } from '~/components/ModalButton';
 import Image from '~/components/Image';
 import ImageInput from './ImageInput';
@@ -12,7 +16,6 @@ import { Camera as CameraIcon } from '~/assets/images/icons/SvgIcons';
 function Avatar({ src }) {
   const [avatar, setAvatar] = useState(src);
   const modalRef = useRef();
-  const imageInputRef = useRef();
 
   // const dataURLtoFile = (dataurl, filename) => {
   //   let arr = dataurl.split(','),
@@ -48,10 +51,9 @@ function Avatar({ src }) {
       </div>
       <Modal ref={modalRef}>
         <ImageInput
-          ref={imageInputRef}
-          onAccept={() => {
+          onAccept={(image) => {
+            setAvatar(image);
             modalRef.current.close();
-            setAvatar(imageInputRef.current.value);
           }}
           className={styles.innerModal}
         />
