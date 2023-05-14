@@ -26,10 +26,11 @@
   }
 
   .menuItem {
+    position: relative;
     display: flex;
     align-items: center;
 
-    padding: 15px 10px;
+    padding: 16px 10px;
     margin: 7px 0px;
 
     color: var(--text-color2);
@@ -43,7 +44,6 @@
   }
 
   .menuItem.separator {
-    padding-bottom: 40px;
     border-bottom: 1px solid var(--separator-color);
   }
 

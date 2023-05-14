@@ -10,9 +10,9 @@ import { routes as routesConfig } from '~/configs';
 import SearchBar from '~/components/SearchBar';
 import Product from '~/components/SearchBar/Product';
 import Logo from '~/assets/images/icons/Logo';
+import CartIcon from './CartIcon';
 import {
   EmptyHeart as EmptyHeartIcon,
-  Cart as CartIcon,
   User as UserIcon,
 } from '~/assets/images/icons/SvgIcons';
 
@@ -86,7 +86,7 @@ function Header() {
               to={routesConfig.userInfos.wishlist}
               className={styles.navbarLink}
             >
-              <EmptyHeartIcon />
+              <EmptyHeartIcon color="var(--red-color)" />
             </Link>
           </li>
           <li>

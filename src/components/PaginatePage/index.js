@@ -1,1 +1,1 @@
-export { deafult } from './PaginatePage';
+export { default } from './PaginatePage';

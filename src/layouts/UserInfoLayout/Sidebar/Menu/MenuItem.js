@@ -23,10 +23,10 @@ function MenuItem({
             [activeClassName]: isActive,
           },
           {
-            [separatorClassName]: separatorClassName,
+            [pendingClassName]: isPending,
           },
           {
-            [pendingClassName]: isPending,
+            [separatorClassName]: separatorClassName,
           },
         ])
       }
