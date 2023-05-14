@@ -1,9 +1,9 @@
-import Item from './Item';
+import ItemShoppingCart from './ItemShoppingCart.js';
 import { useMemo, useEffect, useState } from 'react';
 import { productsPageConfigs as configs } from '~/configs/pages';
 import { clsx } from 'clsx';
 import ReactPaginate from 'react-paginate';
-import styles from './Item.module.scss';
+import styles from './ShoppingCart.module.scss';
 
 function ShoppingCart() {
   const [pageRangeDisplayed, setPageRangeDisplayed] = useState(2);
@@ -64,14 +64,15 @@ function ShoppingCart() {
   return (
     <div className={clsx(['grid', 'wide'])}>
       <div className={clsx(['row', styles.wrapper])}>
-        <nav className={clsx(['col', 'l-2', 'm-3', 'c-0', styles.sidebar])}>
+       <nav className={clsx([styles.main])}>
           <h2 className={styles.title}>Shopping Cart</h2>
         </nav>
-        <div className={clsx(['col', 'l-10', 'm-9', 'c-12', styles.main])}>
+      
+        <div className={clsx(['row', 'l-10', 'm-9', 'c-12', styles.main])}>
           <div className={clsx(['row', styles.container])}>
             {displayItems.map((item, index) => (
-              <div key={index} className={clsx(['col', 'l-3', 'm-4', 'c-6'])}>
-                <Item price="100" name={item} />
+              <div key={index} className={clsx(['row', 'l-o-0', 'l-7', 'm-o-1', 'c-o-0'])}>
+                <ItemShoppingCart price="100" name={item} />
               </div>
             ))}
           </div>
