@@ -50,7 +50,7 @@ function Products() {
             data={configs.categories}
             itemClassName={styles.item}
             itemActiveClassName={styles.active}
-            onItemClick={(item) => setCategorySelected(item.title)}
+            onInactiveItemClick={(item) => setCategorySelected(item.title)}
             renderItem={(item) => item.title}
           />
         </aside>

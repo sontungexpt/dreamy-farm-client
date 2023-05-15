@@ -9,13 +9,14 @@ function Selector(
     className, //string
     itemClassName, //string
     itemActiveClassName, //string
+    onActiveItemClick, //function
+    onInactiveItemClick, //function
     onItemClick, //function
     ...props
   },
   ref,
 ) {
   const [activeIndex, setActiveIndex] = useState(0);
-  console.log('selector');
 
   useImperativeHandle(
     ref,
@@ -41,9 +42,13 @@ function Selector(
           key={index}
           onClick={(event) => {
             // Prevent re-render if the item is already active
-            if (activeIndex === index) return;
+            if (activeIndex !== index) {
+              setActiveIndex(index);
+              onInactiveItemClick && onInactiveItemClick(item, index, event);
+            } else {
+              onActiveItemClick && onActiveItemClick(item, index, event);
+            }
 
-            setActiveIndex(index);
             onItemClick && onItemClick(item, index, event);
           }}
           className={clsx([
