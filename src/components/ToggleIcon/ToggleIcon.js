@@ -3,7 +3,15 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './ToggleIcon.module.scss';
 
-function ToggleIcon({ className, clickIcon, unClickIcon, onClick, onUnClick }) {
+function ToggleIcon({
+  className,
+  activeIcon,
+  unActiveIcon,
+  onClick,
+  customEvent,
+  onUnClick,
+  ...props
+}) {
   const [isClick, setIsClick] = useState(false);
 
   const handleClick = (event) => {
@@ -18,18 +26,30 @@ function ToggleIcon({ className, clickIcon, unClickIcon, onClick, onUnClick }) {
   };
 
   return (
-    <div className={clsx([styles.wrapper, { [className]: className }])}>
-      <span onClick={handleClick}>{isClick ? clickIcon : unClickIcon}</span>
+    <div
+      {...props}
+      className={clsx([styles.wrapper, { [className]: className }])}
+    >
+      {customEvent ? (
+        customEvent() ? (
+          activeIcon
+        ) : (
+          unActiveIcon
+        )
+      ) : (
+        <span onClick={handleClick}>{isClick ? activeIcon : unActiveIcon}</span>
+      )}
     </div>
   );
 }
 
 ToggleIcon.propTypes = {
   className: PropTypes.string,
-  clickIcon: PropTypes.node.isRequired,
-  unClickIcon: PropTypes.node.isRequired,
+  activeIcon: PropTypes.node.isRequired,
+  unActiveIcon: PropTypes.node.isRequired,
   onClick: PropTypes.func,
   onUnClick: PropTypes.func,
+  customEvent: PropTypes.func,
 };
 
 export default ToggleIcon;

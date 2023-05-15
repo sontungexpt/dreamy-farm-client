@@ -43,8 +43,10 @@ function Detail({ id = 1, image, name, price, description }) {
                 </Link>
                 <ToggleIcon
                   className={styles.favorite}
-                  clickIcon={<FilledHeartIcon />}
-                  unClickIcon={<EmptyHeartIcon />}
+                  activeicon={<FilledHeartIcon />}
+                  unActivetoggleIcon={
+                    <EmptyHeartIcon color="var(--red-color)" />
+                  }
                 />
               </div>
               <p className={styles.price}>{price} đ</p>

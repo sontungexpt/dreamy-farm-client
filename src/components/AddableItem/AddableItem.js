@@ -37,8 +37,8 @@ function AddableItem({
               <h3 className={styles.name}>{name}</h3>
               <ToggleIcon
                 className={styles.favorite}
-                clickIcon={<FilledHeartIcon />}
-                unClickIcon={<EmptyHeartIcon color="var(--red-color)" />}
+                activeIcon={<FilledHeartIcon />}
+                unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
                 onClick={onClick}
                 onUnClick={onUnClick}
               />
