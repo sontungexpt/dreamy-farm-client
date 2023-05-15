@@ -21,7 +21,7 @@ const routes = {
     root: '/user-infos/accounts',
     orders: '/user-infos/orders',
     address: '/user-infos/address',
-    wishlist: '/user-infos/wishlist',
+    wishlist: '/user-infos/wishlist', //header too
   },
 };
 

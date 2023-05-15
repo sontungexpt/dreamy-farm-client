@@ -10,7 +10,19 @@ import { clsx } from 'clsx';
 import styles from './Modal.module.scss';
 import { Close as CloseIcon } from '~/assets/images/icons/SvgIcons';
 
-function Modal({ className, children, closeBtn, onClose, onOpen }, ref) {
+function Modal(
+  {
+    className, // className for the body of the modal
+    wrapperClassName, // className for the wrapper of the modal
+    closeBtnClassName, // className for the close button
+    closeIconClassName, // className for the close icon
+    children,
+    closeBtn, // closeBtn = {icon: <Icon />, className: 'className'} or true or false
+    onClose,
+    onOpen,
+  },
+  ref,
+) {
   const overlay = useRef();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -56,10 +68,18 @@ function Modal({ className, children, closeBtn, onClose, onOpen }, ref) {
       onClose && onClose();
     }
   }, [isOpen, onClose, onOpen]);
+
   return (
     <>
       {isOpen && (
-        <div className={styles.modal}>
+        <div
+          className={clsx([
+            styles.modal,
+            {
+              [wrapperClassName]: wrapperClassName,
+            },
+          ])}
+        >
           <div ref={overlay} className={styles.overlay}></div>
           <div
             className={clsx([
@@ -75,12 +95,24 @@ function Modal({ className, children, closeBtn, onClose, onOpen }, ref) {
                   e.stopPropagation();
                   setIsOpen(false);
                 }}
-                className={styles.closeBtn}
+                className={clsx([
+                  styles.closeBtn,
+                  {
+                    [closeBtnClassName]: closeBtnClassName,
+                  },
+                ])}
               >
                 {closeBtn.icon ? (
                   closeBtn.icon
                 ) : (
-                  <CloseIcon className={styles.closeIcon} />
+                  <CloseIcon
+                    className={clsx([
+                      styles.closeIcon,
+                      {
+                        [closeIconClassName]: closeIconClassName,
+                      },
+                    ])}
+                  />
                 )}
               </button>
             )}

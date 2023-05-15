@@ -16,6 +16,7 @@
 | [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver) | Convert jsx syntax                            |
 | [axios](https://github.com/axios/axios)                                                 | Work with api                                 |
 | [react-avatar-editor](https://github.com/mosch/react-avatar-editor)                     | Work with avatar                              |
+| [react-paginate](https://github.com/AdeleD/react-paginate)                              | Make paginate page                            |
 
 ## 2. How to works with this repo
 

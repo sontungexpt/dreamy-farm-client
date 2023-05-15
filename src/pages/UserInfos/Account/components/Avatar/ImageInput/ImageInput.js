@@ -1,53 +1,36 @@
 import { clsx } from 'clsx';
+import PropTypes from 'prop-types';
 import AvatarEditor from 'react-avatar-editor';
-import {
-  useRef,
-  useImperativeHandle,
-  forwardRef,
-  useEffect,
-  useState,
-} from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 import styles from './ImageInput.module.scss';
 import { Check as CheckIcon } from '~/assets/images/icons/SvgIcons';
 import Image from '~/components/Image';
 
-function ImageInput(
-  {
-    initialImage = null,
-    className,
-    width = 310,
-    height = 310,
-    scale = 1.3,
-    onAccept,
-  },
-  ref,
-) {
+function ImageInput({
+  initialImage = null,
+  className,
+  width = 310,
+  height = 310,
+  scale = 1.3,
+  onAccept,
+}) {
   const [avatarPreview, setAvatarPreview] = useState(initialImage);
-  const [resultImage, setResultImage] = useState('');
-
   const avatarEditorRef = useRef();
 
-  useImperativeHandle(ref, () => ({
-    value: resultImage,
-  }));
+  const handlePreview = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setAvatarPreview(URL.createObjectURL(file));
+    }
+  };
 
   const handleAccept = () => {
     const canvasScaled = avatarEditorRef.current
       .getImageScaledToCanvas()
       .toDataURL();
 
-    setResultImage(canvasScaled);
-
-    onAccept && onAccept();
-  };
-
-  const handlePreview = (event) => {
-    const file = event.target.files[0];
-
-    if (file) {
-      setAvatarPreview(URL.createObjectURL(file));
-    }
+    onAccept && onAccept(canvasScaled);
   };
 
   useEffect(() => {
@@ -87,7 +70,7 @@ function ImageInput(
             ref={avatarEditorRef}
           />
         ) : (
-          <Image className={styles.avatarEditorAlt} />
+          <Image className={styles.avatarEditorAlt} alt="noavatar" />
         )}
       </div>
       <label htmlFor="upload-avatar" className={styles.uploadLabel}>
@@ -108,4 +91,13 @@ function ImageInput(
   );
 }
 
-export default forwardRef(ImageInput);
+PropTypes.ImageInput = {
+  initialImage: PropTypes.string,
+  className: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  scale: PropTypes.number,
+  onAccept: PropTypes.func,
+};
+
+export default ImageInput;

@@ -10,9 +10,11 @@ import { routes as routesConfig } from '~/configs';
 import SearchBar from '~/components/SearchBar';
 import Product from '~/components/SearchBar/Product';
 import Logo from '~/assets/images/icons/Logo';
+import CartIcon from './CartIcon';
+import ToggleIcon from '~/components/ToggleIcon';
 import {
   EmptyHeart as EmptyHeartIcon,
-  Cart as CartIcon,
+  FilledHeart as FilledHeartIcon,
   User as UserIcon,
 } from '~/assets/images/icons/SvgIcons';
 
@@ -86,7 +88,15 @@ function Header() {
               to={routesConfig.userInfos.wishlist}
               className={styles.navbarLink}
             >
-              <EmptyHeartIcon />
+              <ToggleIcon
+                activeIcon={<FilledHeartIcon />}
+                unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
+                customEvent={() => {
+                  // TODO: check if user is logged in and has wishlist
+                  if (1) return true;
+                  else return false;
+                }}
+              />
             </Link>
           </li>
           <li>

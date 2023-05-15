@@ -15,9 +15,13 @@
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 
+  span {
+    line-height: 100%;
+  }
+
   .icon + .title,
   .title + .icon {
-    margin-left: 10px;
+    margin-left: 14px;
   }
 }
 
@@ -34,6 +38,22 @@
 
   &:hover {
     background-color: var(--button-hover-color);
+  }
+}
+
+.button.disabledText {
+  color: var(--disabled-color);
+  &:hover {
+    cursor: default;
+  }
+}
+
+.button.primaryText {
+  color: var(--primary-color);
+
+  &:hover {
+    color: var(--button-hover-color1);
+    cursor: pointer;
   }
 }
 

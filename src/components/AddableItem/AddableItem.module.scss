@@ -22,6 +22,7 @@
 .image {
   width: 80%;
   border-radius: 10px;
+  border: 0px solid transparent;
   object-position: center;
   object-fit: contain;
 }
@@ -31,7 +32,7 @@
   padding: 15px;
 
   border-radius: 10px;
-  background-color: #fff;
+  background-color: var(--white-color);
 
   div {
     display: flex;
@@ -41,7 +42,7 @@
 
   .name {
     font-size: 2.3rem;
-    color: var(--black-color);
+    color: var(--text-color);
     flex: 5;
   }
 
@@ -54,7 +55,7 @@
   .quantity {
     margin-top: 10px;
     font-size: 2rem;
-    color: var(--black-color);
+    color: var(--text-color);
   }
 
   .favorite {
@@ -70,7 +71,7 @@
   margin-top: 15px;
 
   font-size: 2.4rem;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 //mobile

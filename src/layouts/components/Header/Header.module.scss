@@ -1,7 +1,7 @@
 .wrapper {
   background-color: var(---white-color);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 
   .navbar {
     display: flex;
@@ -22,8 +22,9 @@
   line-height: 0px;
 
   .navbarLink {
+    display: block;
     text-decoration: none;
-    color: var(--black-color);
+    color: var(--text-color);
     font-size: 2rem;
     font-weight: 400;
 

@@ -1,4 +1,5 @@
-import styles from './Item.module.scss';
+import styles from './AddableItem.module.scss';
+import PropTypes from 'prop-types';
 
 import {
   FilledHeart as FilledHeartIcon,
@@ -11,7 +12,7 @@ import ModalButton from '~/components/ModalButton';
 import Detail from './Detail';
 import Image from '~/components/Image';
 
-function Item({
+function AddableItem({
   name,
   price,
   image,
@@ -29,15 +30,15 @@ function Item({
     <ModalButton
       closeBtn
       button={
-        <div to="/" className={styles.wrapper}>
+        <div className={styles.wrapper}>
           <Image className={styles.image} src={image} alt="item" />
           <div className={styles.content}>
             <div>
               <h3 className={styles.name}>{name}</h3>
               <ToggleIcon
                 className={styles.favorite}
-                clickIcon={<FilledHeartIcon />}
-                unClickIcon={<EmptyHeartIcon />}
+                activeIcon={<FilledHeartIcon />}
+                unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
                 onClick={onClick}
                 onUnClick={onUnClick}
               />
@@ -54,11 +55,22 @@ function Item({
       }
       innerModal={
         <div className={styles.innerModal}>
-          <Detail name={name} price={price} />
+          <Detail description={description} name={name} price={price} />
         </div>
       }
-    ></ModalButton>
+    />
   );
 }
 
-export default Item;
+PropTypes.AddableItem = {
+  name: PropTypes.string,
+  price: PropTypes.number,
+  image: PropTypes.string,
+  quantity: PropTypes.number,
+  description: PropTypes.string,
+  onClick: PropTypes.func,
+  onUnClick: PropTypes.func,
+  onAdd: PropTypes.func,
+};
+
+export default AddableItem;

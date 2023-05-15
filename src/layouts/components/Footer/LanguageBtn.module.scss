@@ -1,16 +1,21 @@
-.language {
-  width: 200px;
-  height: 60px;
+.button {
+  display: flex;
+  align-items: center;
 
-  .languageIcon {
-    margin-left: 14px;
-    margin-top: 6px;
-    width: 28px;
-    height: 28px;
-  }
+  .language {
+    width: 200px;
+    height: 60px;
 
-  .languageTitle {
-    font-size: 2.7rem;
+    .languageIcon {
+      margin-left: 14px;
+      width: 25px;
+      height: 25px;
+    }
+
+    .languageTitle {
+      font-size: 2.8rem;
+      line-height: 2.8rem;
+    }
   }
 }
 

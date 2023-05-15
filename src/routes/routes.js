@@ -23,7 +23,7 @@ const AboutUs = lazy(() => import('~/pages/AboutUs'));
 const Products = lazy(() => import('~/pages/Products'));
 const Recipes = lazy(() => import('~/pages/Recipes'));
 const ShoppingCart = lazy(() => import('~/pages/ShoppingCart'));
-const ProductDetail = lazy(() => import('~/pages/Products/ProductDetail'));
+const ProductDetail = lazy(() => import('~/pages/ProductDetail'));
 
 // Accounts lazy load
 const Login = lazy(() =>

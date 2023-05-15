@@ -38,10 +38,6 @@ a {
   text-decoration: none;
 }
 
-label {
-  border: none;
-}
-
 //variable
 :root {
   --white-color: #fff;
@@ -52,8 +48,13 @@ label {
   --red-color: #ee2c4a;
   --yellow-color: #eda500;
   --blue-color: #0046ab;
+  --light-blue-color: #89b4fa;
   --gray-color: #ccc;
-  --medium-gray-color: #ccc;
+  --purple-color: #c688eb;
+  --pink-color: #e4a4e4;
+  --peach-color: #fab387;
+
+  --medium-gray-color: #666;
   --darker-gray-color: #999;
 
   --gray-background-color: #f5f5f5;
@@ -61,9 +62,11 @@ label {
   --text-color: #000;
   --text-color2: #666;
   --primary-color: #fb9701;
-  --button-hover-color: #e88b39db;
+  --button-hover-color: #fd9451db;
   --button-hover-color1: #949cb4;
   --disabled-color: #b7bec6;
+
+  --separator-color: #e0e0e0;
 
   --header-height: 62px;
 }

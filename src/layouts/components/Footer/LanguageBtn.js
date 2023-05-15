@@ -6,15 +6,17 @@ import { Language as LanguageIcon } from '~/assets/images/icons/SvgIcons';
 function LanguageBtn() {
   return (
     <ModalButton
+      className={styles.button}
       button={
         <Button
           className={styles.language}
+          childrenClassName={styles.languageTitle}
           alignLeft
           whiteOutline
           whiteText
           leftIcon={<LanguageIcon className={styles.languageIcon} />}
         >
-          <span className={styles.languageTitle}>English</span>
+          English
         </Button>
       }
       innerModal={
