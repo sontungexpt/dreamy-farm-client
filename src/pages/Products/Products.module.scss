@@ -13,19 +13,19 @@
     border-bottom: 1px solid #e0e0e0;
   }
 
-  .list {
+  .categories {
+    flex-direction: column;
     margin-top: 30px;
     height: 100%;
 
     .item {
       display: block;
       color: var(--text-color);
-      text-decoration: none;
       font-size: 2.2rem;
       margin-bottom: 16px;
-      cursor: pointer;
 
       &:hover {
+        cursor: pointer;
         color: var(--button-hover-color1);
       }
     }

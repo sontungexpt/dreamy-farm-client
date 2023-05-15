@@ -2,15 +2,35 @@
   padding: 60px 0;
 }
 
-img {
-  object-position: center;
-  object-fit: contain;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+.col1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--primary-color);
+}
+
+.imageFixed {
+  position: relative;
+  width: 100%;
+
+  &::after {
+    content: '';
+    display: block;
+    padding-bottom: 65%;
+  }
+
+  .image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: 50% 50%;
+  }
 }
 
 .container {
-  display: flex !important;
+  height: 100%;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 300px;
@@ -26,7 +46,7 @@ img {
 
       font-size: 3rem;
       font-weight: 700;
-      color: var(--black-color);
+      color: var(--text-color);
 
       &:hover {
         color: var(--primary-color);
@@ -50,12 +70,13 @@ img {
       align-items: center;
 
       width: 30%;
-      height: 60px;
+      height: 55px;
 
       border: 1px solid var(--gray-color);
-      border-radius: 10px;
+      border-radius: 5px;
 
       font-size: 2.2rem;
+      text-align: center;
 
       &:hover {
         cursor: pointer;
@@ -72,14 +93,15 @@ img {
   }
 
   .quantity {
+    margin-top: 20px;
     width: 160px;
   }
 
   .addBtn {
     width: 100%;
     height: 65px;
-    // margin-top: 50px;
-    border: 1px solid #ccc;
+    margin-top: 40px;
+    border: 1px solid var(--gray-color);
 
     font-size: 2.4rem;
   }

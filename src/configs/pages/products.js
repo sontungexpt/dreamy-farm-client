@@ -26,7 +26,7 @@ const configs = {
       api: '/dairy-eggs',
     },
   ],
-  priceRanges: ['100 gram', '300 gram', '1 kilogram'],
+  priceRanges: ['100 gram', '300 gram', '1 kilo'],
 };
 
 export default configs;

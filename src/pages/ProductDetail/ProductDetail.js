@@ -26,45 +26,47 @@ function ProductDetail({ image, price, description }) {
   return (
     <div className={clsx(['grid', 'wide', styles.wrapper])}>
       <div className="row">
-        <Image
-          className={clsx(['col', 'l-5', 'm-5', 'c-12', styles.image])}
-          src={image}
-          alt="Image Item"
-        />
-        <div className={clsx(['col', 'l-7', 'm-7', 'c-12', styles.container])}>
-          <div>
-            <div className={styles.header}>
-              <h3 className={styles.name}>{id}</h3>
-              <ToggleIcon
-                className={styles.favorite}
-                clickIcon={<FilledHeartIcon />}
-                unClickIcon={<EmptyHeartIcon />}
-              />
-            </div>
-            <p className={styles.price}>{price} đ</p>
+        <div className={clsx(['col', 'l-6', 'm-6', 'c-12', styles.col1])}>
+          <div className={styles.imageFixed}>
+            <Image className={styles.image} src={image} alt="Image Item" />
           </div>
+        </div>
+        <div className={clsx(['col', 'l-6', 'm-6', 'c-12'])}>
+          <div className={styles.container}>
+            <div>
+              <div className={styles.header}>
+                <h3 className={styles.name}>{id}</h3>
+                <ToggleIcon
+                  className={styles.favorite}
+                  clickIcon={<FilledHeartIcon />}
+                  unClickIcon={<EmptyHeartIcon color="var(--red-color)" />}
+                />
+              </div>
+              <p className={styles.price}>{price} đ</p>
+            </div>
 
-          <Selector
-            ref={selectedPriceRangeRef}
-            className={styles.type}
-            itemClassName={styles.typeButton}
-            itemActiveClassName={styles.active}
-            data={configs.priceRanges}
-            renderItem={(item) => item}
-          />
+            <Selector
+              ref={selectedPriceRangeRef}
+              className={styles.type}
+              itemClassName={styles.typeButton}
+              itemActiveClassName={styles.active}
+              data={configs.priceRanges}
+              renderItem={(item) => item}
+            />
 
-          <Counter ref={counterRef} className={styles.quantity} />
+            <Counter ref={counterRef} className={styles.quantity} />
 
-          <Button
-            onClick={() => {
-              console.log(counterRef.current.value);
-              console.log(selectedPriceRangeRef.current.activeIndex);
-            }}
-            primary
-            className={styles.addBtn}
-          >
-            Add to cart
-          </Button>
+            <Button
+              onClick={() => {
+                console.log(counterRef.current.value);
+                console.log(selectedPriceRangeRef.current.activeIndex);
+              }}
+              primary
+              className={styles.addBtn}
+            >
+              Add to cart
+            </Button>
+          </div>
         </div>
       </div>
       <div className={styles.description}>

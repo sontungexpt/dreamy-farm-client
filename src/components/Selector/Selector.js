@@ -1,11 +1,21 @@
 import { clsx } from 'clsx';
 import { useState, forwardRef, useImperativeHandle } from 'react';
+import styles from './Selector.module.scss';
 
 function Selector(
-  { data, renderItem, className, itemClassName, itemActiveClassName, ...props },
+  {
+    data, //array
+    renderItem, //function
+    className, //string
+    itemClassName, //string
+    itemActiveClassName, //string
+    onItemClick, //function
+    ...props
+  },
   ref,
 ) {
   const [activeIndex, setActiveIndex] = useState(0);
+  console.log('selector');
 
   useImperativeHandle(
     ref,
@@ -17,19 +27,25 @@ function Selector(
   );
 
   return (
-    <div
+    <ul
       {...props}
       className={clsx([
-        'row',
+        styles.wrapper,
         {
           [className]: className,
         },
       ])}
     >
       {data.map((item, index) => (
-        <div
+        <li
           key={index}
-          onClick={() => setActiveIndex(index)}
+          onClick={(event) => {
+            // Prevent re-render if the item is already active
+            if (activeIndex === index) return;
+
+            setActiveIndex(index);
+            onItemClick && onItemClick(item, index, event);
+          }}
           className={clsx([
             {
               [itemClassName]: itemClassName,
@@ -40,9 +56,9 @@ function Selector(
           ])}
         >
           {renderItem(item, index, activeIndex === index, activeIndex)}
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
