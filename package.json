@@ -18,11 +18,16 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,css,scss,md,json}": "prettier --write --ignore-unknown"
+  },
   "scripts": {
+    "beautiful": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,md,json}\"",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "eject": "react-app-rewired eject",
+    "prepare": "husky install"
   },
   "proxy": "http://127.0.0.1:3001",
   "eslintConfig": {
@@ -46,6 +51,9 @@
   "devDependencies": {
     "babel-plugin-module-resolver": "^5.0.0",
     "customize-cra": "^1.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "prettier": "2.8.8",
     "react-app-rewired": "^2.2.1",
     "sass": "^1.62.1"
   }
