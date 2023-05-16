@@ -2,21 +2,23 @@
 
 ## 1. Packages used in this project
 
-| Library Name                                                                            | Purpose                                       |
-| --------------------------------------------------------------------------------------- | --------------------------------------------- |
-| [clsx](https://www.npmjs.com/package/clsx)                                              | To work better with className                 |
-| [react](https://www.npmjs.com/package/react)                                            | Reactjs library                               |
-| [react-dom](https://www.npmjs.com/package/react-dom)                                    | Reactjs library                               |
-| [react-router-dom](https://www.npmjs.com/package/react-router-dom)                      | To routing your website                       |
-| [customize-cra](https://www.npmjs.com/package/customize-cra)                            | To config webpack                             |
-| [css-normalize](https://www.npmjs.com/package/css-normalize)                            | Reset css and make it sync with multi browser |
-| [sass](https://www.npmjs.com/package/sass)                                              | Scss syntax                                   |
-| [prettier](https://www.npmjs.com/package/prettier)                                      | Make your code beautiful                      |
-| [floating-ui](https://floating-ui.com/docs/getting-started)                             | To make the floating component                |
-| [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver) | Convert jsx syntax                            |
-| [axios](https://github.com/axios/axios)                                                 | Work with api                                 |
-| [react-avatar-editor](https://github.com/mosch/react-avatar-editor)                     | Work with avatar                              |
-| [react-paginate](https://github.com/AdeleD/react-paginate)                              | Make paginate page                            |
+| Library Name                                                                            | Purpose                                                                             |
+| --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| [clsx](https://www.npmjs.com/package/clsx)                                              | To work better with className                                                       |
+| [react](https://www.npmjs.com/package/react)                                            | Reactjs library                                                                     |
+| [react-dom](https://www.npmjs.com/package/react-dom)                                    | Reactjs library                                                                     |
+| [react-router-dom](https://www.npmjs.com/package/react-router-dom)                      | To routing your website                                                             |
+| [customize-cra](https://www.npmjs.com/package/customize-cra)                            | To config webpack                                                                   |
+| [css-normalize](https://www.npmjs.com/package/css-normalize)                            | Reset css and make it sync with multi browser                                       |
+| [sass](https://www.npmjs.com/package/sass)                                              | Scss syntax                                                                         |
+| [prettier](https://www.npmjs.com/package/prettier)                                      | Make your code beautiful                                                            |
+| [lint-stage](https://github.com/okonet/lint-staged)                                     | Run linters against staged git files and don't let hankey slip into your code base! |
+| [husky](https://github.com/typicode/husky)                                              | Husky improves your commits and more woof!                                          |
+| [floating-ui](https://floating-ui.com/docs/getting-started)                             | To make the floating component                                                      |
+| [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver) | Convert jsx syntax                                                                  |
+| [axios](https://github.com/axios/axios)                                                 | Work with api                                                                       |
+| [react-avatar-editor](https://github.com/mosch/react-avatar-editor)                     | Work with avatar                                                                    |
+| [react-paginate](https://github.com/AdeleD/react-paginate)                              | Make paginate page                                                                  |
 
 ## 2. How to works with this repo
 
@@ -58,19 +60,19 @@
   NOTE: The branch name should be related to the feature you are working on.
 
 - **4. Start working on your branch and push it to remote when you finished some new feature or end of day**
-  
+
   NOTE:For the first time you create a new branch and push it to remote do this
- 
+
   ```
   git push -u origin <your-branch-name>
   ```
-  
+
   After that you can push it with the shorter syntax
-  
+
   ```
   git push
   ```
-  
+
   NOTE: The -u flag help you to set up the upstream branch. After that, you can use git push without any flag.
 
 - **5. Create a pull request to develop branch**
