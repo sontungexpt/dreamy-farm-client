@@ -1,10 +1,10 @@
 .wrapper {
     position: relative;
-   
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    // flex-direction: row;
+    // align-items: left;
+    // justify-content: space-between;
+    margin-left: -180px;
   
     border-radius: 4px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
@@ -27,23 +27,23 @@
   border-radius: 10px;
   background-color: #fff;
 
-  div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
+  // div {
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: space-between;
+  // }
   
-  .name {
-    font-size: 2.3rem;
-    color: var(--black-color);
-    flex: 2;
-  }
+  // .name {
+  //   font-size: 2.3rem;
+  //   color: var(--black-color);
+  //   flex: 2;
+  // }
 
-  .price {
-    margin-top: 10px;
-    font-size: 2.4rem;
-    color: var(--primary-color);
-  }
+  // .price {
+  //   margin-top: 10px;
+  //   font-size: 2.4rem;
+  //   color: var(--primary-color);
+  // }
 
   .quantity {
     margin-top: 10px;
@@ -51,19 +51,19 @@
     color: var(--black-color);
   }
 }
-//mobile
-.innerModal {
-  max-width: 85vw;
-  max-height: 95vh;
-  padding: 20px;
+// mobile
+// .innerModal {
+//   max-width: 85vw;
+//   max-height: 95vh;
+//   padding: 20px;
 
-  overflow-y: auto;
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
-  &::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
-  }
-}
+//   overflow-y: auto;
+//   -ms-overflow-style: none; /* Internet Explorer 10+ */
+//   scrollbar-width: none; /* Firefox */
+//   &::-webkit-scrollbar {
+//     display: none; /* Safari and Chrome */
+//   }
+// }
 
 @media (min-width: 740px) {
   .innerModal {

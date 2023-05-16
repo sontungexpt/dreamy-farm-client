@@ -62,23 +62,25 @@ function ShoppingCart() {
   }, []);
 
   return (
-    <div className={clsx(['grid', 'wide'])}>
-      <div className={clsx(['row', styles.wrapper])}>
+    // <div className={clsx(['grid', 'wide'])}>
+      <div className={clsx([styles.wrapper])}>
+     
        <nav className={clsx([styles.main])}>
           <h2 className={styles.title}>Shopping Cart</h2>
         </nav>
       
-        <div className={clsx(['row', 'l-10', 'm-9', 'c-12', styles.main])}>
+        <div className={clsx([ styles.main])}>
           <div className={clsx(['row', styles.container])}>
             {displayItems.map((item, index) => (
-              <div key={index} className={clsx(['row', 'l-o-0', 'l-7', 'm-o-1', 'c-o-0'])}>
+              <div key={index} className={clsx(['l-1', 'l-7', 'm-o-1', 'c-o-0'])}>
                 <ItemShoppingCart price="100" name={item} />
               </div>
             ))}
           </div>
         </div>
-      </div>
-    </div>
+        {/* </> */}
+       </div>
+    // </div>
   );
 }
 
