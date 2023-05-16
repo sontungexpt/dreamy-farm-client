@@ -32,9 +32,7 @@ function ItemShoppingCart({
           <h4 className={styles.price}>{price}đ</h4>
         </div>
 
-        <div>
-          <button className="remove">Remove</button>
-        </div>
+        <button className={styles.remove}>Remove</button>
       </div>
     </div>
   );
