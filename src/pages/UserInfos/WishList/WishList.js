@@ -1,11 +1,13 @@
 import { clsx } from 'clsx';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './WishList.module.scss';
 
 import PaginatePage from '~/components/PaginatePage';
 import AddableItem from '~/components/AddableItem';
 
 function WishList() {
+  const { t } = useTranslation('translations');
   const [items, setItems] = useState([
     'Apple',
     'Noodle',
@@ -27,7 +29,7 @@ function WishList() {
   return (
     <div className={clsx(['grid', styles.wrapper])}>
       <div className={styles.header}>
-        <h2>Wishlist</h2>
+        <h2>{t('Wishlist')}</h2>
         <div className={styles.wishListCount}>({items.length})</div>
       </div>
 

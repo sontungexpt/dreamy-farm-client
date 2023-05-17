@@ -1,12 +1,13 @@
 // libabry
 import { clsx } from 'clsx';
+import { useTranslation } from 'react-i18next';
 
 // configs
 import styles from './Footer.module.scss';
 
 //components
 import Logo from '~/assets/images/icons/Logo';
-import LanguageBtn from './LanguageBtn';
+import LanguageButton from './LanguageButton';
 import Button from '~/components/Button';
 import {
   Facebook as FacebookIcon,
@@ -16,6 +17,7 @@ import {
 } from '~/assets/images/icons/SvgIcons';
 
 function Footer() {
+  const { t } = useTranslation('translations');
   return (
     <footer className={clsx([styles.wrapper])}>
       <div className={clsx(['grid', 'wide', styles.inner])}>
@@ -74,17 +76,17 @@ function Footer() {
           </ul>
         </div>
         <div className={styles.feedback}>
-          <h2 className={styles.feedbackTitle}>Feedback</h2>
+          <h2 className={styles.feedbackTitle}>{t('Feedback')}</h2>
           <input
             type="text"
-            placeholder="Enter your feedback"
+            placeholder={t('Enter your feedback')}
             className={clsx([styles.feedbackInput])}
           />
           <Button primary className={styles.submitBtn}>
-            Submit
+            {t('Submit')}
           </Button>
         </div>
-        <LanguageBtn />
+        <LanguageButton />
       </div>
       <p className={styles.copyRight}>Dreamy Farm © 2023. All Right Served.</p>
     </footer>

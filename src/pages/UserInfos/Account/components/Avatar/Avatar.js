@@ -1,5 +1,6 @@
 //librairies
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import { useRef, useState } from 'react';
 import { clsx } from 'clsx';
 
@@ -16,6 +17,7 @@ import { Camera as CameraIcon } from '~/assets/images/icons/SvgIcons';
 function Avatar({ src }) {
   const [avatar, setAvatar] = useState(src);
   const modalRef = useRef();
+  const { t } = useTranslation('translations');
 
   // const dataURLtoFile = (dataurl, filename) => {
   //   let arr = dataurl.split(','),
@@ -47,7 +49,7 @@ function Avatar({ src }) {
             <CameraIcon className={styles.cameraIcon} />
           </div>
         </div>
-        <h3 className={styles.title}>Your Avatar</h3>
+        <h3 className={styles.title}>{t('Your Avatar')}</h3>
       </div>
       <Modal ref={modalRef}>
         <ImageInput

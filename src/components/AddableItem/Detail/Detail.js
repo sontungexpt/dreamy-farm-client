@@ -2,6 +2,7 @@
 import { clsx } from 'clsx';
 import { Link } from 'react-router-dom';
 import { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 //configs
 import styles from './Detail.module.scss';
@@ -22,6 +23,7 @@ function Detail({ id = 1, image, name, price, description }) {
   const [priceRangeSelected, setPriceRangeSelected] = useState(
     configs.priceRanges[0],
   );
+  const { t } = useTranslation('translations');
   const counterRef = useRef();
 
   return (
@@ -73,13 +75,13 @@ function Detail({ id = 1, image, name, price, description }) {
               primary
               className={styles.addBtn}
             >
-              Add to cart
+              {t('Add to cart')}
             </Button>
           </div>
         </div>
       </div>
       <div className={styles.description}>
-        <h3>Description</h3>
+        <h3>{t('Description')}</h3>
         <p>
           {description ||
             'Beli aneka produk di Toko YouReady secara online sekarang. Kamu bisa beli produk dari Toko YouReady dengan aman & mudah dari Kota Bandung. Ingin belanja lebih hemat & terjangkau di Toko YouReady? Kamu bisa gunakan fitur Cicilan 0% dari berbagai bank dan fitur Bebas Ongkir di Toko YouReady sehingga kamu bisa belanja online dengan nyaman di Tokopedia. Beli aneka produk terbaru di Toko YouReady dengan mudah dari genggaman tangan kamu menggunakan Aplikasi Tokopedia. Cek terus juga Toko YouReady untuk update Produk, Kode Voucher hingga Promo Terbaru dari Toko YouReady Terbaru secara online di Tokopedia'}

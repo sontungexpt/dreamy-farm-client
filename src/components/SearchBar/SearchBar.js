@@ -33,6 +33,7 @@ function SearchBar({
   floaterWrapperTitle, //optional
   mediumHeight, //optional
   largeHeight, //optional
+  inputClassName,
 
   // the function to be executed when the user presses enter
   onEnter, //optional
@@ -165,6 +166,11 @@ function SearchBar({
         })}
         type="text"
         placeholder={placeholder}
+        className={clsx([
+          {
+            [inputClassName]: inputClassName,
+          },
+        ])}
       />
       <SearchIcon className={styles.searchIcon} />
       <div className={styles.floater}>
@@ -221,6 +227,7 @@ function SearchBar({
 }
 
 SearchBar.propTypes = {
+  inputClassName: PropTypes.string,
   placeholder: PropTypes.string,
   noIcon: PropTypes.bool,
   onlyIcon: PropTypes.bool,

@@ -1,5 +1,6 @@
 import styles from './AddableItem.module.scss';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import {
   FilledHeart as FilledHeartIcon,
@@ -26,6 +27,8 @@ function AddableItem({
     event.stopPropagation();
     onAdd && onAdd();
   }
+
+  const { t } = useTranslation('translations');
   return (
     <ModalButton
       closeBtn
@@ -48,7 +51,7 @@ function AddableItem({
               <p className={styles.price}>{price} đ</p>
             </div>
             <Button onClick={handleAdd} className={styles.addBtn} primary>
-              Add
+              {t('Add')}
             </Button>
           </div>
         </div>
