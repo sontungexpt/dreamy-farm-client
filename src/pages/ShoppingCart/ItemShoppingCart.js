@@ -16,10 +16,10 @@ function ItemShoppingCart({
   quantity,
   onRemove,
 }) {
-  function handleRemove(event) {
+  const handleRemove = (event) => {
     event.stopPropagation();
     onRemove && onRemove();
-  }
+  };
   const counterRef = useRef();
   return (
     <div className={styles.itemShoppingCart}>
@@ -32,7 +32,9 @@ function ItemShoppingCart({
           <h4 className={styles.price}>{price}đ</h4>
         </div>
 
-        <button className={styles.remove}>Remove</button>
+        <button className={styles.remove} onClick={handleRemove}>
+          Remove
+        </button>
       </div>
     </div>
   );
