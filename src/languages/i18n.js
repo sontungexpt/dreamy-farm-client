@@ -2,8 +2,7 @@ import { initReactI18next } from 'react-i18next'; // https://react.i18next.com/l
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import i18n from 'i18next';
-import english from './english.json';
-import vietnamese from './vietnamese.json';
+import { languagesConfigs } from '~/configs';
 
 i18n
   .use(Backend)
@@ -11,14 +10,7 @@ i18n
   .use(initReactI18next)
   .init({
     // we init with resources
-    resources: {
-      en: {
-        translations: english,
-      },
-      vn: {
-        translations: vietnamese,
-      },
-    },
+    resources: languagesConfigs,
     fallbackLng: 'en',
 
     // have a common namespace used around the full app
@@ -30,10 +22,6 @@ i18n
     interpolation: {
       escapeValue: false, // not needed for react!!
       formatSeparator: ',',
-    },
-
-    react: {
-      wait: true,
     },
   });
 

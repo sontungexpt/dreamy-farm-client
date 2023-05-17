@@ -7,7 +7,7 @@ import styles from './Footer.module.scss';
 
 //components
 import Logo from '~/assets/images/icons/Logo';
-import LanguageBtn from './LanguageBtn';
+import LanguageButton from './LanguageButton';
 import Button from '~/components/Button';
 import {
   Facebook as FacebookIcon,
@@ -86,7 +86,7 @@ function Footer() {
             {t('Submit')}
           </Button>
         </div>
-        <LanguageBtn />
+        <LanguageButton />
       </div>
       <p className={styles.copyRight}>Dreamy Farm © 2023. All Right Served.</p>
     </footer>

@@ -1,8 +1,13 @@
 {
+  "English": "English",
+  "Vietnamese": "Vietnamese",
+  "Add": "Add",
   "Products": "Products",
   "About Us": "About Us",
   "Recipes": "Recipes",
   "Feedback": "Feedback",
   "Search Products": "Search Products",
-  "Submit": "Submit"
+  "Submit": "Submit",
+  "Fruits": "Fruits",
+  "Vegetables": "Vegetables"
 }

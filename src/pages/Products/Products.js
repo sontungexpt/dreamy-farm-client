@@ -1,5 +1,6 @@
 import { clsx } from 'clsx';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import styles from './Products.module.scss';
 import { productsPageConfigs as configs } from '~/configs/pages';
@@ -12,6 +13,7 @@ function Products() {
   const [categorySelected, setCategorySelected] = useState(
     configs.categories[0].title,
   );
+  const { t } = useTranslation('translations');
 
   const [products, setProducts] = useState([
     'Apple',
@@ -44,18 +46,18 @@ function Products() {
     <div className={clsx(['grid', 'wide'])}>
       <div className={clsx(['row', styles.wrapper])}>
         <aside className={clsx(['col', 'l-2', 'm-3', 'c-0', styles.sidebar])}>
-          <h2 className={styles.title}>Products</h2>
+          <h2 className={styles.title}>{t('Products')}</h2>
           <Selector
             className={styles.categories}
             data={configs.categories}
             itemClassName={styles.item}
             itemActiveClassName={styles.active}
             onInactiveItemClick={(item) => setCategorySelected(item.title)}
-            renderItem={(item) => item.title}
+            renderItem={(item) => t(item.title)}
           />
         </aside>
         <div className={clsx(['col', 'l-10', 'm-9', 'c-12', styles.main])}>
-          <h2 className={styles.title}>{categorySelected}</h2>
+          <h2 className={styles.title}>{t(categorySelected)}</h2>
           <PaginatePage
             className={styles.container}
             data={products}

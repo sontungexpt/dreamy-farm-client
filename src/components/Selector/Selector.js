@@ -1,23 +1,48 @@
 import { clsx } from 'clsx';
-import { useState, forwardRef, useImperativeHandle } from 'react';
+import { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
 import styles from './Selector.module.scss';
-import { flushSync } from 'react-dom';
 
 function Selector(
   {
-    data, //array
+    data, //array or object
     renderItem, //function
     className, //string
     itemClassName, //string
     itemActiveClassName, //string
+    initialActiveIndex, //number
+    itemInactiveClassName, //string
     onActiveItemClick, //function
     onInactiveItemClick, //function
     onItemClick, //function
+    onActiveChange, //function
     ...props
   },
   ref,
 ) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const arrayData = (object) => {
+    const array = [];
+    for (const key in object) {
+      array.push(object[key]);
+    }
+    return array;
+  };
+  const [activeIndex, setActiveIndex] = useState(() => {
+    if (initialActiveIndex) {
+      if (
+        typeof initialActiveIndex === 'number' ||
+        typeof initialActiveIndex === 'string'
+      ) {
+        return initialActiveIndex;
+      }
+      // is function
+      if (Array.isArray(data)) {
+        return initialActiveIndex(data);
+      } else {
+        return initialActiveIndex(data, arrayData(data));
+      }
+    }
+    return Object.keys(data)[0];
+  });
 
   useImperativeHandle(
     ref,
@@ -27,6 +52,26 @@ function Selector(
     }),
     [activeIndex, data],
   );
+
+  useEffect(() => {
+    if (Array.isArray(data)) {
+      onActiveChange && onActiveChange(data[activeIndex], activeIndex);
+    } else {
+      onActiveChange &&
+        onActiveChange(data[activeIndex], activeIndex, arrayData(data));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeIndex, data]);
+
+  const handleClick = (item, index, event) => {
+    if (activeIndex !== index) {
+      setActiveIndex(index);
+      onInactiveItemClick && onInactiveItemClick(item, index, event);
+    } else {
+      onActiveItemClick && onActiveItemClick(item, index, event);
+    }
+    onItemClick && onItemClick(item, index, event);
+  };
 
   return (
     <ul
@@ -38,33 +83,38 @@ function Selector(
         },
       ])}
     >
-      {data.map((item, index) => (
-        <li
-          key={index}
-          onClick={(event) => {
-            // Prevent re-render if the item is already active
-            if (activeIndex !== index) {
-              setActiveIndex(index);
-              onInactiveItemClick && onInactiveItemClick(item, index, event);
-            } else {
-              onActiveItemClick && onActiveItemClick(item, index, event);
-            }
-            flushSync(() => {
-              onItemClick && onItemClick(item, index, event);
-            });
-          }}
-          className={clsx([
-            {
-              [itemClassName]: itemClassName,
-            },
-            {
-              [itemActiveClassName]: activeIndex === index,
-            },
-          ])}
-        >
-          {renderItem(item, index, activeIndex === index, activeIndex)}
-        </li>
-      ))}
+      {(() => {
+        const array = [];
+        for (const key in data) {
+          array.push(
+            <li
+              key={key}
+              onClick={(event) =>
+                handleClick(data[key] /*currentItem*/, key, event)
+              }
+              className={clsx([
+                {
+                  [itemClassName]: itemClassName,
+                },
+                {
+                  [itemActiveClassName]: activeIndex === key,
+                },
+                {
+                  [itemInactiveClassName]: activeIndex !== key,
+                },
+              ])}
+            >
+              {renderItem(
+                data[key] /*currentItem*/,
+                key,
+                activeIndex === key,
+                activeIndex,
+              )}
+            </li>,
+          );
+        }
+        return array;
+      })()}
     </ul>
   );
 }

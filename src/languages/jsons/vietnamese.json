@@ -1,8 +1,13 @@
 {
+  "English": "Tiếng anh",
+  "Vietnamese": "Tiếng việt",
+  "Add": "Mua",
   "Products": "Sản phẩm",
   "About Us": "Về chúng tôi",
   "Recipes": "Các món ăn",
   "Feedback": "Phản hồi",
   "Search Products": "Tìm kiếm sản phẩm",
-  "Submit": "Gửi"
+  "Submit": "Gửi",
+  "Fruits": "Trái cây",
+  "Vegetables": "Rau"
 }
