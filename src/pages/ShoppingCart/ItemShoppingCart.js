@@ -3,10 +3,6 @@ import Image from '~/components/Image';
 import Counter from '~/components/Counter';
 import { useState, useRef } from 'react';
 import { Tag as PriceTag } from '~/assets/images/icons/SvgIcons';
-import ToggleIcon from '~/components/ToggleIcon';
-import ModalButton from '~/components/ModalButton';
-import Button from '~/components/Button';
-import Detail from '~/pages/Products/Item/Detail';
 
 function ItemShoppingCart({
   name,
