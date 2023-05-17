@@ -1,6 +1,8 @@
 {
   "English": "English",
+  "Enter your feedback": "Enter your feedback",
   "Vietnamese": "Vietnamese",
+  "Search products": "Search products",
   "Add": "Add",
   "Products": "Products",
   "About Us": "About Us",
@@ -9,5 +11,11 @@
   "Search Products": "Search Products",
   "Submit": "Submit",
   "Fruits": "Fruits",
-  "Vegetables": "Vegetables"
+  "Vegetables": "Vegetables",
+  "Herbs & Aromatics": "Herbs & Aromatics",
+  "Frozen": "Frozen",
+  "Meat & Seafood": "Meat & Seafood",
+  "Dairy & Eggs": "Dairy & Eggs",
+  "Next": "Next",
+  "Prev": "Prev"
 }

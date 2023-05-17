@@ -79,7 +79,7 @@ function Footer() {
           <h2 className={styles.feedbackTitle}>{t('Feedback')}</h2>
           <input
             type="text"
-            placeholder="Enter your feedback"
+            placeholder={t('Enter your feedback')}
             className={clsx([styles.feedbackInput])}
           />
           <Button primary className={styles.submitBtn}>

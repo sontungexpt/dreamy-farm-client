@@ -71,7 +71,7 @@ function Header() {
                 },
               ]}
               mediumLength
-              placeholder="Search products"
+              placeholder={t('Search products')}
               floaterWrapperTitle="Products"
               searchValue={(item) => item.title}
               renderItem={(item, active) => (

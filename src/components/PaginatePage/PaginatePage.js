@@ -2,6 +2,7 @@ import { clsx } from 'clsx';
 import PropTypes from 'prop-types';
 import { useMemo, useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import { useTranslation } from 'react-i18next';
 
 import styles from './PaginatePage.module.scss';
 
@@ -15,6 +16,8 @@ function PaginatePage({
   // marginPages: func,return number,
   // pageRange: func,return number
   // }
+  nextLabel = 'Next',
+  previousLabel = 'Prev',
 
   data,
   renderItem,
@@ -27,6 +30,7 @@ function PaginatePage({
     responsive?.marginPagesDisplayed ? responsive.marginPagesDisplayed : 2,
   );
   const [pageOffset, setPageOffset] = useState(0);
+  const { t } = useTranslation('translations');
 
   // logic
   const pageCount = Math.ceil(data.length / itemsPerPage);
@@ -106,8 +110,8 @@ function PaginatePage({
         marginPagesDisplayed={marginPagesDisplayed}
         pageRangeDisplayed={pageRangeDisplayed}
         breakLabel="..."
-        nextLabel="Next"
-        previousLabel="Prev"
+        nextLabel={t(nextLabel)}
+        previousLabel={t(previousLabel)}
         onPageChange={({ selected }) => {
           setPageOffset(selected);
         }}
@@ -131,7 +135,8 @@ PaginatePage.propTypes = {
     marginPages: PropTypes.func,
     pageRange: PropTypes.func,
   }),
-
+  nextLabel: PropTypes.string,
+  previousLabel: PropTypes.string,
   data: PropTypes.array.isRequired,
   renderItem: PropTypes.func.isRequired,
   itemsPerPage: PropTypes.number.isRequired,

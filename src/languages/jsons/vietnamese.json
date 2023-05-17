@@ -1,6 +1,10 @@
 {
   "English": "Tiếng anh",
   "Vietnamese": "Tiếng việt",
+  "Enter your feedback": "Nhập phản hồi của bạn",
+  "Search products": "Tìm kiếm sản phẩm",
+  "Next": "Tiến",
+  "Prev": "Lùi",
   "Add": "Mua",
   "Products": "Sản phẩm",
   "About Us": "Về chúng tôi",
@@ -9,5 +13,9 @@
   "Search Products": "Tìm kiếm sản phẩm",
   "Submit": "Gửi",
   "Fruits": "Trái cây",
-  "Vegetables": "Rau"
+  "Vegetables": "Rau",
+  "Herbs & Aromatics": "Thảo mộc & Hương liệu",
+  "Frozen": "Đông lạnh",
+  "Meat & Seafood": "Thịt & Hải sản",
+  "Dairy & Eggs": "Sữa & Trứng"
 }
