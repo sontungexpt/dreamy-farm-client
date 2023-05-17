@@ -45,7 +45,7 @@ function LanguageButton() {
         {t(configs[langCode].title)}
       </Button>
       <Modal ref={modalRef} className={styles.innerModal}>
-        <h3 className={styles.modalTitle}>Choose a language</h3>
+        <h3 className={styles.modalTitle}>{t('Choose a language')}</h3>
         <Selector
           className={styles.languageList}
           data={configs}
