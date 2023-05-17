@@ -25,11 +25,11 @@ function ShoppingCart() {
   }, [products, pageOffset]);
 
   const handleLoadMore = () => {
-    setPageOffset(prevOffset => prevOffset + 1);
+    setPageOffset((prevOffset) => prevOffset + 1);
   };
 
   const handleRemoveProduct = (index) => {
-    setProducts(prevProducts => {
+    setProducts((prevProducts) => {
       const updatedProducts = [...prevProducts];
       updatedProducts.splice(index, 1);
       return updatedProducts;
@@ -37,21 +37,15 @@ function ShoppingCart() {
   };
 
   return (
-    <div className={styles.container}>
+    // <div className={styles.container}>
       <div className={styles.main}>
         <h2 className={styles.title}>Shopping Cart</h2>
-        <h3 className={styles.subtitle}>{`${products.length} products in cart`}</h3>
+        <h3
+          className={styles.subtitle}
+        >{`${products.length} products in cart`}</h3>
 
         <div className={styles.wrapper}>
-          <div
-            className={clsx([
-              styles.leftWrapper,
-              'l-1',
-              'l-7',
-              'm-o-1',
-              'c-o-0',
-            ])}
-          >
+          <div className={styles.leftWrapper}>
             {displayProducts.map((product, index) => (
               <ItemShoppingCart
                 key={index}
@@ -69,10 +63,11 @@ function ShoppingCart() {
           <div className={styles.rightWrapper}>
             <h2>Total</h2>
             <h1>000đ</h1>
+            <button className={styles.checkoutBtn}>Checkout</button>
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 
