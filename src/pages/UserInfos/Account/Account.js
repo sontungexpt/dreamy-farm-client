@@ -1,4 +1,5 @@
 import { clsx } from 'clsx';
+import { useTranslation } from 'react-i18next';
 
 import styles from './Account.module.scss';
 
@@ -14,17 +15,18 @@ import {
 } from '~/assets/images/icons/SvgIcons';
 
 function Account() {
+  const { t } = useTranslation('translations');
   return (
     <form>
       <div className={clsx(['grid', styles.wrapper])}>
         <div className={styles.header}>
-          <h2>Account Informations</h2>
+          <h2>{t('Account Informations')}</h2>
           <Button
             leftIcon={<PencilIcon className={styles.pencilIcon} />}
             className={styles.updateBtn}
             primaryText
           >
-            Update
+            {t('Update')}
           </Button>
         </div>
         <div className={clsx([styles.content])}>
@@ -36,7 +38,7 @@ function Account() {
               <Input
                 labelIcon={<NoFilledUserIcon color="var(--blue-color)" />}
                 className={styles.input}
-                label="Name"
+                label={t('Name')}
                 id="name"
                 type="text"
                 name="name"
@@ -44,7 +46,7 @@ function Account() {
               <Input
                 labelIcon={<MailIcon color="var(--red-color)" />}
                 className={styles.input}
-                label="Email"
+                label={t('Email')}
                 id="email"
                 type="email"
                 name="email"
@@ -52,7 +54,7 @@ function Account() {
               <Input
                 labelIcon={<PhoneIcon color="var(--yellow-color)" />}
                 className={styles.input}
-                label="Phone"
+                label={t('Phone')}
                 id="phone"
                 type="text"
                 name="phone"
@@ -60,7 +62,7 @@ function Account() {
               <Input
                 labelIcon={<GenderIcon color="var(--green-color)" />}
                 className={styles.input}
-                label="Gender"
+                label={t('Gender')}
                 type="text"
                 id="gender"
                 name="gender"

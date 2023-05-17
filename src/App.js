@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // routes
 import { publicRoutes, privateRoutes } from '~/routes';
 
-//components8
+//components
 import Loader from '~/components/Loader';
 import ProtectedRoute from '~/components/Routes/ProtectedRoute';
 import ErroredRoute from '~/components/Routes/ErroredRoute';

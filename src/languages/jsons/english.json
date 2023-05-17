@@ -17,5 +17,20 @@
   "Meat & Seafood": "Meat & Seafood",
   "Dairy & Eggs": "Dairy & Eggs",
   "Next": "Next",
-  "Prev": "Prev"
+  "Prev": "Prev",
+  "Description": "Description",
+  "Add to cart": "Add to cart",
+  "Informations": "Informations",
+  "Accounts": "Accounts",
+  "Orders": "Orders",
+  "Wishlist": "Wishlist",
+  "Address": "Address",
+  "Logout": "Logout",
+  "Account Informations": "Account Informations",
+  "Name": "Name",
+  "Email": "Email",
+  "Phone": "Phone",
+  "Gender": "Gender",
+  "Your Avatar": "Your Avatar",
+  "Update": "Update"
 }

@@ -153,6 +153,12 @@
 
     ![Component Index Example](./gitsources/index-file-example.png)
 
+- **3. For localstorage**
+
+  - Name of variable: DreamyFarm<variablename>
+
+    Example: DreamyFarmLanguage, DreamyFarmToken, DreamyFarmUser
+
 ## 5. The authors of this project
 
 - **1. [Tran Vo Son Tung](https://github.com/sontungexpt)**
