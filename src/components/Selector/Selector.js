@@ -1,6 +1,7 @@
 import { clsx } from 'clsx';
 import { useState, forwardRef, useImperativeHandle } from 'react';
 import styles from './Selector.module.scss';
+import { flushSync } from 'react-dom';
 
 function Selector(
   {
@@ -48,8 +49,9 @@ function Selector(
             } else {
               onActiveItemClick && onActiveItemClick(item, index, event);
             }
-
-            onItemClick && onItemClick(item, index, event);
+            flushSync(() => {
+              onItemClick && onItemClick(item, index, event);
+            });
           }}
           className={clsx([
             {

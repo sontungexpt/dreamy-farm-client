@@ -1,4 +1,5 @@
 // libabry
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { clsx } from 'clsx';
 
@@ -19,6 +20,7 @@ import {
 } from '~/assets/images/icons/SvgIcons';
 
 function Header() {
+  const { t } = useTranslation('translations');
   return (
     <header className={styles.wrapper}>
       <nav className={clsx(['grid', 'wide', styles.navbar])}>
@@ -30,23 +32,24 @@ function Header() {
           </li>
           <li>
             <Link to={routesConfig.products} className={styles.navbarLink}>
-              Products
+              {t('Products')}
             </Link>
           </li>
           <li>
             <Link to={routesConfig.recipes} className={styles.navbarLink}>
-              Recipes
+              {t('Recipes')}
             </Link>
           </li>
           <li>
             <Link to={routesConfig.aboutUs} className={styles.navbarLink}>
-              About us
+              {t('About Us')}
             </Link>
           </li>
         </ul>
         <ul className={styles.navbarList}>
           <li>
             <SearchBar
+              inputClassName={styles.inputSearchBar}
               data={[
                 {
                   image:

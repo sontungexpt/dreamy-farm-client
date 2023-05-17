@@ -20,6 +20,8 @@ function Modal(
     closeBtn, // closeBtn = {icon: <Icon />, className: 'className'} or true or false
     onClose,
     onOpen,
+    closeOnEsc = true,
+    closeOnOverlayClick = true,
   },
   ref,
 ) {
@@ -32,6 +34,8 @@ function Modal(
   }));
 
   useEffect(() => {
+    if (!closeOnEsc) return;
+
     function handleEsc(event) {
       event.stopPropagation();
       if (event.keyCode === 27) {
@@ -44,9 +48,11 @@ function Modal(
     return () => {
       window.removeEventListener('keydown', handleEsc);
     };
-  }, [isOpen]);
+  }, [isOpen, closeOnEsc]);
 
   useEffect(() => {
+    if (!closeOnOverlayClick) return;
+
     function handleClickOutside(event) {
       event.stopPropagation();
       if (overlay.current && overlay.current.contains(event.target)) {
@@ -59,7 +65,7 @@ function Modal(
     return () => {
       window.removeEventListener('click', handleClickOutside);
     };
-  }, [isOpen]);
+  }, [isOpen, closeOnOverlayClick]);
 
   useEffect(() => {
     if (isOpen) {
