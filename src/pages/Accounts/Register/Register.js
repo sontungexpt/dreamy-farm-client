@@ -4,7 +4,7 @@ import { routes as routesConfig } from '~/configs';
 import Button from '~/components/Button/Button';
 import Input from '~/pages/Accounts/components/Input';
 
-const Register = () => {
+function Register() {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.header}>Create an account</h1>
@@ -25,6 +25,6 @@ const Register = () => {
       </Link>
     </div>
   );
-};
+}
 
 export default Register;
