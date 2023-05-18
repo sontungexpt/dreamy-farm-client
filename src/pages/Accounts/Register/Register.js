@@ -8,10 +8,14 @@ const Register = () => {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.header}>Create an account</h1>
-      <Input label="Name" id="name-register" />
-      <Input label="Password" id="password-register" />
-      <Input label="Email" id="email-register" />
-      <Input label="Confirm password" id="confirm-password-register" />
+      <Input label="Name" id="name-register" type="text" />
+      <Input label="Email" id="email-register" type="text" />
+      <Input label="Password" id="password-register" type="password" />
+      <Input
+        label="Confirm password"
+        id="confirm-password-register"
+        type="password"
+      />
 
       <Button primary hoverZoom className={styles.loginBtn}>
         Create account

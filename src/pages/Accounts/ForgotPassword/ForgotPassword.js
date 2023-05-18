@@ -9,9 +9,9 @@ function ForgotPassword() {
     <div className={styles.wrapper}>
       <h1 className={styles.header}>Create new password</h1>
 
-      <Input label="Email" id="email-forgot" />
+      <Input label="Email" id="email-forgot" type="text" />
 
-      <Input label="New Password" id="new-password-forgot" />
+      <Input label="New Password" id="new-password-forgot" type="password" />
 
       <Button hoverZoom primary className={styles.btn}>
         Create new password

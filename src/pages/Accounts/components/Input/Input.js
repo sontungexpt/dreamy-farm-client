@@ -9,6 +9,7 @@ function Input({
   label,
   labelClassName,
   placeHolder,
+  type = 'text',
   inputClassName,
 }) {
   return (
@@ -34,7 +35,7 @@ function Input({
       <input
         placeholder={placeHolder}
         id={id}
-        type="password"
+        type={type}
         className={clsx([
           styles.input,
           {
@@ -47,6 +48,7 @@ function Input({
 }
 
 Input.propTypes = {
+  type: PropTypes.string,
   id: PropTypes.string.isRequired,
   className: PropTypes.string,
   label: PropTypes.string.isRequired,

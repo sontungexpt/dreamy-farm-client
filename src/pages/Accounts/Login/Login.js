@@ -9,8 +9,8 @@ function Login() {
     <div className={styles.wrapper}>
       <h1 className={styles.header}>Login to your account</h1>
 
-      <Input label="Email" id="email-login" />
-      <Input label="Password" id="password-login" />
+      <Input label="Email" id="email-login" type="text" />
+      <Input label="Password" id="password-login" type="password" />
 
       <Link
         to={routesConfig.forgotPassword}
