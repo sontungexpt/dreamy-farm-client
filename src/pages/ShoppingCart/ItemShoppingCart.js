@@ -1,8 +1,9 @@
 import styles from './ItemShoppingCart.module.scss';
+import { useRef } from 'react';
 import { clsx } from 'clsx';
+
 import Image from '~/components/Image';
 import Counter from '~/components/Counter';
-import { useRef } from 'react';
 import { Tag as PriceTag } from '~/assets/images/icons/SvgIcons';
 
 function ItemShoppingCart({ name, price, image, onRemove }) {
@@ -16,10 +17,12 @@ function ItemShoppingCart({ name, price, image, onRemove }) {
   return (
     <div className={clsx(['grid', styles.wrapper])}>
       <div className="row">
-        <div className={clsx(['col', 'l-3', 'm-3', 'c-3'])}>
+        <div
+          className={clsx(['col', 'l-2', 'm-2', 'c-3', styles.imageWrapper])}
+        >
           <Image className={styles.image} src={image} alt="item" />
         </div>
-        <div className={clsx(['col', 'l-9', 'm-9', 'c-9'])}>
+        <div className={clsx(['col', 'l-10', 'm-10', 'c-9'])}>
           <div className={styles.info}>
             <div className={styles.header}>
               <h3 className={styles.name}>{name}</h3>

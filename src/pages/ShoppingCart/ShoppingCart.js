@@ -37,42 +37,40 @@ function ShoppingCart() {
   }, [products]);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={clsx(['grid', 'wide', styles.wrapper])}>
       <h2 className={styles.title}>Shopping Cart</h2>
       <h3 className={styles.subTitle}>
         {`${products.length} products in cart`}
       </h3>
-
-      <div className={styles.main}>
-        <LoadMore
-          data={products}
-          className={clsx([styles.leftWrapper])}
-          autoHidden={false}
-          canCollapse={true}
-          controlClassName={styles.control}
-          renderItem={(item, index) => (
-            <ItemShoppingCart
-              key={index}
-              price={item.price}
-              name={item.name}
-              onRemove={() => handleRemoveProduct(index)}
-            />
-          )}
-        />
-        <div className={styles.rightWrapper}>
-          <div className={styles.total}>
-            <h2>Total Price</h2>
+      <div className={clsx(['row', styles.main])}>
+        <div className="col l-9 m-8 c-12">
+          <LoadMore
+            data={products}
+            autoHidden={false}
+            canCollapse={true}
+            controlClassName={styles.control}
+            renderItem={(item, index) => (
+              <ItemShoppingCart
+                key={index}
+                price={item.price}
+                name={item.name}
+                onRemove={() => handleRemoveProduct(index)}
+              />
+            )}
+          />
+        </div>
+        <div className={clsx(['col', 'l-3', 'm-4', 'c-12', styles.col2])}>
+          <div className={styles.totalWrapper}>
+            <h2 className={styles.total}>Total Price</h2>
+            <h1 className={styles.totalPrice}>{totalPrice}đ</h1>
+            <Button
+              to={routesConfig.checkout}
+              primary
+              className={styles.checkoutBtn}
+            >
+              Checkout
+            </Button>
           </div>
-          <div className={styles.totalPrice}>
-            <h1>{totalPrice}đ</h1>
-          </div>
-          <Button
-            to={routesConfig.checkout}
-            primary
-            className={styles.checkoutBtn}
-          >
-            Checkout
-          </Button>
         </div>
       </div>
     </div>
