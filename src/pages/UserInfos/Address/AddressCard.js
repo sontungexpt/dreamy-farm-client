@@ -2,6 +2,7 @@ import styles from './AddressCard.module.scss';
 
 function AddressCard({
   city,
+  name,
   phone,
   address,
   onEdit,
@@ -17,15 +18,18 @@ function AddressCard({
       <div className={styles.city}>
         <h3 className={styles.city}>{city}</h3>
       </div>
+      <div className={styles.name}>
+        <p className={styles.name}>{name}</p>
+      </div>
       <div className={styles.phone}>
-        <h3 className={styles.phone}>{phone}</h3>
+        <p className={styles.phone}>{phone}</p>
       </div>
       <div className={styles.address}>
-        <h4 className={styles.address}>{address}</h4>
+        <p className={styles.address}>{address}</p>
       </div>
-      <button className={styles.delete} onClick={handleDelete}>
+      {/* <button className={styles.delete} onClick={handleDelete}>
         Delete
-      </button>
+      </button> */}
     </button>
   );
 }

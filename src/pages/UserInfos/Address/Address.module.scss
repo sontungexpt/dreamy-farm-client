@@ -2,4 +2,21 @@
   background-color: var(--white-color);
   padding: 30px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+}
+.header {
+  margin-bottom: 10px;
+  position: relative;
+  border-bottom: 1px solid var(--gray-color);
+}
+.addressContainer {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.addressRow {
+  margin-bottom: 20px;
 }
