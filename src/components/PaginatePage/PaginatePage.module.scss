@@ -6,7 +6,7 @@
   margin-top: 30px;
 
   .page {
-    display: inline-flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 
@@ -16,7 +16,6 @@
     border-radius: 50%;
 
     color: var(--text-color);
-    vertical-align: middle;
 
     font-size: 2.6rem;
 
@@ -39,10 +38,12 @@
   }
 
   .control {
+    display: block;
     margin: 0 20px;
 
     color: var(--text-color);
     font-size: 2.2rem;
+    line-height: 2.2rem;
 
     &:hover {
       cursor: pointer;
