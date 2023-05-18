@@ -15,17 +15,19 @@ function AddressCard({
   };
   return (
     <button className={styles.addressCard}>
-      <div className={styles.city}>
-        <h3 className={styles.city}>{city}</h3>
-      </div>
-      <div className={styles.name}>
-        <p className={styles.name}>{name}</p>
-      </div>
-      <div className={styles.phone}>
-        <p className={styles.phone}>{phone}</p>
-      </div>
-      <div className={styles.address}>
-        <p className={styles.address}>{address}</p>
+      <div className={styles.info}>
+        <div className={styles.city}>
+          <h3>{city}</h3>
+        </div>
+        <div className={styles.name}>
+          <p>{name}</p>
+        </div>
+        <div className={styles.phone}>
+          <p>{phone}</p>
+        </div>
+        <div className={styles.address}>
+          <p>{address}</p>
+        </div>
       </div>
       {/* <button className={styles.delete} onClick={handleDelete}>
         Delete
