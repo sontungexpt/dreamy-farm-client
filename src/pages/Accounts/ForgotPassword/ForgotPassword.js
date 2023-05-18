@@ -9,15 +9,21 @@ function ForgotPassword() {
       <h1 className={styles.header}>Create new password</h1>
 
       <div className={styles.infoWrapper}>
-        <p className={styles.insideText}>New password</p>
+        <label htmlFor="password-forgot" className={styles.insideText}>
+          New password
+        </label>
         <input
+          id="password-forgot"
           type="password"
           placeholder="Enter your new password"
           className={styles.insideInput}
         />
 
-        <p className={styles.insideText}>Confirm password</p>
+        <label htmlFor="password-confirm-forgot" className={styles.insideText}>
+          Confirm password
+        </label>
         <input
+          id="password-confirm-forgot"
           type="password"
           placeholder="Re-Enter your new password"
           className={styles.insideInput}

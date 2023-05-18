@@ -2,27 +2,15 @@ import styles from './Login.module.scss';
 import { Link } from 'react-router-dom';
 import { routes as routesConfig } from '~/configs';
 import Button from '~/components/Button/Button';
+import Input from '~/pages/Accounts/components/Input';
 
 function Login() {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.header}>Login to your account</h1>
 
-      <div className={styles.infoWrapper}>
-        <label htmlFor="email-login" className={styles.label}>
-          Email
-        </label>
-        <input id="email-login" type="text" className={styles.insideInput} />
-
-        <label htmlFor="password-login" className={styles.label}>
-          Password
-        </label>
-        <input
-          id="password-login"
-          type="password"
-          className={styles.insideInput}
-        />
-      </div>
+      <Input label="Email" id="email-login" />
+      <Input label="Password" id="password-login" />
 
       <Link
         to={routesConfig.forgotPassword}

@@ -67,8 +67,7 @@
   margin-left: auto;
   align-self: right;
   font-size: var(--fontSizeInput);
-  border: 2px solid #e2e2e2;
-  background-color: white;
+  border: 2px solid var(--separrator-color);
   border-radius: 0.3em;
 }
 
@@ -77,8 +76,7 @@
   height: var(--inputHeight);
   margin-top: var(--gapTextToInput);
   font-size: var(--fontSizeInput);
-  border: 2px solid #e2e2e2;
-  background-color: white;
+  border: 2px solid var(--separrator-color);
   border-radius: 0.3em;
 }
 
