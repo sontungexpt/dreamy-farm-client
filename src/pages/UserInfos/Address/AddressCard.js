@@ -1,4 +1,6 @@
 import styles from './AddressCard.module.scss';
+import { Address } from '~/assets/images/icons/SvgIcons';
+import { clsx } from 'clsx';
 
 function AddressCard({
   city,
@@ -14,9 +16,10 @@ function AddressCard({
     onDelete && onDelete();
   };
   return (
-    <button className={styles.addressCard}>
+    <button className={clsx(['grid', styles.addressCard])}>
       <div className={styles.info}>
         <div className={styles.city}>
+          <Address className={styles.icon} color="var(--black-color)" />
           <h3>{city}</h3>
         </div>
         <div className={styles.name}>

@@ -1,5 +1,4 @@
 .addressCard {
-  width: 1000px;
   background-color: var(--white-color);
   padding: 30px;
   display: flex;
@@ -12,10 +11,23 @@
 
 .addressCard .info {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.addressCard .city {
+  display: flex;
+  align-items: center;
 }
 
 .addressCard h3,
 .addressCard p {
-  margin: 0; /* Add this line to remove the default margin */
-  text-align: left; /* Add this line to align the text to the left */
+  margin: 0;
+  text-align: left;
+}
+
+.addressCard .icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 }
