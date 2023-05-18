@@ -1,4 +1,5 @@
 import styles from './ForgotPassword.module.scss';
+import { Link } from 'react-router-dom';
 
 // function ForgotPassword() {
 //   return <div className={styles.wrapper}>Forgot password</div>;
@@ -28,9 +29,9 @@ const ForgotPassword = () => {
 
     <div className={styles.suggestCreateAccount}>
       <p>New to Dreamy Farm?</p>
-      <a href="##" className={styles.navigateToSignUp}>
+      <Link href="##" className={styles.navigateToSignUp}>
         Sign up
-      </a>
+      </Link>
     </div>
   </div>;
 };

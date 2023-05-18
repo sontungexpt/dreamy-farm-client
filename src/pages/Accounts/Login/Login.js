@@ -1,4 +1,5 @@
 import styles from './Login.module.scss';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
@@ -13,17 +14,17 @@ const Login = () => {
         <input type="password" className={styles.insideInput} />
       </div>
 
-      <a href="##" className={styles.navigateToForgot}>
+      <Link to="##" className={styles.navigateToForgot}>
         Forgot password{' '}
-      </a>
+      </Link>
 
       <div className={styles.loginBtn}>Login now</div>
 
       <p>
         Don't have an account?{' '}
-        <a href="##" className={styles.navigateToSignUp}>
+        <Link href="##" className={styles.navigateToSignUp}>
           Sign up
-        </a>
+        </Link>
       </p>
     </div>
   );
