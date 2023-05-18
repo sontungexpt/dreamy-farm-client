@@ -25,6 +25,15 @@
   }
 }
 
+.noData {
+  color: var(--disabled-color);
+  margin-top: 60px;
+  &:hover {
+    cursor: default;
+    color: var(--disabled-color);
+  }
+}
+
 .checkoutBtn {
   height: 60px;
   font-size: 2.4rem;
