@@ -7,6 +7,7 @@ const routes = {
   recipes: '/recipes',
   aboutUs: '/aboutUs',
   shoppingCart: '/shoppingCart',
+  checkout: '/checkout',
 
   // accounts pages
   login: '/accounts/',
