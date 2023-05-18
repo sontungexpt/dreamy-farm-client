@@ -17,12 +17,19 @@ const UserInfoLayout = lazy(() =>
   })),
 );
 
+const HeaderOnly = lazy(() =>
+  import('~/layouts').then((module) => ({
+    default: module.HeaderOnly,
+  })),
+);
+
 // Pages lazy load
 const Home = lazy(() => import('~/pages/Home'));
 const AboutUs = lazy(() => import('~/pages/AboutUs'));
 const Products = lazy(() => import('~/pages/Products'));
 const Recipes = lazy(() => import('~/pages/Recipes'));
 const ShoppingCart = lazy(() => import('~/pages/ShoppingCart'));
+const Checkout = lazy(() => import('~/pages/Checkout'));
 const ProductDetail = lazy(() => import('~/pages/ProductDetail'));
 
 // Accounts lazy load
@@ -81,7 +88,6 @@ const publicRoutes = [
   { path: routesConfig.productDetail, element: ProductDetail },
   { path: routesConfig.recipes, element: Recipes },
   { path: routesConfig.aboutUs, element: AboutUs },
-  { path: routesConfig.shoppingCart, element: ShoppingCart },
 
   // Accounts
   {
@@ -110,6 +116,17 @@ const publicRoutes = [
 ];
 
 const privateRoutes = [
+  {
+    path: routesConfig.shoppingCart,
+    element: ShoppingCart,
+    redirectPath: routesConfig.login,
+  },
+  {
+    path: routesConfig.checkout,
+    element: Checkout,
+    layout: HeaderOnly,
+    redirectPath: routesConfig.login,
+  },
   {
     path: routesConfig.userInfos.wishlist,
     element: WishList,
