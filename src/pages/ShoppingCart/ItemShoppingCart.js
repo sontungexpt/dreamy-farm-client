@@ -4,14 +4,7 @@ import Counter from '~/components/Counter';
 import { useState, useRef } from 'react';
 import { Tag as PriceTag } from '~/assets/images/icons/SvgIcons';
 
-function ItemShoppingCart({
-  name,
-  price,
-  image,
-  priceTag,
-  quantity,
-  onRemove,
-}) {
+function ItemShoppingCart({ name, price, image, priceTag, onRemove }) {
   const handleRemove = (event) => {
     event.stopPropagation();
     onRemove && onRemove();

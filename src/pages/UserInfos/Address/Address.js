@@ -1,9 +1,12 @@
 import styles from './Address.module.scss';
 import { useMemo, useState } from 'react';
+import AddressCard from './AddressCard.js';
+import { clsx } from 'clsx';
+import React from 'react';
 
 function Address() {
   const [pageOffset, setPageOffset] = useState(0);
-  const [address, setAddress] = useState([
+  const [addresses, setAddress] = useState([
     {
       city: 'Hồ Chí Minh',
       phone: '0123456789',
@@ -44,8 +47,8 @@ function Address() {
 
   const displayAddress = useMemo(() => {
     const itemsVisited = pageOffset * itemsPerPage;
-    return address.slice(itemsVisited, itemsVisited + itemsPerPage);
-  }, [address, pageOffset]);
+    return addresses.slice(itemsVisited, itemsVisited + itemsPerPage);
+  }, [addresses, pageOffset]);
 
   // const handleLoadMore = () => {
   //   setPageOffset((prevOffset) => prevOffset + 1);
@@ -67,16 +70,20 @@ function Address() {
   // };
 
   return (
-    <div className={styles.main}>
-      <h2 className={styles.title}>Shopping Cart</h2>
-      <div>
-        {displayAddress.map((address, index) => (
-          <div key={index}>
-            <p>{address.city}</p>
-            <p>{address.phone}</p>
-            <p>{address.address}</p>
-          </div>
-        ))}
+    <div className={clsx(['grid', 'wide'])}>
+      <div className={clsx(['row', styles.wrapper])}>
+        <h2 className={styles.title}>Address</h2>
+        <div>
+          {displayAddress.map((address, index) => (
+            <div className={styles.addressRow} key={index}>
+              <AddressCard
+                city={address.city}
+                phone={address.phone}
+                address={address.address}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

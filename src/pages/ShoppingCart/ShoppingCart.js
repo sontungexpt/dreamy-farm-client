@@ -1,7 +1,5 @@
 import ItemShoppingCart from './ItemShoppingCart.js';
-import { useMemo, useEffect, useState } from 'react';
-import { productsPageConfigs as configs } from '~/configs/pages';
-import { clsx } from 'clsx';
+import { useMemo, useState } from 'react';
 import styles from './ShoppingCart.module.scss';
 
 function ShoppingCart() {
