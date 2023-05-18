@@ -57,6 +57,14 @@
   }
 }
 
+.button.hoverZoom {
+  transition: 0.5s;
+  will-change: transform;
+  &:hover {
+    transform: scale(1.15);
+  }
+}
+
 .button.disabled {
   background-color: var(--disabled-color);
   color: var(--white-color);

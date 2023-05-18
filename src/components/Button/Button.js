@@ -18,6 +18,7 @@ function Button({
   to, //optional
   href, //optional
   onClick, //optional
+  hoverZoom, //optional
   whiteOutline, //optional
   blackOutline, //optional
   primaryOutline, //optional
@@ -77,6 +78,9 @@ function Button({
         {
           [styles.primaryText]: primaryText,
         },
+        {
+          [styles.hoverZoom]: hoverZoom,
+        },
       ])}
       {...props}
       {...rest}
@@ -133,6 +137,7 @@ Button.propTypes = {
   whiteOutline: PropTypes.bool, //optional
   blackOutline: PropTypes.bool, //optional
   primaryOutline: PropTypes.bool, //optional
+  hoverZoom: PropTypes.bool, //optional
   whiteText: PropTypes.bool, //optional
   disabled: PropTypes.bool, //optional
   disabledText: PropTypes.bool, //optional

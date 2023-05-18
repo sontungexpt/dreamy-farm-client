@@ -27,6 +27,7 @@
 .navigateToForgot {
   display: block;
   width: 100%;
+  font-size: 2rem;
 
   text-align: right;
   color: var(--link-color);
@@ -35,4 +36,5 @@
 .navigateToSignUp {
   margin-left: 6px;
   color: var(--link-color);
+  font-size: 2rem;
 }

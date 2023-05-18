@@ -1,37 +1,20 @@
 import styles from './ForgotPassword.module.scss';
-import { routes as routesConfig } from '~/configs';
 import { Link } from 'react-router-dom';
+import { routes as routesConfig } from '~/configs';
 import Button from '~/components/Button/Button';
+import Input from '~/pages/Accounts/components/Input';
 
 function ForgotPassword() {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.header}>Create new password</h1>
 
-      <div className={styles.infoWrapper}>
-        <label htmlFor="password-forgot" className={styles.insideText}>
-          New password
-        </label>
-        <input
-          id="password-forgot"
-          type="password"
-          placeholder="Enter your new password"
-          className={styles.insideInput}
-        />
+      <Input label="Email" id="email-forgot" />
 
-        <label htmlFor="password-confirm-forgot" className={styles.insideText}>
-          Confirm password
-        </label>
-        <input
-          id="password-confirm-forgot"
-          type="password"
-          placeholder="Re-Enter your new password"
-          className={styles.insideInput}
-        />
-      </div>
+      <Input label="New Password" id="new-password-forgot" />
 
-      <Button hoverZoom primary className={styles.loginBtn}>
-        Login now
+      <Button hoverZoom primary className={styles.btn}>
+        Create new password
       </Button>
 
       <div className={styles.suggestCreateAccount}>
