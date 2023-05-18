@@ -1,6 +1,8 @@
 import styles from './AddressCard.module.scss';
-import { Address } from '~/assets/images/icons/SvgIcons';
+import { Address, ThreeDots } from '~/assets/images/icons/SvgIcons';
 import { clsx } from 'clsx';
+import Button from '~/components/Button/Button';
+import OptionCard from './OptionCard';
 
 function AddressCard({
   city,
@@ -32,9 +34,7 @@ function AddressCard({
           <p>{address}</p>
         </div>
       </div>
-      {/* <button className={styles.delete} onClick={handleDelete}>
-        Delete
-      </button> */}
+      <OptionCard />
     </button>
   );
 }
