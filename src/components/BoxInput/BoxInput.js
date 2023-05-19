@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './Input.module.scss';
 
-function Input({
+function BoxInput({
   className, // optional className of the wrapper div
   labelClassName, //optional className for the label
   inputClassName, //optional className for the input
@@ -11,11 +11,15 @@ function Input({
 
   id, // required id for the input
   label, // required label for the input
+  name, // optional name for the input
 
   type = 'text', // optional type for the input
   required, // optional boolean to show the error message
   placeHolder, // optional placeholder for the input
   errorMessage, // optional error message
+
+  value, // optional value for the input
+  onChange, // optional onChange function for the input
   ...props
 }) {
   return (
@@ -42,6 +46,9 @@ function Input({
         placeholder={placeHolder}
         id={id}
         type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
         {...props}
         className={clsx([
           styles.input,
@@ -66,7 +73,7 @@ function Input({
   );
 }
 
-Input.propTypes = {
+BoxInput.propTypes = {
   className: PropTypes.string,
   labelClassName: PropTypes.string,
   inputClassName: PropTypes.string,
@@ -74,11 +81,15 @@ Input.propTypes = {
 
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  name: PropTypes.string,
 
   type: PropTypes.string,
   required: PropTypes.bool,
   placeHolder: PropTypes.string,
   errorMessage: PropTypes.string,
+
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
-export default Input;
+export default BoxInput;

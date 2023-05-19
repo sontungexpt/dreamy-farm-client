@@ -1,17 +1,30 @@
 import styles from './ForgotPassword.module.scss';
+import inputStyles from '~/pages/Accounts/styles/InputStyles.module.scss';
 import { Link } from 'react-router-dom';
 import { routes as routesConfig } from '~/configs';
 import Button from '~/components/Button/Button';
-import Input from '~/pages/Accounts/components/Input';
+import Input from '~/components/Input';
 
 function ForgotPassword() {
   return (
-    <div className={styles.wrapper}>
+    <form className={styles.wrapper}>
       <h1 className={styles.header}>Create new password</h1>
 
-      <Input label="Email" id="email-forgot" type="text" />
+      <Input
+        box
+        label="Email"
+        id="email-forgot"
+        type="text"
+        labelClassName={inputStyles.label}
+      />
 
-      <Input label="New Password" id="new-password-forgot" type="password" />
+      <Input
+        box
+        label="New Password"
+        id="new-password-forgot"
+        type="password"
+        labelClassName={inputStyles.label}
+      />
 
       <Button hoverZoom primary className={styles.btn}>
         Create new password
@@ -23,7 +36,7 @@ function ForgotPassword() {
           Sign up
         </Link>
       </div>
-    </div>
+    </form>
   );
 }
 export default ForgotPassword;

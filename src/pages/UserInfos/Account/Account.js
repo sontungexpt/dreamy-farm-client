@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './Account.module.scss';
 
-import Input from './components/Input';
-import Avatar from './components/Avatar';
+import Input from '~/components/Input';
+import Avatar from './Avatar';
 import Button from '~/components/Button/Button';
 import {
   Pencil as PencilIcon,
