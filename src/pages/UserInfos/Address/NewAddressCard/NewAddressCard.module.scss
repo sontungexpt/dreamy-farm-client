@@ -36,6 +36,15 @@
   margin-top: 15px;
 }
 
+.cancelButton {
+  display: flex;
+  margin-top: 15px;
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 100px;
+  margin-right: 10px;
+}
+
 .saveButton {
   width: 100px;
   display: flex;
@@ -48,13 +57,4 @@
   color: var(--white-color);
   margin-top: 15px;
   margin-right: 5px;
-}
-
-.cancelButton {
-  display: flex;
-  margin-top: 15px;
-  border: 1px solid black;
-  border-radius: 4px;
-  width: 100px;
-  margin-right: 10px;
 }

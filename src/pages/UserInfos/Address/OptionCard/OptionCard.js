@@ -1,15 +1,17 @@
 import styles from './OptionCard.module.scss';
 import Button from '~/components/Button';
 import { Modal } from '~/components/ModalButton';
-import { useCallback, useState, useRef } from 'react';
+import { useCallback, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ThreeDots } from '~/assets/images/icons/SvgIcons';
-import EditAddressCard from '../EditAddress/EditAddressCard';
+import EditAddressCard from '~/pages/UserInfos/Address/EditAddress/EditAddressCard';
 
-function OptionCard({ onDelete, onEdit, onSelectPrimary, isDefault }) {
+function OptionCard({ onDelete, onEdit, onSelectPrimary }) {
   const modalRef = useRef(null);
   const handleModalClose = useCallback(() => {
     modalRef.current.close();
   }, []);
+  const { t } = useTranslation('translations');
 
   const handleDelete = () => {
     if (onDelete) {
@@ -48,12 +50,12 @@ function OptionCard({ onDelete, onEdit, onSelectPrimary, isDefault }) {
           </li>
           <li>
             <Button className={styles.button} onClick={handleDelete}>
-              Delete
+              {t('Delete')}
             </Button>
           </li>
           <li>
             <Button className={styles.button} onClick={handleSelectPrimary}>
-              Select as primary address
+              {t('Select as primary address')}
             </Button>
           </li>
         </ol>

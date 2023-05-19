@@ -1,13 +1,13 @@
 import styles from './Address.module.scss';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import AddressCard from './AddressCard/AddressCard.js';
 import { clsx } from 'clsx';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import PaginatePage from '~/components/PaginatePage';
-import NewAddressCard from './NewAddressCard/NewAddressCard';
+import NewAddressCard from './NewAddressCard';
 
 function Address() {
-  // const [pageOffset, setPageOffset] = useState(0);
   const [addresses, setAddresses] = useState([
     {
       city: 'Ho Chi Minh',
@@ -91,11 +91,12 @@ function Address() {
       return updatedAddresses;
     });
   };
+  const { t } = useTranslation('translations');
 
   return (
     <div className={clsx(['grid', 'l-10', 'm-10', 'c-12'])}>
       <div className={clsx(['row', styles.wrapper])}>
-        <h2 className={styles.header}>Address</h2>
+        <h2 className={styles.header}>{t('Address')}</h2>
         <div className={styles.addButtonWrapper}>
           <div className={styles.addButton}>
             <NewAddressCard />

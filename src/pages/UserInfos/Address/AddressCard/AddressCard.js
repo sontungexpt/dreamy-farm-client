@@ -1,7 +1,7 @@
 import styles from './AddressCard.module.scss';
 import { Address } from '~/assets/images/icons/SvgIcons';
 import { clsx } from 'clsx';
-import OptionCard from '../OptionCard/OptionCard';
+import OptionCard from '~/pages/UserInfos/Address/OptionCard/OptionCard';
 
 function AddressCard({
   city,

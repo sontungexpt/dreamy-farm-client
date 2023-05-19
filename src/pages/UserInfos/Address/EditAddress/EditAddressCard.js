@@ -3,33 +3,31 @@ import { clsx } from 'clsx';
 import Button from '~/components/Button';
 import Input from '~/pages/UserInfos/Account/components/Input';
 import { useTranslation } from 'react-i18next';
-import { useCallback, useState, useRef } from 'react';
+import { useRef } from 'react';
 import { Modal } from '~/components/ModalButton';
-import { Plus } from '~/assets/images/icons/SvgIcons';
 import {
   NoFilledUser as NoFilledUserIcon,
   Phone as PhoneIcon,
   Location as LocationIcon,
 } from '~/assets/images/icons/SvgIcons';
+
 function EditAddressCard() {
   const { t } = useTranslation('translations');
   const modalRef = useRef(null);
-  const handleModalClose = useCallback(() => {
-    modalRef.current.close();
-  }, []);
+
   return (
     <div>
       <Button
         onClick={() => modalRef.current.open()}
         className={styles.editAddressCard}
       >
-        Edit
+        {t('Edit')}
       </Button>
       <Modal ref={modalRef} className={styles.innerModal}>
         <form>
           <div className={clsx(['grid', styles.wrapper])}>
             <div className={styles.header}>
-              <h2>{t('Edit adress')}</h2>
+              <h2>{t('Edit address')}</h2>
             </div>
             <div className={clsx(['col l-12 m-12 c-12', styles.info])}>
               <Input
@@ -51,10 +49,10 @@ function EditAddressCard() {
               <Input
                 labelIcon={<LocationIcon color="var(--green-color)" />}
                 className={styles.input}
-                label={t('Adress')}
-                id="adress"
+                label={t('Address')}
+                id="address"
                 type="text"
-                name="adress"
+                name="address"
               />
             </div>
             <div className={clsx(['grid', 'l-o-6', styles.buttonWrapper])}>
@@ -62,13 +60,13 @@ function EditAddressCard() {
                 className={clsx([styles.cancelButton])}
                 onClick={() => modalRef.current.open()}
               >
-                Cancel
+                {t('Cancel')}
               </Button>
               <Button
                 className={clsx([styles.saveButton])}
                 onClick={() => modalRef.current.open()}
               >
-                Save
+                {t('Save')}
               </Button>
             </div>
           </div>

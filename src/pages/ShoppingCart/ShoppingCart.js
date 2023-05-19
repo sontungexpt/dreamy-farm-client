@@ -1,13 +1,14 @@
 import ItemShoppingCart from './ItemShoppingCart.js';
 import { useMemo, useState } from 'react';
 import { clsx } from 'clsx';
-
+import { useTranslation } from 'react-i18next';
 import styles from './ShoppingCart.module.scss';
 import { routes as routesConfig } from '~/configs';
 import Button from '~/components/Button';
 import LoadMore from '~/components/LoadMore';
 
 function ShoppingCart() {
+  const { t } = useTranslation('translations');
   const [products, setProducts] = useState([
     { name: 'Product 1', price: 100 },
     { name: 'Product 2', price: 200 },
@@ -38,9 +39,9 @@ function ShoppingCart() {
 
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.title}>Shopping Cart</h2>
+      <h2 className={styles.title}>{t('Shopping Cart')}</h2>
       <h3 className={styles.subTitle}>
-        {`${products.length} products in cart`}
+        {products.length} {t('products in cart')}
       </h3>
 
       <div className={styles.main}>
@@ -61,7 +62,7 @@ function ShoppingCart() {
         />
         <div className={styles.rightWrapper}>
           <div className={styles.total}>
-            <h2>Total Price</h2>
+            <h2>{t('Total Price')}</h2>
           </div>
           <div className={styles.totalPrice}>
             <h1>{totalPrice}đ</h1>
@@ -71,7 +72,7 @@ function ShoppingCart() {
             primary
             className={styles.checkoutBtn}
           >
-            Checkout
+            {t('Checkout')}
           </Button>
         </div>
       </div>

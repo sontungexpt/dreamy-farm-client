@@ -3,7 +3,7 @@ import { clsx } from 'clsx';
 import Button from '~/components/Button';
 import Input from '~/pages/UserInfos/Account/components/Input';
 import { useTranslation } from 'react-i18next';
-import { useCallback, useState, useRef } from 'react';
+import { useRef } from 'react';
 import { Modal } from '~/components/ModalButton';
 import { Plus } from '~/assets/images/icons/SvgIcons';
 import {
@@ -15,24 +15,20 @@ import {
 function NewAddressCard() {
   const { t } = useTranslation('translations');
   const modalRef = useRef(null);
-  const handleModalClose = useCallback(() => {
-    modalRef.current.close();
-  }, []);
   return (
     <div>
       <Button
         onClick={() => modalRef.current.open()}
-        className={styles.newAddressCard}
         whiteText
         leftIcon={<Plus className={styles.plusIcon} />}
       >
-        Add new address
+        {t('Add new address')}
       </Button>
       <Modal ref={modalRef} className={styles.innerModal}>
         <form>
-          <div className={clsx(['grid', styles.wrapper])}>
+          <div className={clsx(['grid'])}>
             <div className={styles.header}>
-              <h2>{t('Add new adress')}</h2>
+              <h2>{t('Add new address')}</h2>
             </div>
             <div className={clsx(['col l-12 m-12 c-12', styles.info])}>
               <Input
@@ -54,10 +50,10 @@ function NewAddressCard() {
               <Input
                 labelIcon={<LocationIcon color="var(--green-color)" />}
                 className={styles.input}
-                label={t('Adress')}
-                id="adress"
+                label={t('Address')}
+                id="address"
                 type="text"
-                name="adress"
+                name="address"
               />
             </div>
             <div className={clsx(['grid', 'l-o-6', styles.buttonWrapper])}>
@@ -65,13 +61,13 @@ function NewAddressCard() {
                 className={clsx([styles.cancelButton])}
                 onClick={() => modalRef.current.open()}
               >
-                Cancel
+                {t('Cancel')}
               </Button>
               <Button
                 className={clsx([styles.saveButton])}
                 onClick={() => modalRef.current.open()}
               >
-                Save
+                {t('Save')}
               </Button>
             </div>
           </div>
