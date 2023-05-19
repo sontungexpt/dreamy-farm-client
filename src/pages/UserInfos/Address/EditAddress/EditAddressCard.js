@@ -1,4 +1,4 @@
-import styles from './NewAddressCard.module.scss';
+import styles from './EditAddressCard.module.scss';
 import { clsx } from 'clsx';
 import Button from '~/components/Button';
 import Input from '~/pages/UserInfos/Account/components/Input';
@@ -11,8 +11,7 @@ import {
   Phone as PhoneIcon,
   Location as LocationIcon,
 } from '~/assets/images/icons/SvgIcons';
-
-function NewAddressCard() {
+function EditAddressCard() {
   const { t } = useTranslation('translations');
   const modalRef = useRef(null);
   const handleModalClose = useCallback(() => {
@@ -22,17 +21,15 @@ function NewAddressCard() {
     <div>
       <Button
         onClick={() => modalRef.current.open()}
-        className={styles.newAddressCard}
-        whiteText
-        leftIcon={<Plus className={styles.plusIcon} />}
+        className={styles.editAddressCard}
       >
-        Add new address
+        Edit
       </Button>
       <Modal ref={modalRef} className={styles.innerModal}>
         <form>
           <div className={clsx(['grid', styles.wrapper])}>
             <div className={styles.header}>
-              <h2>{t('Add new adress')}</h2>
+              <h2>{t('Edit adress')}</h2>
             </div>
             <div className={clsx(['col l-12 m-12 c-12', styles.info])}>
               <Input
@@ -60,9 +57,15 @@ function NewAddressCard() {
                 name="adress"
               />
             </div>
-            <div className={styles.saveButtonWrapper}>
+            <div className={clsx(['grid', 'l-o-6', styles.buttonWrapper])}>
               <Button
-                className={styles.saveButton}
+                className={clsx([styles.cancelButton])}
+                onClick={() => modalRef.current.open()}
+              >
+                Cancel
+              </Button>
+              <Button
+                className={clsx([styles.saveButton])}
                 onClick={() => modalRef.current.open()}
               >
                 Save
@@ -74,4 +77,4 @@ function NewAddressCard() {
     </div>
   );
 }
-export default NewAddressCard;
+export default EditAddressCard;

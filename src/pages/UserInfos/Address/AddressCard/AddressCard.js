@@ -1,7 +1,7 @@
 import styles from './AddressCard.module.scss';
 import { Address } from '~/assets/images/icons/SvgIcons';
 import { clsx } from 'clsx';
-import OptionCard from './OptionCard';
+import OptionCard from '../OptionCard/OptionCard';
 
 function AddressCard({
   city,
@@ -19,6 +19,7 @@ function AddressCard({
         <div className={styles.city}>
           <Address className={styles.icon} color="var(--black-color)" />
           <h3>{city}</h3>
+          {isDefault && <span className={styles.defaultMark}>Default</span>}
         </div>
         <div className={styles.name}>
           <p>{name}</p>

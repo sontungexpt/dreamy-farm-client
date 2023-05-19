@@ -1,11 +1,10 @@
 import styles from './Address.module.scss';
 import { useMemo, useState } from 'react';
-import AddressCard from './AddressCard.js';
+import AddressCard from './AddressCard/AddressCard.js';
 import { clsx } from 'clsx';
 import React from 'react';
 import PaginatePage from '~/components/PaginatePage';
-
-import NewAddressCard from './NewAddressCard';
+import NewAddressCard from './NewAddressCard/NewAddressCard';
 
 function Address() {
   // const [pageOffset, setPageOffset] = useState(0);

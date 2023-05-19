@@ -3,6 +3,7 @@ import Button from '~/components/Button';
 import { Modal } from '~/components/ModalButton';
 import { useCallback, useState, useRef } from 'react';
 import { ThreeDots } from '~/assets/images/icons/SvgIcons';
+import EditAddressCard from '../EditAddress/EditAddressCard';
 
 function OptionCard({ onDelete, onEdit, onSelectPrimary, isDefault }) {
   const modalRef = useRef(null);
@@ -20,8 +21,8 @@ function OptionCard({ onDelete, onEdit, onSelectPrimary, isDefault }) {
   const handleEdit = () => {
     if (onEdit) {
       onEdit();
+      handleModalClose();
     }
-    handleModalClose();
   };
 
   const handleSelectPrimary = () => {
@@ -31,7 +32,7 @@ function OptionCard({ onDelete, onEdit, onSelectPrimary, isDefault }) {
     handleModalClose();
   };
   return (
-    <div className={styles.button}>
+    <div>
       <Button
         onClick={() => modalRef.current.open()}
         className={styles.option}
@@ -42,7 +43,7 @@ function OptionCard({ onDelete, onEdit, onSelectPrimary, isDefault }) {
         <ol className={styles.optionList}>
           <li>
             <Button className={styles.button} onClick={handleEdit}>
-              Edit
+              <EditAddressCard />
             </Button>
           </li>
           <li>
@@ -57,7 +58,6 @@ function OptionCard({ onDelete, onEdit, onSelectPrimary, isDefault }) {
           </li>
         </ol>
       </Modal>
-      {isDefault && <span className={styles.defaultMark}>Default</span>}
     </div>
   );
 }
