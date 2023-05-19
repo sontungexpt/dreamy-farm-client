@@ -5,6 +5,12 @@ import Input from '~/pages/UserInfos/Account/components/Input';
 import { useTranslation } from 'react-i18next';
 import { useCallback, useState, useRef } from 'react';
 import { Modal } from '~/components/ModalButton';
+import { Plus } from '~/assets/images/icons/SvgIcons';
+import {
+  NoFilledUser as NoFilledUserIcon,
+  Phone as PhoneIcon,
+  Location as LocationIcon,
+} from '~/assets/images/icons/SvgIcons';
 
 function NewAddressCard() {
   const { t } = useTranslation('translations');
@@ -17,8 +23,11 @@ function NewAddressCard() {
       <Button
         onClick={() => modalRef.current.open()}
         className={styles.newAddressCard}
-        childrenClassName={styles.addressCardText}
-      ></Button>
+        whiteText
+        leftIcon={<Plus className={styles.plusIcon} />}
+      >
+        Add new address
+      </Button>
       <Modal ref={modalRef} className={styles.innerModal}>
         <form>
           <div className={clsx(['grid', styles.wrapper])}>
@@ -27,7 +36,7 @@ function NewAddressCard() {
             </div>
             <div className={clsx(['col l-8 m-8 c-12', styles.info])}>
               <Input
-                // labelIcon={<NoFilledUserIcon color="var(--blue-color)" />}
+                labelIcon={<NoFilledUserIcon color="var(--blue-color)" />}
                 className={styles.input}
                 label={t('Name')}
                 id="name"
@@ -35,29 +44,29 @@ function NewAddressCard() {
                 name="name"
               />
               <Input
-                // labelIcon={<MailIcon color="var(--red-color)" />}
+                labelIcon={<PhoneIcon color="var(--yellow-color)" />}
                 className={styles.input}
-                label={t('Email')}
-                id="email"
-                type="email"
-                name="email"
-              />
-              <Input
-                // labelIcon={<PhoneIcon color="var(--yellow-color)" />}
-                className={styles.input}
-                label={t('Phone')}
+                label={t('Phone number')}
                 id="phone"
-                type="text"
+                type="numeric"
                 name="phone"
               />
               <Input
-                // labelIcon={<GenderIcon color="var(--green-color)" />}
+                labelIcon={<LocationIcon color="var(--green-color)" />}
                 className={styles.input}
-                label={t('Gender')}
+                label={t('Adress')}
+                id="adress"
                 type="text"
-                id="gender"
-                name="gender"
+                name="adress"
               />
+            </div>
+            <div className={styles.saveButtonWrapper}>
+              <Button
+                className={styles.saveButton}
+                onClick={() => modalRef.current.open()}
+              >
+                Save
+              </Button>
             </div>
           </div>
         </form>

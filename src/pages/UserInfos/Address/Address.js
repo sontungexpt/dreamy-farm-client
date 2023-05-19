@@ -4,7 +4,7 @@ import AddressCard from './AddressCard.js';
 import { clsx } from 'clsx';
 import React from 'react';
 import PaginatePage from '~/components/PaginatePage';
-import { Plus } from '~/assets/images/icons/SvgIcons';
+
 import NewAddressCard from './NewAddressCard';
 
 function Address() {
@@ -79,10 +79,9 @@ function Address() {
       <div className={clsx(['row', styles.wrapper])}>
         <h2 className={styles.header}>Address</h2>
         <div className={styles.addButtonWrapper}>
-          <button className={styles.addButton}>
-            <Plus />
-            <NewAddressCard className={styles.addNewAddressText} />
-          </button>
+          <div className={styles.addButton}>
+            <NewAddressCard />
+          </div>
         </div>
 
         <PaginatePage
