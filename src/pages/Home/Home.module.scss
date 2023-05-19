@@ -2,13 +2,53 @@
   position: relative;
   display: flex;
   width: 100%;
-  height: 40vh;
+  height: 360px;
 }
 
-.img_header {
+.LinkToProduct {
+  color: black;
+}
+
+.footer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 750px;
+  margin-top: 300px;
+}
+
+.img_layout {
   display: block;
   width: 100%;
   height: auto;
+}
+
+.imgFooter {
+  position: absolute;
+  width: 420px;
+  height: 400px;
+  left: 10%;
+  bottom: 12%;
+}
+
+.footerTitle {
+  font-weight: bold;
+  font-size: 3rem;
+  margin-bottom: 30px;
+}
+
+.footerContent {
+  line-height: 25px;
+}
+
+.footerIntro {
+  position: absolute;
+  right: 20%;
+  top: 35%;
+}
+
+h2 {
+  font-size: 4rem;
 }
 
 .shoppingNow {
@@ -30,8 +70,20 @@
   cursor: pointer;
 }
 
-footer {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
+.productImgs {
+  height: 205px;
+  width: 330px;
+  margin-top: 40px;
+}
+
+.categoriesPart {
+  margin-top: 50px;
+}
+
+.recipesPart {
+  margin-top: 50px;
+}
+
+.line {
+  border: 2px solid #e2e2e2;
 }

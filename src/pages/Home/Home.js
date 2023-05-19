@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import header_image from '~/assets/images/jpgs/home_header-image.jpg';
 import styles from './Home.module.scss';
-import Button from '~/components/Button/Button';
-import images from '~/assets/images/jpgs/farm_fruit.jpg';
+import images from '~/assets/images/jpgs/index';
 function Home() {
   const categoriesBrand = [
     {
@@ -110,9 +108,15 @@ function Home() {
       <div key={rowIndex} className={clsx('row', styles.products)}>
         {row.map((product, colIndex) => (
           <div key={colIndex} className={clsx('col', 'l-4', styles.product)}>
-            <img src={images} alt={product.name} />
+            <img
+              src={images.fruitImg}
+              alt={product.name}
+              className={styles.productImgs}
+            />
             <h3>{product.name}</h3>
-            <Link to={`/recipes/${product.id}`}>Shop now</Link>
+            <Link to="/products" className={styles.LinkToProduct}>
+              Shop Now!
+            </Link>
           </div>
         ))}
       </div>
@@ -122,9 +126,18 @@ function Home() {
   return (
     <div>
       <div className={styles.header}>
-        <img src={header_image} alt="fruit-img" className={styles.img_header} />
-        <div className={styles.shoppingNow}>Shop Now!</div>
+        <img
+          src={images.headerLayoutHomePage}
+          alt="fruit-img"
+          className={styles.img_layout}
+        />
+        <div className={styles.shoppingNow}>
+          <Link to="/products" className={styles.LinkToProduct}>
+            Shop Now!
+          </Link>
+        </div>
       </div>
+
       <div className={clsx('grid', 'wide', styles.wrapperContent)}>
         <div className={styles.wrapperContent}>
           <div className={styles.categoriesPart}>
@@ -138,6 +151,28 @@ function Home() {
             <div className={styles.line}></div>
             {renderRows(recipes)}
           </div>
+        </div>
+      </div>
+
+      <div className={styles.footer}>
+        <img
+          src={images.footerLayoutHomePage}
+          alt="fruit-img"
+          className={styles.img_layout}
+        />
+        <img
+          src={images.footerLayoutImg}
+          alt="footer-img"
+          className={styles.imgFooter}
+        />
+        <div className={styles.footerIntro}>
+          <p className={styles.footerTitle}>How it works</p>
+          <p className={styles.footerContent}>
+            1. Shop on the schedule. <br />
+            2. We harvest your food. <br />
+            3. On the day of your delivery, we pack up your <br /> box and bring
+            it to your door.
+          </p>
         </div>
       </div>
     </div>
