@@ -4,7 +4,7 @@ import { Modal } from '~/components/ModalButton';
 import { useCallback, useState, useRef } from 'react';
 import { ThreeDots } from '~/assets/images/icons/SvgIcons';
 
-function OptionCard({ onDelete, onEdit, onSelectPrimary }) {
+function OptionCard({ onDelete, onEdit, onSelectPrimary, isDefault }) {
   const modalRef = useRef(null);
   const handleModalClose = useCallback(() => {
     modalRef.current.close();
@@ -30,7 +30,6 @@ function OptionCard({ onDelete, onEdit, onSelectPrimary }) {
     }
     handleModalClose();
   };
-
   return (
     <div className={styles.button}>
       <Button
@@ -58,6 +57,7 @@ function OptionCard({ onDelete, onEdit, onSelectPrimary }) {
           </li>
         </ol>
       </Modal>
+      {isDefault && <span className={styles.defaultMark}>Default</span>}
     </div>
   );
 }

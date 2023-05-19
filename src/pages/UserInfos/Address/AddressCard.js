@@ -3,7 +3,16 @@ import { Address } from '~/assets/images/icons/SvgIcons';
 import { clsx } from 'clsx';
 import OptionCard from './OptionCard';
 
-function AddressCard({ city, name, phone, address, onEdit, onDelete }) {
+function AddressCard({
+  city,
+  name,
+  phone,
+  address,
+  onEdit,
+  onDelete,
+  onSelectPrimary,
+  isDefault,
+}) {
   return (
     <button className={clsx(['grid', styles.addressCard])}>
       <div className={styles.info}>
@@ -22,7 +31,12 @@ function AddressCard({ city, name, phone, address, onEdit, onDelete }) {
         </div>
       </div>
       <div className={styles.threedots}>
-        <OptionCard onDelete={onDelete} onEdit={onEdit} />
+        <OptionCard
+          onDelete={onDelete}
+          onEdit={onEdit}
+          onSelectPrimary={onSelectPrimary}
+          isDefault={isDefault}
+        />
       </div>
     </button>
   );

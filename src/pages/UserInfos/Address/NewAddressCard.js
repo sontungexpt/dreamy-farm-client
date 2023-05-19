@@ -19,7 +19,7 @@ function NewAddressCard() {
     modalRef.current.close();
   }, []);
   return (
-    <div className={styles.button}>
+    <div>
       <Button
         onClick={() => modalRef.current.open()}
         className={styles.newAddressCard}
@@ -32,9 +32,9 @@ function NewAddressCard() {
         <form>
           <div className={clsx(['grid', styles.wrapper])}>
             <div className={styles.header}>
-              <h2>{t('Edit Address')}</h2>
+              <h2>{t('Add new adress')}</h2>
             </div>
-            <div className={clsx(['col l-8 m-8 c-12', styles.info])}>
+            <div className={clsx(['col l-12 m-12 c-12', styles.info])}>
               <Input
                 labelIcon={<NoFilledUserIcon color="var(--blue-color)" />}
                 className={styles.input}

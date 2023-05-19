@@ -8,61 +8,71 @@ import PaginatePage from '~/components/PaginatePage';
 import NewAddressCard from './NewAddressCard';
 
 function Address() {
-  const [pageOffset, setPageOffset] = useState(0);
+  // const [pageOffset, setPageOffset] = useState(0);
   const [addresses, setAddresses] = useState([
     {
       city: 'Ho Chi Minh',
       name: 'Agelia',
       phone: '0123456789',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
+      isDefault: false,
+    },
+    {
+      city: 'Ho Chi Minh',
+      name: 'Stella',
+      phone: '0123456789',
+      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
+
+      isDefault: false,
+    },
+    {
+      city: 'Ho Chi Minh',
+      name: 'Katina',
+      phone: '0123456789',
+      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
+      isDefault: false,
     },
     {
       city: 'Ho Chi Minh',
       name: 'Agelia',
       phone: '0123456789',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
+      isDefault: false,
     },
     {
       city: 'Ho Chi Minh',
       name: 'Agelia',
       phone: '0123456789',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    },
-    {
-      city: 'Ho Chi Minh',
-      name: 'Agelia',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    },
-    {
-      city: 'Ho Chi Minh',
-      name: 'Agelia',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
+      isDefault: false,
     },
     {
       city: 'Ho Chi Minh',
       name: 'Anaa',
       phone: '98765431',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
+      isDefault: false,
     },
     {
       city: 'Ho Chi Minh',
       name: 'Agelia',
       phone: '0123456789',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
+      isDefault: false,
     },
     {
       city: 'Ho Chi Minh',
       name: 'Agelia',
       phone: '0123456789',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
+      isDefault: false,
     },
     {
       city: 'Ho Chi Minh',
       name: 'Agelia',
       phone: '0123456789',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
+      isDefault: false,
     },
   ]);
 
@@ -70,6 +80,15 @@ function Address() {
     setAddresses((prevAddresses) => {
       const updatedAddresses = [...prevAddresses];
       updatedAddresses.splice(index, 1);
+      return updatedAddresses;
+    });
+  };
+  const handleSelectPrimary = (index) => {
+    setAddresses((prevAddresses) => {
+      const updatedAddresses = [...prevAddresses];
+      updatedAddresses.forEach((address, i) => {
+        address.isDefault = i === index;
+      });
       return updatedAddresses;
     });
   };
@@ -95,6 +114,8 @@ function Address() {
                 phone={address.phone}
                 address={address.address}
                 onDelete={() => handleDeleteAddress(index)}
+                onSelectPrimary={() => handleSelectPrimary(index)}
+                isDefault={address.isDefault}
               />
             </div>
           )}
