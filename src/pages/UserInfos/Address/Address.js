@@ -4,10 +4,12 @@ import AddressCard from './AddressCard.js';
 import { clsx } from 'clsx';
 import React from 'react';
 import PaginatePage from '~/components/PaginatePage';
+import { Plus } from '~/assets/images/icons/SvgIcons';
+import NewAddressCard from './NewAddressCard';
 
 function Address() {
   const [pageOffset, setPageOffset] = useState(0);
-  const [addresses, setAddress] = useState([
+  const [addresses, setAddresses] = useState([
     {
       city: 'Ho Chi Minh',
       name: 'Agelia',
@@ -64,10 +66,24 @@ function Address() {
     },
   ]);
 
+  const handleDeleteAddress = (index) => {
+    setAddresses((prevAddresses) => {
+      const updatedAddresses = [...prevAddresses];
+      updatedAddresses.splice(index, 1);
+      return updatedAddresses;
+    });
+  };
+
   return (
     <div className={clsx(['grid', 'l-10', 'm-10', 'c-12'])}>
       <div className={clsx(['row', styles.wrapper])}>
         <h2 className={styles.header}>Address</h2>
+        <div className={styles.addButtonWrapper}>
+          <button className={styles.addButton}>
+            <Plus />
+            <NewAddressCard className={styles.addNewAddressText} />
+          </button>
+        </div>
 
         <PaginatePage
           className={clsx(['l-12', 'm-12', 'c-12', styles.addressContainer])}
@@ -79,6 +95,7 @@ function Address() {
                 name={address.name}
                 phone={address.phone}
                 address={address.address}
+                onDelete={() => handleDeleteAddress(index)}
               />
             </div>
           )}

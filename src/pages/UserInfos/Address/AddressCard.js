@@ -1,22 +1,9 @@
 import styles from './AddressCard.module.scss';
-import { Address, ThreeDots } from '~/assets/images/icons/SvgIcons';
+import { Address } from '~/assets/images/icons/SvgIcons';
 import { clsx } from 'clsx';
-import Button from '~/components/Button/Button';
 import OptionCard from './OptionCard';
 
-function AddressCard({
-  city,
-  name,
-  phone,
-  address,
-  onEdit,
-  onDelete,
-  onSelectAsPrimaryAddress,
-}) {
-  const handleDelete = (event) => {
-    event.stopPropagation();
-    onDelete && onDelete();
-  };
+function AddressCard({ city, name, phone, address, onEdit, onDelete }) {
   return (
     <button className={clsx(['grid', styles.addressCard])}>
       <div className={styles.info}>
@@ -34,7 +21,9 @@ function AddressCard({
           <p>{address}</p>
         </div>
       </div>
-      <OptionCard />
+      <div className={styles.threedots}>
+        <OptionCard onDelete={onDelete} onEdit={onEdit} />
+      </div>
     </button>
   );
 }

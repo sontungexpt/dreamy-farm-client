@@ -31,3 +31,27 @@
   margin-bottom: 20px;
   margin-left: 15px;
 }
+
+.addButtonWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 20px;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+  border: none;
+  cursor: pointer;
+}
+
+.addNewAddressText {
+  font-size: 13px;
+  color: var(--white-color);
+}

@@ -4,36 +4,62 @@ import { Modal } from '~/components/ModalButton';
 import { useCallback, useState, useRef } from 'react';
 import { ThreeDots } from '~/assets/images/icons/SvgIcons';
 
-function OptionCard() {
+function OptionCard({ onDelete, onEdit, onSelectPrimary }) {
   const modalRef = useRef(null);
   const handleModalClose = useCallback(() => {
     modalRef.current.close();
   }, []);
+
+  const handleDelete = () => {
+    if (onDelete) {
+      onDelete();
+    }
+    handleModalClose();
+  };
+
+  const handleEdit = () => {
+    if (onEdit) {
+      onEdit();
+    }
+    handleModalClose();
+  };
+
+  const handleSelectPrimary = () => {
+    if (onSelectPrimary) {
+      onSelectPrimary();
+    }
+    handleModalClose();
+  };
 
   return (
     <div className={styles.button}>
       <Button
         onClick={() => modalRef.current.open()}
         className={styles.option}
-        childrenClassName={styles.optionText}
-        alignLeft
-        blackOutline
-        leftIcon={<ThreeDots className={styles.threedots} />}
+        alignRight
+        rightIcon={<ThreeDots className={styles.threedots} />}
       ></Button>
       <Modal ref={modalRef} className={styles.innerModal}>
-        <ol style={{ listStyleType: 'decimal' }}>
+        <ol className={styles.optionList}>
           <li>
-            <Button className={styles.button}>Edit</Button>
+            <Button className={styles.button} onClick={handleEdit}>
+              Edit
+            </Button>
           </li>
           <li>
-            <Button className={styles.button}>Delete</Button>
+            <Button className={styles.button} onClick={handleDelete}>
+              Delete
+            </Button>
           </li>
           <li>
-            <Button className={styles.button}>Select as primary address</Button>
+            <Button className={styles.button} onClick={handleSelectPrimary}>
+              Select as primary address
+            </Button>
           </li>
         </ol>
       </Modal>
     </div>
   );
 }
+
 export default OptionCard;
