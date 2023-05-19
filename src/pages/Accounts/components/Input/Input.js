@@ -4,13 +4,19 @@ import PropTypes from 'prop-types';
 import styles from './Input.module.scss';
 
 function Input({
-  id,
-  className,
-  label,
-  labelClassName,
-  placeHolder,
-  type = 'text',
-  inputClassName,
+  className, // optional className of the wrapper div
+  labelClassName, //optional className for the label
+  inputClassName, //optional className for the input
+  errorClassName, //optional className for the errorMessage
+
+  id, // required id for the input
+  label, // required label for the input
+
+  type = 'text', // optional type for the input
+  required, // optional boolean to show the error message
+  placeHolder, // optional placeholder for the input
+  errorMessage, // optional error message
+  ...props
 }) {
   return (
     <div
@@ -36,6 +42,7 @@ function Input({
         placeholder={placeHolder}
         id={id}
         type={type}
+        {...props}
         className={clsx([
           styles.input,
           {
@@ -43,18 +50,35 @@ function Input({
           },
         ])}
       />
+      {required && (
+        <span
+          className={clsx([
+            styles.error,
+            {
+              [styles.errorClassName]: errorClassName,
+            },
+          ])}
+        >
+          {errorMessage || 'This field is required'}
+        </span>
+      )}
     </div>
   );
 }
 
 Input.propTypes = {
-  type: PropTypes.string,
-  id: PropTypes.string.isRequired,
   className: PropTypes.string,
-  label: PropTypes.string.isRequired,
   labelClassName: PropTypes.string,
-  placeHolder: PropTypes.string,
   inputClassName: PropTypes.string,
+  errorClassName: PropTypes.string,
+
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+
+  type: PropTypes.string,
+  required: PropTypes.bool,
+  placeHolder: PropTypes.string,
+  errorMessage: PropTypes.string,
 };
 
 export default Input;

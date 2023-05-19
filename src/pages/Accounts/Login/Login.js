@@ -6,11 +6,11 @@ import Input from '~/pages/Accounts/components/Input';
 
 function Login() {
   return (
-    <div className={styles.wrapper}>
+    <form className={styles.wrapper}>
       <h1 className={styles.header}>Login to your account</h1>
 
-      <Input label="Email" id="email-login" type="text" />
-      <Input label="Password" id="password-login" type="password" />
+      <Input required label="Email" id="email-login" type="text" />
+      <Input required label="Password" id="password-login" type="password" />
 
       <Link
         to={routesConfig.forgotPassword}
@@ -29,7 +29,7 @@ function Login() {
           Sign up
         </Link>
       </p>
-    </div>
+    </form>
   );
 }
 
