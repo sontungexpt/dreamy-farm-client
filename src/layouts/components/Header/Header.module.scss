@@ -2,15 +2,15 @@
   background-color: var(---white-color);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   margin-bottom: 2px;
+}
 
-  .navbar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    height: var(--header-height);
-    background-color: var(---white-color);
-  }
+.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  background-color: var(---white-color);
 }
 
 .navbarList {
@@ -21,33 +21,33 @@
   list-style: none;
   line-height: 0px;
 
-  .navbarLink {
-    display: block;
-    text-decoration: none;
-    color: var(--text-color);
-    font-size: 2rem;
-    font-weight: 400;
-
-    padding: 0 12px;
-
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
-
-    &:hover {
-      color: var(--primary-color);
-    }
-  }
-
   &:first-child {
-    .navbarLink {
+    .navbarItem {
       margin-right: 40px;
     }
   }
 
   &:last-child {
-    .navbarLink {
+    .navbarItem {
       margin-left: 40px;
     }
+  }
+}
+
+.navbarLink {
+  display: block;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 2rem;
+  font-weight: 400;
+
+  padding: 0 12px;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+
+  &:hover {
+    color: var(--primary-color);
   }
 }
