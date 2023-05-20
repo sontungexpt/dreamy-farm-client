@@ -25,7 +25,7 @@ function Footer() {
           <ul className={styles.socialList}>
             <li>
               <div className={clsx([styles.logo])}>
-                <Logo color="#ffffff" transform={'scale(2.1)'} />
+                <Logo color="var(--white-color)" transform={'scale(2.1)'} />
               </div>
               <a
                 href="https://www.facebook.com/DreamyFarm/"
