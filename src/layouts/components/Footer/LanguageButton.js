@@ -15,6 +15,7 @@ function LanguageButton() {
     }
     return configs.en.i18nType;
   }); // ['en', 'vn']
+
   const { t, i18n } = useTranslation('translations');
   const modalRef = useRef(null);
 
