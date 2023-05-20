@@ -77,7 +77,7 @@ function Footer() {
         </div>
         <div className={styles.feedback}>
           <h2 className={styles.feedbackTitle}>{t('Feedback')}</h2>
-          <input
+          <textarea
             type="text"
             placeholder={t('Enter your feedback')}
             className={clsx([styles.feedbackInput])}
