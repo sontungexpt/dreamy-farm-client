@@ -42,9 +42,12 @@ function Register() {
       <Button primary hoverZoom className={styles.loginBtn}>
         Create account
       </Button>
-      <Link to={routesConfig.login} className={styles.loginText}>
-        Login
-      </Link>
+      <span className={styles.loginText}>
+        Already have an account?
+        <Link to={routesConfig.login} className={styles.loginLink}>
+          Login
+        </Link>
+      </span>
     </form>
   );
 }

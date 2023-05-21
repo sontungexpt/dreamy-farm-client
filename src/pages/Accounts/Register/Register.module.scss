@@ -23,8 +23,13 @@
   }
 
   .loginText {
+    font-size: 1.8rem;
+  }
+
+  .loginLink {
     font-size: 2rem;
     color: var(--link-color);
+    margin-left: 5px;
 
     &:hover {
       color: var(--gray-color);
