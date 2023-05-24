@@ -4,6 +4,8 @@ import { clsx } from 'clsx';
 import { useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
 import SelectOtherAddress from './SelectAnother/SelectOtherAddress';
+import LoadMore from '~/components/LoadMore';
+import Item from './Item/Item';
 
 function Checkout() {
   const { t } = useTranslation('translations');
@@ -53,6 +55,17 @@ function Checkout() {
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
     },
   ];
+  const [products, setProducts] = useState([
+    { name: 'Product 1', price: 100, quantity: 2 },
+    { name: 'Product 2', price: 200, quantity: 2 },
+    { name: 'Product 3', price: 300, quantity: 1 },
+    { name: 'Product 4', price: 400, quantity: 1 },
+    { name: 'Product 5', price: 100, quantity: 2 },
+    { name: 'Product 6', price: 100, quantity: 3 },
+    { name: 'Product 7', price: 100, quantity: 3 },
+    { name: 'Product 8', price: 100, quantity: 1 },
+    { name: 'Product 9', price: 100, quantity: 1 },
+  ]);
   const [selectedAddress, setSelectedAddress] = useState(0);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
 
@@ -105,6 +118,32 @@ function Checkout() {
       </div>
       <div className={styles.header}>
         <h1>{t('Order detail')}</h1>
+      </div>
+      <h3 className={styles.subTitle}>
+        {`${products.length} products in cart`}
+      </h3>
+      <div className={clsx(['row', styles.main])}>
+        <div className="col l-9 m-8 c-12">
+          <LoadMore
+            data={products}
+            loadMoreLabel="Load More"
+            collapseLabel="Collapse"
+            noDataLabel="There is no data to load"
+            autoHidden={false}
+            canCollapse={true}
+            controlClassName={styles.control}
+            noDataClassName={styles.noData}
+            itemsPerLoad={3}
+            renderItem={(item, index) => (
+              <Item
+                key={index}
+                price={item.price}
+                name={item.name}
+                quantity={item.quantity}
+              />
+            )}
+          />
+        </div>
       </div>
     </div>
   );
