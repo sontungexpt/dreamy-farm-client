@@ -1,14 +1,25 @@
 import styles from './SelectOtherAddress.module.scss';
+import BillingAddress from '../BillingAddress';
 import Button from '~/components/Button';
 import { Modal } from '~/components/ModalButton';
 import { useCallback, useRef } from 'react';
 import { clsx } from 'clsx';
-function SelectOtherAddress({ selected, handleSelect }) {
+import { useState } from 'react';
+function SelectOtherAddress({ addresses }) {
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const modalRef = useRef(null);
+
+  const handleSelectAddress = (index) => {
+    setSelectedAddress(index);
+  };
 
   return (
     <div
-      className={clsx(['grid', styles.selectCard, selected && styles.selected])}
+      className={clsx([
+        'grid',
+        styles.selectCard,
+        selectedAddress !== null && styles.selected,
+      ])}
     >
       <Button
         onClick={() => modalRef.current.open()}
@@ -16,11 +27,30 @@ function SelectOtherAddress({ selected, handleSelect }) {
         alignRight
       >
         <div className={styles.radioButton}>
-          <input type="radio" checked={selected} readOnly />
+          <input type="radio" checked={selectedAddress !== null} readOnly />
           <p className={styles.selectText}>+ Select another billing address</p>
         </div>
       </Button>
-      <Modal ref={modalRef} className={styles.innerModal}></Modal>
+      <Modal ref={modalRef} className={styles.innerModal}>
+        <div className={styles.modalContent}>
+          <div className={styles.addressList}>
+            {addresses.map((address, index) => (
+              <BillingAddress
+                key={index}
+                name={address.name}
+                phone={address.phone}
+                address={address.address}
+                selected={selectedAddress === index}
+                handleSelect={() => handleSelectAddress(index)}
+              />
+            ))}
+          </div>
+          <div className={styles.modalButtons}>
+            <Button className={styles.cancelButton}>Cancel</Button>
+            <Button className={styles.saveButton}>Save</Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

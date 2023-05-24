@@ -8,23 +8,46 @@
   border: 8px;
   margin-left: 0;
   position: relative;
-}
 
-.radioButton {
-  display: flex;
-  align-items: center;
-  margin-right: 10px;
-}
+  .radioButton {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
 
-.selectText {
-  margin: 0;
-  text-align: left;
-  margin-left: 10px;
-  color: var(--green-color);
-}
-.innerModal {
-  width: 380px;
-  height: 145px;
-  padding: 20px;
-  border-radius: 5px;
+  .selectText {
+    margin: 0;
+    text-align: left;
+    margin-left: 10px;
+    color: var(--green-color);
+  }
+
+  .innerModal {
+    width: 600px;
+    height: 600px;
+    padding: 20px;
+    border-radius: 5px;
+
+    .modalContent {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+
+      .addressList {
+        flex: 1;
+        overflow-y: auto;
+      }
+
+      .modalButtons {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+
+        .cancelButton,
+        .saveButton {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
 }
