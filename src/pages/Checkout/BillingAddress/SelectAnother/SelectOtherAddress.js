@@ -9,8 +9,8 @@ function SelectOtherAddress({ addresses }) {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const modalRef = useRef(null);
 
-  const handleSelectAddress = (index) => {
-    setSelectedAddress(index);
+  const handleSelectAddress = (address) => {
+    setSelectedAddress(address);
   };
 
   return (
@@ -40,14 +40,19 @@ function SelectOtherAddress({ addresses }) {
                 name={address.name}
                 phone={address.phone}
                 address={address.address}
-                selected={selectedAddress === index}
-                handleSelect={() => handleSelectAddress(index)}
+                selected={selectedAddress === address}
+                handleSelect={() => handleSelectAddress(address)}
               />
             ))}
           </div>
           <div className={styles.modalButtons}>
             <Button className={styles.cancelButton}>Cancel</Button>
-            <Button className={styles.saveButton}>Save</Button>
+            <Button
+              className={styles.saveButton}
+              onClick={() => handleSelectAddress(selectedAddress)}
+            >
+              Save
+            </Button>
           </div>
         </div>
       </Modal>

@@ -3,11 +3,9 @@ import { clsx } from 'clsx';
 
 import React, { useState } from 'react';
 
-function BillingAddress({ name, phone, address }) {
-  const [selected, setSelected] = useState(false);
-
-  const handleSelect = () => {
-    setSelected(!selected);
+function BillingAddress({ name, phone, address, selected, handleSelect }) {
+  const onChangeValue = (event) => {
+    console.log(event.target.value);
   };
 
   return (
@@ -21,7 +19,12 @@ function BillingAddress({ name, phone, address }) {
     >
       <div className={styles.addressCardLeft}>
         <div className={styles.radioButton}>
-          <input type="radio" checked={selected} readOnly />
+          <input
+            type="radio"
+            name="billingAddress"
+            checked={selected}
+            onChange={onChangeValue}
+          />
         </div>
         <div className={styles.info}>
           <div className={styles.namePhone}>
