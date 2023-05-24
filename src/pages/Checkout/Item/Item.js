@@ -18,13 +18,15 @@ function Item({ name, price, image, quantity }) {
           <div className={styles.info}>
             <div className={styles.header}>
               <h3 className={styles.name}>{name}</h3>
-              <div className={styles.priceWrapper}>
-                <PriceTag className={styles.icon} color="var(--red-color)" />
-                <h4 className={styles.price}>{price}đ </h4>
+              <div className={styles.rightWrapper}>
+                <div className={styles.priceWrapper}>
+                  <PriceTag className={styles.icon} color="var(--red-color)" />
+                  <h4 className={styles.price}>{price}đ</h4>
+                </div>
+                <div className={styles.quantityWrapper}>
+                  <p>Q{quantity}</p>
+                </div>
               </div>
-            </div>
-            <div className={styles.quantityWrapper}>
-              <p>Q{quantity}</p>
             </div>
           </div>
         </div>
@@ -32,4 +34,5 @@ function Item({ name, price, image, quantity }) {
     </div>
   );
 }
+
 export default Item;
