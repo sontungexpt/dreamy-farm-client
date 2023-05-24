@@ -9,8 +9,8 @@ function SelectOtherAddress({ addresses }) {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const modalRef = useRef(null);
 
-  const handleSelectAddress = (address) => {
-    setSelectedAddress(address);
+  const handleSelectAddress = (index) => {
+    setSelectedAddress(index);
   };
 
   return (
@@ -28,7 +28,24 @@ function SelectOtherAddress({ addresses }) {
       >
         <div className={styles.radioButton}>
           <input type="radio" checked={selectedAddress !== null} readOnly />
-          <p className={styles.selectText}>+ Select another billing address</p>
+          <p
+            className={clsx(
+              styles.selectText,
+              selectedAddress !== null && styles.selectedText,
+            )}
+          >
+            {selectedAddress !== null ? (
+              <>
+                <p>
+                  {addresses[selectedAddress].name} -{' '}
+                  {addresses[selectedAddress].phone}
+                </p>
+                <p>{addresses[selectedAddress].address}</p>
+              </>
+            ) : (
+              '+ Select another billing address'
+            )}
+          </p>
         </div>
       </Button>
       <Modal ref={modalRef} className={styles.innerModal}>
@@ -40,22 +57,23 @@ function SelectOtherAddress({ addresses }) {
                 name={address.name}
                 phone={address.phone}
                 address={address.address}
-                selected={selectedAddress === address}
-                handleSelect={() => handleSelectAddress(address)}
+                selected={selectedAddress === index}
+                handleSelect={() => handleSelectAddress(index)}
               />
             ))}
           </div>
           <div className={styles.modalButtons}>
             <Button className={styles.cancelButton}>Cancel</Button>
-            <Button
-              className={styles.saveButton}
-              onClick={() => handleSelectAddress(selectedAddress)}
-            >
-              Save
-            </Button>
+            <Button className={styles.saveButton}>Save</Button>
           </div>
         </div>
       </Modal>
+      {/* {selectedAddress !== null && (
+        <div className={styles.selectedAddress}>
+          <p>{addresses[selectedAddress].name} - {addresses[selectedAddress].phone}</p>
+          <p>{addresses[selectedAddress].address}</p>
+        </div>
+      )} */}
     </div>
   );
 }

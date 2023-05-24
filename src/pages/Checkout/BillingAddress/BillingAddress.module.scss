@@ -10,39 +10,18 @@
   position: relative;
 
   .addressCardLeft {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 10px;
     align-items: center;
-    margin-right: 10px;
-    justify-content: flex-start; /* Align items from start */
-  }
-
-  .radioButton {
-    display: flex;
-    align-items: center;
-    margin-right: 10px; /* Increase margin for gutter */
-    margin-left: 0; /* Remove left margin */
-  }
-
-  .radioButton input[type='radio'] {
-    margin: 0;
   }
 
   .namePhone {
     display: flex;
     align-items: center;
-    margin-bottom: 5px; /* Add spacing between name-phone and address */
   }
 
   .namePhone p {
-    margin: 0;
-    text-align: left;
-  }
-
-  .namePhone span {
-    margin: 0 5px;
-  }
-
-  .address {
-    text-align: left;
+    margin-right: 5px;
   }
 }

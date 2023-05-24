@@ -2,7 +2,7 @@ import styles from './Checkout.module.scss';
 import BillingAddress from './BillingAddress/BillingAddress';
 import { clsx } from 'clsx';
 import { useTranslation } from 'react-i18next';
-
+import React, { useState } from 'react';
 import SelectOtherAddress from './BillingAddress/SelectAnother/SelectOtherAddress';
 
 function Checkout() {
@@ -53,6 +53,11 @@ function Checkout() {
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
     },
   ];
+  const [selectedAddress, setSelectedAddress] = useState(0);
+
+  const handleSelectAddress = (index) => {
+    setSelectedAddress(index);
+  };
 
   return (
     <div className={clsx(['grid', 'l-10', 'm-10', 'c-10', styles.wrapper])}>
@@ -61,9 +66,9 @@ function Checkout() {
       </div>
       <div className={styles.addressArea}>
         <BillingAddress
-          name={addresses[0].name}
-          phone={addresses[0].phone}
-          address={addresses[0].address}
+          {...addresses[selectedAddress]}
+          selected={true}
+          handleSelect={() => {}}
         />
         <SelectOtherAddress addresses={addresses} />
       </div>

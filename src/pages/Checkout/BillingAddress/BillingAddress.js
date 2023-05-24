@@ -28,9 +28,9 @@ function BillingAddress({ name, phone, address, selected, handleSelect }) {
         </div>
         <div className={styles.info}>
           <div className={styles.namePhone}>
-            <p>{name}</p>
-            <span>-</span>
-            <p>{phone}</p>
+            <p>
+              {name} - {phone}
+            </p>
           </div>
           <div className={styles.address}>
             <p>{address}</p>
