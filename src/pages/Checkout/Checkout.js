@@ -116,33 +116,35 @@ function Checkout() {
           </div>
         </div>
       </div>
-      <div className={styles.header}>
-        <h1>{t('Order detail')}</h1>
-      </div>
-      <h3 className={styles.subTitle}>
-        {`${products.length} products in cart`}
-      </h3>
-      <div className={clsx(['row', styles.main])}>
-        <div className="col l-9 m-8 c-12">
-          <LoadMore
-            data={products}
-            loadMoreLabel="Load More"
-            collapseLabel="Collapse"
-            noDataLabel="There is no data to load"
-            autoHidden={false}
-            canCollapse={true}
-            controlClassName={styles.control}
-            noDataClassName={styles.noData}
-            itemsPerLoad={3}
-            renderItem={(item, index) => (
-              <Item
-                key={index}
-                price={item.price}
-                name={item.name}
-                quantity={item.quantity}
-              />
-            )}
-          />
+      <div className={styles.orderDetail}>
+        <div className={styles.header}>
+          <h1>{t('Order detail')}</h1>
+        </div>
+        <h3 className={styles.subTitle}>
+          {`${products.length} products in cart`}
+        </h3>
+        <div className={clsx(['row', styles.main])}>
+          <div className="col l-9 m-8 c-12">
+            <LoadMore
+              data={products}
+              loadMoreLabel="Load More"
+              collapseLabel="Collapse"
+              noDataLabel="There is no data to load"
+              autoHidden={false}
+              canCollapse={true}
+              controlClassName={styles.control}
+              noDataClassName={styles.noData}
+              itemsPerLoad={3}
+              renderItem={(item, index) => (
+                <Item
+                  key={index}
+                  price={item.price}
+                  name={item.name}
+                  quantity={item.quantity}
+                />
+              )}
+            />
+          </div>
         </div>
       </div>
     </div>
