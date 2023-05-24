@@ -17,9 +17,10 @@ function BillingAddress({ name, phone, address }) {
         styles.addressCard,
         selected && styles.selected,
       ])}
+      onClick={handleSelect}
     >
       <div className={styles.addressCardLeft}>
-        <div className={styles.radioButton} onClick={handleSelect}>
+        <div className={styles.radioButton}>
           <input type="radio" checked={selected} readOnly />
         </div>
         <div className={styles.info}>

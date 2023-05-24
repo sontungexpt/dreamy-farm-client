@@ -9,10 +9,6 @@
   margin-left: 0;
   position: relative;
 
-  &.selected {
-    border: 8px solid blue; /* Example border style for selected addressCard */
-  }
-
   .addressCardLeft {
     display: flex;
     align-items: center;
