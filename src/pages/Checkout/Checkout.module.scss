@@ -1,5 +1,6 @@
 .wrapper {
   padding: 20px 0;
+
   .title {
     margin-bottom: 13px;
     font-size: 3.4rem;
@@ -8,5 +9,31 @@
   .subTitle {
     font-size: 2rem;
     color: var(--darker-gray-color);
+  }
+}
+
+.paymentWrapper {
+  background-color: var(--white-color);
+  padding: 30px;
+  display: flex;
+  align-items: flex-start;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.178);
+  border: 8px;
+  margin-left: 0;
+  position: relative;
+
+  input[type='radio'] {
+    margin-right: 15px;
+  }
+
+  .walletContainer {
+    display: flex;
+    align-items: center;
+  }
+  .cashOnDelivery {
+    margin-right: 10px;
+  }
+  .creditCard {
+    margin-right: 10px;
   }
 }

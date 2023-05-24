@@ -1,5 +1,5 @@
 import styles from './Checkout.module.scss';
-import BillingAddress from './BillingAddress/BillingAddress';
+import { Wallet, CreditCard } from '~/assets/images/icons/SvgIcons';
 import { clsx } from 'clsx';
 import { useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
@@ -54,9 +54,14 @@ function Checkout() {
     },
   ];
   const [selectedAddress, setSelectedAddress] = useState(0);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
 
   const handleSelectAddress = (index) => {
     setSelectedAddress(index);
+  };
+
+  const handleSelectPaymentMethod = (method) => {
+    setSelectedPaymentMethod(method);
   };
 
   return (
@@ -65,12 +70,41 @@ function Checkout() {
         <h1>{t('Billing address')}</h1>
       </div>
       <div className={styles.addressArea}>
-        <BillingAddress
-          {...addresses[selectedAddress]}
-          selected={true}
-          handleSelect={() => {}}
-        />
         <SelectOtherAddress addresses={addresses} />
+      </div>
+      <div className={styles.header}>
+        <h1>{t('Payment method')}</h1>
+      </div>
+      <div className={styles.paymentMethods}>
+        <div className={styles.paymentWrapper}>
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="cod"
+            checked={selectedPaymentMethod === 'cod'}
+            onChange={() => handleSelectPaymentMethod('cod')}
+          />
+          <div className={styles.methodContainer}>
+            <Wallet className={styles.cashOnDelivery} />
+            <span>{t('Cash on delivery')}</span>
+          </div>
+        </div>
+        <div className={styles.paymentWrapper}>
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="creditCard"
+            checked={selectedPaymentMethod === 'creditCard'}
+            onChange={() => handleSelectPaymentMethod('creditCard')}
+          />
+          <div className={styles.methodContainer}>
+            <CreditCard className={styles.creditCard} />
+            <span>{t('Credit card')}</span>
+          </div>
+        </div>
+      </div>
+      <div className={styles.header}>
+        <h1>{t('Order detail')}</h1>
       </div>
     </div>
   );
