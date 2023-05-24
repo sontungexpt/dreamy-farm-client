@@ -3,7 +3,7 @@ import { Wallet, CreditCard } from '~/assets/images/icons/SvgIcons';
 import { clsx } from 'clsx';
 import { useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
-import SelectOtherAddress from './BillingAddress/SelectAnother/SelectOtherAddress';
+import SelectOtherAddress from './SelectAnother/SelectOtherAddress';
 
 function Checkout() {
   const { t } = useTranslation('translations');

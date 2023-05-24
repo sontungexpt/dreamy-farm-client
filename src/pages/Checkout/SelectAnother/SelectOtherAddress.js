@@ -5,17 +5,12 @@ import { Modal } from '~/components/ModalButton';
 import { useCallback, useRef } from 'react';
 import { clsx } from 'clsx';
 import { useState } from 'react';
-function SelectOtherAddress({
-  addresses,
-  selectedAddressIndex,
-  handleSelectAddress,
-}) {
-  const [selectedAddress, setSelectedAddress] = useState(selectedAddressIndex);
+function SelectOtherAddress({ addresses }) {
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const modalRef = useRef(null);
 
-  const handleSelect = (index) => {
+  const handleSelectAddress = (index) => {
     setSelectedAddress(index);
-    handleSelectAddress(index);
   };
 
   return (
@@ -26,25 +21,33 @@ function SelectOtherAddress({
         selectedAddress !== null && styles.selected,
       ])}
     >
-      <div className={styles.option}>
+      <Button
+        onClick={() => modalRef.current.open()}
+        className={styles.option}
+        alignRight
+      >
         <div className={styles.radioButton}>
-          <input
-            type="radio"
-            id="selectOtherAddress"
-            name="addressOption"
-            checked={selectedAddressIndex === null}
-            onChange={() => handleSelect(null)}
-          />
-          <span
+          <input type="radio" checked={selectedAddress !== null} readOnly />
+          <p
             className={clsx(
               styles.selectText,
-              selectedAddressIndex === null && styles.selectedText,
+              selectedAddress !== null && styles.selectedText,
             )}
           >
-            + Select another billing address
-          </span>
+            {selectedAddress !== null ? (
+              <>
+                <p>
+                  {addresses[selectedAddress].name} -{' '}
+                  {addresses[selectedAddress].phone}
+                </p>
+                <p>{addresses[selectedAddress].address}</p>
+              </>
+            ) : (
+              '+ Select another billing address'
+            )}
+          </p>
         </div>
-      </div>
+      </Button>
       <Modal ref={modalRef} className={styles.innerModal}>
         <div className={styles.modalContent}>
           <div className={styles.addressList}>
@@ -55,7 +58,7 @@ function SelectOtherAddress({
                 phone={address.phone}
                 address={address.address}
                 selected={selectedAddress === index}
-                handleSelect={() => handleSelect(index)}
+                handleSelect={() => handleSelectAddress(index)}
               />
             ))}
           </div>
@@ -65,7 +68,14 @@ function SelectOtherAddress({
           </div>
         </div>
       </Modal>
+      {/* {selectedAddress !== null && (
+        <div className={styles.selectedAddress}>
+          <p>{addresses[selectedAddress].name} - {addresses[selectedAddress].phone}</p>
+          <p>{addresses[selectedAddress].address}</p>
+        </div>
+      )} */}
     </div>
   );
 }
+
 export default SelectOtherAddress;
