@@ -30,6 +30,7 @@ const Products = lazy(() => import('~/pages/Products'));
 const Recipes = lazy(() => import('~/pages/Recipes'));
 const ShoppingCart = lazy(() => import('~/pages/ShoppingCart'));
 const Checkout = lazy(() => import('~/pages/Checkout'));
+const OrderConfirm = lazy(() => import('~/pages/OrderConfirm'));
 const ProductDetail = lazy(() => import('~/pages/ProductDetail'));
 
 // Accounts lazy load
@@ -125,6 +126,11 @@ const privateRoutes = [
     path: routesConfig.checkout,
     element: Checkout,
     layout: HeaderOnly,
+    redirectPath: routesConfig.login,
+  },
+  {
+    path: routesConfig.orderConfirm,
+    element: OrderConfirm,
     redirectPath: routesConfig.login,
   },
   {

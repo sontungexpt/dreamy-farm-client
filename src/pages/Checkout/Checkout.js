@@ -1,11 +1,13 @@
 import styles from './Checkout.module.scss';
+import Button from '~/components/Button/Button';
 import { Wallet, CreditCard } from '~/assets/images/icons/SvgIcons';
 import { clsx } from 'clsx';
 import { useTranslation } from 'react-i18next';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import SelectOtherAddress from './SelectAnother/SelectOtherAddress';
 import LoadMore from '~/components/LoadMore';
 import Item from './Item/Item';
+import { routes as routesConfig } from '~/configs';
 
 function Checkout() {
   const { t } = useTranslation('translations');
@@ -76,6 +78,13 @@ function Checkout() {
   const handleSelectPaymentMethod = (method) => {
     setSelectedPaymentMethod(method);
   };
+  const totalPrice = useMemo(() => {
+    const totalPrice = products.reduce(
+      (accumulator, product) => accumulator + parseFloat(product.price),
+      0,
+    );
+    return totalPrice;
+  }, [products]);
 
   return (
     <div className={clsx(['grid', 'l-10', 'm-10', 'c-10', styles.wrapper])}>
@@ -124,7 +133,7 @@ function Checkout() {
           {`${products.length} products in cart`}
         </h3>
         <div className={clsx(['row', styles.main])}>
-          <div className="col l-9 m-8 c-12">
+          <div className="col l-12 m- c-12">
             <LoadMore
               data={products}
               loadMoreLabel="Load More"
@@ -146,6 +155,17 @@ function Checkout() {
             />
           </div>
         </div>
+        <div className={styles.totalWrapper}>
+          <h2 className={styles.total}>Total Price</h2>
+          <h1 className={styles.totalPrice}>{totalPrice}đ</h1>
+        </div>
+        <Button
+          to={routesConfig.orderConfirm}
+          primary
+          className={styles.completeBtn}
+        >
+          Complete Checkout
+        </Button>
       </div>
     </div>
   );
