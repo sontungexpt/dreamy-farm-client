@@ -85,16 +85,24 @@ function Checkout() {
     );
     return totalPrice;
   }, [products]);
-
+  const totalQuantity = useMemo(() => {
+    const totalQuantity = products.reduce(
+      (accumulator, product) => accumulator + product.quantity,
+      0,
+    );
+    return totalQuantity;
+  }, [products]);
   return (
-    <div className={clsx(['grid', 'l-10', 'm-10', 'c-10', styles.wrapper])}>
-      <div className={styles.header}>
+    <div
+      className={clsx(['grid', 'wide', 'l-12', 'm-12', 'c-12', styles.wrapper])}
+    >
+      <div className={clsx(['col', styles.header])}>
         <h1>{t('Billing address')}</h1>
       </div>
       <div className={styles.addressArea}>
         <SelectOtherAddress addresses={addresses} />
       </div>
-      <div className={styles.header}>
+      <div className={clsx(['col', styles.header])}>
         <h1>{t('Payment method')}</h1>
       </div>
       <div className={styles.paymentMethods}>
@@ -126,14 +134,15 @@ function Checkout() {
         </div>
       </div>
       <div className={styles.orderDetail}>
-        <div className={styles.header}>
+        <div className={clsx(['col', styles.header])}>
           <h1>{t('Order detail')}</h1>
+
+          <h3 className={clsx(['col', styles.subTitle])}>
+            {`${totalQuantity} products in cart`}
+          </h3>
         </div>
-        <h3 className={styles.subTitle}>
-          {`${products.length} products in cart`}
-        </h3>
         <div className={clsx(['row', styles.main])}>
-          <div className="col l-12 m- c-12">
+          <div className="col l-12 m-12 c-12">
             <LoadMore
               data={products}
               loadMoreLabel="Load More"

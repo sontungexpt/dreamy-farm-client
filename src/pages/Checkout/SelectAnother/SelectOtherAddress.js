@@ -43,7 +43,7 @@ function SelectOtherAddress({ addresses }) {
                 <p>{addresses[selectedAddress].address}</p>
               </>
             ) : (
-              '+ Select another billing address'
+              '+ Select a billing address'
             )}
           </p>
         </div>
@@ -68,12 +68,6 @@ function SelectOtherAddress({ addresses }) {
           </div>
         </div>
       </Modal>
-      {/* {selectedAddress !== null && (
-        <div className={styles.selectedAddress}>
-          <p>{addresses[selectedAddress].name} - {addresses[selectedAddress].phone}</p>
-          <p>{addresses[selectedAddress].address}</p>
-        </div>
-      )} */}
     </div>
   );
 }

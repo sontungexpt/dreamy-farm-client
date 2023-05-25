@@ -3,7 +3,7 @@ import { GreenTick } from '~/assets/images/icons/SvgIcons';
 import { clsx } from 'clsx';
 function OrderConfirm() {
   return (
-    <div className={clsx([styles.body])}>
+    <div className={clsx(['grid', 'wide', styles.body])}>
       <div className={clsx([styles.greenTick])}>
         <GreenTick />
       </div>

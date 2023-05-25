@@ -1,24 +1,49 @@
 .wrapper {
+  margin-top: 91px;
   padding: 20px 0;
 
-  .title {
-    margin-bottom: 13px;
-    font-size: 3.4rem;
+  .header {
+    margin-bottom: 35px;
   }
 
   .subTitle {
     font-size: 2rem;
     color: var(--darker-gray-color);
+    margin-bottom: 15px;
+  }
+
+  .addressArea {
+    margin-bottom: 35px;
+  }
+
+  .orderDetail {
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .orderDetailHeading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 15px;
+
+      h1 {
+        margin-right: 15px;
+      }
+    }
   }
 }
 
 .paymentWrapper {
   background-color: var(--white-color);
+  margin-bottom: 29px;
   padding: 30px;
   display: flex;
   align-items: flex-start;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.178);
-  border: 8px;
   margin-left: 0;
   position: relative;
 
@@ -30,13 +55,43 @@
     display: flex;
     align-items: center;
   }
+
   .cashOnDelivery {
     margin-right: 10px;
   }
+
   .creditCard {
     margin-right: 10px;
   }
 }
+
 .main {
-  border-bottom: 1px solid var(--gray-color);
+  margin-bottom: 59px;
+}
+
+.control {
+  font-size: 2.1rem;
+  padding: 10px;
+  color: var(--primary-color);
+
+  &:hover {
+    cursor: pointer;
+    color: var(--gray-color);
+  }
+}
+
+.totalWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  border-top: 1px solid var(--gray-color);
+
+  .total {
+    margin-top: 20px;
+  }
+
+  .totalPrice {
+    margin-top: 5px;
+    text-align: right;
+  }
 }
