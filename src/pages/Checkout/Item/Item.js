@@ -17,14 +17,14 @@ function Item({ name, price, image, quantity }) {
         <div className={clsx(['col', 'l-10', 'm-10', 'c-9'])}>
           <div className={styles.info}>
             <div className={styles.header}>
-              <h3 className={styles.name}>{name}</h3>
+              <p className={styles.name}>{name}</p>
               <div className={styles.rightWrapper}>
                 <div className={styles.priceWrapper}>
                   <PriceTag className={styles.icon} color="var(--red-color)" />
                   <h4 className={styles.price}>{price}đ</h4>
                 </div>
                 <div className={styles.quantityWrapper}>
-                  <p>Q{quantity}</p>
+                  <p>Q: {quantity}</p>
                 </div>
               </div>
             </div>

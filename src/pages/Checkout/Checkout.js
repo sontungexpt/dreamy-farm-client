@@ -68,6 +68,7 @@ function Checkout() {
     { name: 'Product 8', price: 100, quantity: 1 },
     { name: 'Product 9', price: 100, quantity: 1 },
   ]);
+
   const [selectedAddress, setSelectedAddress] = useState(0);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
 
@@ -93,9 +94,7 @@ function Checkout() {
     return totalQuantity;
   }, [products]);
   return (
-    <div
-      className={clsx(['grid', 'wide', 'l-12', 'm-12', 'c-12', styles.wrapper])}
-    >
+    <div className={clsx(['grid', styles.wrapper])}>
       <div className={clsx(['col', styles.header])}>
         <h1>{t('Billing address')}</h1>
       </div>
@@ -141,7 +140,7 @@ function Checkout() {
             {`${totalQuantity} products in cart`}
           </h3>
         </div>
-        <div className={clsx(['row', styles.main])}>
+        <div className={clsx(['col', styles.main])}>
           <div className="col l-12 m-12 c-12">
             <LoadMore
               data={products}
@@ -165,13 +164,15 @@ function Checkout() {
           </div>
         </div>
         <div className={styles.totalWrapper}>
-          <h2 className={styles.total}>Total Price</h2>
+          <h2 className={styles.total}>Total</h2>
           <h1 className={styles.totalPrice}>{totalPrice}đ</h1>
         </div>
+      </div>
+      <div className={clsx(['l-o-6', 'm-o-6', 'c-o-6', styles.completeBtn])}>
         <Button
           to={routesConfig.orderConfirm}
           primary
-          className={styles.completeBtn}
+          className={clsx([styles.completeBtn])}
         >
           Complete Checkout
         </Button>

@@ -12,6 +12,15 @@ function SelectOtherAddress({ addresses }) {
   const handleSelectAddress = (index) => {
     setSelectedAddress(index);
   };
+  const handleSave = () => {
+    // Perform save action here
+    modalRef.current.close(); // Close the modal
+  };
+
+  const handleCancel = () => {
+    // Perform cancel action here
+    modalRef.current.close(); // Close the modal
+  };
 
   return (
     <div
@@ -63,8 +72,12 @@ function SelectOtherAddress({ addresses }) {
             ))}
           </div>
           <div className={styles.modalButtons}>
-            <Button className={styles.cancelButton}>Cancel</Button>
-            <Button className={styles.saveButton}>Save</Button>
+            <Button className={styles.cancelButton} onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button className={styles.saveButton} onClick={handleCancel}>
+              Save
+            </Button>
           </div>
         </div>
       </Modal>

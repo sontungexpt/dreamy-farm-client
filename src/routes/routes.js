@@ -125,7 +125,6 @@ const privateRoutes = [
   {
     path: routesConfig.checkout,
     element: Checkout,
-    layout: HeaderOnly,
     redirectPath: routesConfig.login,
   },
   {
