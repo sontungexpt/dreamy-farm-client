@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import styles from './LoadMore.module.scss';
+import { useTranslation } from 'react-i18next';
 
 function LoadMore({
   className,

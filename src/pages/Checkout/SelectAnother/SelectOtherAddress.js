@@ -5,44 +5,52 @@ import { Modal } from '~/components/ModalButton';
 import { useCallback, useRef } from 'react';
 import { clsx } from 'clsx';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+function AddressListItem({ address, index, selected, handleSelect }) {
+  return (
+    <BillingAddress
+      key={index}
+      name={address.name}
+      phone={address.phone}
+      address={address.address}
+      selected={selected}
+      handleSelect={handleSelect}
+    />
+  );
+}
+
 function SelectOtherAddress({ addresses }) {
+  const { t } = useTranslation('translations');
   const [selectedAddress, setSelectedAddress] = useState(null);
   const modalRef = useRef(null);
 
   const handleSelectAddress = (index) => {
     setSelectedAddress(index);
   };
+
   const handleSave = () => {
-    // Perform save action here
-    modalRef.current.close(); // Close the modal
+    modalRef.current.close();
   };
 
   const handleCancel = () => {
-    // Perform cancel action here
-    modalRef.current.close(); // Close the modal
+    modalRef.current.close();
   };
 
   return (
-    <div
-      className={clsx([
-        'grid',
-        styles.selectCard,
-        selectedAddress !== null && styles.selected,
-      ])}
-    >
+    <div className={clsx([styles.selectCard])}>
       <Button
         onClick={() => modalRef.current.open()}
         className={styles.option}
         alignRight
       >
         <div className={styles.radioButton}>
-          <input type="radio" checked={selectedAddress !== null} readOnly />
-          <p
-            className={clsx(
-              styles.selectText,
-              selectedAddress !== null && styles.selectedText,
-            )}
-          >
+          <input
+            type="radio"
+            checked={selectedAddress !== null}
+            onChange={() => handleSelectAddress(selectedAddress)}
+          />
+          <p className={clsx(styles.selectText)}>
             {selectedAddress !== null ? (
               <>
                 <p>
@@ -52,7 +60,7 @@ function SelectOtherAddress({ addresses }) {
                 <p>{addresses[selectedAddress].address}</p>
               </>
             ) : (
-              '+ Select a billing address'
+              t('+ Select a billing address')
             )}
           </p>
         </div>
@@ -61,11 +69,10 @@ function SelectOtherAddress({ addresses }) {
         <div className={styles.modalContent}>
           <div className={styles.addressList}>
             {addresses.map((address, index) => (
-              <BillingAddress
+              <AddressListItem
                 key={index}
-                name={address.name}
-                phone={address.phone}
-                address={address.address}
+                address={address}
+                index={index}
                 selected={selectedAddress === index}
                 handleSelect={() => handleSelectAddress(index)}
               />
@@ -73,10 +80,10 @@ function SelectOtherAddress({ addresses }) {
           </div>
           <div className={styles.modalButtons}>
             <Button className={styles.cancelButton} onClick={handleCancel}>
-              Cancel
+              {t('Cancel')}
             </Button>
-            <Button className={styles.saveButton} onClick={handleCancel}>
-              Save
+            <Button className={styles.saveButton} onClick={handleSave}>
+              {t('Save')}
             </Button>
           </div>
         </div>

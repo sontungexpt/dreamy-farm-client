@@ -74,6 +74,8 @@ function Checkout() {
 
   const handleSelectAddress = (index) => {
     setSelectedAddress(index);
+    // Reset the selected payment method when a new address is selected
+    setSelectedPaymentMethod(null);
   };
 
   const handleSelectPaymentMethod = (method) => {
@@ -94,11 +96,11 @@ function Checkout() {
     return totalQuantity;
   }, [products]);
   return (
-    <div className={clsx(['grid', styles.wrapper])}>
+    <div className={clsx(['grid', styles.checkoutWrapper])}>
       <div className={clsx(['col', styles.header])}>
         <h1>{t('Billing address')}</h1>
       </div>
-      <div className={styles.addressArea}>
+      <div className={clsx(['grid', styles.addressArea])}>
         <SelectOtherAddress addresses={addresses} />
       </div>
       <div className={clsx(['col', styles.header])}>
@@ -137,16 +139,16 @@ function Checkout() {
           <h1>{t('Order detail')}</h1>
 
           <h3 className={clsx(['col', styles.subTitle])}>
-            {`${totalQuantity} products in cart`}
+            {`${totalQuantity} ${t('products in cart')}`}
           </h3>
         </div>
         <div className={clsx(['col', styles.main])}>
           <div className="col l-12 m-12 c-12">
             <LoadMore
               data={products}
-              loadMoreLabel="Load More"
-              collapseLabel="Collapse"
-              noDataLabel="There is no data to load"
+              loadMoreLabel={t('Load More')}
+              collapseLabel={t('Collapse')}
+              noDataLabel={t('There is no data to load')}
               autoHidden={false}
               canCollapse={true}
               controlClassName={styles.control}
@@ -164,7 +166,7 @@ function Checkout() {
           </div>
         </div>
         <div className={styles.totalWrapper}>
-          <h2 className={styles.total}>Total</h2>
+          <h2 className={styles.total}>{t('Total')}</h2>
           <h1 className={styles.totalPrice}>{totalPrice}đ</h1>
         </div>
       </div>
@@ -174,7 +176,7 @@ function Checkout() {
           primary
           className={clsx([styles.completeBtn])}
         >
-          Complete Checkout
+          {t('Complete Checkout')}
         </Button>
       </div>
     </div>
