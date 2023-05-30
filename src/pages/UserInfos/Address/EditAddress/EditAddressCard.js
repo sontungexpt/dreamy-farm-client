@@ -1,7 +1,7 @@
 import styles from './EditAddressCard.module.scss';
 import { clsx } from 'clsx';
 import Button from '~/components/Button';
-import Input from '~/pages/UserInfos/Account/components/Input';
+import Input from '~/components/Input';
 import { useTranslation } from 'react-i18next';
 import { useRef } from 'react';
 import { Modal } from '~/components/ModalButton';

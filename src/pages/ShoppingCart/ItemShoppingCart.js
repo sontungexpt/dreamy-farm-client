@@ -1,11 +1,11 @@
-import styles from './ItemShoppingCart.module.scss';
 import { useRef } from 'react';
 import { clsx } from 'clsx';
+import { useTranslation } from 'react-i18next';
+
+import styles from './ItemShoppingCart.module.scss';
 
 import Image from '~/components/Image';
 import Counter from '~/components/Counter';
-import { useTranslation } from 'react-i18next';
-import { useRef } from 'react';
 import { Tag as PriceTag } from '~/assets/images/icons/SvgIcons';
 
 function ItemShoppingCart({ name, price, image, onRemove }) {

@@ -1,12 +1,13 @@
-import ItemShoppingCart from './ItemShoppingCart.js';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { clsx } from 'clsx';
-import { useTranslation } from 'react-i18next';
+
 import styles from './ShoppingCart.module.scss';
 import { routes as routesConfig } from '~/configs';
+
 import Button from '~/components/Button';
 import LoadMore from '~/components/LoadMore';
+import ItemShoppingCart from './ItemShoppingCart.js';
 
 function ShoppingCart() {
   const { t } = useTranslation('translations');
@@ -39,7 +40,6 @@ function ShoppingCart() {
   }, [products]);
 
   return (
-
     <div className={clsx(['grid', 'wide', styles.wrapper])}>
       <h2 className={styles.title}>{t('Shopping Cart')}</h2>
       <h3 className={styles.subTitle}>
