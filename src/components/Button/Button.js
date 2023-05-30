@@ -141,6 +141,7 @@ Button.propTypes = {
   whiteText: PropTypes.bool, //optional
   disabled: PropTypes.bool, //optional
   disabledText: PropTypes.bool, //optional
+  primaryText: PropTypes.bool, //optional
 };
 
 export default Button;

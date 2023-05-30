@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 import { routes as routesConfig } from '~/configs';
+import { apiConfigs } from '~/configs';
 import styles from './Register.module.scss';
 import inputStyles from '~/pages/Accounts/styles/InputStyles.module.scss';
 
@@ -25,20 +28,26 @@ function Register() {
     e.preventDefault();
 
     const errors = validator.validate(account);
-    if (!errors) {
-      console.log('Submit');
+    if (validator.isNoErrors(errors)) {
+      axios
+        .post(apiConfigs.users.register, account)
+        .then((response) => {
+          const { error } = response.data;
+          if (error) {
+            toast.error(error);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       setAccount((prevState) => ({
         ...prevState,
-        errors: {
-          ...prevState.errors,
-          ...errors,
-        },
+        errors,
       }));
     }
   };
 
-  console.log(account);
   const handleFocus = (e) => {
     const { name } = e.target;
 
@@ -71,7 +80,7 @@ function Register() {
     }));
   };
   return (
-    <form className={styles.wrapper}>
+    <form onSubmit={handleSubmit} className={styles.wrapper}>
       <h1 className={styles.header}>{t('Create an account')}</h1>
 
       <Input
@@ -136,6 +145,7 @@ function Register() {
         primary
         hoverZoom
         className={styles.loginBtn}
+        type="submit"
       >
         {t('Create account')}
       </Button>

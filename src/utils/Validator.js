@@ -48,6 +48,13 @@ class Validator {
     return this.errors;
   }
 
+  isNoErrors(errors) {
+    if (errors) {
+      return Object.keys(errors).length === 0;
+    }
+    return Object.keys(this.errors).length === 0;
+  }
+
   validateOne(field, state) {
     return this.handleValidation(state, this.rules, field);
   }

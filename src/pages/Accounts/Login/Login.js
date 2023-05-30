@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import axios from 'axios';
 
 import { routes as routesConfig } from '~/configs';
 import inputStyles from '~/pages/Accounts/styles/InputStyles.module.scss';
@@ -24,8 +25,10 @@ function Login() {
     e.preventDefault();
 
     const errors = validator.validate(account);
-    if (!errors) {
-      console.log('Submit');
+    if (validator.isNoErrors(errors)) {
+      axios.get('/login', account).then((res) => {
+        console.log(res);
+      });
     } else {
       setAccount((prevState) => ({
         ...prevState,
@@ -70,7 +73,7 @@ function Login() {
   };
 
   return (
-    <form className={styles.wrapper}>
+    <form onSubmit={handleSubmit} className={styles.wrapper}>
       <h1 className={styles.header}>{t('Login to your account')}</h1>
 
       <Input
@@ -109,12 +112,7 @@ function Login() {
         {t('Forgot password?')}
       </Link>
 
-      <Button
-        onClick={handleSubmit}
-        primary
-        hoverZoom
-        className={styles.loginBtn}
-      >
+      <Button type="submit" primary hoverZoom className={styles.loginBtn}>
         {t('Login now')}
       </Button>
 
