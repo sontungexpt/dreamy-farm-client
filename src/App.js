@@ -71,7 +71,18 @@ function App() {
             {handleRoutes(privateRoutes)}
           </Routes>
         </Suspense>
-        <ToastContainer position="top-right" newestOnTop />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
       </div>
     </Router>
   );

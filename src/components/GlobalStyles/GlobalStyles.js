@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
+import 'react-toastify/ReactToastify.min.css';
 import './GlobalStyles.scss';
 import './ResponsiveStyles.scss';
-import 'react-toastify/ReactToastify.min.css';
 
 function GlobalStyles({ children }) {
   return children;

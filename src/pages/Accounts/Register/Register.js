@@ -34,7 +34,16 @@ function Register() {
         .then((response) => {
           const { error } = response.data;
           if (error) {
-            toast.error(error);
+            toast.error(error, {
+              position: 'top-right',
+              autoClose: 3000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: 'colored',
+            });
           }
         })
         .catch((error) => {
