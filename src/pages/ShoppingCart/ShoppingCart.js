@@ -1,5 +1,6 @@
 import ItemShoppingCart from './ItemShoppingCart.js';
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { clsx } from 'clsx';
 import { useTranslation } from 'react-i18next';
 import styles from './ShoppingCart.module.scss';
@@ -38,42 +39,46 @@ function ShoppingCart() {
   }, [products]);
 
   return (
-    <div className={styles.wrapper}>
+
+    <div className={clsx(['grid', 'wide', styles.wrapper])}>
       <h2 className={styles.title}>{t('Shopping Cart')}</h2>
       <h3 className={styles.subTitle}>
         {products.length} {t('products in cart')}
       </h3>
-
-      <div className={styles.main}>
-        <LoadMore
-          data={products}
-          className={clsx([styles.leftWrapper])}
-          autoHidden={false}
-          canCollapse={true}
-          controlClassName={styles.control}
-          renderItem={(item, index) => (
-            <ItemShoppingCart
-              key={index}
-              price={item.price}
-              name={item.name}
-              onRemove={() => handleRemoveProduct(index)}
-            />
-          )}
-        />
-        <div className={styles.rightWrapper}>
-          <div className={styles.total}>
-            <h2>{t('Total Price')}</h2>
+      <div className={clsx(['row', styles.main])}>
+        <div className="col l-9 m-8 c-12">
+          <LoadMore
+            data={products}
+            loadMoreLabel="Load More"
+            collapseLabel="Collapse"
+            noDataLabel="There is no data to load"
+            autoHidden={false}
+            canCollapse={true}
+            controlClassName={styles.control}
+            noDataClassName={styles.noData}
+            itemsPerLoad={3}
+            renderItem={(item, index) => (
+              <ItemShoppingCart
+                key={index}
+                price={item.price}
+                name={item.name}
+                onRemove={() => handleRemoveProduct(index)}
+              />
+            )}
+          />
+        </div>
+        <div className={clsx(['col', 'l-3', 'm-4', 'c-12', styles.col2])}>
+          <div className={styles.totalWrapper}>
+            <h2 className={styles.total}>{t('Total Price')}</h2>
+            <h1 className={styles.totalPrice}>{totalPrice}đ</h1>
+            <Button
+              to={routesConfig.checkout}
+              primary
+              className={styles.checkoutBtn}
+            >
+              {t('Checkout')}
+            </Button>
           </div>
-          <div className={styles.totalPrice}>
-            <h1>{totalPrice}đ</h1>
-          </div>
-          <Button
-            to={routesConfig.checkout}
-            primary
-            className={styles.checkoutBtn}
-          >
-            {t('Checkout')}
-          </Button>
         </div>
       </div>
     </div>

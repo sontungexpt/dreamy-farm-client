@@ -8,6 +8,7 @@ const routes = {
   aboutUs: '/aboutUs',
   shoppingCart: '/shoppingCart',
   checkout: '/checkout',
+  orderConfirm: '/orderConfirm',
 
   // accounts pages
   login: '/accounts/',

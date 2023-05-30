@@ -95,6 +95,10 @@ function PaginatePage({
     >
       <div
         className={clsx([
+          // NOTE:
+          // default using flexbox to render items in a row and wrap
+          // to next row when overflow the container width (responsive)
+          // you just need add col class to each item to render items in a column
           'row',
           styles.container,
           {

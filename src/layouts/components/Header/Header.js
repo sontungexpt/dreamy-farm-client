@@ -12,11 +12,11 @@ import SearchBar from '~/components/SearchBar';
 import Product from '~/components/SearchBar/Product';
 import Logo from '~/assets/images/icons/Logo';
 import CartIcon from './CartIcon';
+import Avatar from './Avatar';
 import ToggleIcon from '~/components/ToggleIcon';
 import {
   EmptyHeart as EmptyHeartIcon,
   FilledHeart as FilledHeartIcon,
-  User as UserIcon,
 } from '~/assets/images/icons/SvgIcons';
 
 function Header() {
@@ -25,29 +25,29 @@ function Header() {
     <header className={styles.wrapper}>
       <nav className={clsx(['grid', 'wide', styles.navbar])}>
         <ul className={styles.navbarList}>
-          <li>
+          <li className={styles.navbarItem}>
             <Link to={routesConfig.root} className={styles.navbarLink}>
               <Logo />
             </Link>
           </li>
-          <li>
+          <li className={styles.navbarItem}>
             <Link to={routesConfig.products} className={styles.navbarLink}>
               {t('Products')}
             </Link>
           </li>
-          <li>
+          <li className={styles.navbarItem}>
             <Link to={routesConfig.recipes} className={styles.navbarLink}>
               {t('Recipes')}
             </Link>
           </li>
-          <li>
+          <li className={styles.navbarItem}>
             <Link to={routesConfig.aboutUs} className={styles.navbarLink}>
               {t('About Us')}
             </Link>
           </li>
         </ul>
         <ul className={styles.navbarList}>
-          <li>
+          <li className={styles.navbarItem}>
             <SearchBar
               inputClassName={styles.inputSearchBar}
               data={[
@@ -86,7 +86,7 @@ function Header() {
             />
           </li>
 
-          <li>
+          <li className={styles.navbarItem}>
             <Link
               to={routesConfig.userInfos.wishlist}
               className={styles.navbarLink}
@@ -102,15 +102,13 @@ function Header() {
               />
             </Link>
           </li>
-          <li>
+          <li className={styles.navbarItem}>
             <Link to={routesConfig.shoppingCart} className={styles.navbarLink}>
               <CartIcon />
             </Link>
           </li>
-          <li>
-            <Link to={routesConfig.login} className={styles.navbarLink}>
-              <UserIcon style={{ marginTop: '7px' }} />
-            </Link>
+          <li className={styles.navbarItem}>
+            <Avatar />
           </li>
         </ul>
       </nav>

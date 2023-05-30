@@ -49,5 +49,20 @@
   "Total Price": "Tổng cộng",
   "Checkout": "Tiến hành thanh toán",
   "Remove": "Xoá",
-  "Load More": "Tải thêm"
+  "+ Select a billing address": "Chọn một địa chỉ",
+  "Save": "Lưu",
+  "Cancel": "Huỷ",
+  "Billing address": "Địa chỉ giao hàng",
+  "Payment method": "Phương thức thanh toán",
+  "Cash on delivery": "Thanh toán khi nhận hàng",
+  "Credit card": "Thẻ Credit",
+  "Order detail": "Chi tiết đơn hàng",
+  "products in cart": "sản phẩm trong giỏ",
+  "Load More": "Xem thêm",
+  "Collapse": "Thu gọn",
+  "There is no data to load": "Không có sản phẩm nào trong giỏ",
+  "Total": "Tổng cộng",
+  "Complete Checkout": "Hoàn tất đặt hàng",
+  "Order Successfully": "Đặt hàng thành công",
+  "Please check your email for more information": "Xem email để biết thêm chi tiết"
 }

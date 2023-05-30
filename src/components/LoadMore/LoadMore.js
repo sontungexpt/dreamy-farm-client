@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import styles from './LoadMore.module.scss';
+import { useTranslation } from 'react-i18next';
 
 function LoadMore({
   className,
@@ -9,24 +10,26 @@ function LoadMore({
   controlClassName,
   loadMoreClassName,
   collapseClassName,
+  noDataClassName,
 
   autoHidden = true, // if true, the loadMoreLabel will be hidden when there is no more data to load
   canCollapse = false, //just work if autoHidden = false
 
+  noDataLabel = 'There is no data to load',
   loadMoreLabel = 'Load More',
   collapseLabel = 'Collapse',
 
   data,
   renderItem,
-  itemsPerPage = 3,
+  itemsPerLoad = 3,
 }) {
   const [pageOffset, setPageOffset] = useState(0);
 
-  const pageCount = Math.ceil(data.length / itemsPerPage);
+  const pageCount = Math.ceil(data.length / itemsPerLoad);
   const displayItems = useMemo(() => {
-    const itemsVisited = pageOffset * itemsPerPage;
-    return data.slice(0, itemsVisited + itemsPerPage);
-  }, [data, pageOffset, itemsPerPage]);
+    const itemsVisited = pageOffset * itemsPerLoad;
+    return data.slice(0, itemsVisited + itemsPerLoad);
+  }, [data, pageOffset, itemsPerLoad]);
 
   const handleLoadMore = () => {
     setPageOffset(pageOffset + 1);
@@ -56,43 +59,60 @@ function LoadMore({
         {displayItems.map((item, index) => renderItem(item, index))}
       </div>
       {(() => {
-        if (pageCount === pageOffset) {
-          if (autoHidden) {
-            return;
+        if (data.length > 0) {
+          if (pageCount === pageOffset) {
+            if (autoHidden) {
+              return;
+            }
+            if (canCollapse) {
+              return (
+                <p
+                  className={clsx([
+                    {
+                      [controlClassName]: controlClassName,
+                    },
+                    {
+                      [collapseClassName]: collapseClassName,
+                    },
+                  ])}
+                  onClick={handleCollapse}
+                >
+                  {collapseLabel}
+                </p>
+              );
+            }
           }
-          if (canCollapse) {
-            return (
-              <p
-                className={clsx([
-                  {
-                    [controlClassName]: controlClassName,
-                  },
-                  {
-                    [collapseClassName]: collapseClassName,
-                  },
-                ])}
-                onClick={handleCollapse}
-              >
-                {collapseLabel}
-              </p>
-            );
-          }
+          return (
+            <p
+              className={clsx([
+                {
+                  [controlClassName]: controlClassName,
+                },
+                {
+                  [loadMoreClassName]: loadMoreClassName,
+                },
+              ])}
+              onClick={handleLoadMore}
+            >
+              {loadMoreLabel}
+            </p>
+          );
+        } else {
+          return (
+            <p
+              className={clsx([
+                {
+                  [controlClassName]: controlClassName,
+                },
+                {
+                  [noDataClassName]: noDataClassName,
+                },
+              ])}
+            >
+              {noDataLabel}
+            </p>
+          );
         }
-        return (
-          <p
-            className={clsx([
-              {
-                [controlClassName]: controlClassName,
-              },
-              {
-                [loadMoreClassName]: loadMoreClassName,
-              },
-            ])}
-            onClick={handleLoadMore}
-          >
-            {loadMoreLabel}
-          </p>
-        );
       })()}
     </div>
   );
@@ -112,7 +132,7 @@ LoadMore.propTypes = {
 
   data: PropTypes.array.isRequired,
   renderItem: PropTypes.func.isRequired,
-  itemsPerPage: PropTypes.number,
+  itemsPerLoad: PropTypes.number,
 };
 
 export default LoadMore;

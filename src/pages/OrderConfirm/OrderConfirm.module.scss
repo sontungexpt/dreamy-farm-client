@@ -1,0 +1,17 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.greenTick {
+  margin-bottom: 45px;
+}
+.sub {
+  margin-bottom: 14px;
+  font-size: 2.4rem;
+}
+.text {
+  font-size: 2rem;
+}
