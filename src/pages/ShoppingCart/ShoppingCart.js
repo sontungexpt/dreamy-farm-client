@@ -1,11 +1,14 @@
 import ItemShoppingCart from './ItemShoppingCart.js';
-import { useMemo, useEffect, useState } from 'react';
-import { productsPageConfigs as configs } from '~/configs/pages';
+import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { clsx } from 'clsx';
+
 import styles from './ShoppingCart.module.scss';
+import { routes as routesConfig } from '~/configs';
+import Button from '~/components/Button';
+import LoadMore from '~/components/LoadMore';
 
 function ShoppingCart() {
-  const [pageOffset, setPageOffset] = useState(0);
   const [products, setProducts] = useState([
     { name: 'Product 1', price: 100 },
     { name: 'Product 2', price: 200 },
@@ -18,17 +21,6 @@ function ShoppingCart() {
     { name: 'Product 9', price: 100 },
   ]);
 
-  const itemsPerPage = 2;
-
-  const displayProducts = useMemo(() => {
-    const itemsVisited = pageOffset * itemsPerPage;
-    return products.slice(0, itemsVisited + itemsPerPage);
-  }, [products, pageOffset]);
-
-  const handleLoadMore = () => {
-    setPageOffset((prevOffset) => prevOffset + 1);
-  };
-
   const handleRemoveProduct = (index) => {
     setProducts((prevProducts) => {
       const updatedProducts = [...prevProducts];
@@ -37,45 +29,54 @@ function ShoppingCart() {
     });
   };
 
-  const calculateTotalPrice = () => {
+  const totalPrice = useMemo(() => {
     const totalPrice = products.reduce(
       (accumulator, product) => accumulator + parseFloat(product.price),
       0,
     );
     return totalPrice;
-  };
+  }, [products]);
 
   return (
-    <div className={styles.main}>
+    <div className={clsx(['grid', 'wide', styles.wrapper])}>
       <h2 className={styles.title}>Shopping Cart</h2>
-      <h3
-        className={styles.subtitle}
-      >{`${products.length} products in cart`}</h3>
-
-      <div className={styles.wrapper}>
-        <div className={styles.leftWrapper}>
-          {displayProducts.map((product, index) => (
-            <ItemShoppingCart
-              key={index}
-              price={product.price}
-              name={product.name}
-              onRemove={() => handleRemoveProduct(index)}
-            />
-          ))}
-          {displayProducts.length < products.length && (
-            <button className={styles.loadMoreBtn} onClick={handleLoadMore}>
-              Load More
-            </button>
-          )}
+      <h3 className={styles.subTitle}>
+        {`${products.length} products in cart`}
+      </h3>
+      <div className={clsx(['row', styles.main])}>
+        <div className="col l-9 m-8 c-12">
+          <LoadMore
+            data={products}
+            loadMoreLabel="Load More"
+            collapseLabel="Collapse"
+            noDataLabel="There is no data to load"
+            autoHidden={false}
+            canCollapse={true}
+            controlClassName={styles.control}
+            noDataClassName={styles.noData}
+            itemsPerLoad={3}
+            renderItem={(item, index) => (
+              <ItemShoppingCart
+                key={index}
+                price={item.price}
+                name={item.name}
+                onRemove={() => handleRemoveProduct(index)}
+              />
+            )}
+          />
         </div>
-        <div className={styles.rightWrapper}>
-          <div className={styles.total}>
-            <h2>Total</h2>
+        <div className={clsx(['col', 'l-3', 'm-4', 'c-12', styles.col2])}>
+          <div className={styles.totalWrapper}>
+            <h2 className={styles.total}>Total Price</h2>
+            <h1 className={styles.totalPrice}>{totalPrice}đ</h1>
+            <Button
+              to={routesConfig.checkout}
+              primary
+              className={styles.checkoutBtn}
+            >
+              Checkout
+            </Button>
           </div>
-          <div className={styles.totalPrice}>
-            <h1>{calculateTotalPrice()}đ</h1>
-          </div>
-          <button className={styles.checkoutBtn}>Checkout</button>
         </div>
       </div>
     </div>
