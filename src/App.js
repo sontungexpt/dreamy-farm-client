@@ -9,6 +9,7 @@ import { publicRoutes, privateRoutes } from '~/routes';
 import Loader from '~/components/Loader';
 import ProtectedRoute from '~/components/Routes/ProtectedRoute';
 import ErroredRoute from '~/components/Routes/ErroredRoute';
+import { ToastContainer } from 'react-toastify';
 
 //layouts
 const DefaultLayout = lazy(() =>
@@ -70,6 +71,18 @@ function App() {
             {handleRoutes(privateRoutes)}
           </Routes>
         </Suspense>
+        <ToastContainer
+          position="top-right"
+          autoClose={2500}
+          hideProgressBar
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
       </div>
     </Router>
   );

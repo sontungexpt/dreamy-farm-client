@@ -13,14 +13,22 @@ import {
   safePolygon,
 } from '@floating-ui/react';
 import { useState } from 'react';
+import clsx from 'clsx';
 
 function Floater({
+  className,
+  anchorClassName,
+  floaterClassName,
+
   anchor,
-  render,
+  innerFloater,
+
   whenHover = false,
   whenFocus = false,
   whenClick = false,
-  floatingProps = {},
+  floatingProps = {
+    middleware: [],
+  },
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const { refs, floatingStyles, context } = useFloating({
@@ -28,8 +36,8 @@ function Floater({
     open: isOpen,
     onOpenChange: setIsOpen,
     placement: 'bottom-start',
-    middleware: [offset(10), flip(), shift()],
     ...floatingProps,
+    middleware: [offset(10), flip(), shift(), ...floatingProps.middleware],
   });
 
   const hover = useHover(context, {
@@ -41,6 +49,7 @@ function Floater({
       buffer: 1,
     }),
   });
+
   const click = useClick(context, {
     enabled: whenClick,
   });
@@ -59,19 +68,39 @@ function Floater({
     dismiss,
     role,
   ]);
+
   return (
-    <div>
-      <span ref={refs.setReference} {...getReferenceProps()}>
+    <div
+      className={clsx([
+        {
+          [className]: className,
+        },
+      ])}
+    >
+      <div
+        className={clsx([
+          {
+            [anchorClassName]: anchorClassName,
+          },
+        ])}
+        ref={refs.setReference}
+        {...getReferenceProps()}
+      >
         {anchor}
-      </span>
+      </div>
       {isOpen && (
-        <span
+        <ul
+          className={clsx([
+            {
+              [floaterClassName]: floaterClassName,
+            },
+          ])}
           ref={refs.setFloating}
           style={floatingStyles}
           {...getFloatingProps()}
         >
-          {render}
-        </span>
+          {innerFloater}
+        </ul>
       )}
     </div>
   );

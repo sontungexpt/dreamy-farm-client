@@ -22,6 +22,9 @@
 | [react-i18next](https://react.i18next.com/)                                                     | Work with multi language                                                            |
 | [i18next-browser-languagedetector](https://github.com/i18next/i18next-browser-languageDetector) | Work with multi language                                                            |
 | [i18next-http-backend](https://github.com/i18next/i18next-http-backend)                         | Work with multi language                                                            |
+| [validator](https://github.com/validatorjs/validator.js/)                                       | Validate data                                                                       |
+| [react-toastify](https://github.com/fkhadra/react-toastify)                                     | Make toast notification                                                             |
+| [redux](https://redux.js.org/usage/getting-started)                                             | Work with state                                                                     |
 
 ## 2. How to works with this repo
 

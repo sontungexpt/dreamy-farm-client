@@ -1,12 +1,16 @@
-import styles from './ItemShoppingCart.module.scss';
 import { useRef } from 'react';
 import { clsx } from 'clsx';
+import { useTranslation } from 'react-i18next';
+
+import styles from './ItemShoppingCart.module.scss';
 
 import Image from '~/components/Image';
 import Counter from '~/components/Counter';
 import { Tag as PriceTag } from '~/assets/images/icons/SvgIcons';
 
 function ItemShoppingCart({ name, price, image, onRemove }) {
+  const { t } = useTranslation('translations');
+
   const handleRemove = (event) => {
     event.stopPropagation();
     onRemove && onRemove();
@@ -33,7 +37,7 @@ function ItemShoppingCart({ name, price, image, onRemove }) {
             </div>
             <div className={styles.removeWrapper}>
               <button className={styles.remove} onClick={handleRemove}>
-                Remove
+                {t('Remove')}
               </button>
             </div>
             <Counter ref={counterRef} className={styles.quantity} />

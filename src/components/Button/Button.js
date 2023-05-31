@@ -11,6 +11,7 @@ function Button({
   iconClassName, //optional
 
   alignLeft, //optional
+  alignRight, //optional
   leftIcon, //optional
   rightIcon, //optional
   small, //optional
@@ -56,6 +57,9 @@ function Button({
         },
         {
           [styles.alignLeft]: alignLeft,
+        },
+        {
+          [styles.alignRight]: alignRight,
         },
         {
           [styles.whiteOutline]: whiteOutline,
@@ -125,6 +129,7 @@ function Button({
 
 Button.propTypes = {
   alignLeft: PropTypes.bool, //optional
+  alignRight: PropTypes.bool, //optional
   leftIcon: PropTypes.node, //optional
   rightIcon: PropTypes.node, //optional
   small: PropTypes.bool, //optional
@@ -141,6 +146,7 @@ Button.propTypes = {
   whiteText: PropTypes.bool, //optional
   disabled: PropTypes.bool, //optional
   disabledText: PropTypes.bool, //optional
+  primaryText: PropTypes.bool, //optional
 };
 
 export default Button;

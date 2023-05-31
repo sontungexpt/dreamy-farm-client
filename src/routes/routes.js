@@ -5,9 +5,9 @@ import { lazy } from 'react';
 import { routes as routesConfig } from '~/configs';
 
 // Layouts
-const AccountLayout = lazy(() =>
+const CenterContentLayout = lazy(() =>
   import('~/layouts').then((module) => ({
-    default: module.AccountLayout,
+    default: module.CenterContentLayout,
   })),
 );
 
@@ -30,6 +30,7 @@ const Products = lazy(() => import('~/pages/Products'));
 const Recipes = lazy(() => import('~/pages/Recipes'));
 const ShoppingCart = lazy(() => import('~/pages/ShoppingCart'));
 const Checkout = lazy(() => import('~/pages/Checkout'));
+const OrderConfirm = lazy(() => import('~/pages/OrderConfirm'));
 const ProductDetail = lazy(() => import('~/pages/ProductDetail'));
 
 // Accounts lazy load
@@ -93,19 +94,19 @@ const publicRoutes = [
   {
     path: routesConfig.login,
     element: Login,
-    layout: AccountLayout,
+    layout: CenterContentLayout,
   },
 
   {
     path: routesConfig.register,
     element: Register,
-    layout: AccountLayout,
+    layout: CenterContentLayout,
   },
 
   {
     path: routesConfig.forgotPassword,
     element: ForgotPassword,
-    layout: AccountLayout,
+    layout: CenterContentLayout,
   },
 
   {
@@ -124,7 +125,12 @@ const privateRoutes = [
   {
     path: routesConfig.checkout,
     element: Checkout,
-    layout: HeaderOnly,
+    redirectPath: routesConfig.login,
+  },
+  {
+    path: routesConfig.orderConfirm,
+    element: OrderConfirm,
+    layout: CenterContentLayout,
     redirectPath: routesConfig.login,
   },
   {

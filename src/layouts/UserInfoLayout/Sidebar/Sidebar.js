@@ -31,7 +31,7 @@ function Sidebar({ className, ...props }) {
           ({ title, icon: Icon, to, colorIcon, separator }, index) => (
             <MenuItem
               to={to}
-              className={styles.menuItem}
+              className={clsx([styles.menuItem, 'col', 'l-12', 'm-12', 'c-6'])}
               activeClassName={styles.active}
               separatorClassName={clsx([{ [styles.separator]: separator }])}
               key={index}
