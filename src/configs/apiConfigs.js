@@ -1,11 +1,14 @@
 const apiConfigs = {
   products: {
-    fruit: '',
-    vegetables: '',
-    herbs_aromatics: '',
-    frozens: '',
-    meats_seafoods: '',
-    dairy_eggs: '',
+    root: '/products',
+    fruit: '/products/fruits',
+    vegetables: '/products/vegetables',
+    herbs_aromatics: '/products/herbs-aromatics',
+    frozens: '/products/frozens',
+    meats_seafoods: '/products/meats-seafoods',
+    dairy_eggs: '/products/dairy-eggs',
+    detail: (id) => `/products/detail/${id}`,
+    category: (category) => `/products/${category}`,
   },
   users: {
     login: '/user/login',

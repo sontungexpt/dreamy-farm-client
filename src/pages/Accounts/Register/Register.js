@@ -36,7 +36,7 @@ function Register() {
         if (error) {
           toast.error(t(error));
         } else {
-          navigate(routesConfig.login);
+          navigate(routesConfig.login, { replace: true });
           toast.success(t('Register successfully'));
         }
       } catch (error) {

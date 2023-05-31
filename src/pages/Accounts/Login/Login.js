@@ -34,7 +34,7 @@ function Login() {
         if (error) {
           toast.error(t(error));
         } else {
-          navigate(routesConfig.root);
+          navigate(routesConfig.root, { replace: true });
           toast.success(t('Login successfully'));
         }
       } catch (error) {
