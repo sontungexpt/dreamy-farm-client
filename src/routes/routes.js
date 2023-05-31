@@ -5,9 +5,9 @@ import { lazy } from 'react';
 import { routes as routesConfig } from '~/configs';
 
 // Layouts
-const AccountLayout = lazy(() =>
+const CenterContentLayout = lazy(() =>
   import('~/layouts').then((module) => ({
-    default: module.AccountLayout,
+    default: module.CenterContentLayout,
   })),
 );
 
@@ -94,19 +94,19 @@ const publicRoutes = [
   {
     path: routesConfig.login,
     element: Login,
-    layout: AccountLayout,
+    layout: CenterContentLayout,
   },
 
   {
     path: routesConfig.register,
     element: Register,
-    layout: AccountLayout,
+    layout: CenterContentLayout,
   },
 
   {
     path: routesConfig.forgotPassword,
     element: ForgotPassword,
-    layout: AccountLayout,
+    layout: CenterContentLayout,
   },
 
   {
@@ -130,6 +130,7 @@ const privateRoutes = [
   {
     path: routesConfig.orderConfirm,
     element: OrderConfirm,
+    layout: CenterContentLayout,
     redirectPath: routesConfig.login,
   },
   {

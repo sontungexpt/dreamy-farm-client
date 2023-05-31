@@ -49,9 +49,9 @@ function ShoppingCart() {
         <div className="col l-9 m-8 c-12">
           <LoadMore
             data={products}
-            loadMoreLabel="Load More"
-            collapseLabel="Collapse"
-            noDataLabel="There is no data to load"
+            loadMoreLabel={t('Load More')}
+            collapseLabel={t('Collapse')}
+            noDataLabel={t('There is no data to load')}
             autoHidden={false}
             canCollapse={true}
             controlClassName={styles.control}

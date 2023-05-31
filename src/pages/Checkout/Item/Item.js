@@ -1,12 +1,9 @@
 import styles from './Item.module.scss';
-import { useRef } from 'react';
 import { clsx } from 'clsx';
-import { useTranslation } from 'react-i18next';
 import Image from '~/components/Image';
 import { Tag as PriceTag } from '~/assets/images/icons/SvgIcons';
 
 function Item({ name, price, image, quantity }) {
-  const { t } = useTranslation('translations');
   return (
     <div className={clsx(['grid', styles.itemWrapper])}>
       <div className="row">

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -22,33 +22,27 @@ function Register() {
     errors: {},
   });
 
+  const navigate = useNavigate();
   const { t } = useTranslation('translations');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const errors = validator.validate(account);
     if (validator.isNoErrors(errors)) {
-      axios
-        .post(apiConfigs.users.register, account)
-        .then((response) => {
-          const { error } = response.data;
-          if (error) {
-            toast.error(error, {
-              position: 'top-right',
-              autoClose: 3000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: 'colored',
-            });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await axios.post(apiConfigs.users.register, account);
+        const { error } = res.data;
+        if (error) {
+          toast.error(t(error));
+        } else {
+          navigate(routesConfig.login);
+          toast.success(t('Register successfully'));
+        }
+      } catch (error) {
+        toast.error(t('Something went wrong'));
+        console.log(error);
+      }
     } else {
       setAccount((prevState) => ({
         ...prevState,
@@ -69,7 +63,7 @@ function Register() {
     }));
   };
 
-  const handleBlur = (e) => {
+  const handleBlur = () => {
     const errors = validator.validate(account);
     setAccount((prevState) => ({
       ...prevState,

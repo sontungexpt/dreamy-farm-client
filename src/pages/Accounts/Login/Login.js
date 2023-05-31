@@ -1,10 +1,12 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import { routes as routesConfig } from '~/configs';
 import inputStyles from '~/pages/Accounts/styles/InputStyles.module.scss';
+import { apiConfigs } from '~/configs';
 import styles from './Login.module.scss';
 
 import Button from '~/components/Button/Button';
@@ -18,17 +20,27 @@ function Login() {
     password: '',
     errors: {},
   });
-
+  const navigate = useNavigate();
   const { t } = useTranslation('translations');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const errors = validator.validate(account);
     if (validator.isNoErrors(errors)) {
-      axios.get('/login', account).then((res) => {
-        console.log(res);
-      });
+      try {
+        const res = await axios.post(apiConfigs.users.login, account);
+        const { error } = res.data;
+        if (error) {
+          toast.error(t(error));
+        } else {
+          navigate(routesConfig.root);
+          toast.success(t('Login successfully'));
+        }
+      } catch (error) {
+        toast.error(t('Something went wrong'));
+        console.log(error);
+      }
     } else {
       setAccount((prevState) => ({
         ...prevState,
@@ -50,10 +62,7 @@ function Login() {
   };
 
   const handleBlur = (e) => {
-    const { name, value } = e.target;
-
-    const errors = validator.validateOne(name, value, account);
-
+    const errors = validator.validate(account);
     setAccount((prevState) => ({
       ...prevState,
       errors: {

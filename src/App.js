@@ -73,7 +73,7 @@ function App() {
         </Suspense>
         <ToastContainer
           position="top-right"
-          autoClose={3000}
+          autoClose={2500}
           hideProgressBar
           newestOnTop
           closeOnClick
