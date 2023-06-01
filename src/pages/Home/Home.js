@@ -51,47 +51,40 @@ function Home() {
     {
       id: 1,
       name: 'Product 1',
-      price: 9.99,
       image: 'product1.jpg',
     },
     {
       id: 2,
       name: 'Product 2',
-      price: 14.99,
       image: 'product2.jpg',
     },
     {
       id: 3,
       name: 'Product 3',
-      price: 14.99,
       image: 'product2.jpg',
     },
     {
       id: 4,
       name: 'Product 4',
-      price: 19.99,
       image: 'product3.jpg',
     },
     {
       id: 5,
       name: 'Product 5',
-      price: 19.99,
       image: 'product3.jpg',
     },
     {
       id: 6,
       name: 'Product 6',
-      price: 19.99,
       image: 'product3.jpg',
     },
     {
       id: 7,
       name: 'Product 7',
-      price: 19.99,
       image: 'product3.jpg',
     },
   ];
-  const renderRows = (products) => {
+  const renderRows = (products, type) => {
     const rows = [];
     let row = [];
 
@@ -114,9 +107,21 @@ function Home() {
               className={styles.productImgs}
             />
             <h3>{product.name}</h3>
-            <Link to="/products" className={styles.LinkToProduct}>
-              Shop Now!
-            </Link>
+            {type === 'shopping' ? (
+              <Link
+                to={`/products/${product.id}/about`}
+                className={styles.LinkToProduct}
+              >
+                Shop Now!
+              </Link>
+            ) : (
+              <Link
+                to={`/recipes/${product.id}`}
+                className={styles.LinkToProduct}
+              >
+                Read more
+              </Link>
+            )}
           </div>
         ))}
       </div>
@@ -141,15 +146,19 @@ function Home() {
       <div className={clsx('grid', 'wide', styles.wrapperContent)}>
         <div className={styles.wrapperContent}>
           <div className={styles.categoriesPart}>
-            <h2>Categories</h2>
+            <Link to="/products" className={styles.brandTitle}>
+              Categories
+            </Link>
             <div className={styles.line}></div>
-            {renderRows(categoriesBrand)}
+            {renderRows(categoriesBrand, 'shopping')}
           </div>
 
           <div className={styles.recipesPart}>
-            <h2>Recipes</h2>
+            <Link to="/recipes" className={styles.brandTitle}>
+              Recipes
+            </Link>
             <div className={styles.line}></div>
-            {renderRows(recipes)}
+            {renderRows(recipes, 'recipe')}
           </div>
         </div>
       </div>
