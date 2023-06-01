@@ -62,7 +62,7 @@ function Products() {
             renderItem={(item, index) => (
               <div key={index} className="col l-3 m-4 c-6">
                 <AddableItem
-                  price="100"
+                  price={100}
                   description={item.description}
                   name={item.name}
                   image={item.image}

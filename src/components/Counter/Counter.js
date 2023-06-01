@@ -9,22 +9,34 @@ import {
 } from '~/assets/images/icons/SvgIcons';
 
 function Counter(
-  { className, inputClassName, iconClassName, iconWrapperClassName, ...props },
+  {
+    onDecrease,
+    onIncrease,
+    initialCount,
+    className,
+    inputClassName,
+    iconClassName,
+    iconWrapperClassName,
+    minValue = 1,
+    ...props
+  },
   ref,
 ) {
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(initialCount || minValue);
 
   useImperativeHandle(ref, () => ({
     value,
   }));
 
   function handleIncrease() {
+    onIncrease && onIncrease(value);
     setValue(Number.parseInt(value) + 1);
   }
 
   function handleDecrease() {
     const intValue = Number.parseInt(value);
-    if (intValue > 1) {
+    if (intValue > minValue) {
+      onDecrease && onDecrease(intValue);
       setValue(intValue - 1);
     }
   }
@@ -32,7 +44,7 @@ function Counter(
   function handleChangeInput(e) {
     const re = /^[0-9\b]+$/; //rules
     if (e.target.value === '') {
-      setValue(1);
+      setValue(minValue);
     } else if (re.test(e.target.value)) {
       setValue(Number.parseInt(e.target.value));
     }

@@ -1,5 +1,9 @@
-import { useRef } from 'react';
 import { clsx } from 'clsx';
+import { useDispatch } from 'react-redux';
+import {
+  increaseProductCount,
+  decreaseProductCount,
+} from '~/redux/slices/orderSlice';
 
 import styles from './ItemShoppingCart.module.scss';
 
@@ -7,15 +11,32 @@ import Image from '~/components/Image';
 import Counter from '~/components/Counter';
 import Trans from '~/components/Trans';
 import { Tag as PriceTag } from '~/assets/images/icons/SvgIcons';
+import PropTypes from 'prop-types';
 
-function ItemShoppingCart({ name, price, image, onRemove }) {
+function ItemShoppingCart({
+  id,
+  type,
+  name,
+  price,
+  image,
+  onRemove,
+  initialCount,
+}) {
+  const dispatch = useDispatch();
+
   const handleRemove = (event) => {
     event.stopPropagation();
     event.preventDefault();
     onRemove && onRemove();
   };
 
-  const counterRef = useRef();
+  const handleIncrease = () => {
+    dispatch(increaseProductCount({ id, type }));
+  };
+
+  const handleDecrease = () => {
+    dispatch(decreaseProductCount({ id, type }));
+  };
 
   return (
     <div className={clsx(['grid', styles.wrapper])}>
@@ -39,11 +60,28 @@ function ItemShoppingCart({ name, price, image, onRemove }) {
                 <Trans>Remove</Trans>
               </button>
             </div>
-            <Counter ref={counterRef} className={styles.quantity} />
+            <Counter
+              minValue={0}
+              onIncrease={handleIncrease}
+              onDecrease={handleDecrease}
+              className={styles.quantity}
+              initialCount={initialCount}
+            />
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+ItemShoppingCart.propTypes = {
+  name: PropTypes.string,
+  price: PropTypes.number,
+  image: PropTypes.string,
+  onRemove: PropTypes.func,
+  id: PropTypes.string,
+  type: PropTypes.string,
+  initialCount: PropTypes.number,
+};
+
 export default ItemShoppingCart;

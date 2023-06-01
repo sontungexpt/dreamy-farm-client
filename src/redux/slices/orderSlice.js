@@ -60,9 +60,37 @@ export const counterSlice = createSlice({
       );
       state.totalPrice = totalPrice;
     },
+    increaseProductCount: (state, action) => {
+      const { id, type } = action.payload;
+      const duplicateIndex = state.products.findIndex(
+        (product) => product.id === id && product.type === type,
+      );
+      if (duplicateIndex !== -1) {
+        state.products[duplicateIndex].count++;
+      }
+      state.count++;
+    },
+    decreaseProductCount: (state, action) => {
+      const { id, type } = action.payload;
+      const duplicateIndex = state.products.findIndex(
+        (product) => product.id === id && product.type === type,
+      );
+      if (duplicateIndex !== -1) {
+        state.products[duplicateIndex].count--;
+        if (state.products[duplicateIndex].count === 0) {
+          state.products.splice(duplicateIndex, 1);
+        }
+      }
+      state.count--;
+    },
   },
 });
 
-export const { calcTotalPrice, addProduct, removeProduct } =
-  counterSlice.actions;
+export const {
+  calcTotalPrice,
+  addProduct,
+  removeProduct,
+  increaseProductCount,
+  decreaseProductCount,
+} = counterSlice.actions;
 export default counterSlice.reducer;
