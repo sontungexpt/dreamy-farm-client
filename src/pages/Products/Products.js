@@ -3,10 +3,11 @@ import { clsx } from 'clsx';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './Products.module.scss';
 import { productsPageConfigs as configs } from '~/configs/pages';
-import { apiConfigs } from '~/configs';
+import { apis } from '~/configs';
 
 import PaginatePage from '~/components/PaginatePage';
 import AddableItem from '~/components/AddableItem';
@@ -17,19 +18,25 @@ function Products() {
     configs.categories[0],
   );
   const { t } = useTranslation('translations');
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(apiConfigs.products.category(categorySelected.category))
-      .then((res) => {
-        const { products: productsRes } = res.data;
-        setProducts(productsRes);
-      })
-      .catch((error) => {
+    const handleGetProducts = async () => {
+      try {
+        const res = await axios.get(
+          apis.products.category(categorySelected.category),
+        );
+        setProducts(res.data.products);
+      } catch (error) {
+        if (error.response.status === 404) {
+          return navigate('/e404', { replace: true });
+        }
         toast.error(t('Something went wrong'));
         console.log(error);
-      });
+      }
+    };
+    handleGetProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categorySelected]);
 
@@ -59,7 +66,7 @@ function Products() {
                   description={item.description}
                   name={item.name}
                   image={item.image}
-                  id={item._id}
+                  slug={item.slug}
                 />
               </div>
             )}
