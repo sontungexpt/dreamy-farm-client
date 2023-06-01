@@ -18,10 +18,10 @@ import Trans from '~/components/Trans';
 
 function AddableItem({
   name,
-  price,
   image,
-  type = '100g',
+  type,
   slug,
+
   onClick,
   onUnClick,
   onAdd,
@@ -40,7 +40,6 @@ function AddableItem({
         count: 1,
         image: image,
         type: type,
-        price: price,
       }),
     );
     dispatch(calcTotalPrice());
@@ -64,8 +63,8 @@ function AddableItem({
           />
         </div>
         <div>
-          <p className={styles.quantity}>{type}</p>
-          <p className={styles.price}>{price} đ</p>
+          <p className={styles.quantity}>{type.name || ''}</p>
+          <p className={styles.price}>{type.price || ''} đ</p>
         </div>
         <Button onClick={handleAdd} className={styles.addBtn} primary>
           <Trans>Add</Trans>
@@ -76,12 +75,14 @@ function AddableItem({
 }
 
 PropTypes.AddableItem = {
-  name: PropTypes.string,
-  price: PropTypes.number,
-  image: PropTypes.string,
-  type: PropTypes.string,
-  slug: PropTypes.string,
-  description: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  type: PropTypes.shape({
+    name: PropTypes.string,
+    price: PropTypes.number,
+  }).isRequired,
+  slug: PropTypes.string.isRequired,
+
   onClick: PropTypes.func,
   onUnClick: PropTypes.func,
   onAdd: PropTypes.func,

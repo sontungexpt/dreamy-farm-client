@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import {
   increaseProductCount,
   decreaseProductCount,
+  removeProduct,
 } from '~/redux/slices/orderSlice';
 
 import styles from './ItemShoppingCart.module.scss';
@@ -17,25 +18,30 @@ function ItemShoppingCart({
   id,
   type,
   name,
-  price,
   image,
-  onRemove,
   initialCount,
+
+  onIncrease,
+  onDecrease,
+  onRemove,
 }) {
   const dispatch = useDispatch();
 
   const handleRemove = (event) => {
     event.stopPropagation();
     event.preventDefault();
+    dispatch(removeProduct({ id, type }));
     onRemove && onRemove();
   };
 
   const handleIncrease = () => {
     dispatch(increaseProductCount({ id, type }));
+    onIncrease && onIncrease();
   };
 
   const handleDecrease = () => {
     dispatch(decreaseProductCount({ id, type }));
+    onDecrease && onDecrease();
   };
 
   return (
@@ -52,10 +58,11 @@ function ItemShoppingCart({
               <h3 className={styles.name}>{name}</h3>
               <div className={styles.priceWrapper}>
                 <PriceTag className={styles.icon} color="var(--red-color)" />
-                <h4 className={styles.price}>{price}đ </h4>
+                <h4 className={styles.price}>{type.price}đ </h4>
               </div>
             </div>
-            <div className={styles.removeWrapper}>
+            <div className={styles.row2}>
+              <h4 className={styles.type}>{type.name}</h4>
               <button className={styles.remove} onClick={handleRemove}>
                 <Trans>Remove</Trans>
               </button>
@@ -75,13 +82,18 @@ function ItemShoppingCart({
 }
 
 ItemShoppingCart.propTypes = {
-  name: PropTypes.string,
-  price: PropTypes.number,
-  image: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  type: PropTypes.shape({
+    name: PropTypes.string,
+    price: PropTypes.number,
+  }).isRequired,
+  initialCount: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+
+  onIncrease: PropTypes.func,
+  onDecrease: PropTypes.func,
   onRemove: PropTypes.func,
-  id: PropTypes.string,
-  type: PropTypes.string,
-  initialCount: PropTypes.number,
 };
 
 export default ItemShoppingCart;

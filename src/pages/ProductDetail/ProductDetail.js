@@ -33,8 +33,11 @@ function ProductDetail() {
   useEffect(() => {
     const handleGetProductDetail = async () => {
       const productRes = await getProduct(slug);
-      if (productRes) setProduct(productRes);
-      else navigate('/e404', { replace: true });
+      if (productRes) {
+        setProduct(productRes);
+      } else {
+        navigate('/e404', { replace: true });
+      }
     };
     handleGetProductDetail();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,9 +49,8 @@ function ProductDetail() {
         id: product.slug,
         name: product.name,
         image: product.image,
-        count: counterRef.current.value,
         type: typeRef.current.activeItem,
-        price: 100,
+        count: counterRef.current.value,
       }),
     );
     dispatch(calcTotalPrice());
@@ -86,7 +88,7 @@ function ProductDetail() {
                 className={styles.type}
                 itemClassName={styles.typeButton}
                 itemActiveClassName={styles.active}
-                data={product.type}
+                data={product.types}
                 renderItem={(item) => item.name}
               />
 

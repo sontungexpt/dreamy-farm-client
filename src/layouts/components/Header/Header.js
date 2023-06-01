@@ -1,5 +1,6 @@
 // libabry
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { clsx } from 'clsx';
 
@@ -14,6 +15,7 @@ import Logo from '~/assets/images/icons/Logo';
 import CartIcon from './CartIcon';
 import Avatar from './Avatar';
 import ToggleIcon from '~/components/ToggleIcon';
+import LinkCondition from '~/components/LinkCondition';
 import {
   EmptyHeart as EmptyHeartIcon,
   FilledHeart as FilledHeartIcon,
@@ -21,6 +23,8 @@ import {
 
 function Header() {
   const { t } = useTranslation('translations');
+  const { count } = useSelector((state) => state.order);
+
   return (
     <header className={styles.wrapper}>
       <nav className={clsx(['grid', 'wide', styles.navbar])}>
@@ -95,7 +99,6 @@ function Header() {
                 activeIcon={<FilledHeartIcon />}
                 unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
                 customEvent={() => {
-                  // TODO: check if user is logged in and has wishlist
                   if (1) return true;
                   else return false;
                 }}
@@ -103,9 +106,14 @@ function Header() {
             </Link>
           </li>
           <li className={styles.navbarItem}>
-            <Link to={routesConfig.shoppingCart} className={styles.navbarLink}>
+            <LinkCondition
+              isAllowed={count > 0}
+              to={routesConfig.shoppingCart}
+              className={styles.navbarLink}
+              errorMessage={t('Your cart is empty')}
+            >
               <CartIcon />
-            </Link>
+            </LinkCondition>
           </li>
           <li className={styles.navbarItem}>
             <Avatar />

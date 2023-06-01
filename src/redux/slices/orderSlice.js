@@ -5,6 +5,8 @@ import i18next from 'i18next';
 export const counterSlice = createSlice({
   name: 'order',
   initialState: {
+    // products in cart (if same type, count++)
+    // one product has one type
     products: [],
     totalPrice: 0,
     count: 0,
@@ -13,8 +15,10 @@ export const counterSlice = createSlice({
     //  id: 1,
     //  name: '',
     //  count: 0,
-    //  price: 0 // unhanded
-    //  type: '',
+    //  type:{
+    //    name: ''
+    //    price: 0
+    //  image: ""
     //  }
   },
   reducers: {
@@ -25,7 +29,8 @@ export const counterSlice = createSlice({
       // if exist, product count++
       const duplicateIndex = state.products.findIndex(
         (product) =>
-          product.id === productAdd.id && product.type === productAdd.type,
+          product.id === productAdd.id &&
+          product.type.name === productAdd.type.name,
       );
 
       if (duplicateIndex !== -1) {
@@ -37,51 +42,51 @@ export const counterSlice = createSlice({
       state.count += productAdd.count;
       toast.success(i18next.t('Add to shopping cart successfully'));
     },
-    removeProduct: (state, action) => {
-      const productRemove = action.payload;
 
-      // if exist, product count--
-      // if count === 0, remove product
+    removeProduct: (state, action) => {
+      const { id, type } = action.payload;
       const duplicateIndex = state.products.findIndex(
-        (product) => product.id === productRemove.id,
+        (product) => product.id === id && product.type.name === type.name,
       );
       if (duplicateIndex !== -1) {
-        state.products[duplicateIndex].count--;
-        if (state.products[duplicateIndex].count === 0) {
-          state.products.splice(duplicateIndex, 1);
-        }
+        state.count -= state.products[duplicateIndex].count;
+        state.products.splice(duplicateIndex, 1);
       }
     },
+
     calcTotalPrice: (state) => {
       const totalPrice = state.products.reduce(
         (accumulator, product) =>
-          accumulator + parseFloat(product.price * product.count),
+          accumulator + parseFloat(product.type.price * product.count),
         0,
       );
       state.totalPrice = totalPrice;
     },
+
     increaseProductCount: (state, action) => {
       const { id, type } = action.payload;
       const duplicateIndex = state.products.findIndex(
-        (product) => product.id === id && product.type === type,
+        (product) => product.id === id && product.type.name === type.name,
       );
       if (duplicateIndex !== -1) {
         state.products[duplicateIndex].count++;
+        state.count++;
       }
-      state.count++;
     },
+
     decreaseProductCount: (state, action) => {
       const { id, type } = action.payload;
       const duplicateIndex = state.products.findIndex(
-        (product) => product.id === id && product.type === type,
+        (product) => product.id === id && product.type.name === type.name,
       );
       if (duplicateIndex !== -1) {
         state.products[duplicateIndex].count--;
         if (state.products[duplicateIndex].count === 0) {
+          // console.log('remove');
           state.products.splice(duplicateIndex, 1);
         }
+        state.count--;
       }
-      state.count--;
     },
   },
 });

@@ -3,6 +3,8 @@ import i18next from 'i18next';
 import { toast } from 'react-toastify';
 import { apis } from '~/configs';
 
+const t = i18next.t.bind(i18next);
+
 export const getProduct = async (slug) => {
   try {
     const res = await request.get(apis.products.detail(slug));
@@ -11,7 +13,20 @@ export const getProduct = async (slug) => {
     if (error?.response?.status === 404) {
       return null;
     }
-    toast.error(i18next.t('Something went wrong'));
+    toast.error(t('Something went wrong'));
+    console.log(error);
+  }
+};
+
+export const getProductsAtCategory = async (category) => {
+  try {
+    const res = await request.get(apis.products.category(category));
+    return res.data;
+  } catch (error) {
+    if (error?.response?.status === 404) {
+      return null;
+    }
+    toast.error(t('Something went wrong'));
     console.log(error);
   }
 };

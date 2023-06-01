@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './ShoppingCart.module.scss';
 import { routes as routesConfig } from '~/configs';
@@ -8,34 +8,39 @@ import { routes as routesConfig } from '~/configs';
 import Button from '~/components/Button';
 import LoadMore from '~/components/LoadMore';
 import ItemShoppingCart from './ItemShoppingCart.js';
+import Trans from '~/components/Trans';
 
 function ShoppingCart() {
-  const { t } = useTranslation('translations');
+  const navigate = useNavigate();
   const {
     products,
     count: productCount,
     totalPrice,
   } = useSelector((state) => state.order);
 
-  const handleRemoveProduct = (index) => {};
-
   const handleCheckout = () => {
-    console.log(products);
+    if (productCount === 0) {
+      return;
+    }
+    navigate(routesConfig.checkout);
   };
 
   return (
     <div className={clsx(['grid', 'wide', styles.wrapper])}>
-      <h2 className={styles.title}>{t('Shopping Cart')}</h2>
+      <h2 className={styles.title}>
+        <Trans>Shopping Cart</Trans>
+      </h2>
       <h3 className={styles.subTitle}>
-        {productCount} {t('products in cart')}
+        <span>{productCount} </span>
+        <Trans>products in cart</Trans>
       </h3>
       <div className={clsx(['row', styles.main])}>
         <div className="col l-9 m-8 c-12">
           <LoadMore
             data={products}
-            loadMoreLabel={t('Load More')}
-            collapseLabel={t('Collapse')}
-            noDataLabel={t('There is no data to load')}
+            loadMoreLabel={<Trans>Load More</Trans>}
+            collapseLabel={<Trans>Collapse</Trans>}
+            noDataLabel={<Trans>There is no data to load</Trans>}
             autoHidden={false}
             canCollapse={true}
             controlClassName={styles.control}
@@ -44,28 +49,28 @@ function ShoppingCart() {
             renderItem={(item, index) => (
               <ItemShoppingCart
                 key={index}
-                price={item.price}
+                price={item.type.price}
                 name={item.name}
                 initialCount={item.count}
                 image={item.image}
                 id={item.id}
                 type={item.type}
-                onRemove={handleRemoveProduct}
               />
             )}
           />
         </div>
         <div className={clsx(['col', 'l-3', 'm-4', 'c-12', styles.col2])}>
           <div className={styles.totalWrapper}>
-            <h2 className={styles.total}>{t('Total Price')}</h2>
-            <h1 className={styles.totalPrice}>{totalPrice}</h1>
+            <h2 className={styles.total}>
+              <Trans>Total Price</Trans>
+            </h2>
+            <h1 className={styles.totalPrice}>{totalPrice} đ</h1>
             <Button
-              // to={routesConfig.checkout}
               onClick={handleCheckout}
               primary
               className={styles.checkoutBtn}
             >
-              {t('Checkout')}
+              <Trans>Checkout</Trans>
             </Button>
           </div>
         </div>
