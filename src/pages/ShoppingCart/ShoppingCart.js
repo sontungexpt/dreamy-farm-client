@@ -7,8 +7,8 @@ import { routes as routesConfig } from '~/configs';
 
 import Button from '~/components/Button';
 import LoadMore from '~/components/LoadMore';
-import ItemShoppingCart from './ItemShoppingCart.js';
 import Trans from '~/components/Trans';
+import ItemShoppingCart from '~/components/ItemShoppingCart';
 
 function ShoppingCart() {
   const navigate = useNavigate();

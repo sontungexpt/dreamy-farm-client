@@ -3,7 +3,6 @@
   border-radius: 4px;
   border: 1px solid var(--gray-color);
 }
-
 .imageWrapper {
   position: relative;
   width: 95%;
@@ -65,6 +64,7 @@
   .type {
     font-size: 1.8rem;
     color: var(--red-color);
+    flex: 1;
   }
 
   .remove {
@@ -80,6 +80,7 @@
 }
 
 .quantity {
-  width: 120px;
-  color: var(--text-color);
+  width: 130px;
+  color: var(--darker-gray-color);
+  font-size: 2.2rem;
 }

@@ -1,17 +1,19 @@
-import styles from './Checkout.module.scss';
-import Button from '~/components/Button/Button';
-import { Wallet, CreditCard } from '~/assets/images/icons/SvgIcons';
+import { useSelector } from 'react-redux';
 import { clsx } from 'clsx';
-import { useTranslation } from 'react-i18next';
+import styles from './Checkout.module.scss';
+import { routes as routesConfig } from '~/configs';
 import React, { useState, useMemo } from 'react';
 import SelectOtherAddress from './SelectAnother/SelectOtherAddress';
 import LoadMore from '~/components/LoadMore';
-import Item from './Item/Item';
-import { routes as routesConfig } from '~/configs';
-import { useSelector } from 'react-redux';
+import Button from '~/components/Button';
+import ItemShoppingCart from '~/components/ItemShoppingCart';
+import Trans from '~/components/Trans';
+import {
+  Wallet as WalletIcon,
+  CreditCard as CreditCardIcon,
+} from '~/assets/images/icons/SvgIcons';
 
 function Checkout() {
-  const { t } = useTranslation('translations');
   const addresses = [
     {
       name: 'Agelia',
@@ -20,30 +22,6 @@ function Checkout() {
     },
     {
       name: 'Stella',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    },
-    {
-      name: 'Katina',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    },
-    {
-      name: 'Agelia',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    },
-    {
-      name: 'Agelia',
-      phone: '0123456789',
-    },
-    {
-      name: 'Anaa',
-      phone: '98765431',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    },
-    {
-      name: 'Agelia',
       phone: '0123456789',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
     },
@@ -87,16 +65,14 @@ function Checkout() {
     return totalQuantity;
   }, [products]);
   return (
-    <div className={clsx(['grid', styles.checkoutWrapper])}>
-      <div className={clsx(['col', styles.header])}>
-        <h1>{t('Billing address')}</h1>
-      </div>
-      <div className={clsx(['grid', styles.addressArea])}>
-        <SelectOtherAddress addresses={addresses} />
-      </div>
-      <div className={clsx(['col', styles.header])}>
-        <h1>{t('Payment method')}</h1>
-      </div>
+    <div className={clsx([styles.wrapper])}>
+      <h1 className={styles.header}>
+        <Trans>Billing address</Trans>
+      </h1>
+      <SelectOtherAddress addresses={addresses} />
+      <h1 className={styles.header}>
+        <Trans>Payment method</Trans>
+      </h1>
       <div className={styles.paymentMethods}>
         <div className={styles.paymentWrapper}>
           <input
@@ -107,8 +83,10 @@ function Checkout() {
             onChange={() => handleSelectPaymentMethod('cod')}
           />
           <div className={styles.methodContainer}>
-            <Wallet className={styles.cashOnDelivery} />
-            <span>{t('Cash on delivery')}</span>
+            <WalletIcon className={styles.cashOnDelivery} />
+            <span>
+              <Trans>'Cash on delivery</Trans>
+            </span>
           </div>
         </div>
         <div className={styles.paymentWrapper}>
@@ -120,56 +98,63 @@ function Checkout() {
             onChange={() => handleSelectPaymentMethod('creditCard')}
           />
           <div className={styles.methodContainer}>
-            <CreditCard className={styles.creditCard} />
-            <span>{t('Credit card')}</span>
+            <CreditCardIcon className={styles.creditCard} />
+            <span>
+              <Trans>Credit card</Trans>
+            </span>
           </div>
         </div>
       </div>
       <div className={styles.orderDetail}>
-        <div className={clsx(['col', styles.header])}>
-          <h1>{t('Order detail')}</h1>
+        <div className={clsx([styles.header])}>
+          <h1>
+            <Trans>Order detail</Trans>
+          </h1>
 
-          <h3 className={clsx(['col', styles.subTitle])}>
-            {`${totalQuantity} ${t('products in cart')}`}
+          <h3 className={clsx([styles.subTitle])}>
+            {totalQuantity} <Trans>products in cart</Trans>
           </h3>
         </div>
-        <div className={clsx(['col', styles.main])}>
-          <div className="col l-12 m-12 c-12">
-            <LoadMore
-              data={products}
-              loadMoreLabel={t('Load More')}
-              collapseLabel={t('Collapse')}
-              noDataLabel={t('There is no data to load')}
-              autoHidden={false}
-              canCollapse={true}
-              controlClassName={styles.control}
-              noDataClassName={styles.noData}
-              itemsPerLoad={3}
-              renderItem={(item, index) => (
-                <Item
-                  key={index}
-                  price={item.price}
-                  name={item.name}
-                  quantity={item.quantity}
-                />
-              )}
-            />
-          </div>
+        <div className={clsx([styles.main])}>
+          <LoadMore
+            data={products}
+            loadMoreLabel={<Trans>Load More</Trans>}
+            collapseLabel={<Trans>Collapse</Trans>}
+            noDataLabel={<Trans>There is no data to load</Trans>}
+            autoHidden={false}
+            canCollapse={true}
+            controlClassName={styles.control}
+            noDataClassName={styles.noData}
+            itemsPerLoad={3}
+            renderItem={(item, index) => (
+              <ItemShoppingCart
+                key={index}
+                price={item.type.price}
+                name={item.name}
+                initialCount={item.count}
+                image={item.image}
+                id={item.id}
+                type={item.type}
+                hasCounter={false}
+                hasBtnRemove={false}
+              />
+            )}
+          />
         </div>
         <div className={styles.totalWrapper}>
-          <h2 className={styles.total}>{t('Total')}</h2>
+          <h2 className={styles.total}>
+            <Trans>Total</Trans>
+          </h2>
           <h1 className={styles.totalPrice}>{totalPrice}đ</h1>
         </div>
       </div>
-      <div className={clsx(['l-o-6', 'm-o-6', 'c-o-6', styles.completeBtn])}>
-        <Button
-          to={routesConfig.orderConfirm}
-          primary
-          className={clsx([styles.completeBtn])}
-        >
-          {t('Complete Checkout')}
-        </Button>
-      </div>
+      <Button
+        to={routesConfig.orderConfirm}
+        primary
+        className={clsx([styles.completeBtn])}
+      >
+        <Trans>Complete Checkout</Trans>
+      </Button>
     </div>
   );
 }

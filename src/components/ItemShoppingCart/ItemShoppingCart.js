@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { clsx } from 'clsx';
 import { useDispatch } from 'react-redux';
 import {
@@ -12,7 +13,6 @@ import Image from '~/components/Image';
 import Counter from '~/components/Counter';
 import Trans from '~/components/Trans';
 import { Tag as PriceTag } from '~/assets/images/icons/SvgIcons';
-import PropTypes from 'prop-types';
 
 function ItemShoppingCart({
   id,
@@ -20,6 +20,9 @@ function ItemShoppingCart({
   name,
   image,
   initialCount,
+  hasBtnRemove = true,
+  hasCounter = true,
+  className,
 
   onIncrease,
   onDecrease,
@@ -45,7 +48,15 @@ function ItemShoppingCart({
   };
 
   return (
-    <div className={clsx(['grid', styles.wrapper])}>
+    <div
+      className={clsx([
+        'grid',
+        styles.wrapper,
+        {
+          [className]: className,
+        },
+      ])}
+    >
       <div className="row">
         <div
           className={clsx(['col', 'l-2', 'm-2', 'c-3', styles.imageWrapper])}
@@ -63,17 +74,25 @@ function ItemShoppingCart({
             </div>
             <div className={styles.row2}>
               <h4 className={styles.type}>{type.name}</h4>
-              <button className={styles.remove} onClick={handleRemove}>
-                <Trans>Remove</Trans>
-              </button>
+              {hasBtnRemove && (
+                <button className={styles.remove} onClick={handleRemove}>
+                  <Trans>Remove</Trans>
+                </button>
+              )}
             </div>
-            <Counter
-              minValue={0}
-              onIncrease={handleIncrease}
-              onDecrease={handleDecrease}
-              className={styles.quantity}
-              initialCount={initialCount}
-            />
+            {hasCounter ? (
+              <Counter
+                minValue={0}
+                onIncrease={handleIncrease}
+                onDecrease={handleDecrease}
+                className={styles.quantity}
+                initialCount={initialCount}
+              />
+            ) : (
+              <h4 className={styles.quantity}>
+                <Trans>Quantity</Trans>: {initialCount}
+              </h4>
+            )}
           </div>
         </div>
       </div>
@@ -90,6 +109,9 @@ ItemShoppingCart.propTypes = {
   }).isRequired,
   initialCount: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
+
+  hasBtnRemove: PropTypes.bool,
+  hasCounter: PropTypes.bool,
 
   onIncrease: PropTypes.func,
   onDecrease: PropTypes.func,

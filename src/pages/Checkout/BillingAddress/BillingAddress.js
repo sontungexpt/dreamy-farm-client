@@ -1,8 +1,6 @@
 import styles from './BillingAddress.module.scss';
 import { clsx } from 'clsx';
 
-import React, { useState } from 'react';
-
 function BillingAddress({ name, phone, address, selected, handleSelect }) {
   const onChangeValue = (event) => {
     console.log(event.target.value);
