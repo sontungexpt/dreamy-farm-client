@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-import { routes as routesConfig } from '~/configs';
-import { apiConfigs } from '~/configs';
-import styles from './Register.module.scss';
 import inputStyles from '~/pages/Accounts/styles/InputStyles.module.scss';
+import styles from './Register.module.scss';
+import { routes as routesConfig } from '~/configs';
+import { apis } from '~/configs';
 
 import Button from '~/components/Button/Button';
 import Input from '~/components/Input';
@@ -23,7 +23,7 @@ function Register() {
   });
 
   const navigate = useNavigate();
-  const { t } = useTranslation('translations');
+  const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,14 +31,12 @@ function Register() {
     const errors = validator.validate(account);
     if (validator.isNoErrors(errors)) {
       try {
-        const res = await axios.post(apiConfigs.users.register, account);
-        const { error } = res.data;
-        if (error) {
-          toast.error(t(error));
-        } else {
+        const res = await axios.post(apis.users.register, account);
+        const { status, message } = res.data;
+        if (status === 'success') {
           navigate(routesConfig.login, { replace: true });
-          toast.success(t('Register successfully'));
         }
+        toast[status](t(message));
       } catch (error) {
         toast.error(t('Something went wrong'));
         console.log(error);

@@ -16,6 +16,7 @@ function ToggleIcon({
 
   const handleClick = (event) => {
     event.stopPropagation();
+    event.preventDefault();
 
     setIsClick(!isClick);
     if (isClick) {

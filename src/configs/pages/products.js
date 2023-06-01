@@ -1,35 +1,36 @@
-import { apiConfigs } from '~/configs';
+import { apis } from '~/configs';
+
 const configs = {
   itemsPerPage: 12,
   categories: [
     {
       title: 'Fruits',
-      api: apiConfigs.products.fruit,
+      api: apis.products.fruit,
       category: 'fruit',
     },
     {
       title: 'Vegetables',
-      api: apiConfigs.products.vegetables,
+      api: apis.products.vegetables,
       category: 'vegetable',
     },
     {
       title: 'Herbs & Aromatics',
-      api: apiConfigs.products.herbs_aromatics,
+      api: apis.products.herbs_aromatics,
       category: 'herb_aromatic',
     },
     {
       title: 'Frozen',
-      api: apiConfigs.products.frozens,
+      api: apis.products.frozens,
       category: 'frozen',
     },
     {
       title: 'Meat & Seafood',
-      api: apiConfigs.products.meats_seafoods,
+      api: apis.products.meats_seafoods,
       category: 'meat_seafood',
     },
     {
       title: 'Dairy & Eggs',
-      api: apiConfigs.products.dairy_eggs,
+      api: apis.products.dairy_eggs,
       category: 'dairy_egg',
     },
   ],

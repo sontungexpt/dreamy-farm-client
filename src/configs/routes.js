@@ -2,8 +2,8 @@ const routes = {
   // headers pages
   root: '/',
   products: '/products',
-  productDetail: '/products/detail/:id',
-  moveProductDetail: (id) => `/products/detail/${id}`,
+  productDetail: '/products/detail/:slug',
+  moveProductDetail: (slug) => `/products/detail/${slug}`,
   recipes: '/recipes',
   aboutUs: '/aboutUs',
   shoppingCart: '/shoppingCart',

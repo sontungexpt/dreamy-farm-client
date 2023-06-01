@@ -27,7 +27,7 @@ function Products() {
         const res = await axios.get(
           apis.products.category(categorySelected.category),
         );
-        setProducts(res.data.products);
+        setProducts(res.data.data);
       } catch (error) {
         if (error.response.status === 404) {
           return navigate('/e404', { replace: true });

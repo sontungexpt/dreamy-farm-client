@@ -1,4 +1,4 @@
-const apiConfigs = {
+const apis = {
   products: {
     root: '/products',
     fruit: '/products/fruits',
@@ -7,7 +7,7 @@ const apiConfigs = {
     frozens: '/products/frozens',
     meats_seafoods: '/products/meats-seafoods',
     dairy_eggs: '/products/dairy-eggs',
-    detail: (id) => `/products/detail/${id}`,
+    detail: (slug) => `/products/detail/${slug}`,
     category: (category) => `/products/${category}`,
   },
   users: {
@@ -23,4 +23,4 @@ const apiConfigs = {
   },
 };
 
-export default apiConfigs;
+export default apis;

@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { clsx } from 'clsx';
+import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './ShoppingCart.module.scss';
 import { routes as routesConfig } from '~/configs';
@@ -11,44 +11,21 @@ import ItemShoppingCart from './ItemShoppingCart.js';
 
 function ShoppingCart() {
   const { t } = useTranslation('translations');
-  const [products, setProducts] = useState([
-    { name: 'Product 1', price: 100 },
-    { name: 'Product 2', price: 200 },
-    { name: 'Product 3', price: 300 },
-    { name: 'Product 4', price: 400 },
-    { name: 'Product 5', price: 100 },
-    { name: 'Product 6', price: 100 },
-    { name: 'Product 7', price: 100 },
-    { name: 'Product 8', price: 100 },
-    { name: 'Product 9', price: 100 },
-  ]);
+  const order = useSelector((state) => state.order);
+  console.log(order.products);
 
-  const handleRemoveProduct = (index) => {
-    setProducts((prevProducts) => {
-      const updatedProducts = [...prevProducts];
-      updatedProducts.splice(index, 1);
-      return updatedProducts;
-    });
-  };
-
-  const totalPrice = useMemo(() => {
-    const totalPrice = products.reduce(
-      (accumulator, product) => accumulator + parseFloat(product.price),
-      0,
-    );
-    return totalPrice;
-  }, [products]);
+  const handleRemoveProduct = (index) => {};
 
   return (
     <div className={clsx(['grid', 'wide', styles.wrapper])}>
       <h2 className={styles.title}>{t('Shopping Cart')}</h2>
       <h3 className={styles.subTitle}>
-        {products.length} {t('products in cart')}
+        {order.products.length} {t('products in cart')}
       </h3>
       <div className={clsx(['row', styles.main])}>
         <div className="col l-9 m-8 c-12">
           <LoadMore
-            data={products}
+            data={order.products}
             loadMoreLabel={t('Load More')}
             collapseLabel={t('Collapse')}
             noDataLabel={t('There is no data to load')}
@@ -62,7 +39,7 @@ function ShoppingCart() {
                 key={index}
                 price={item.price}
                 name={item.name}
-                onRemove={() => handleRemoveProduct(index)}
+                onRemove={handleRemoveProduct}
               />
             )}
           />
@@ -70,7 +47,7 @@ function ShoppingCart() {
         <div className={clsx(['col', 'l-3', 'm-4', 'c-12', styles.col2])}>
           <div className={styles.totalWrapper}>
             <h2 className={styles.total}>{t('Total Price')}</h2>
-            <h1 className={styles.totalPrice}>{totalPrice}đ</h1>
+            <h1 className={styles.totalPrice}>{order.totalPrice}</h1>
             <Button
               to={routesConfig.checkout}
               primary

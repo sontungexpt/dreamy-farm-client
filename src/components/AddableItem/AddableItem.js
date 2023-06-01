@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { addProduct, calcTotalPrice } from '~/redux/slices/orderSlice';
 
 import styles from './AddableItem.module.scss';
 import { routes as routeConfigs } from '~/configs';
@@ -13,80 +14,43 @@ import {
 import Button from '~/components/Button';
 import ToggleIcon from '~/components/ToggleIcon';
 import Image from '~/components/Image';
-
-// import ModalButton from '~/components/ModalButton';
-// import Detail from './Detail';
-
-// function AddableItem({
-//   name,
-//   price,
-//   image,
-//   quantity,
-//   description,
-//   onClick,
-//   onUnClick,
-//   onAdd,
-// }) {
-//   function handleAdd(event) {
-//     event.stopPropagation();
-//     onAdd && onAdd();
-//   }
-
-//   const { t } = useTranslation('translations');
-//   return (
-//     <ModalButton
-//       closeBtn
-//       button={
-//         <div className={styles.wrapper}>
-//           <Image className={styles.image} src={image} alt="item" />
-//           <div className={styles.content}>
-//             <div>
-//               <h3 className={styles.name}>{name}</h3>
-//               <ToggleIcon
-//                 className={styles.favorite}
-//                 activeIcon={<FilledHeartIcon />}
-//                 unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
-//                 onClick={onClick}
-//                 onUnClick={onUnClick}
-//               />
-//             </div>
-//             <div>
-//               <p className={styles.quantity}>{quantity ? quantity : '100 g'}</p>
-//               <p className={styles.price}>{price} đ</p>
-//             </div>
-//             <Button onClick={handleAdd} className={styles.addBtn} primary>
-//               {t('Add')}
-//             </Button>
-//           </div>
-//         </div>
-//       }
-//       innerModal={
-//         <div className={styles.innerModal}>
-//           <Detail description={description} name={name} price={price} />
-//         </div>
-//       }
-//     />
-//   );
-// }
+import Trans from '~/components/Trans';
 
 function AddableItem({
   name,
   price,
   image,
-  type,
-  id,
+  type = '100g',
+  slug,
   onClick,
   onUnClick,
   onAdd,
 }) {
-  function handleAdd(event) {
-    event.stopPropagation();
-    onAdd && onAdd();
-  }
+  const dispatch = useDispatch();
 
-  const { t } = useTranslation('translations');
+  const handleAdd = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    //logic
+    dispatch(
+      addProduct({
+        id: slug,
+        name: name,
+        count: 1,
+        image: image,
+        type: type,
+        price: price,
+      }),
+    );
+    dispatch(calcTotalPrice());
+
+    // custom logic
+    onAdd && onAdd();
+  };
+
   return (
-    <Link to={routeConfigs.moveProductDetail(id)} className={styles.wrapper}>
+    <Link to={routeConfigs.moveProductDetail(slug)} className={styles.wrapper}>
       <Image className={styles.image} src={image} alt="item" />
       <div className={styles.content}>
         <div>
@@ -100,11 +64,11 @@ function AddableItem({
           />
         </div>
         <div>
-          <p className={styles.quantity}>{type ? type : '100 g'}</p>
+          <p className={styles.quantity}>{type}</p>
           <p className={styles.price}>{price} đ</p>
         </div>
         <Button onClick={handleAdd} className={styles.addBtn} primary>
-          {t('Add')}
+          <Trans>Add</Trans>
         </Button>
       </div>
     </Link>
@@ -116,6 +80,7 @@ PropTypes.AddableItem = {
   price: PropTypes.number,
   image: PropTypes.string,
   type: PropTypes.string,
+  slug: PropTypes.string,
   description: PropTypes.string,
   onClick: PropTypes.func,
   onUnClick: PropTypes.func,

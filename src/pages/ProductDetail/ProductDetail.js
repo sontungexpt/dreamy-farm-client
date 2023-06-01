@@ -2,12 +2,12 @@
 import { clsx } from 'clsx';
 import { useRef, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import { getProduct } from '~/apiServices/productServices';
+import { useDispatch } from 'react-redux';
+import { addProduct, calcTotalPrice } from '~/redux/slices/orderSlice';
 
 //configs
 import styles from './ProductDetail.module.scss';
-import { apiConfigs } from '~/configs';
 
 //components
 import Counter from '~/components/Counter';
@@ -19,31 +19,40 @@ import {
   EmptyHeart as EmptyHeartIcon,
 } from '~/assets/images/icons/SvgIcons';
 import Selector from '~/components/Selector';
+import Trans from '~/components/Trans';
 
 function ProductDetail() {
-  const [product, setProduct] = useState(null);
-  const { id } = useParams();
-  const { t } = useTranslation('translations');
+  const [product, setProduct] = useState();
+  const { slug } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const counterRef = useRef();
-  const selectedPriceRangeRef = useRef();
+  const typeRef = useRef();
 
   useEffect(() => {
-    axios
-      .get(apiConfigs.products.detail(id))
-      .then((res) => {
-        const { error } = res.data;
-        if (error) return navigate('/e404', { replace: true });
-        const { product: productRes } = res.data;
-        setProduct(productRes);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
+    const handleGetProductDetail = async () => {
+      const productRes = await getProduct(slug);
+      if (productRes) setProduct(productRes);
+      else navigate('/e404', { replace: true });
+    };
+    handleGetProductDetail();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [slug]);
+
+  const handleAdd = () => {
+    dispatch(
+      addProduct({
+        id: product.slug,
+        name: product.name,
+        image: product.image,
+        count: counterRef.current.value,
+        type: typeRef.current.activeItem,
+        price: 100,
+      }),
+    );
+    dispatch(calcTotalPrice());
+  };
 
   return (
     product && (
@@ -73,7 +82,7 @@ function ProductDetail() {
               </div>
 
               <Selector
-                ref={selectedPriceRangeRef}
+                ref={typeRef}
                 className={styles.type}
                 itemClassName={styles.typeButton}
                 itemActiveClassName={styles.active}
@@ -83,22 +92,17 @@ function ProductDetail() {
 
               <Counter ref={counterRef} className={styles.quantity} />
 
-              <Button
-                onClick={() => {
-                  console.log(counterRef.current.value);
-                  console.log(selectedPriceRangeRef.current.activeIndex);
-                }}
-                primary
-                className={styles.addBtn}
-              >
-                {t('Add to cart')}
+              <Button onClick={handleAdd} primary className={styles.addBtn}>
+                <Trans>Add to cart</Trans>
               </Button>
             </div>
           </div>
         </div>
         <div className={styles.description}>
-          <h3>{t('Description')}</h3>
-          <p>{product.description || ''}</p>
+          <h3>
+            <Trans>Description</Trans>
+          </h3>
+          <p>{product.description || <Trans>No description</Trans>}</p>
         </div>
       </div>
     )

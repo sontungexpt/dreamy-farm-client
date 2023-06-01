@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import { routes as routesConfig } from '~/configs';
 import inputStyles from '~/pages/Accounts/styles/InputStyles.module.scss';
-import { apiConfigs } from '~/configs';
+import { apis } from '~/configs';
 import styles from './Login.module.scss';
 
 import Button from '~/components/Button/Button';
@@ -21,7 +21,7 @@ function Login() {
     errors: {},
   });
   const navigate = useNavigate();
-  const { t } = useTranslation('translations');
+  const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,14 +29,16 @@ function Login() {
     const errors = validator.validate(account);
     if (validator.isNoErrors(errors)) {
       try {
-        const res = await axios.post(apiConfigs.users.login, account);
-        const { error } = res.data;
-        if (error) {
-          toast.error(t(error));
-        } else {
+        const res = await axios.post(apis.users.login, account);
+
+        const { status, message, data } = res.data;
+        if (status === 'success') {
           navigate(routesConfig.root, { replace: true });
-          toast.success(t('Login successfully'));
+          window.localStorage.setItem('DreamyFarmToken', data);
+          window.localStorage.setItem('DreamyFarmLogin', true);
         }
+
+        toast[status](t(message));
       } catch (error) {
         toast.error(t('Something went wrong'));
         console.log(error);
@@ -61,7 +63,7 @@ function Login() {
     }));
   };
 
-  const handleBlur = (e) => {
+  const handleBlur = () => {
     const errors = validator.validate(account);
     setAccount((prevState) => ({
       ...prevState,
