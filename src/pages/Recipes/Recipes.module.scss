@@ -1,14 +1,17 @@
-h1 {
-  margin-top: 1em;
+.itemWrapper {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.header {
+  margin-top: 50px;
 }
 
-.line {
+.lineHeader {
   border: 2px solid #e2e2e2;
   width: 100%;
-  margin-top: 1.2em;
-  margin-bottom: 3.8em;
+  margin-top: 10px;
 }
 
-.products {
-  margin-top: 2em;
+.lineSpacing {
+  margin-top: 40px;
 }

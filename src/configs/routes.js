@@ -5,6 +5,7 @@ const routes = {
   productDetail: '/products/:id/about',
   moveProductDetail: (id) => `/products/${id}/about`,
   recipes: '/recipes',
+  recipeDetail: '/recipes/:id',
   aboutUs: '/aboutUs',
   shoppingCart: '/shoppingCart',
   checkout: '/checkout',
