@@ -1,5 +1,5 @@
 import OrderItem from './OrderItem';
-// import styles from './Orders.module.scss';
+import styles from './Orders.module.scss';
 
 function Orders() {
   const ordersData = [
