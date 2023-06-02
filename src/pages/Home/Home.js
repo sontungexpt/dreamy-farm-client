@@ -97,10 +97,13 @@ function Home() {
       }
     }
 
-    return rows.map((row, rowIndex) => (
-      <div key={rowIndex} className={clsx('row', styles.products)}>
+    return rows.map((row) => (
+      <div key={row.id} className={clsx('row', styles.products)}>
         {row.map((product, colIndex) => (
-          <div key={colIndex} className={clsx('col', 'l-4', styles.product)}>
+          <div
+            key={colIndex}
+            className={clsx('col', 'l-4', 'm-6', 'c-12', styles.product)}
+          >
             <img
               src={images.fruitImg}
               alt={product.name}
@@ -129,6 +132,7 @@ function Home() {
   };
 
   return (
+    // header Part
     <div>
       <div className={styles.header}>
         <img
@@ -143,6 +147,7 @@ function Home() {
         </div>
       </div>
 
+      {/* content Part */}
       <div className={clsx('grid', 'wide', styles.wrapperContent)}>
         <div className={styles.wrapperContent}>
           <div className={styles.categoriesPart}>
@@ -163,6 +168,7 @@ function Home() {
         </div>
       </div>
 
+      {/* footer part */}
       <div className={styles.footer}>
         <img
           src={images.footerLayoutHomePage}
