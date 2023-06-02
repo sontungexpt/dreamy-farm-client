@@ -1,12 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
-import axios from 'axios';
+import { getToken, getUserInfos } from '~/apiServices/userServices';
+import { useDispatch } from 'react-redux';
+import { login } from '~/redux/slices/userSlice';
 
 import { routes as routesConfig } from '~/configs';
 import inputStyles from '~/pages/Accounts/styles/InputStyles.module.scss';
-import { apis } from '~/configs';
 import styles from './Login.module.scss';
 
 import Button from '~/components/Button/Button';
@@ -22,26 +22,22 @@ function Login() {
   });
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const errors = validator.validate(account);
     if (validator.isNoErrors(errors)) {
-      try {
-        const res = await axios.post(apis.users.login, account);
-
-        const { status, message, data } = res.data;
-        if (status === 'success') {
-          navigate(routesConfig.root, { replace: true });
-          window.localStorage.setItem('DreamyFarmToken', data);
-          window.localStorage.setItem('DreamyFarmLogin', true);
-        }
-
-        toast[status](t(message));
-      } catch (error) {
-        toast.error(t('Something went wrong'));
-        console.log(error);
+      const token = await getToken(account);
+      if (token) {
+        navigate(routesConfig.root, { replace: true });
+        window.localStorage.setItem('DreamyFarmToken', token);
+        window.localStorage.setItem('DreamyFarmLogin', true);
+      }
+      const userInfos = await getUserInfos(token);
+      if (userInfos) {
+        dispatch(login(userInfos));
       }
     } else {
       setAccount((prevState) => ({

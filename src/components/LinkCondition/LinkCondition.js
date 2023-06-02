@@ -3,7 +3,15 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import i18next from 'i18next';
 
-function LinkCondition({ errorMessage, isAllowed, className, to, children }) {
+function LinkCondition({
+  errorMessage,
+  isAllowed,
+  className,
+  to,
+  children,
+  onClick,
+  ...props
+}) {
   const handleClick = (e) => {
     if (typeof isAllowed === 'function') {
       const result = isAllowed(e);
@@ -13,10 +21,11 @@ function LinkCondition({ errorMessage, isAllowed, className, to, children }) {
       e.preventDefault();
       errorMessage && toast.error(i18next.t(errorMessage));
     }
+    onClick && onClick(e);
   };
 
   return (
-    <Link onClick={handleClick} className={className} to={to}>
+    <Link onClick={handleClick} className={className} to={to} {...props}>
       {children}
     </Link>
   );

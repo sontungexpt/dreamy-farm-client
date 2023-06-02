@@ -14,6 +14,7 @@ const apis = {
     login: '/user/login',
     register: '/user/register',
     forgotPassword: '/user/forgot-password',
+    userInfos: '/user/userInfos',
     resetPassword: '',
     changePassword: '',
     updateProfile: '',

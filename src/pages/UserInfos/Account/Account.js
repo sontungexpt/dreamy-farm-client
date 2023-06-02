@@ -44,14 +44,6 @@ function Account() {
                 name="name"
               />
               <Input
-                labelIcon={<MailIcon color="var(--red-color)" />}
-                className={styles.input}
-                label={t('Email')}
-                id="email"
-                type="email"
-                name="email"
-              />
-              <Input
                 labelIcon={<PhoneIcon color="var(--yellow-color)" />}
                 className={styles.input}
                 label={t('Phone')}

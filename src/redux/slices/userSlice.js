@@ -3,16 +3,44 @@ import { createSlice } from '@reduxjs/toolkit';
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    users: {},
+    email: '',
+    name: '',
+    avatar: '',
+    addreses: [],
+    addressActive: 0,
+    phoneNumber: '',
+    roles: [],
+    favoriteProducts: [],
   },
   reducers: {
     login: (state, action) => {
-      for (const key in action) {
-        state.users[key] = action[key];
-      }
+      const {
+        email,
+        fullName,
+        avatar,
+        addreses,
+        addressActive,
+        roles,
+        phoneNumber,
+      } = action.payload;
+
+      state.email = email;
+      state.name = fullName;
+      state.avatar = avatar;
+      state.addreses = addreses;
+      state.addressActive = addressActive;
+      state.phoneNumber = phoneNumber;
+      state.roles = roles;
     },
-    logout: (state, action) => {
-      state.users = {};
+
+    logout: (state) => {
+      state.name = '';
+      state.email = '';
+      state.addreses = [];
+      state.addressActive = 0;
+      state.phoneNumber = '';
+      state.roles = [];
+      state.favoriteProducts = [];
     },
   },
 });

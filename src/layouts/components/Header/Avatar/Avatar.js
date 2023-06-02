@@ -1,20 +1,29 @@
+import PropTypes from 'prop-types';
 import { offset } from '@floating-ui/react';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '~/redux/slices/userSlice';
 import { Link } from 'react-router-dom';
 import { clsx } from 'clsx';
-import PropTypes from 'prop-types';
 
 import styles from './Avatar.module.scss';
 import { routes as routesConfig } from '~/configs';
+import { avtarMenuConfigs as configs } from '~/configs/pages';
 
-import { Floater, ItemWrapper } from '~/components/Floater';
-import {
-  User as UserIcon,
-  Logout as LogoutIcon,
-  Setting as SettingIcon,
-} from '~/assets/images/icons/SvgIcons';
+import { Floater } from '~/components/Floater';
+import Image from '~/components/Image';
+import jpgImages from '~/assets/images/jpgs';
+import { User as UserIcon } from '~/assets/images/icons/SvgIcons';
 import Button from '~/components/Button';
 
 function Avatar({ className }) {
+  const dispatch = useDispatch();
+  const { email, avatar } = useSelector((state) => state.user);
+
+  const handleLogout = () => {
+    window.localStorage.removeItem('DreamyFarmToken');
+    dispatch(logout());
+  };
+
   return (
     <Floater
       className={clsx([
@@ -26,51 +35,45 @@ function Avatar({ className }) {
       anchorClassName={styles.anchor}
       floaterClassName={styles.floater}
       whenHover
-      placement="bottom-end"
+      placement="bottom-start"
       floatingProps={{
         middleware: [
           offset(() => ({
-            mainAxis: 0,
-            crossAxis: 15,
+            mainAxis: 4,
+            crossAxis: 20,
           })),
         ],
       }}
       anchor={
-        <Link to={routesConfig.login} className={styles.navbarLink}>
-          <UserIcon style={{ marginTop: '7px' }} />
-        </Link>
+        email ? (
+          <Image
+            className={clsx([styles.avatar, styles.navbarLink])}
+            src={avatar}
+            altSrc={jpgImages.noAvatar}
+            alt="avatar"
+          />
+        ) : (
+          <Link to={routesConfig.login} className={styles.navbarLink}>
+            <UserIcon style={{ marginTop: '7px' }} />
+          </Link>
+        )
       }
-      innerFloater={
-        <>
-          <ItemWrapper className={styles.item}>
-            <Button
-              alignLeft
-              className={styles.link}
-              leftIcon={
-                <SettingIcon
-                  className={styles.icon}
-                  color="var(--blue-color)"
-                />
-              }
-              to={routesConfig.userInfos.root}
-            >
-              Settings
-            </Button>
-          </ItemWrapper>
-          <ItemWrapper className={styles.item}>
-            <Button
-              alignLeft
-              className={styles.link}
-              leftIcon={
-                <LogoutIcon color="var(--red-color)" className={styles.icon} />
-              }
-              to={routesConfig.login}
-            >
-              Logout
-            </Button>
-          </ItemWrapper>
-        </>
-      }
+      data={(() =>
+        configs.menus.filter((menu) => menu.condition === (email !== '')))()}
+      renderItem={(item) => (
+        <Button
+          alignLeft
+          onClick={item.title === 'Logout' ? handleLogout : null}
+          className={styles.link}
+          leftIcon={(() => {
+            const Icon = item.icon;
+            return <Icon color={item.colorIcon} className={styles.icon} />;
+          })()}
+          to={item.to}
+        >
+          {item.title}
+        </Button>
+      )}
     />
   );
 }

@@ -16,7 +16,7 @@ function Button({
   small, //optional
   primary, //optional
   to, //optional
-  isAllowed, //optional
+  isAllowed = true, //optional
   errorMessage, //optional
   href, //optional
   onClick, //optional

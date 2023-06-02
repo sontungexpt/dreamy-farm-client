@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import i18next from 'i18next';
+import { checkoutConfigs } from '~/configs/pages';
 
 export const counterSlice = createSlice({
   name: 'order',
@@ -11,7 +12,7 @@ export const counterSlice = createSlice({
     totalPrice: 0,
     count: 0,
     address: '',
-    paymentMethod: 'cash',
+    paymentMethod: checkoutConfigs.payments[0].method,
     // products: [
     //  {
     //  id: 1,
