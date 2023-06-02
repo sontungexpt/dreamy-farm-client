@@ -5,7 +5,7 @@ import styles from './ReceiptsItem.module.scss';
 function RecipesItem({ recipeImg, recipeName, recipeId }) {
   return (
     <div>
-      <img src={recipeImg} alt="recipeImg" />
+      <img src={recipeImg} alt="recipeImg" className={styles.recipeImage} />
       <div className={styles.recipeName}>{recipeName}</div>
       <Link to={`/recipes/${recipeId}`} className={styles.textDisplay}>
         Read more
