@@ -1,11 +1,5 @@
 import PropTypes from 'prop-types';
 import { clsx } from 'clsx';
-import { useDispatch } from 'react-redux';
-import {
-  increaseProductCount,
-  decreaseProductCount,
-  removeProduct,
-} from '~/redux/slices/orderSlice';
 
 import styles from './ItemShoppingCart.module.scss';
 
@@ -15,7 +9,6 @@ import Trans from '~/components/Trans';
 import { Tag as PriceTag } from '~/assets/images/icons/SvgIcons';
 
 function ItemShoppingCart({
-  id,
   type,
   name,
   image,
@@ -28,22 +21,17 @@ function ItemShoppingCart({
   onDecrease,
   onRemove,
 }) {
-  const dispatch = useDispatch();
-
   const handleRemove = (event) => {
     event.stopPropagation();
     event.preventDefault();
-    dispatch(removeProduct({ id, type }));
     onRemove && onRemove();
   };
 
   const handleIncrease = () => {
-    dispatch(increaseProductCount({ id, type }));
     onIncrease && onIncrease();
   };
 
   const handleDecrease = () => {
-    dispatch(decreaseProductCount({ id, type }));
     onDecrease && onDecrease();
   };
 
@@ -89,7 +77,7 @@ function ItemShoppingCart({
                 initialCount={initialCount}
               />
             ) : (
-              <h4 className={styles.quantity}>
+              <h4 className={styles.quantityTitle}>
                 <Trans>Quantity</Trans>: {initialCount}
               </h4>
             )}
@@ -108,7 +96,6 @@ ItemShoppingCart.propTypes = {
     price: PropTypes.number,
   }).isRequired,
   initialCount: PropTypes.number.isRequired,
-  id: PropTypes.string.isRequired,
 
   hasBtnRemove: PropTypes.bool,
   hasCounter: PropTypes.bool,

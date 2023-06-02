@@ -1,6 +1,10 @@
 import { clsx } from 'clsx';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  increaseProductCount,
+  decreaseProductCount,
+  removeProduct,
+} from '~/redux/slices/orderSlice';
 
 import styles from './ShoppingCart.module.scss';
 import { routes as routesConfig } from '~/configs';
@@ -11,18 +15,23 @@ import Trans from '~/components/Trans';
 import ItemShoppingCart from '~/components/ItemShoppingCart';
 
 function ShoppingCart() {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     products,
     count: productCount,
     totalPrice,
   } = useSelector((state) => state.order);
 
-  const handleCheckout = () => {
-    if (productCount === 0) {
-      return;
-    }
-    navigate(routesConfig.checkout);
+  const handleRemove = (id, type) => {
+    dispatch(removeProduct({ id, type }));
+  };
+
+  const handleIncrease = (id, type) => {
+    dispatch(increaseProductCount({ id, type }));
+  };
+
+  const handleDecrease = (id, type) => {
+    dispatch(decreaseProductCount({ id, type }));
   };
 
   return (
@@ -46,15 +55,18 @@ function ShoppingCart() {
             controlClassName={styles.control}
             noDataClassName={styles.noData}
             itemsPerLoad={3}
-            renderItem={(item, index) => (
+            renderItem={(item) => (
               <ItemShoppingCart
-                key={index}
+                key={item.id}
+                id={item.id}
                 price={item.type.price}
                 name={item.name}
                 initialCount={item.count}
                 image={item.image}
-                id={item.id}
                 type={item.type}
+                onIncrease={() => handleIncrease(item.id, item.type)}
+                onDecrease={() => handleDecrease(item.id, item.type)}
+                onRemove={() => handleRemove(item.id, item.type)}
               />
             )}
           />
@@ -66,7 +78,9 @@ function ShoppingCart() {
             </h2>
             <h1 className={styles.totalPrice}>{totalPrice} đ</h1>
             <Button
-              onClick={handleCheckout}
+              to={routesConfig.checkout}
+              isAllowed={productCount > 0}
+              errorMessage={'You have no product in cart'}
               primary
               className={styles.checkoutBtn}
             >

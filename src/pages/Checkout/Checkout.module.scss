@@ -1,70 +1,34 @@
+.page {
+  background-color: var(--gray-background-color);
+}
+
 .wrapper {
   padding: 100px 0;
   margin: 0 auto;
-  width: 800px;
-  position: relative;
-
-  .header {
-    margin-bottom: 20px;
-  }
-
-  .subTitle {
-    font-size: 2rem;
-    color: var(--darker-gray-color);
-    margin-bottom: 15px;
-  }
-
-  .addressArea {
-    margin-bottom: 35px;
-  }
-
-  .orderDetail {
-    .header {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-bottom: 15px;
-    }
-
-    .orderDetailHeading {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-bottom: 15px;
-
-      h1 {
-        margin-right: 15px;
-      }
-    }
-  }
+  width: 850px;
 }
 
-.paymentWrapper {
-  background-color: var(--white-color);
-  margin-bottom: 29px;
-  padding: 30px;
-  display: flex;
-  align-items: flex-start;
-  box-shadow: 0px 0px 10px var(--box-shadow-color);
-  margin-left: 0;
-  position: relative;
+.section {
+  margin-bottom: 50px;
+}
 
-  input[type='radio'] {
-    margin-right: 15px;
-  }
+.header {
+  margin-bottom: 20px;
+  font-size: 3rem;
+}
 
-  .walletContainer {
-    display: flex;
-    align-items: center;
-  }
+.orderHeader {
+  margin-bottom: 10px;
+}
 
-  .cashOnDelivery {
-    margin-right: 10px;
-  }
+.subTitle {
+  margin-bottom: 30px;
+  color: var(--darker-gray-color);
+  font-size: 2rem;
+}
 
-  .creditCard {
-    margin-right: 10px;
-  }
+.card {
+  margin-bottom: 20px;
 }
 
 .control {
@@ -81,25 +45,27 @@
 .totalWrapper {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
   border-top: 1px solid var(--gray-color);
   text-align: center;
-
-  .total {
-    margin-top: 20px;
-    margin-right: 15px;
-  }
-
-  .totalPrice {
-    margin-top: 5px;
-    margin-right: 15px;
-  }
 }
+
+.total {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-size: 4rem;
+  color: var(--red-color);
+}
+
+.price {
+  font-size: 3.5rem;
+  color: var(--darker-gray-color);
+}
+
 .completeBtn {
+  width: 40%;
   height: 70px;
   font-size: 2.2rem;
-  position: relative;
-  margin-top: 89px;
-  margin-bottom: 100px;
-  right: 0;
+  margin-top: 50px;
 }

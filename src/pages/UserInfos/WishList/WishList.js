@@ -39,7 +39,7 @@ function WishList() {
           data={items}
           renderItem={(item, index) => (
             <div key={index} className={clsx(['col', 'l-3', 'm-4', 'c-6'])}>
-              <AddableItem price="100" name={item} />
+              <AddableItem id={index} type price="100" name={item} />
             </div>
           )}
           itemsPerPage={8}

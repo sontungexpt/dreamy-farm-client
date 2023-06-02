@@ -1,32 +1,33 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import i18next from 'i18next';
 
-function LinkCondition({
-  errorMessage,
-  isAllowed,
-  className,
-  to,
-  children,
-  ...props
-}) {
+function LinkCondition({ errorMessage, isAllowed, className, to, children }) {
   const handleClick = (e) => {
+    if (typeof isAllowed === 'function') {
+      const result = isAllowed(e);
+      isAllowed = result;
+    }
     if (!isAllowed) {
       e.preventDefault();
-      toast.error(errorMessage);
+      errorMessage && toast.error(i18next.t(errorMessage));
     }
   };
+
   return (
-    <Link onClick={handleClick} className={className} to={to} {...props}>
+    <Link onClick={handleClick} className={className} to={to}>
       {children}
     </Link>
   );
 }
 
 LinkCondition.propTypes = {
-  isAllowed: PropTypes.bool,
   to: PropTypes.string,
+  isAllowed: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   children: PropTypes.node.isRequired,
+  errorMessage: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default LinkCondition;

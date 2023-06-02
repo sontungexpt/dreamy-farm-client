@@ -10,6 +10,8 @@ export const counterSlice = createSlice({
     products: [],
     totalPrice: 0,
     count: 0,
+    address: '',
+    paymentMethod: 'cash',
     // products: [
     //  {
     //  id: 1,
@@ -81,12 +83,19 @@ export const counterSlice = createSlice({
       );
       if (duplicateIndex !== -1) {
         state.products[duplicateIndex].count--;
-        if (state.products[duplicateIndex].count === 0) {
-          // console.log('remove');
+        if (state.products[duplicateIndex].count <= 0) {
           state.products.splice(duplicateIndex, 1);
         }
         state.count--;
       }
+    },
+
+    setAddress: (state, action) => {
+      state.address = action.payload;
+    },
+
+    setPaymentMethod: (state, action) => {
+      state.paymentMethod = action.payload;
     },
   },
 });
@@ -97,5 +106,7 @@ export const {
   removeProduct,
   increaseProductCount,
   decreaseProductCount,
+  setAddress,
+  setPaymentMethod,
 } = counterSlice.actions;
 export default counterSlice.reducer;
