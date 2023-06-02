@@ -1,0 +1,45 @@
+.border {
+  display: flex;
+  position: relative;
+  height: 90px;
+  width: 100%;
+  margin-top: 30px;
+  border: 1px Gray solid;
+  border-radius: 5px;
+  align-items: center;
+}
+
+p {
+  display: inline-block;
+}
+
+.textContent {
+  display: flex;
+  font-size: 2rem;
+  margin-left: 25px;
+  flex-direction: column;
+}
+
+.stateColor {
+  margin-top: 5px;
+  margin-right: 20px;
+  font-size: 4rem;
+}
+
+.stateContent {
+  font-size: 2rem;
+}
+
+.currentState {
+  display: flex;
+  position: absolute;
+  left: 70%;
+  align-items: center;
+  margin-left: auto;
+  line-height: 1;
+}
+
+.moreInfoImage {
+  position: absolute;
+  left: 95%;
+}

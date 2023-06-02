@@ -5,6 +5,7 @@ const jpgImages = {
   noAvatar: require('./no-avatar.jpg'),
   recipeItemImage: require('./recipes_item.jpg'),
   timing: require('./Vector.jpg'),
+  moreInfo: require('./moreInfo.jpg'),
 };
 
 export default jpgImages;
