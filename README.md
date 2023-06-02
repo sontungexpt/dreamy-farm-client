@@ -25,6 +25,7 @@
 | [validator](https://github.com/validatorjs/validator.js/)                                       | Validate data                                                                       |
 | [react-toastify](https://github.com/fkhadra/react-toastify)                                     | Make toast notification                                                             |
 | [redux](https://redux.js.org/usage/getting-started)                                             | Work with state                                                                     |
+| [redux-toolkit](https://redux-toolkit.js.org/)                                                  | Work with state                                                                     |
 
 ## 2. How to works with this repo
 
@@ -85,19 +86,50 @@
 
 ## 3. How to run this project
 
-- **Step 1. Make sure installed all dependencies packages when pull from the
-  remote**
+- **Step 1. Install mongodb**
+
+- **Step 2. Clone backend repo**
+
+  NOTE : Ssh method (recommended)
+
+  ```
+  git clone git@github.com:sontungexpt/dreamy-farm-server.git
+  ```
+
+  NOTE : Https method (may no longer be supported from git)
+
+  ```
+  git clone https://github.com/sontungexpt/dreamy-farm-server.git
+  ```
+
+- **Step 3. Run mongodb**
+
+- **Step 4. Run the backend project first**
+
+  **NOTE: Make sure installed all dependencies packages when pull from the remote if not run this command**
 
   ```
   npm install
   ```
 
-- **Step 2. Run the project**
-
-  NOTE: Make sure you are in the root folder of the project
+  **Run project (Make sure you are in the root folder of the project)**
 
   ```
-    npm start
+  npm start
+  ```
+
+- **Step 5. Run the frontend project**
+
+  **NOTE: Make sure installed all dependencies packages when pull from the remote if not run this command**
+
+  ```
+  npm install
+  ```
+
+  **Run project (Make sure you are in the root folder of the project)**
+
+  ```
+  npm start
   ```
 
 ## 4. Some syntax rules for this project (important)
