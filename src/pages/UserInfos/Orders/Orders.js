@@ -1,4 +1,5 @@
 import OrderItem from './OrderItem';
+// import styles from './Orders.module.scss';
 
 function Orders() {
   const ordersData = [
@@ -49,7 +50,12 @@ function Orders() {
     />
   ));
 
-  return <div style={{ marginTop: '60px' }}>{orderItems}</div>;
+  return (
+    <div>
+      <h2>Orders</h2>
+      <div style={{ marginTop: '20px' }}>{orderItems}</div>
+    </div>
+  );
 }
 
 export default Orders;

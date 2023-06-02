@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react';
 import styles from './OrderItem.module.scss';
-import moreInfo from '~/assets/images/jpgs/index';
+import { AngleUp, AngleDown } from '~/assets/images/icons/SvgIcons';
 
 function OrderItem({
   orderName,
@@ -8,6 +9,11 @@ function OrderItem({
   numberOfItem,
   orderState,
 }) {
+  const [orderExpand, setOrderExpland] = useState(false);
+  const handleExpland = () => {
+    setOrderExpland((prev) => !prev);
+  };
+
   return (
     <div className={styles.border}>
       <div className={styles.textContent}>
@@ -25,11 +31,9 @@ function OrderItem({
         </span>
         <p className={styles.stateContent}>{orderState}</p>
       </div>
-      <img
-        src={moreInfo.moreInfo}
-        alt="moreInfo"
-        className={styles.moreInfoImage}
-      />
+      <div onClick={handleExpland} className={styles.moreInfoImage}>
+        {orderExpand ? <AngleUp color="black" /> : <AngleDown color="black" />}
+      </div>
     </div>
   );
 }
