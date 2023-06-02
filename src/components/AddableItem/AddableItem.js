@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { addProduct, calcTotalPrice } from '~/redux/slices/orderSlice';
+import { updateUserFavoriteProducts } from '~/apiServices/userServices';
+import { updateFavoriteProducts } from '~/redux/slices/userSlice';
 
 import styles from './AddableItem.module.scss';
 import { routes as routeConfigs } from '~/configs';
@@ -21,12 +23,14 @@ function AddableItem({
   image,
   type,
   slug,
+  id,
 
-  onClick,
-  onUnClick,
+  onClickFavorite,
+  onUnClickFavorite,
   onAdd,
 }) {
   const dispatch = useDispatch();
+  const { email } = useSelector((state) => state.user);
 
   const handleAdd = (event) => {
     event.stopPropagation();
@@ -48,6 +52,25 @@ function AddableItem({
     onAdd && onAdd();
   };
 
+  const handleUpdateFavoriteProducts = async (method) => {
+    const favoriteProducts = await updateUserFavoriteProducts(
+      email,
+      id,
+      method,
+    );
+    if (favoriteProducts) {
+      dispatch(updateFavoriteProducts(favoriteProducts));
+    }
+  };
+
+  const handleClick = (event, active) => {
+    if (active) {
+      handleUpdateFavoriteProducts('remove');
+    } else {
+      handleUpdateFavoriteProducts('add');
+    }
+  };
+
   return (
     <Link to={routeConfigs.moveProductDetail(slug)} className={styles.wrapper}>
       <Image className={styles.image} src={image} alt="item" />
@@ -55,11 +78,13 @@ function AddableItem({
         <div>
           <h3 className={styles.name}>{name}</h3>
           <ToggleIcon
+            disableToggle={!email}
             className={styles.favorite}
             activeIcon={<FilledHeartIcon />}
             unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
-            onClick={onClick}
-            onUnClick={onUnClick}
+            onClick={handleClick}
+            onActive={onClickFavorite}
+            onUnActive={onUnClickFavorite}
           />
         </div>
         <div>
@@ -82,10 +107,11 @@ PropTypes.AddableItem = {
     price: PropTypes.number,
   }).isRequired,
   slug: PropTypes.string.isRequired,
+  id: PropTypes.string,
 
-  onClick: PropTypes.func,
-  onUnClick: PropTypes.func,
   onAdd: PropTypes.func,
+  onClickFavorite: PropTypes.func,
+  onUnClickFavorite: PropTypes.func,
 };
 
 export default AddableItem;

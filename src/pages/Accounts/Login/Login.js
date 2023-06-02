@@ -31,13 +31,16 @@ function Login() {
     if (validator.isNoErrors(errors)) {
       const token = await getToken(account);
       if (token) {
+        // set token to local storage
         navigate(routesConfig.root, { replace: true });
         window.localStorage.setItem('DreamyFarmToken', token);
         window.localStorage.setItem('DreamyFarmLogin', true);
-      }
-      const userInfos = await getUserInfos(token);
-      if (userInfos) {
-        dispatch(login(userInfos));
+
+        // get user infos
+        const userInfos = await getUserInfos(token);
+        if (userInfos) {
+          dispatch(login(userInfos));
+        }
       }
     } else {
       setAccount((prevState) => ({

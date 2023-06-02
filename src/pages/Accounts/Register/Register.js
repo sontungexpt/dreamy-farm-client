@@ -31,7 +31,10 @@ function Register() {
     const errors = validator.validate(account);
     if (validator.isNoErrors(errors)) {
       try {
-        const res = await axios.post(apis.users.register, account);
+        const res = await axios.post(apis.users.register, {
+          ...account,
+          method: 'register',
+        });
         const { status, message } = res.data;
         if (status === 'success') {
           navigate(routesConfig.login, { replace: true });

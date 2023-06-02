@@ -32,6 +32,7 @@ function SelectOtherAddress({ addresses }) {
       <Card
         name="address"
         checked={address !== ''}
+        onChange={() => {}}
         onClick={() => modalRef.current.open()}
         icon={<AddressIcon color="var(--blue-color)" />}
         title={address || 'No address'}
@@ -42,12 +43,13 @@ function SelectOtherAddress({ addresses }) {
           data={addresses}
           ref={selectorRef}
           className={styles.selector}
-          initialIndex={0}
+          initialActiveIndex={0}
           itemClassName={clsx(['l-12 c-12 m-12', styles.item])}
-          renderItem={(address, index, active, activeItem) => (
+          renderItem={(address, index, active) => (
             <Card
               name="address"
               checked={active}
+              onChange={() => {}}
               key={index}
               title={address}
               icon={<AddressIcon color="var(--blue-color)" />}

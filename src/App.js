@@ -10,6 +10,7 @@ import Loader from '~/components/Loader';
 import ProtectedRoute from '~/components/Routes/ProtectedRoute';
 import ErroredRoute from '~/components/Routes/ErroredRoute';
 import { ToastContainer } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
 //layouts
 const DefaultLayout = lazy(() =>
@@ -19,6 +20,8 @@ const DefaultLayout = lazy(() =>
 );
 
 function App() {
+  const { email } = useSelector((state) => state.user);
+
   function handleRoutes(routes, isProtected = false) {
     return routes.map((route, index) => {
       let Layout = DefaultLayout;

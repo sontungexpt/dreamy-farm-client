@@ -55,6 +55,7 @@ function Products() {
             renderItem={(item, index) => (
               <div key={index} className="col l-3 m-4 c-6">
                 <AddableItem
+                  id={item._id}
                   name={item.name}
                   image={item.image}
                   type={item.types[0]}

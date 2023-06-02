@@ -93,7 +93,7 @@ function Header() {
               <ToggleIcon
                 activeIcon={<FilledHeartIcon />}
                 unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
-                customEvent={() => favoriteProducts.length > 0}
+                disableToggle={favoriteProducts.length > 0}
               />
             </Link>
           </li>

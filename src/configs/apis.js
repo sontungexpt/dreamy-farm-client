@@ -15,12 +15,7 @@ const apis = {
     register: '/user/register',
     forgotPassword: '/user/forgot-password',
     userInfos: '/user/userInfos',
-    resetPassword: '',
-    changePassword: '',
-    updateProfile: '',
-    updateProfileImage: '',
-    updateProfilePassword: '',
-    updateProfileEmail: '',
+    updateUserFavoriteProducts: '/user/updateFavoriteProducts',
   },
 };
 

@@ -29,3 +29,28 @@ export const getUserInfos = async (token) => {
     console.log(error);
   }
 };
+
+export const updateUserFavoriteProducts = async (email, productId, method) => {
+  try {
+    const res = await request.post(apis.users.updateUserFavoriteProducts, {
+      email,
+      productId,
+      method,
+    });
+    const { status, message, data } = res;
+
+    if (status === 'error') {
+      if (message === 'Email is required') {
+        toast.warning(
+          t('You need to login to add to update favorite products'),
+        );
+      } else {
+        toast[status](t(message));
+      }
+    }
+    return data;
+  } catch (error) {
+    toast.error(t('Something went wrong'));
+    console.log(error);
+  }
+};

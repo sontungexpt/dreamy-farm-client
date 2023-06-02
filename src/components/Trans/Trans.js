@@ -8,7 +8,7 @@ function Trans({ children, set = 'translations' }) {
 
 PropTypes.Trans = {
   children: PropTypes.string.isRequired,
-  t: PropTypes.string,
+  set: PropTypes.string,
 };
 
 export default Trans;

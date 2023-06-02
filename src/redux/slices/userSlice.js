@@ -42,8 +42,12 @@ export const userSlice = createSlice({
       state.roles = [];
       state.favoriteProducts = [];
     },
+
+    updateFavoriteProducts: (state, action) => {
+      state.favoriteProducts = action.payload;
+    },
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, updateFavoriteProducts } = userSlice.actions;
 export default userSlice.reducer;

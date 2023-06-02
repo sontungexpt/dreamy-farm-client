@@ -5,42 +5,49 @@ import styles from './ToggleIcon.module.scss';
 
 function ToggleIcon({
   className,
+  disableToggle = false,
   activeIcon,
   unActiveIcon,
+  initialActive = false,
+
   onClick,
-  customEvent,
-  onUnClick,
+  onActive,
+  onUnActive,
+  type = 'button',
   ...props
 }) {
-  const [isClick, setIsClick] = useState(false);
+  const [active, setActive] = useState(initialActive);
 
   const handleClick = (event) => {
     event.stopPropagation();
-    event.preventDefault();
+    if (type !== 'submit') {
+      event.preventDefault();
+    }
 
-    setIsClick(!isClick);
-    if (isClick) {
-      onUnClick && onUnClick();
+    onClick && onClick(event, !active);
+
+    if (typeof disableToggle === 'function') {
+      disableToggle = disableToggle();
+    }
+    if (disableToggle) return;
+
+    setActive(!active);
+    if (active) {
+      onUnActive && onUnActive(event);
     } else {
-      onClick && onClick();
+      onActive && onActive(event);
     }
   };
 
   return (
-    <div
+    <button
       {...props}
+      type={type}
       className={clsx([styles.wrapper, { [className]: className }])}
+      onClick={handleClick}
     >
-      {customEvent ? (
-        customEvent() ? (
-          activeIcon
-        ) : (
-          unActiveIcon
-        )
-      ) : (
-        <span onClick={handleClick}>{isClick ? activeIcon : unActiveIcon}</span>
-      )}
-    </div>
+      {active ? activeIcon : unActiveIcon}
+    </button>
   );
 }
 
@@ -48,9 +55,12 @@ ToggleIcon.propTypes = {
   className: PropTypes.string,
   activeIcon: PropTypes.node.isRequired,
   unActiveIcon: PropTypes.node.isRequired,
+  onActive: PropTypes.func,
+  onUnActive: PropTypes.func,
   onClick: PropTypes.func,
-  onUnClick: PropTypes.func,
-  customEvent: PropTypes.func,
+  disableToggle: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  initialActive: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 export default ToggleIcon;

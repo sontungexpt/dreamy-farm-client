@@ -7,6 +7,7 @@ import { routes as routesConfig } from '~/configs';
 import { checkoutConfigs as configs } from '~/configs/pages';
 
 import SelectOtherAddress from './SelectOtherAddress';
+import SelectOtherPhoneNumber from './SelectOtherPhoneNumber';
 import Selector from '~/components/Selector';
 import LoadMore from '~/components/LoadMore';
 import Button from '~/components/Button';
@@ -17,46 +18,12 @@ import Card from './Card';
 function Checkout() {
   const dispatch = useDispatch();
   const addresses = [
-    {
-      name: 'Agelia',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    },
-    {
-      name: 'Stella',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    },
-    {
-      name: 'Agelia',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    },
-    {
-      name: 'Stella',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    },
-    {
-      name: 'Agelia',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    },
-    {
-      name: 'Stella',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    },
-    {
-      name: 'Agelia',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    },
-    {
-      name: 'Agelia',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    },
+    '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
+    '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
+    '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
+    '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
+    '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
+    '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
   ];
   const {
     products,
@@ -80,6 +47,12 @@ function Checkout() {
         </section>
         <section className={styles.section}>
           <h1 className={styles.header}>
+            <Trans>Phone number</Trans>
+          </h1>
+          <SelectOtherPhoneNumber />
+        </section>
+        <section className={styles.section}>
+          <h1 className={styles.header}>
             <Trans>Payment method</Trans>
           </h1>
           <Selector
@@ -91,6 +64,8 @@ function Checkout() {
             renderItem={(item) => (
               <Card
                 name="payment-method"
+                value={item.method}
+                onChange={() => {}}
                 hoverEffect
                 checked={paymentMethod === item.method}
                 title={item.title}
