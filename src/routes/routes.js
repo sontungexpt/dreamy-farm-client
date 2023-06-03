@@ -32,6 +32,7 @@ const ShoppingCart = lazy(() => import('~/pages/ShoppingCart'));
 const Checkout = lazy(() => import('~/pages/Checkout'));
 const OrderConfirm = lazy(() => import('~/pages/OrderConfirm'));
 const ProductDetail = lazy(() => import('~/pages/ProductDetail'));
+const RecipeDetail = lazy(() => import('~/pages/RecipeDetail'));
 
 // Accounts lazy load
 const Login = lazy(() =>
@@ -88,6 +89,7 @@ const publicRoutes = [
   { path: routesConfig.products, element: Products },
   { path: routesConfig.productDetail, element: ProductDetail },
   { path: routesConfig.recipes, element: Recipes },
+  { path: routesConfig.recipeDetail, element: RecipeDetail },
   { path: routesConfig.aboutUs, element: AboutUs },
 
   // Accounts
