@@ -13,7 +13,17 @@ import Selector from '~/components/Selector';
 import Trans from '~/components/Trans';
 
 function Products() {
-  const [category, setCategory] = useState(configs.categories[0]);
+  const [category, setCategory] = useState(() => {
+    const { state } = history.location;
+    if (state) {
+      const { page, category } = state;
+      if (page === 'Home') {
+        return category;
+      }
+    }
+
+    return configs.categories[0];
+  });
   const { favoriteProducts } = useSelector((state) => state.user);
   const [products, setProducts] = useState([]);
 
@@ -46,6 +56,7 @@ function Products() {
           <Selector
             className={styles.categories}
             data={configs.categories}
+            initialActiveItem={(item) => item.title === category.title}
             itemClassName={styles.item}
             itemActiveClassName={styles.active}
             onInactiveItemClick={(item) => setCategory(item)}

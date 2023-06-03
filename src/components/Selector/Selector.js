@@ -9,8 +9,49 @@ function Selector(
     className, //string
     itemClassName, //string
     itemActiveClassName, //string
-    initialActiveIndex, //number or string or function
     itemInactiveClassName, //string
+
+    // just use one of these initialActiveIndex or initialActiveItem
+    // number or string or
+    // function like initialActiveItem(data, arrayData)
+    // data is object or array that you provided
+    // arrayData is array convert from your object that you provided
+    // arrayData convert by return array of values from your object that you provided like this
+    // {
+    //  key1: value1,
+    //  key2: value2,
+    //  key3: value3,
+    //  ...
+    // }
+    // to
+    // [value1, value2, value3, ...]
+    // if you provide array, arrayData is not work you just use your array
+    initialActiveIndex,
+
+    //initialActiveItem(item)
+    //item is the value of your object or array that you provided like this
+    // {
+    // key1: value1,
+    // key2: value2,
+    // key3: value3,
+    // ...
+    // }
+    // or
+    // [value1, value2, value3, ...]
+    // initialActiveItem is function return boolean
+    // if return true, item is active
+    // if return false, item is inactive
+    // this function will loop through your object or array that you provided to find active item
+    // by use array.findIndex(item) function
+    // the item in initialActiveItem(item) is same as item in array.findIndex(item)
+    // you can use the item to check if it is active or not by your condition
+    // like when you use with array.findIndex(item)
+    // like this
+    // initialActiveItem(item) {
+    //    return item === 'value1';
+    // }
+    initialActiveItem,
+
     onActiveItemClick, //function
     onInactiveItemClick, //function
     onItemClick, //function
@@ -27,6 +68,16 @@ function Selector(
     return array;
   };
   const [activeIndex, setActiveIndex] = useState(() => {
+    if (initialActiveItem) {
+      let index;
+      if (Array.isArray(data)) {
+        index = data.findIndex((item) => initialActiveItem(item));
+      } else {
+        index = arrayData(data).findIndex((item) => initialActiveItem(item));
+      }
+      return Object.keys(data)[index];
+    }
+
     if (initialActiveIndex) {
       if (
         typeof initialActiveIndex === 'number' ||

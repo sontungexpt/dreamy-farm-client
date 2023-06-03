@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 
-function Card({ title, image, subTitle, className, ...props }) {
+function Card({ title, image, subTitle, className, to, state, ...props }) {
   const { t } = useTranslation();
   return (
     <div
@@ -20,7 +20,9 @@ function Card({ title, image, subTitle, className, ...props }) {
       </div>
       <div className={styles.footer}>
         <h3 className={styles.title}>{t(title)}</h3>
-        <Link className={styles.subTitle}>{t(subTitle)}</Link>
+        <Link to={to} state={state} className={styles.subTitle}>
+          {t(subTitle)}
+        </Link>
       </div>
     </div>
   );

@@ -7,14 +7,6 @@ import { routes as routesConfig } from '~/configs';
 import Card from './Card';
 
 function Home() {
-  const recipes = [
-    {
-      id: 1,
-      name: 'Product 1',
-      image: 'product1.jpg',
-    },
-  ];
-
   return (
     <div>
       <div
@@ -39,7 +31,12 @@ function Home() {
                 <Card
                   className={styles.card}
                   title={category.title}
+                  state={{
+                    category: category,
+                    page: 'Home',
+                  }}
                   subTitle="Show now"
+                  to={category.to}
                   image={category.img}
                 />
               </div>
