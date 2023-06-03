@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import styles from './Home.module.scss';
 import images from '~/assets/images/jpgs/index';
+
 function Home() {
   const categoriesBrand = [
     {
