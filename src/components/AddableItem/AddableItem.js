@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addProduct, calcTotalPrice } from '~/redux/slices/orderSlice';
-import { updateUserFavoriteProducts } from '~/apiServices/userServices';
 import { updateFavoriteProducts } from '~/redux/slices/userSlice';
 
 import styles from './AddableItem.module.scss';
@@ -24,6 +23,7 @@ function AddableItem({
   type,
   slug,
   id,
+  isFavorite = false,
 
   onClickFavorite,
   onUnClickFavorite,
@@ -52,33 +52,27 @@ function AddableItem({
     onAdd && onAdd();
   };
 
-  const handleUpdateFavoriteProducts = async (method) => {
-    const favoriteProducts = await updateUserFavoriteProducts(
-      email,
-      id,
-      method,
-    );
-    if (favoriteProducts) {
-      dispatch(updateFavoriteProducts(favoriteProducts));
-    }
-  };
-
   const handleClick = (event, active) => {
+    event.stopPropagation();
+    event.preventDefault();
     if (active) {
-      handleUpdateFavoriteProducts('remove');
+      dispatch(updateFavoriteProducts({ email, productId: id, method: 'add' }));
     } else {
-      handleUpdateFavoriteProducts('add');
+      dispatch(
+        updateFavoriteProducts({ email, productId: id, method: 'remove' }),
+      );
     }
   };
 
   return (
     <Link to={routeConfigs.moveProductDetail(slug)} className={styles.wrapper}>
-      <Image className={styles.image} src={image} alt="item" />
+      <Image className={styles.image} src={image} alt={name} />
       <div className={styles.content}>
         <div>
           <h3 className={styles.name}>{name}</h3>
           <ToggleIcon
             disableToggle={!email}
+            initialActive={isFavorite}
             className={styles.favorite}
             activeIcon={<FilledHeartIcon />}
             unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
@@ -108,6 +102,7 @@ PropTypes.AddableItem = {
   }).isRequired,
   slug: PropTypes.string.isRequired,
   id: PropTypes.string,
+  isFavorite: PropTypes.bool,
 
   onAdd: PropTypes.func,
   onClickFavorite: PropTypes.func,

@@ -16,6 +16,7 @@ const apis = {
     forgotPassword: '/user/forgot-password',
     userInfos: '/user/userInfos',
     updateUserFavoriteProducts: '/user/updateFavoriteProducts',
+    getUserFavoriteProducts: '/user/getFavoriteProducts',
   },
 };
 

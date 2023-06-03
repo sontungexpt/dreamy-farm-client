@@ -8,7 +8,9 @@ function ToggleIcon({
   disableToggle = false,
   activeIcon,
   unActiveIcon,
+
   initialActive = false,
+  customEvent,
 
   onClick,
   onActive,
@@ -19,11 +21,6 @@ function ToggleIcon({
   const [active, setActive] = useState(initialActive);
 
   const handleClick = (event) => {
-    event.stopPropagation();
-    if (type !== 'submit') {
-      event.preventDefault();
-    }
-
     onClick && onClick(event, !active);
 
     if (typeof disableToggle === 'function') {
@@ -46,7 +43,7 @@ function ToggleIcon({
       className={clsx([styles.wrapper, { [className]: className }])}
       onClick={handleClick}
     >
-      {active ? activeIcon : unActiveIcon}
+      {(customEvent && customEvent()) || active ? activeIcon : unActiveIcon}
     </button>
   );
 }

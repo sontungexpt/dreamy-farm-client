@@ -1,45 +1,46 @@
 import { clsx } from 'clsx';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 import styles from './WishList.module.scss';
 
 import PaginatePage from '~/components/PaginatePage';
 import AddableItem from '~/components/AddableItem';
+import Trans from '~/components/Trans';
+import { useSelector, useDispatch } from 'react-redux';
+import { getWishList } from '~/redux/slices/userSlice';
 
 function WishList() {
-  const { t } = useTranslation('translations');
-  const [items, setItems] = useState([
-    'Apple',
-    'Noodle',
-    'Fish',
-    'French fries',
-    'Water',
-    'Organe',
-    'Tomato',
-    'Kiwi',
-    'Banana',
-    'Potato',
-    'Milk',
-    'Bread',
-    'Rice',
-    'Sugar',
-    'Salt',
-    'Pepper',
-  ]);
+  const dispatch = useDispatch();
+  const { wishList, email, favoriteProducts } = useSelector(
+    (state) => state.user,
+  );
+
+  useEffect(() => {
+    dispatch(getWishList(email));
+  }, [favoriteProducts, dispatch, email]);
+
   return (
     <div className={clsx(['grid', styles.wrapper])}>
       <div className={styles.header}>
-        <h2>{t('Wishlist')}</h2>
-        <div className={styles.wishListCount}>({items.length})</div>
+        <h2>
+          <Trans>Wishlist</Trans>
+        </h2>
+        <div className={styles.wishListCount}>{wishList.length}</div>
       </div>
 
       <div className={styles.main}>
         <PaginatePage
           className={styles.container}
-          data={items}
+          data={wishList}
           renderItem={(item, index) => (
             <div key={index} className={clsx(['col', 'l-3', 'm-4', 'c-6'])}>
-              <AddableItem id={index} type price="100" name={item} />
+              <AddableItem
+                isFavorite={true}
+                id={item._id}
+                name={item.name}
+                image={item.image}
+                type={item.types[0]}
+                slug={item.slug}
+              />
             </div>
           )}
           itemsPerPage={8}

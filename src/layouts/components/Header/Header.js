@@ -93,7 +93,8 @@ function Header() {
               <ToggleIcon
                 activeIcon={<FilledHeartIcon />}
                 unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
-                disableToggle={favoriteProducts.length > 0}
+                disableToggle={true}
+                customEvent={() => favoriteProducts.length > 0}
               />
             </Link>
           </li>
@@ -102,7 +103,7 @@ function Header() {
               isAllowed={count > 0}
               to={routesConfig.shoppingCart}
               className={styles.navbarLink}
-              errorMessage={t('Your cart is empty')}
+              errorMessage="Your cart is empty"
             >
               <CartIcon />
             </LinkCondition>

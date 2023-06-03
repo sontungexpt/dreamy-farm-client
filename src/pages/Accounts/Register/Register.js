@@ -1,13 +1,12 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { register } from '~/redux/slices/userSlice';
 
 import inputStyles from '~/pages/Accounts/styles/InputStyles.module.scss';
 import styles from './Register.module.scss';
 import { routes as routesConfig } from '~/configs';
-import { apis } from '~/configs';
 
 import Button from '~/components/Button/Button';
 import Input from '~/components/Input';
@@ -22,7 +21,7 @@ function Register() {
     errors: {},
   });
 
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
@@ -30,20 +29,7 @@ function Register() {
 
     const errors = validator.validate(account);
     if (validator.isNoErrors(errors)) {
-      try {
-        const res = await axios.post(apis.users.register, {
-          ...account,
-          method: 'register',
-        });
-        const { status, message } = res.data;
-        if (status === 'success') {
-          navigate(routesConfig.login, { replace: true });
-        }
-        toast[status](t(message));
-      } catch (error) {
-        toast.error(t('Something went wrong'));
-        console.log(error);
-      }
+      dispatch(register(account));
     } else {
       setAccount((prevState) => ({
         ...prevState,

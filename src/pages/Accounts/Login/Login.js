@@ -1,7 +1,6 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { getToken, getUserInfos } from '~/apiServices/userServices';
 import { useDispatch } from 'react-redux';
 import { login } from '~/redux/slices/userSlice';
 
@@ -20,7 +19,6 @@ function Login() {
     password: '',
     errors: {},
   });
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -29,19 +27,7 @@ function Login() {
 
     const errors = validator.validate(account);
     if (validator.isNoErrors(errors)) {
-      const token = await getToken(account);
-      if (token) {
-        // set token to local storage
-        navigate(routesConfig.root, { replace: true });
-        window.localStorage.setItem('DreamyFarmToken', token);
-        window.localStorage.setItem('DreamyFarmLogin', true);
-
-        // get user infos
-        const userInfos = await getUserInfos(token);
-        if (userInfos) {
-          dispatch(login(userInfos));
-        }
-      }
+      dispatch(login(account));
     } else {
       setAccount((prevState) => ({
         ...prevState,

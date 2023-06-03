@@ -1,56 +1,55 @@
 import * as request from '~/utils/request';
-import i18next from 'i18next';
-import { toast } from 'react-toastify';
 import { apis } from '~/configs';
-
-const t = i18next.t.bind(i18next);
+import MD5 from 'crypto-js/md5';
+import sha256 from 'crypto-js/sha256';
 
 export const getToken = async ({ email, password }) => {
-  try {
-    const res = await request.post(apis.users.login, { email, password });
+  const md5password = MD5(password).toString();
+  const encryptedPassword = sha256(md5password).toString();
 
-    const { status, message, data } = res;
-    if (status) toast[status](t(message));
-    return data;
-  } catch (error) {
-    toast.error(t('Something went wrong'));
-    console.log(error);
-  }
+  const res = await request.post(apis.users.login, {
+    email,
+    password: encryptedPassword,
+  });
+  const { data } = res;
+  return data;
 };
 
 export const getUserInfos = async (token) => {
-  try {
-    const res = await request.post(apis.users.userInfos, { token });
-    const { status, message, data } = res;
-    if (status) toast[status](t(message));
-    return data;
-  } catch (error) {
-    toast.error(t('Something went wrong'));
-    console.log(error);
-  }
+  const res = await request.post(apis.users.userInfos, { token });
+  const { data } = res;
+  return data;
+};
+
+export const registerUser = async ({ name, email, password }) => {
+  const md5password = MD5(password).toString();
+  const encryptedPassword = sha256(md5password).toString();
+
+  const res = await request.post(apis.users.register, {
+    name,
+    email,
+    password: encryptedPassword,
+    method: 'register',
+  });
+  const { status } = res;
+
+  return status;
 };
 
 export const updateUserFavoriteProducts = async (email, productId, method) => {
-  try {
-    const res = await request.post(apis.users.updateUserFavoriteProducts, {
-      email,
-      productId,
-      method,
-    });
-    const { status, message, data } = res;
+  const res = await request.post(apis.users.updateUserFavoriteProducts, {
+    email,
+    productId,
+    method,
+  });
+  const { data } = res;
+  return data;
+};
 
-    if (status === 'error') {
-      if (message === 'Email is required') {
-        toast.warning(
-          t('You need to login to add to update favorite products'),
-        );
-      } else {
-        toast[status](t(message));
-      }
-    }
-    return data;
-  } catch (error) {
-    toast.error(t('Something went wrong'));
-    console.log(error);
-  }
+export const getUserFavoriteProducts = async (email) => {
+  const res = await request.post(apis.users.getUserFavoriteProducts, {
+    email,
+  });
+  const { data } = res;
+  return data;
 };
