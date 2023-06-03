@@ -1,13 +1,12 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { register } from '~/redux/slices/userSlice';
 
-import { routes as routesConfig } from '~/configs';
-import { apiConfigs } from '~/configs';
-import styles from './Register.module.scss';
 import inputStyles from '~/pages/Accounts/styles/InputStyles.module.scss';
+import styles from './Register.module.scss';
+import { routes as routesConfig } from '~/configs';
 
 import Button from '~/components/Button/Button';
 import Input from '~/components/Input';
@@ -22,27 +21,15 @@ function Register() {
     errors: {},
   });
 
-  const navigate = useNavigate();
-  const { t } = useTranslation('translations');
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const errors = validator.validate(account);
     if (validator.isNoErrors(errors)) {
-      try {
-        const res = await axios.post(apiConfigs.users.register, account);
-        const { error } = res.data;
-        if (error) {
-          toast.error(t(error));
-        } else {
-          navigate(routesConfig.login);
-          toast.success(t('Register successfully'));
-        }
-      } catch (error) {
-        toast.error(t('Something went wrong'));
-        console.log(error);
-      }
+      dispatch(register(account));
     } else {
       setAccount((prevState) => ({
         ...prevState,

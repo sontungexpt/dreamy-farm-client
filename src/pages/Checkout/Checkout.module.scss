@@ -1,79 +1,35 @@
-.checkoutWrapper {
-  margin-top: 91px;
-  padding: 20px 0;
-  margin-left: 400px;
-  margin-right: 400px;
+.page {
+  background-color: var(--gray-background-color);
+}
+
+.wrapper {
+  padding: 100px 0;
+  margin: 0 auto;
+  width: 850px;
+}
+
+.section {
   margin-bottom: 50px;
-  width: 640px;
-  position: relative;
-  .header {
-    margin-bottom: 35px;
-  }
-
-  .subTitle {
-    font-size: 2rem;
-    color: var(--darker-gray-color);
-    margin-bottom: 15px;
-  }
-
-  .addressArea {
-    margin-bottom: 35px;
-  }
-
-  .orderDetail {
-    .header {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-bottom: 15px;
-    }
-
-    .orderDetailHeading {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-bottom: 15px;
-
-      h1 {
-        margin-right: 15px;
-      }
-    }
-  }
 }
 
-.paymentWrapper {
-  background-color: var(--white-color);
-  margin-bottom: 29px;
-  padding: 30px;
-  display: flex;
-  align-items: flex-start;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.178);
-  margin-left: 0;
-  position: relative;
-  width: 640px;
-  height: 78px;
-
-  input[type='radio'] {
-    margin-right: 15px;
-  }
-
-  .walletContainer {
-    display: flex;
-    align-items: center;
-  }
-
-  .cashOnDelivery {
-    margin-right: 10px;
-  }
-
-  .creditCard {
-    margin-right: 10px;
-  }
+.header {
+  margin-bottom: 20px;
+  font-size: 3rem;
+  width: 100%;
 }
 
-.main {
-  margin-bottom: 59px;
-  width: 640px;
+.orderHeader {
+  margin-bottom: 10px;
+}
+
+.subTitle {
+  margin-bottom: 30px;
+  color: var(--darker-gray-color);
+  font-size: 2rem;
+}
+
+.card {
+  margin-bottom: 20px;
 }
 
 .control {
@@ -90,27 +46,27 @@
 .totalWrapper {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
   border-top: 1px solid var(--gray-color);
-  width: 640px;
-
-  .total {
-    margin-top: 20px;
-    margin-right: 15px;
-  }
-
-  .totalPrice {
-    margin-top: 5px;
-    margin-right: 15px;
-    text-align: right;
-  }
+  text-align: center;
 }
+
+.total {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-size: 4rem;
+  color: var(--red-color);
+}
+
+.price {
+  font-size: 3.5rem;
+  color: var(--darker-gray-color);
+}
+
 .completeBtn {
-  width: 300px;
+  width: 40%;
   height: 70px;
   font-size: 2.2rem;
-  position: relative;
-  margin-top: 89px;
-  margin-bottom: 100px;
-  right: 0;
+  margin-top: 50px;
 }

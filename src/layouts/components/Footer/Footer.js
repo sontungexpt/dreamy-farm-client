@@ -1,6 +1,8 @@
 // libabry
 import { clsx } from 'clsx';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 // configs
 import styles from './Footer.module.scss';
@@ -18,6 +20,19 @@ import {
 
 function Footer() {
   const { t } = useTranslation('translations');
+  const { email } = useSelector((state) => state.user);
+
+  console.log('render Footer');
+  const handleSendFeedback = (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.warning(t('Please login to send feedback'));
+      return;
+    }
+
+    toast.success(t('Send feedback successfully'));
+  };
+
   return (
     <footer className={clsx([styles.wrapper])}>
       <div className={clsx(['grid', 'wide', styles.inner])}>
@@ -75,17 +90,20 @@ function Footer() {
             </li>
           </ul>
         </div>
-        <div className={styles.feedback}>
-          <h2 className={styles.feedbackTitle}>{t('Feedback')}</h2>
-          <textarea
-            type="text"
-            placeholder={t('Enter your feedback')}
-            className={clsx([styles.feedbackInput])}
-          />
-          <Button primary className={styles.submitBtn}>
-            {t('Submit')}
-          </Button>
-        </div>
+
+        <form onSubmit={handleSendFeedback}>
+          <div className={styles.feedback}>
+            <h2 className={styles.feedbackTitle}>{t('Feedback')}</h2>
+            <textarea
+              type="text"
+              placeholder={t('Enter your feedback')}
+              className={clsx([styles.feedbackInput])}
+            />
+            <Button type="submit" primary className={styles.submitBtn}>
+              {t('Submit')}
+            </Button>
+          </div>
+        </form>
         <LanguageButton />
       </div>
       <p className={styles.copyRight}>Dreamy Farm © 2023. All Right Served.</p>
