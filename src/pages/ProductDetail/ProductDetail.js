@@ -140,8 +140,12 @@ function ProductDetail() {
 
             <Counter
               ref={counterRef}
-              onIncrease={(curr, next) => setPrice(price * next)}
-              onDecrease={(curr, next) => setPrice(price * next)}
+              onIncrease={(curr, next) =>
+                setPrice(typeRef.current.activeItem.price * next)
+              }
+              onDecrease={(curr, next) =>
+                setPrice(typeRef.current.activeItem.price * next)
+              }
               className={styles.quantity}
             />
 
