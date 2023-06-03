@@ -1,13 +1,30 @@
-import styles from './Card.module.scss';
+import styles from './PreviewCard.module.scss';
 import Image from '~/components/Image';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 
-function Card({ title, image, subTitle, className, to, state, ...props }) {
+function Preview({
+  enableClickAny = false,
+  title,
+  image,
+  subTitle,
+  className,
+  to,
+  state,
+  ...rest
+}) {
   const { t } = useTranslation();
+  const Wrapper = enableClickAny ? Link : 'div';
+  const props = enableClickAny
+    ? {
+        to,
+        state,
+      }
+    : {};
   return (
-    <div
+    <Wrapper
+      {...rest}
       {...props}
       className={clsx([
         {
@@ -24,8 +41,8 @@ function Card({ title, image, subTitle, className, to, state, ...props }) {
           {t(subTitle)}
         </Link>
       </div>
-    </div>
+    </Wrapper>
   );
 }
 
-export default Card;
+export default Preview;

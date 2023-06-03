@@ -1,48 +1,22 @@
 import clsx from 'clsx';
+import { useEffect, useState } from 'react';
+import { getRecipes } from '~/apiServices/recipeServices';
 
 import styles from './Recipes.module.scss';
-import RecipesItem from './RecipesItem';
-import images from '~/assets/images/jpgs/index';
 import PaginatePage from '~/components/PaginatePage/PaginatePage';
+import PreivewCard from '~/components/PreivewCard';
+import { routes as routesConfig } from '~/configs';
 
 function RecipesPage() {
-  const recipes = [
-    {
-      id: 1,
-      name: 'Product 1',
-      image: images.recipeItemImage,
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      image: images.recipeItemImage,
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      image: images.recipeItemImage,
-    },
-    {
-      id: 4,
-      name: 'Product 4',
-      image: images.recipeItemImage,
-    },
-    {
-      id: 5,
-      name: 'Product 5',
-      image: images.recipeItemImage,
-    },
-    {
-      id: 6,
-      name: 'Product 6',
-      image: images.recipeItemImage,
-    },
-    {
-      id: 7,
-      name: 'Product 7',
-      image: images.recipeItemImage,
-    },
-  ];
+  const [recipes, setRecipes] = useState([]);
+  useEffect(() => {
+    const handleGetRecipes = async () => {
+      const recipesRes = await getRecipes();
+      setRecipes(recipesRes);
+    };
+    handleGetRecipes();
+  }, []);
+
   return (
     <div className={clsx(['grid', 'wide'])}>
       <div className={clsx([styles.header])}>
@@ -54,20 +28,14 @@ function RecipesPage() {
         data={recipes}
         renderItem={(recipe, index) => {
           return (
-            <div
-              key={index}
-              className={clsx([
-                'col',
-                'l-4',
-                'm-6',
-                'c-12',
-                styles.lineSpacing,
-              ])}
-            >
-              <RecipesItem
-                recipeName={recipe.name}
-                recipeImg={recipe.image}
-                recipeId={recipe.id}
+            <div key={index} className="col l-4 m-4 c-6">
+              <PreivewCard
+                enableClickAny
+                className={styles.card}
+                title={recipe.name}
+                subTitle="Show how"
+                to={routesConfig.moveRecipeDetail(recipe.slug)}
+                image={recipe.image}
               />
             </div>
           );

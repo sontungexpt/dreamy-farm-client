@@ -1,12 +1,24 @@
 import { Link } from 'react-router-dom';
 import { clsx } from 'clsx';
+import { useState, useEffect } from 'react';
+import { getRecipes } from '~/apiServices/recipeServices';
+
 import styles from './Home.module.scss';
 import images from '~/assets/images/jpgs/index';
 import { productsPageConfigs as configs } from '~/configs/pages';
 import { routes as routesConfig } from '~/configs';
-import Card from './Card';
+import PreivewCard from '~/components/PreivewCard';
 
 function Home() {
+  const [recipes, setRecipes] = useState([]);
+  useEffect(() => {
+    const handleGetRecipes = async () => {
+      const recipesRes = await getRecipes('less');
+      setRecipes(recipesRes);
+    };
+    handleGetRecipes();
+  }, []);
+
   return (
     <div>
       <div
@@ -28,7 +40,8 @@ function Home() {
           <div className="row">
             {configs.categories.map((category, index) => (
               <div key={index} className="col l-4 m-4 c-6">
-                <Card
+                <PreivewCard
+                  enableClickAny
                   className={styles.card}
                   title={category.title}
                   state={{
@@ -48,6 +61,20 @@ function Home() {
           <Link to={routesConfig.recipes} className={styles.brandTitle}>
             Recipes
           </Link>
+          <div className="row">
+            {recipes.map((recipe, index) => (
+              <div key={index} className="col l-4 m-4 c-6">
+                <PreivewCard
+                  enableClickAny
+                  className={styles.card}
+                  title={recipe.name}
+                  subTitle="Show how"
+                  to={routesConfig.moveRecipeDetail(recipe.slug)}
+                  image={recipe.image}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

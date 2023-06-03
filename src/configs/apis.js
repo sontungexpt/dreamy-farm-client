@@ -19,6 +19,10 @@ const apis = {
     getUserFavoriteProducts: '/user/getFavoriteProducts',
     feedback: '/user/feedback',
   },
+  recipes: {
+    getRecipes: '/recipes',
+    addRecipe: '/recipes/add',
+  },
 };
 
 export default apis;

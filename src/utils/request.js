@@ -16,6 +16,9 @@ const notifyMessage = async (callback) => {
       if (message === 'Product found') {
         return res.data;
       }
+      if (message === 'Get recipes successfully') {
+        return res.data;
+      }
 
       //
       if (message) {
