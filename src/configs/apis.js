@@ -17,6 +17,7 @@ const apis = {
     userInfos: '/user/userInfos',
     updateUserFavoriteProducts: '/user/updateFavoriteProducts',
     getUserFavoriteProducts: '/user/getFavoriteProducts',
+    feedback: '/user/feedback',
   },
 };
 

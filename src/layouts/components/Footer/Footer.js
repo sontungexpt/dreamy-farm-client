@@ -1,8 +1,5 @@
 // libabry
 import { clsx } from 'clsx';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 
 // configs
 import styles from './Footer.module.scss';
@@ -10,7 +7,7 @@ import styles from './Footer.module.scss';
 //components
 import Logo from '~/assets/images/icons/Logo';
 import LanguageButton from './LanguageButton';
-import Button from '~/components/Button';
+import Feedback from './Feedback';
 import {
   Facebook as FacebookIcon,
   Instagram as InstagramIcon,
@@ -19,19 +16,6 @@ import {
 } from '~/assets/images/icons/SvgIcons';
 
 function Footer() {
-  const { t } = useTranslation('translations');
-  const { email } = useSelector((state) => state.user);
-
-  const handleSendFeedback = (e) => {
-    e.preventDefault();
-    if (!email) {
-      toast.warning(t('Please login to send feedback'));
-      return;
-    }
-
-    toast.success(t('Send feedback successfully'));
-  };
-
   return (
     <footer className={clsx([styles.wrapper])}>
       <div className={clsx(['grid', 'wide', styles.inner])}>
@@ -55,7 +39,7 @@ function Footer() {
             </li>
             <li>
               <a
-                href="https://www.instagram.com/dreamyfarmvn/?igshid=ZDdkNTZiNTM=&fbclid=IwAR2AiFyZtxmLYaooqEn7mpfST3-ug9y3owqJUML5N2VS8JvA3LBSpjOmVf0"
+                href="https://www.instagram.com/dreamyfarmvn/"
                 target="_blank"
                 rel="noreferrer"
                 className={clsx([styles.socialLink])}
@@ -90,19 +74,16 @@ function Footer() {
           </ul>
         </div>
 
-        <form onSubmit={handleSendFeedback}>
-          <div className={styles.feedback}>
-            <h2 className={styles.feedbackTitle}>{t('Feedback')}</h2>
-            <textarea
-              type="text"
-              placeholder={t('Enter your feedback')}
-              className={clsx([styles.feedbackInput])}
-            />
-            <Button type="submit" primary className={styles.submitBtn}>
-              {t('Submit')}
-            </Button>
-          </div>
-        </form>
+        <Feedback
+          className={styles.feedback}
+          title="Feedback"
+          placeholder="Enter your feedback"
+          sendTitle="Submit"
+          titleClassName={styles.feedbackTitle}
+          textareaClassName={styles.feedbackInput}
+          sendButtonClassName={styles.submitBtn}
+        />
+
         <LanguageButton />
       </div>
       <p className={styles.copyRight}>Dreamy Farm © 2023. All Right Served.</p>

@@ -1,11 +1,9 @@
 import * as request from '~/utils/request';
 import { apis } from '~/configs';
-import MD5 from 'crypto-js/md5';
-import sha256 from 'crypto-js/sha256';
+import encryptPassword from '~/utils/encryptPassword';
 
 export const getToken = async ({ email, password }) => {
-  const md5password = MD5(password).toString();
-  const encryptedPassword = sha256(md5password).toString();
+  const encryptedPassword = encryptPassword(password);
 
   const res = await request.post(apis.users.login, {
     email,
@@ -22,8 +20,7 @@ export const getUserInfos = async (token) => {
 };
 
 export const registerUser = async ({ name, email, password }) => {
-  const md5password = MD5(password).toString();
-  const encryptedPassword = sha256(md5password).toString();
+  const encryptedPassword = encryptPassword(password);
 
   const res = await request.post(apis.users.register, {
     name,
@@ -49,6 +46,15 @@ export const updateUserFavoriteProducts = async (email, productId, method) => {
 export const getUserFavoriteProducts = async (email) => {
   const res = await request.post(apis.users.getUserFavoriteProducts, {
     email,
+  });
+  const { data } = res;
+  return data;
+};
+
+export const addFeedback = async (email, content) => {
+  const res = await request.post(apis.users.feedback, {
+    email,
+    content,
   });
   const { data } = res;
   return data;
