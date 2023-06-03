@@ -1,0 +1,102 @@
+.header {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 360px;
+}
+
+.LinkToProduct {
+  color: black;
+}
+
+.LinkToProduct:hover {
+  color: #ff5500;
+}
+
+.brandTitle {
+  color: black;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.footer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 750px;
+  margin-top: 300px;
+}
+
+.img_layout {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.imgFooter {
+  position: absolute;
+  width: 420px;
+  height: 400px;
+  left: 10%;
+  bottom: 12%;
+}
+
+.footerTitle {
+  font-weight: 500;
+  font-size: 4rem;
+  margin-bottom: 30px;
+}
+
+.footerContent {
+  font-size: 2rem;
+  line-height: 30px;
+}
+
+.footerIntro {
+  position: absolute;
+  right: 20%;
+  top: 35%;
+}
+
+h2 {
+  font-size: 4rem;
+}
+
+.shoppingNow {
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 60%;
+  width: 20%;
+  height: 2.6em;
+  font-size: 3rem;
+  background-color: #fb9701;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  transition: 0.5s;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.productImgs {
+  height: 265px;
+  width: 430px;
+  margin-top: 40px;
+}
+
+.categoriesPart {
+  margin-top: 50px;
+}
+
+.recipesPart {
+  margin-top: 50px;
+}
+
+.line {
+  width: 98.5%;
+  margin-top: 10px;
+  border: 2px solid #e2e2e2;
+}

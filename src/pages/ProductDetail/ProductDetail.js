@@ -1,12 +1,13 @@
 //libraries
 import { clsx } from 'clsx';
-import { useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useRef, useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { getProduct } from '~/apiServices/productServices';
+import { useDispatch } from 'react-redux';
+import { addProduct, calcTotalPrice } from '~/redux/slices/orderSlice';
 
 //configs
 import styles from './ProductDetail.module.scss';
-import { productsPageConfigs as configs } from '~/configs/pages';
 
 //components
 import Counter from '~/components/Counter';
@@ -18,67 +19,95 @@ import {
   EmptyHeart as EmptyHeartIcon,
 } from '~/assets/images/icons/SvgIcons';
 import Selector from '~/components/Selector';
+import Trans from '~/components/Trans';
 
-function ProductDetail({ image, price, description }) {
-  const { id } = useParams();
-  const { t } = useTranslation('translations');
+function ProductDetail() {
+  const [product, setProduct] = useState();
+  const { slug } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const counterRef = useRef();
-  const selectedPriceRangeRef = useRef();
+  const typeRef = useRef();
+
+  useEffect(() => {
+    const handleGetProductDetail = async () => {
+      const productRes = await getProduct(slug);
+      if (productRes) {
+        setProduct(productRes);
+      } else {
+        navigate('/e404', { replace: true });
+      }
+    };
+    handleGetProductDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]);
+
+  const handleAdd = () => {
+    dispatch(
+      addProduct({
+        id: product.slug,
+        name: product.name,
+        image: product.image,
+        type: typeRef.current.activeItem,
+        count: counterRef.current.value,
+      }),
+    );
+    dispatch(calcTotalPrice());
+  };
 
   return (
-    <div className={clsx(['grid', 'wide', styles.wrapper])}>
-      <div className="row">
-        <div className={clsx(['col', 'l-6', 'm-6', 'c-12', styles.col1])}>
-          <div className={styles.imageFixed}>
-            <Image className={styles.image} src={image} alt="Image Item" />
-          </div>
-        </div>
-        <div className={clsx(['col', 'l-6', 'm-6', 'c-12'])}>
-          <div className={styles.container}>
-            <div>
-              <div className={styles.header}>
-                <h3 className={styles.name}>{id}</h3>
-                <ToggleIcon
-                  className={styles.favorite}
-                  clickIcon={<FilledHeartIcon />}
-                  unClickIcon={<EmptyHeartIcon color="var(--red-color)" />}
-                />
-              </div>
-              <p className={styles.price}>{price} đ</p>
+    product && (
+      <div className={clsx(['grid', 'wide', styles.wrapper])}>
+        <div className="row">
+          <div className={clsx(['col', 'l-6', 'm-6', 'c-12', styles.col1])}>
+            <div className={styles.imageFixed}>
+              <Image
+                className={styles.image}
+                src={product.image}
+                alt="Image Item"
+              />
             </div>
+          </div>
+          <div className={clsx(['col', 'l-6', 'm-6', 'c-12'])}>
+            <div className={styles.container}>
+              <div>
+                <div className={styles.header}>
+                  <h3 className={styles.name}>{product.name}</h3>
+                  <ToggleIcon
+                    className={styles.favorite}
+                    activeIcon={<FilledHeartIcon />}
+                    unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
+                  />
+                </div>
+                <p className={styles.price}>{product.type[0].price} đ</p>
+              </div>
 
-            <Selector
-              ref={selectedPriceRangeRef}
-              className={styles.type}
-              itemClassName={styles.typeButton}
-              itemActiveClassName={styles.active}
-              data={configs.priceRanges}
-              renderItem={(item) => item}
-            />
+              <Selector
+                ref={typeRef}
+                className={styles.type}
+                itemClassName={styles.typeButton}
+                itemActiveClassName={styles.active}
+                data={product.types}
+                renderItem={(item) => item.name}
+              />
 
-            <Counter ref={counterRef} className={styles.quantity} />
+              <Counter ref={counterRef} className={styles.quantity} />
 
-            <Button
-              onClick={() => {
-                console.log(counterRef.current.value);
-                console.log(selectedPriceRangeRef.current.activeIndex);
-              }}
-              primary
-              className={styles.addBtn}
-            >
-              {t('Add to cart')}
-            </Button>
+              <Button onClick={handleAdd} primary className={styles.addBtn}>
+                <Trans>Add to cart</Trans>
+              </Button>
+            </div>
           </div>
         </div>
+        <div className={styles.description}>
+          <h3>
+            <Trans>Description</Trans>
+          </h3>
+          <p>{product.description || <Trans>No description</Trans>}</p>
+        </div>
       </div>
-      <div className={styles.description}>
-        <h3>{t('Description')}</h3>
-        <p>
-          {description ||
-            'Beli aneka produk di Toko YouReady secara online sekarang. Kamu bisa beli produk dari Toko YouReady dengan aman & mudah dari Kota Bandung. Ingin belanja lebih hemat & terjangkau di Toko YouReady? Kamu bisa gunakan fitur Cicilan 0% dari berbagai bank dan fitur Bebas Ongkir di Toko YouReady sehingga kamu bisa belanja online dengan nyaman di Tokopedia. Beli aneka produk terbaru di Toko YouReady dengan mudah dari genggaman tangan kamu menggunakan Aplikasi Tokopedia. Cek terus juga Toko YouReady untuk update Produk, Kode Voucher hingga Promo Terbaru dari Toko YouReady Terbaru secara online di Tokopedia'}
-        </p>
-      </div>
-    </div>
+    )
   );
 }
 

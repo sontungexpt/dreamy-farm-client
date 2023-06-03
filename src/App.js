@@ -10,6 +10,8 @@ import Loader from '~/components/Loader';
 import ProtectedRoute from '~/components/Routes/ProtectedRoute';
 import ErroredRoute from '~/components/Routes/ErroredRoute';
 import { ToastContainer } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import GlobalNavigate from './components/GlobalNavigate';
 
 //layouts
 const DefaultLayout = lazy(() =>
@@ -19,6 +21,11 @@ const DefaultLayout = lazy(() =>
 );
 
 function App() {
+  // enable navigate outside of react components
+
+  // logic for routes
+  const { email } = useSelector((state) => state.user);
+
   function handleRoutes(routes, isProtected = false) {
     return routes.map((route, index) => {
       let Layout = DefaultLayout;
@@ -40,9 +47,11 @@ function App() {
                 isAllowed={!isProtected}
                 redirectPath={route.redirectPath}
               >
-                <Layout>
-                  <Page />
-                </Layout>
+                <GlobalNavigate>
+                  <Layout>
+                    <Page />
+                  </Layout>
+                </GlobalNavigate>
               </ProtectedRoute>
             </ErroredRoute>
           }
@@ -72,7 +81,7 @@ function App() {
           </Routes>
         </Suspense>
         <ToastContainer
-          position="top-right"
+          position="top-center"
           autoClose={2500}
           hideProgressBar
           newestOnTop

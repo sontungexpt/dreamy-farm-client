@@ -9,7 +9,7 @@ function Selector(
     className, //string
     itemClassName, //string
     itemActiveClassName, //string
-    initialActiveIndex, //number
+    initialActiveIndex, //number or string or function
     itemInactiveClassName, //string
     onActiveItemClick, //function
     onInactiveItemClick, //function
@@ -93,6 +93,8 @@ function Selector(
                 handleClick(data[key] /*currentItem*/, key, event)
               }
               className={clsx([
+                styles.item,
+
                 {
                   [itemClassName]: itemClassName,
                 },
