@@ -38,7 +38,7 @@ const configs = {
       title: 'Logout',
       icon: LogoutIcon,
       colorIcon: 'var(--red-color)',
-      to: routeConfigs.root,
+      to: routeConfigs.login,
     },
   ],
 };

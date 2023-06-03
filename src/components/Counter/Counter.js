@@ -10,8 +10,11 @@ import {
 
 function Counter(
   {
-    onDecrease,
-    onIncrease,
+    onIncrease, //onIncrease(current, next)
+    onDecrease, //onDecrease(current, idealNextValue)
+    //idealNextValue is the value after decrease
+    //the ui may not update if the next value is less than min value
+
     initialCount,
     className,
     inputClassName,
@@ -29,14 +32,14 @@ function Counter(
   }));
 
   function handleIncrease() {
-    onIncrease && onIncrease(value);
+    onIncrease && onIncrease(value /*current*/, value + 1 /*next*/);
     setValue(Number.parseInt(value) + 1);
   }
 
   function handleDecrease() {
     const intValue = Number.parseInt(value);
     if (intValue > minValue) {
-      onDecrease && onDecrease(intValue);
+      onDecrease && onDecrease(intValue, intValue - 1);
       setValue(intValue - 1);
     }
   }

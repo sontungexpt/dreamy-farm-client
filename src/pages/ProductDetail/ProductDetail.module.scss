@@ -1,11 +1,8 @@
 .wrapper {
-  padding: 60px 0;
+  padding: 60px 10px;
 }
 
 .col1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 1px solid var(--primary-color);
   border-radius: 10px;
 }
@@ -17,7 +14,7 @@
   &::after {
     content: '';
     display: block;
-    padding-bottom: 65%;
+    padding-bottom: 60%;
   }
 
   .image {
@@ -46,7 +43,6 @@
       margin: 10px 0;
 
       font-size: 3rem;
-      font-weight: 700;
       color: var(--text-color);
 
       &:hover {
@@ -62,15 +58,12 @@
 
   // type of products
   .type {
-    justify-content: space-between;
-    margin-top: 20px;
-
     .typeButton {
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-top: 20px;
 
-      width: 30%;
       height: 55px;
 
       border: 1px solid var(--gray-color);
@@ -85,11 +78,13 @@
       }
     }
 
-    .typeButton.active {
-      background-color: var(--primary-color);
-      border: none;
+    .active {
+      .typeButton {
+        background-color: var(--primary-color);
+        border: none;
 
-      color: var(--white-color);
+        color: var(--white-color);
+      }
     }
   }
 

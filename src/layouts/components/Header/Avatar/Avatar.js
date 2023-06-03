@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { offset } from '@floating-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '~/redux/slices/userSlice';
 import { Link } from 'react-router-dom';
@@ -9,7 +8,7 @@ import styles from './Avatar.module.scss';
 import { routes as routesConfig } from '~/configs';
 import { avtarMenuConfigs as configs } from '~/configs/pages';
 
-import { Floater } from '~/components/Floater';
+import { Floater, offset } from '~/components/Floater';
 import Image from '~/components/Image';
 import jpgImages from '~/assets/images/jpgs';
 import { User as UserIcon } from '~/assets/images/icons/SvgIcons';
@@ -17,10 +16,9 @@ import Button from '~/components/Button';
 
 function Avatar({ className }) {
   const dispatch = useDispatch();
-  const { email, avatar } = useSelector((state) => state.user);
+  const { loggedIn, avatar } = useSelector((state) => state.user);
 
   const handleLogout = () => {
-    window.localStorage.removeItem('DreamyFarmToken');
     dispatch(logout());
   };
 
@@ -45,7 +43,7 @@ function Avatar({ className }) {
         ],
       }}
       anchor={
-        email ? (
+        loggedIn ? (
           <Image
             className={clsx([styles.avatar, styles.navbarLink])}
             src={avatar}
@@ -59,7 +57,7 @@ function Avatar({ className }) {
         )
       }
       data={(() =>
-        configs.menus.filter((menu) => menu.condition === (email !== '')))()}
+        configs.menus.filter((menu) => menu.condition === loggedIn))()}
       renderItem={(item) => (
         <Button
           alignLeft

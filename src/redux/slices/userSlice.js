@@ -37,6 +37,8 @@ export const userSlice = createSlice({
       state.roles = [];
       state.favoriteProducts = [];
       state.wishList = [];
+
+      window.localStorage.removeItem('DreamyFarmToken');
     },
   },
   extraReducers: (builder) => {
@@ -60,7 +62,7 @@ export const userSlice = createSlice({
       .addCase(login.rejected, (state) => {
         state.status = 'idle';
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (_, action) => {
         if (action.payload === 'success') {
           history.navigate(routesConfig.login, { replace: true });
         }

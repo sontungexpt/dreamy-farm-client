@@ -101,6 +101,19 @@ export const counterSlice = createSlice({
   },
 });
 
+export const addProductAndCalcTotalPrice = (product) => (dispatch) => {
+  dispatch(
+    counterSlice.actions.addProduct({
+      id: product.slug,
+      name: product.name,
+      image: product.image,
+      type: product.type,
+      count: product.count,
+    }),
+  );
+  dispatch(counterSlice.actions.calcTotalPrice());
+};
+
 export const {
   calcTotalPrice,
   addProduct,

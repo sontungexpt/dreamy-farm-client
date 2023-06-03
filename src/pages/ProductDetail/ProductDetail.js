@@ -3,8 +3,9 @@ import { clsx } from 'clsx';
 import { useRef, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getProduct } from '~/apiServices/productServices';
-import { useDispatch } from 'react-redux';
-import { addProduct, calcTotalPrice } from '~/redux/slices/orderSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProductAndCalcTotalPrice } from '~/redux/slices/orderSlice';
+import { updateFavoriteProducts } from '~/redux/slices/userSlice';
 
 //configs
 import styles from './ProductDetail.module.scss';
@@ -22,19 +23,34 @@ import Selector from '~/components/Selector';
 import Trans from '~/components/Trans';
 
 function ProductDetail() {
+  //state
   const [product, setProduct] = useState();
+  const [price, setPrice] = useState(0);
+
+  //global state
+  const { email, favoriteProducts } = useSelector((state) => state.user);
+
+  //hooks
   const { slug } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  //ref
   const counterRef = useRef();
   const typeRef = useRef();
 
+  //effect
   useEffect(() => {
     const handleGetProductDetail = async () => {
       const productRes = await getProduct(slug);
+
+      const isFavorite = favoriteProducts.includes(productRes._id);
       if (productRes) {
-        setProduct(productRes);
+        setProduct((prev) => ({
+          ...prev,
+          ...productRes,
+          isFavorite,
+        }));
       } else {
         navigate('/e404', { replace: true });
       }
@@ -45,7 +61,7 @@ function ProductDetail() {
 
   const handleAdd = () => {
     dispatch(
-      addProduct({
+      addProductAndCalcTotalPrice({
         id: product.slug,
         name: product.name,
         image: product.image,
@@ -53,61 +69,95 @@ function ProductDetail() {
         count: counterRef.current.value,
       }),
     );
-    dispatch(calcTotalPrice());
   };
 
+  const handleClickFavorite = (event, active) => {
+    event.stopPropagation();
+    event.preventDefault();
+    if (active) {
+      dispatch(
+        updateFavoriteProducts({
+          email,
+          productId: product._id,
+          method: 'add',
+        }),
+      );
+    } else {
+      dispatch(
+        updateFavoriteProducts({
+          email,
+          productId: product._id,
+          method: 'remove',
+        }),
+      );
+    }
+  };
+
+  // make sure product is loaded to render
+  if (!product) return null;
+
   return (
-    product && (
-      <div className={clsx(['grid', 'wide', styles.wrapper])}>
-        <div className="row">
-          <div className={clsx(['col', 'l-6', 'm-6', 'c-12', styles.col1])}>
-            <div className={styles.imageFixed}>
-              <Image
-                className={styles.image}
-                src={product.image}
-                alt="Image Item"
-              />
-            </div>
-          </div>
-          <div className={clsx(['col', 'l-6', 'm-6', 'c-12'])}>
-            <div className={styles.container}>
-              <div>
-                <div className={styles.header}>
-                  <h3 className={styles.name}>{product.name}</h3>
-                  <ToggleIcon
-                    className={styles.favorite}
-                    activeIcon={<FilledHeartIcon />}
-                    unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
-                  />
-                </div>
-                <p className={styles.price}>{product.type[0].price} đ</p>
-              </div>
-
-              <Selector
-                ref={typeRef}
-                className={styles.type}
-                itemClassName={styles.typeButton}
-                itemActiveClassName={styles.active}
-                data={product.types}
-                renderItem={(item) => item.name}
-              />
-
-              <Counter ref={counterRef} className={styles.quantity} />
-
-              <Button onClick={handleAdd} primary className={styles.addBtn}>
-                <Trans>Add to cart</Trans>
-              </Button>
-            </div>
+    <div className={clsx(['grid', 'wide', styles.wrapper])}>
+      <div className="row">
+        <div className={clsx(['col', 'l-6', 'm-6', 'c-12', styles.col1])}>
+          <div className={styles.imageFixed}>
+            <Image
+              className={styles.image}
+              src={product.image}
+              alt="Image Item"
+            />
           </div>
         </div>
-        <div className={styles.description}>
-          <h3>
-            <Trans>Description</Trans>
-          </h3>
-          <p>{product.description || <Trans>No description</Trans>}</p>
+        <div className={clsx(['col', 'l-6', 'm-6', 'c-12'])}>
+          <div className={styles.container}>
+            <div>
+              <div className={styles.header}>
+                <h3 className={styles.name}>{product.name}</h3>
+                <ToggleIcon
+                  className={styles.favorite}
+                  activeIcon={<FilledHeartIcon />}
+                  unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
+                  initialActive={product.isFavorite}
+                  onClick={handleClickFavorite}
+                />
+              </div>
+              <p className={styles.price}>{price} đ</p>
+            </div>
+
+            <Selector
+              ref={typeRef}
+              className={clsx([styles.type, 'row'])}
+              itemClassName={clsx(['col', 'l-4', 'm-4', 'c-6'])}
+              itemActiveClassName={styles.active}
+              onActiveChange={(item) =>
+                setPrice(item.price * counterRef.current.value)
+              }
+              data={product.types}
+              renderItem={(item) => (
+                <div className={styles.typeButton}>{item.name}</div>
+              )}
+            />
+
+            <Counter
+              ref={counterRef}
+              onIncrease={(curr, next) => setPrice(price * next)}
+              onDecrease={(curr, next) => setPrice(price * next)}
+              className={styles.quantity}
+            />
+
+            <Button onClick={handleAdd} primary className={styles.addBtn}>
+              <Trans>Add to cart</Trans>
+            </Button>
+          </div>
         </div>
       </div>
-    )
+      <div className={styles.description}>
+        <h3>
+          <Trans>Description</Trans>
+        </h3>
+        <p>{product.description || <Trans>No description</Trans>}</p>
+      </div>
+    </div>
   );
 }
 

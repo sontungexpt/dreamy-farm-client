@@ -94,7 +94,6 @@ function Selector(
               }
               className={clsx([
                 styles.item,
-
                 {
                   [itemClassName]: itemClassName,
                 },

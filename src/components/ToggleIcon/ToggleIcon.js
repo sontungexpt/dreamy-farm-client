@@ -18,7 +18,12 @@ function ToggleIcon({
   type = 'button',
   ...props
 }) {
-  const [active, setActive] = useState(initialActive);
+  const [active, setActive] = useState(() => {
+    if (typeof initialActive === 'function') {
+      return initialActive();
+    }
+    return initialActive;
+  });
 
   const handleClick = (event) => {
     onClick && onClick(event, !active);
@@ -56,7 +61,7 @@ ToggleIcon.propTypes = {
   onUnActive: PropTypes.func,
   onClick: PropTypes.func,
   disableToggle: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-  initialActive: PropTypes.bool,
+  initialActive: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   type: PropTypes.string,
 };
 

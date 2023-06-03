@@ -1,10 +1,11 @@
 import { clsx } from 'clsx';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import styles from './Products.module.scss';
 import { productsPageConfigs as configs } from '~/configs/pages';
 import { getProductsAtCategory } from '~/apiServices/productServices';
+import history from '~/utils/navigateSite';
 
 import PaginatePage from '~/components/PaginatePage';
 import AddableItem from '~/components/AddableItem';
@@ -13,7 +14,7 @@ import Trans from '~/components/Trans';
 
 function Products() {
   const [category, setCategory] = useState(configs.categories[0]);
-  const navigate = useNavigate();
+  const { favoriteProducts } = useSelector((state) => state.user);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -22,12 +23,18 @@ function Products() {
       if (productsRes) {
         setProducts(productsRes);
       } else {
-        navigate('/404', { replace: true });
+        history.navigate('/404', { replace: true });
       }
     };
     handleGetProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
+
+  const handleIsFavorite = (id) => {
+    if (favoriteProducts) {
+      return favoriteProducts.includes(id);
+    }
+  };
 
   return (
     <div className={clsx(['grid', 'wide'])}>
@@ -60,6 +67,7 @@ function Products() {
                   image={item.image}
                   type={item.types[0]}
                   slug={item.slug}
+                  isFavorite={(() => handleIsFavorite(item._id))()}
                 />
               </div>
             )}

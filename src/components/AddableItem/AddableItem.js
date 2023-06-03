@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { addProduct, calcTotalPrice } from '~/redux/slices/orderSlice';
 import { updateFavoriteProducts } from '~/redux/slices/userSlice';
+import { addProductAndCalcTotalPrice } from '~/redux/slices/orderSlice';
 
 import styles from './AddableItem.module.scss';
 import { routes as routeConfigs } from '~/configs';
@@ -36,9 +36,8 @@ function AddableItem({
     event.stopPropagation();
     event.preventDefault();
 
-    //logic
     dispatch(
-      addProduct({
+      addProductAndCalcTotalPrice({
         id: slug,
         name: name,
         count: 1,
@@ -46,13 +45,12 @@ function AddableItem({
         type: type,
       }),
     );
-    dispatch(calcTotalPrice());
 
     // custom logic
     onAdd && onAdd();
   };
 
-  const handleClick = (event, active) => {
+  const handleClickFavorite = (event, active) => {
     event.stopPropagation();
     event.preventDefault();
     if (active) {
@@ -76,7 +74,7 @@ function AddableItem({
             className={styles.favorite}
             activeIcon={<FilledHeartIcon />}
             unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
-            onClick={handleClick}
+            onClick={handleClickFavorite}
             onActive={onClickFavorite}
             onUnActive={onUnClickFavorite}
           />

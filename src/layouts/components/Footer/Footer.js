@@ -22,7 +22,6 @@ function Footer() {
   const { t } = useTranslation('translations');
   const { email } = useSelector((state) => state.user);
 
-  console.log('render Footer');
   const handleSendFeedback = (e) => {
     e.preventDefault();
     if (!email) {
