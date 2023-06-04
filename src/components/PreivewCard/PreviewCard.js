@@ -16,16 +16,18 @@ function Preview({
 }) {
   const { t } = useTranslation();
   const Wrapper = enableClickAny ? Link : 'div';
-  const props = enableClickAny
+  const LinkInner = enableClickAny ? 'span' : Link;
+  const wrapperProps = enableClickAny
     ? {
         to,
         state,
       }
     : {};
+  const innerProps = enableClickAny ? {} : { to, state };
   return (
     <Wrapper
       {...rest}
-      {...props}
+      {...wrapperProps}
       className={clsx([
         {
           [className]: className,
@@ -37,9 +39,9 @@ function Preview({
       </div>
       <div className={styles.footer}>
         <h3 className={styles.title}>{t(title)}</h3>
-        <Link to={to} state={state} className={styles.subTitle}>
+        <LinkInner {...innerProps} className={styles.subTitle}>
           {t(subTitle)}
-        </Link>
+        </LinkInner>
       </div>
     </Wrapper>
   );
