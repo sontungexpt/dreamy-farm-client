@@ -18,7 +18,7 @@ function RecipesPage() {
   }, []);
 
   return (
-    <div className={clsx(['grid', 'wide'])}>
+    <div className={clsx(['grid', 'wide', styles.wrapper])}>
       <div className={clsx([styles.header])}>
         <h1>Recipes</h1>
         <div className={styles.lineHeader}></div>

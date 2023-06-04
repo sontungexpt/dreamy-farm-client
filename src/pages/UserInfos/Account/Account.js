@@ -9,7 +9,6 @@ import Button from '~/components/Button/Button';
 import {
   Pencil as PencilIcon,
   NoFilledUser as NoFilledUserIcon,
-  Mail as MailIcon,
   Phone as PhoneIcon,
   Gender as GenderIcon,
 } from '~/assets/images/icons/SvgIcons';
@@ -42,14 +41,6 @@ function Account() {
                 id="name"
                 type="text"
                 name="name"
-              />
-              <Input
-                labelIcon={<PhoneIcon color="var(--yellow-color)" />}
-                className={styles.input}
-                label={t('Phone')}
-                id="phone"
-                type="text"
-                name="phone"
               />
               <Input
                 labelIcon={<GenderIcon color="var(--green-color)" />}

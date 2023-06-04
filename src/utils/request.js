@@ -15,7 +15,11 @@ const notifyMessage = async (callback) => {
     const { status, message } = res.data;
     if (status) {
       // NOTE: no need to notify message
-      const notShowMessages = ['Get recipes successfully', 'Product found'];
+      const notShowMessages = [
+        'Get recipes successfully',
+        'Product found',
+        'Recipe found',
+      ];
 
       if (message) {
         if (notShowMessages.includes(message)) {

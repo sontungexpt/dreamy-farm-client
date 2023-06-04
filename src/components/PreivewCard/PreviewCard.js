@@ -29,6 +29,7 @@ function Preview({
       {...rest}
       {...wrapperProps}
       className={clsx([
+        styles.wrapper,
         {
           [className]: className,
         },

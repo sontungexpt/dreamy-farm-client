@@ -42,7 +42,7 @@ const RecipeDetail = () => {
       <div className="row">
         <div className="col l-8 m-12 c-12">
           <div className={styles.imageWrapper}>
-            <Image className={styles.image} />
+            <Image className={styles.image} src={recipe.image} />
           </div>
         </div>
       </div>
