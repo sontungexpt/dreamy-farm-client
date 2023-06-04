@@ -1,6 +1,8 @@
 import axios from 'axios';
 import i18next from 'i18next';
 import { toast } from 'react-toastify';
+import history from './navigateSite';
+import { routes as routesConfig } from '~/configs';
 
 const t = i18next.t.bind(i18next);
 // const request = axios.create({
@@ -13,20 +15,22 @@ const notifyMessage = async (callback) => {
     const { status, message } = res.data;
     if (status) {
       // NOTE: no need to notify message
-      if (message === 'Product found') {
-        return res.data;
-      }
-      if (message === 'Get recipes successfully') {
-        return res.data;
-      }
+      const notShowMessages = ['Get recipes successfully', 'Product found'];
 
-      //
       if (message) {
+        if (notShowMessages.includes(message)) {
+          return res.data;
+        }
+
         toast[status](t(message));
       }
     }
     return res.data;
   } catch (error) {
+    if (error?.response?.status === 404) {
+      history.navigate(routesConfig.e404, { replace: true });
+      return null;
+    }
     toast.error(t('Something went wrong'));
     console.log(error);
   }

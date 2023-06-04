@@ -112,7 +112,7 @@ const publicRoutes = [
   },
 
   {
-    path: routesConfig.e404,
+    path: '*',
     element: E404,
     layout: null,
   },

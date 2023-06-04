@@ -5,7 +5,7 @@ const routes = {
   productDetail: '/products/detail/:slug',
   moveProductDetail: (slug) => `/products/detail/${slug}`,
   recipes: '/recipes',
-  recipeDetail: '/recipes/detail/:id',
+  recipeDetail: '/recipes/detail/:slug',
   moveRecipeDetail: (slug) => `/recipes/detail/${slug}`,
   aboutUs: '/aboutUs',
   shoppingCart: '/shoppingCart',
@@ -18,7 +18,7 @@ const routes = {
   forgotPassword: '/accounts/forgotPassword',
 
   // error pages
-  e404: '*',
+  e404: '/e404',
 
   // settings
   userInfos: {

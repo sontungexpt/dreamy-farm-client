@@ -11,7 +11,7 @@ import store from '~/redux';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <I18nextProvider i18n={i18n} defaultNS={'translation'}>
+    <I18nextProvider i18n={i18n} defaultNS={'translations'}>
       <GlobalStyles>
         <Provider store={store}>
           <App />

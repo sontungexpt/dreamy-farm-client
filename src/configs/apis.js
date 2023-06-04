@@ -22,6 +22,7 @@ const apis = {
   recipes: {
     getRecipes: '/recipes',
     addRecipe: '/recipes/add',
+    detail: (slug) => `/recipes/detail/${slug}`,
   },
 };
 

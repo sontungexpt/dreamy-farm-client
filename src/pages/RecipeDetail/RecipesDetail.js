@@ -1,60 +1,88 @@
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
+import { useParams } from 'react-router-dom';
+import { getRecipe } from '~/apiServices/recipeServices';
+
 import styles from './RecipesDetail.module.scss';
-import img from '~/assets/images/jpgs/index';
+import { routes as routesConfig } from '~/configs';
+import history from '~/utils/navigateSite';
+import Trans from '~/components/Trans';
+import Image from '~/components/Image';
+import { Clock as ClockIcon } from '~/assets/images/icons/SvgIcons';
 
 const RecipeDetail = () => {
-  const { id } = useParams();
+  const [recipe, setRecipe] = useState();
+  const { slug } = useParams();
+
+  useEffect(() => {
+    const handleGetRecipeDetail = async () => {
+      const recipeRes = await getRecipe(slug);
+      if (recipeRes) setRecipe(recipeRes);
+      else history.navigate(routesConfig.e404, { replace: true });
+    };
+    handleGetRecipeDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]);
+
+  // make sure recipe is loaded
+  if (!recipe) {
+    return null;
+  }
+
   return (
-    <div className={clsx(['grid', 'wide'])}>
-      <div className={clsx([styles.header])}>
-        <h1>Recipes</h1>
-        <div className={styles.lineHeader}></div>
+    <div className={clsx(['grid', 'wide', styles.wrapper])}>
+      <div className={styles.name}>
+        <h2 className={styles.headerTitle}>{recipe.name}</h2>
+        <ClockIcon className={styles.clockIcon} color="var(--green-color)" />
+        <span className={styles.estimateCookTime}>
+          20
+          <Trans>mins</Trans>
+        </span>
       </div>
-      <div>
-        <img
-          src={img.recipeItemImage}
-          alt="recipeImage"
-          className={styles.headerImage}
-        />
-        <div>
-          <h2>Recipe {id}</h2>
-          <img
-            src={img.timing}
-            alt="recipeImage"
-            className={styles.clockImage}
-          />
-          <span className={styles.estimateCookTime}>20 mins</span>
-          <ul className={styles.ingredientsList}>
-            <li>Step 1</li>
-            <li>Step 1</li>
-            <li>Step 1</li>
-            <li>Step 1</li>
-            <li>Step 1</li>
-            <li>Step 1</li>
-          </ul>
-          <p className={styles.description}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply
-            dummy text of the printing and typesetting industry. Lorem Ipsum has
-            been the industry's standard dummy text ever since the 1500s, when
-            an unknown printer took a galley of type and scrambled it to make a
-            type specimen book. It has survived not only five centuries, but
-            also the leap into electronic typesetting, remaining essentially
-            unchanged. It was popularised in the 1960s with the release of
-            Letraset sheets containing Lorem Ipsum passages, and more recently
-            with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.
-          </p>
+      <div className="row">
+        <div className="col l-8 m-12 c-12">
+          <div className={styles.imageWrapper}>
+            <Image className={styles.image} />
+          </div>
         </div>
       </div>
+
+      <section className={styles.section}>
+        <h2 className={styles.headerTitle}>
+          <Trans>Ingredient</Trans>
+        </h2>
+        <ul className={styles.list}>
+          {recipe?.ingredients.map((ingredient, index) => (
+            <li className={styles.listItem} key={index}>
+              {ingredient}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.headerTitle}>
+          <Trans>Making</Trans>
+        </h2>
+        <ul className={clsx([styles.list, styles.stepList])}>
+          {recipe?.steps.map((step, index) => (
+            <div>
+              <h3 className={styles.stepTitle}>
+                <Trans>Step</Trans>
+                {` ${index + 1}`}:
+              </h3>
+              <li className={styles.listItem}>{step}</li>
+            </div>
+          ))}
+        </ul>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.headerTitle}>
+          <Trans>Description</Trans>
+        </h2>
+        <p className={styles.description}>{recipe.description}</p>
+      </section>
     </div>
   );
 };
