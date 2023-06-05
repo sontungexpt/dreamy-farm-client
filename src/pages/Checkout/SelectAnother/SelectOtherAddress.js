@@ -75,7 +75,7 @@ function SelectOtherAddress({ addresses }) {
     // Hide the "Add new address" section
     setShowNewAddress(false);
 
-    handleSave();
+    // handleSave();
   };
 
   return (
