@@ -13,46 +13,35 @@ function Checkout() {
   const { t } = useTranslation('translations');
   const addresses = [
     {
-      name: 'Agelia',
       phone: '0123456789',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
     },
     {
-      name: 'Stella',
       phone: '0123456789',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
     },
     {
-      name: 'Katina',
       phone: '0123456789',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
     },
     {
-      name: 'Agelia',
       phone: '0123456789',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
     },
+
     {
-      name: 'Agelia',
-      phone: '0123456789',
-    },
-    {
-      name: 'Anaa',
       phone: '98765431',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
     },
     {
-      name: 'Agelia',
       phone: '0123456789',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
     },
     {
-      name: 'Agelia',
       phone: '0123456789',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
     },
     {
-      name: 'Agelia',
       phone: '0123456789',
       address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
     },
