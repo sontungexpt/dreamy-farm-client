@@ -107,7 +107,6 @@ function SearchBar({
 
     const handleSearch = async () => {
       const products = await search(debouncedInputValue);
-      console.log(products);
 
       setItems(products);
       setIsOpen(true);
@@ -182,11 +181,7 @@ function SearchBar({
       <div className={styles.floater}>
         <FloatingPortal>
           {isOpen && (
-            <FloatingFocusManager
-              context={context}
-              initialFocus={-1}
-              visuallyHiddenDismiss
-            >
+            <FloatingFocusManager context={context} initialFocus={-1}>
               <div
                 className={clsx([
                   styles.floatWrapper,

@@ -9,8 +9,8 @@ import styles from './Header.module.scss';
 import { routes as routesConfig } from '~/configs';
 
 //components
-import SearchBar from '~/components/SearchBar';
-import Product from '~/components/SearchBar/Product';
+import SearchBar from '~/components/SearchBarUp';
+import Product from '~/components/SearchBarUp/Product';
 import Logo from '~/assets/images/icons/Logo';
 import CartIcon from './CartIcon';
 import Avatar from './Avatar';
@@ -54,18 +54,12 @@ function Header() {
         <ul className={styles.navbarList}>
           <li className={styles.navbarItem}>
             <SearchBar
-              inputClassName={styles.inputSearchBar}
-              mediumLength
-              placeholder={t('Search products')}
-              floaterWrapperTitle="Products"
-              searchValue={(item) => item.name}
-              renderItem={(item, active) => (
+              floaterHeaderTitle="Products"
+              renderItem={(item, index, active) => (
                 <Product
-                  key={item._id}
-                  image={item.image}
-                  title={item.title}
-                  price={item.price}
-                  activeClassName={active}
+                  title={item}
+                  description="this is apple this is organge this is banana "
+                  active={active}
                 />
               )}
             />

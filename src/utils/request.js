@@ -29,11 +29,11 @@ const notifyMessage = async (callback) => {
         toast[status](t(message));
       }
     }
+    console.log(res);
     return res.data;
   } catch (error) {
     // if (error?.response?.status === 404) {
     //   history.navigate(routesConfig.e404, { replace: true });
-    //   return null;
     // }
     toast.error(t('Something went wrong'));
     console.log(error);

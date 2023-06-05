@@ -1,0 +1,216 @@
+import { clsx } from 'clsx';
+import PropTypes from 'prop-types';
+import { useRef, useEffect, useState } from 'react';
+import {
+  autoUpdate,
+  offset,
+  shift,
+  size,
+  flip,
+  useDismiss,
+  useFloating,
+  useInteractions,
+  useListNavigation,
+  useRole,
+  FloatingFocusManager,
+} from '@floating-ui/react';
+import { search } from '~/apiServices/searchServices';
+
+import { useDebounce } from '~/hooks';
+import styles from './SearchBar.module.scss';
+import ItemWrapper from './ItemWrapper';
+import Loader from '~/components/Loader';
+import { Search as SearchIcon } from '~/assets/images/icons/SvgIcons';
+
+function SearchBar({
+  placeholder,
+
+  className,
+  inputClassName,
+  floaterClassName,
+  itemWrapperClassName,
+  itemWrapperActiveClassName,
+
+  renderItem,
+}) {
+  const [open, setOpen] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [items, setItems] = useState([]);
+  const listRef = useRef([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const debouncedInputValue = useDebounce(inputValue, 600);
+
+  const { refs, floatingStyles, context } = useFloating({
+    whileElementsMounted: autoUpdate,
+    open,
+    onOpenChange: setOpen,
+    middleware: [
+      flip({ padding: 10 }),
+      offset(4),
+      shift(),
+      size({
+        apply({ rects, availableHeight, elements }) {
+          Object.assign(elements.floating.style, {
+            width: `${rects.reference.width}px`,
+            maxHeight: `${availableHeight}px`,
+          });
+        },
+        padding: 10,
+      }),
+    ],
+  });
+
+  const role = useRole(context, { role: 'listbox' });
+  const dismiss = useDismiss(context);
+  const listNav = useListNavigation(context, {
+    listRef,
+    activeIndex,
+    onNavigate: setActiveIndex,
+    virtual: true,
+    loop: true,
+  });
+
+  const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
+    [role, dismiss, listNav],
+  );
+
+  function handleChangeInput(event) {
+    const { value } = event.target;
+    setInputValue(value);
+
+    // if (value) {
+    //   setOpen(true);
+    //   setActiveIndex(0);
+    // } else {
+    //   setOpen(false);
+    // }
+  }
+
+  function handleEnter(event) {
+    if (event.key === 'Enter' && activeIndex != null && items[activeIndex]) {
+      setInputValue(items[activeIndex]);
+      setActiveIndex(null);
+      setOpen(false);
+    }
+  }
+
+  function handleClickItem(item) {
+    setInputValue(item);
+    setOpen(false);
+    refs.domReference.current?.focus();
+  }
+
+  useEffect(() => {
+    if (!debouncedInputValue.trim()) {
+      setOpen(false);
+      setItems([]);
+      return;
+    }
+
+    setIsLoading(true);
+    const handleSearch = async () => {
+      const products = await search(debouncedInputValue, 'less');
+
+      setItems(products);
+      if (products.length > 0) {
+        setOpen(true);
+      }
+
+      setActiveIndex(0);
+    };
+    handleSearch();
+    setIsLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedInputValue]);
+
+  return (
+    <div
+      className={clsx([
+        styles.wrapper,
+        {
+          [className]: className,
+        },
+      ])}
+      ref={refs.setPositionReference}
+    >
+      <input
+        {...getReferenceProps({
+          ref: refs.setReference,
+          onChange: handleChangeInput,
+          placeholder: placeholder,
+          value: inputValue,
+          onKeyDown: handleEnter,
+          'aria-autocomplete': 'list',
+        })}
+        type="text"
+        placeholder={placeholder}
+        className={clsx([
+          {
+            [inputClassName]: inputClassName,
+          },
+        ])}
+      />
+
+      {!isLoading && <SearchIcon className={styles.icon} />}
+      {isLoading && <Loader className={styles.icon} r={20} borderWidth={2} />}
+      {open && (
+        <FloatingFocusManager
+          context={context}
+          initialFocus={-1}
+          visuallyHiddenDismiss
+        >
+          <ul
+            className={clsx([
+              styles.floating,
+              {
+                [floaterClassName]: floaterClassName,
+              },
+            ])}
+            {...getFloatingProps({
+              ref: refs.setFloating,
+              style: {
+                ...floatingStyles,
+              },
+            })}
+          >
+            {items.map((item, index) => (
+              <ItemWrapper
+                key={index}
+                className={clsx([
+                  styles.itemWrapper,
+                  {
+                    [itemWrapperClassName]: itemWrapperClassName,
+                  },
+                  {
+                    [itemWrapperActiveClassName]: activeIndex === index,
+                  },
+                ])}
+                {...getItemProps({
+                  ref(node) {
+                    listRef.current[index] = node;
+                  },
+                  onClick: () => handleClickItem(item),
+                })}
+              >
+                {renderItem && renderItem(item, index, activeIndex === index)}
+              </ItemWrapper>
+            ))}
+          </ul>
+        </FloatingFocusManager>
+      )}
+    </div>
+  );
+}
+
+PropTypes.propTypes = {
+  placeholder: PropTypes.string,
+  className: PropTypes.string,
+  inputClassName: PropTypes.string,
+  floaterClassName: PropTypes.string,
+  itemWrapperClassName: PropTypes.string,
+  itemWrapperActiveClassName: PropTypes.string,
+  renderItem: PropTypes.func,
+};
+
+export default SearchBar;
