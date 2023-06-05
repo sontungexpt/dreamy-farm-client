@@ -1,5 +1,8 @@
 import { clsx } from 'clsx';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateProfile } from '~/redux/slices/userSlice';
 
 import styles from './Account.module.scss';
 
@@ -9,18 +12,34 @@ import Button from '~/components/Button/Button';
 import {
   Pencil as PencilIcon,
   NoFilledUser as NoFilledUserIcon,
-  Phone as PhoneIcon,
   Gender as GenderIcon,
 } from '~/assets/images/icons/SvgIcons';
 
 function Account() {
   const { t } = useTranslation('translations');
+  const { email, name: nameUser, sex } = useSelector((state) => state.user);
+  const [nameUpdate, setNameUpdate] = useState(nameUser || '');
+  const [genderUpdate, setGenderUpdate] = useState(sex || '');
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      updateProfile({
+        email,
+        name: nameUpdate,
+        sex: genderUpdate,
+      }),
+    );
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className={clsx(['grid', styles.wrapper])}>
         <div className={styles.header}>
           <h2>{t('Account Informations')}</h2>
           <Button
+            type="submit"
             leftIcon={<PencilIcon className={styles.pencilIcon} />}
             className={styles.updateBtn}
             primaryText
@@ -41,6 +60,8 @@ function Account() {
                 id="name"
                 type="text"
                 name="name"
+                value={nameUpdate}
+                onChange={(e) => setNameUpdate(e.target.value)}
               />
               <Input
                 labelIcon={<GenderIcon color="var(--green-color)" />}
@@ -49,6 +70,8 @@ function Account() {
                 type="text"
                 id="gender"
                 name="gender"
+                value={genderUpdate}
+                onChange={(e) => setGenderUpdate(e.target.value)}
               />
             </div>
           </div>

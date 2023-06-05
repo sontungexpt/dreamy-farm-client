@@ -34,7 +34,10 @@ function Feedback({
       return;
     }
 
-    await addFeedback(email, feedback);
+    await addFeedback({
+      email,
+      content: feedback,
+    });
   };
   return (
     <form onSubmit={handleSendFeedback}>

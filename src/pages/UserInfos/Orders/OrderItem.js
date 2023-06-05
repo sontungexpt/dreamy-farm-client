@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './OrderItem.module.scss';
 import { AngleUp, AngleDown } from '~/assets/images/icons/SvgIcons';
 

@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { clsx } from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAddress } from '~/redux/slices/orderSlice';
+import PropTypes from 'prop-types';
 
 import styles from './SelectOtherAddress.module.scss';
 
@@ -10,7 +11,10 @@ import Trans from '~/components/Trans';
 import Selector from '~/components/Selector';
 import Button from '~/components/Button';
 import { Modal } from '~/components/ModalButton';
-import { Address as AddressIcon } from '~/assets/images/icons/SvgIcons';
+import {
+  Address as AddressIcon,
+  Phone as PhoneIcon,
+} from '~/assets/images/icons/SvgIcons';
 
 function SelectOtherAddress({ addresses }) {
   const modalRef = useRef(null);
@@ -34,25 +38,47 @@ function SelectOtherAddress({ addresses }) {
         checked={address !== ''}
         onChange={() => {}}
         onClick={() => modalRef.current.open()}
-        icon={<AddressIcon color="var(--blue-color)" />}
-        title={address || 'No address'}
+        // title={address || 'No address'}
+        // icon={<AddressIcon color="var(--blue-color)" />}
+
+        titles={[
+          {
+            title: address,
+            icon: <AddressIcon color="var(--blue-color)" />,
+          },
+          {
+            title: '0392211343',
+            icon: <PhoneIcon color="var(--green-color)" />,
+          },
+        ]}
         className={styles.card}
       />
       <Modal ref={modalRef} className={styles.innerModal}>
         <Selector
           data={addresses}
           ref={selectorRef}
-          className={styles.selector}
+          className="row"
           initialActiveIndex={0}
-          itemClassName={clsx(['l-12 c-12 m-12', styles.item])}
+          itemClassName={clsx(['col l-12 c-12 m-12', styles.item])}
           renderItem={(address, index, active) => (
             <Card
               name="address"
               checked={active}
               onChange={() => {}}
               key={index}
-              title={address}
-              icon={<AddressIcon color="var(--blue-color)" />}
+              // title={address}
+              // icon={<AddressIcon color="var(--blue-color)" />}
+              //
+              titles={[
+                {
+                  title: address,
+                  icon: <AddressIcon color="var(--blue-color)" />,
+                },
+                {
+                  title: '0392211343',
+                  icon: <PhoneIcon color="var(--green-color)" />,
+                },
+              ]}
               index={index}
             />
           )}
@@ -69,5 +95,9 @@ function SelectOtherAddress({ addresses }) {
     </>
   );
 }
+
+SelectOtherAddress.propTypes = {
+  addresses: PropTypes.array,
+};
 
 export default SelectOtherAddress;

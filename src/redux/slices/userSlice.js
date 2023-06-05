@@ -5,6 +5,7 @@ import {
   registerUser,
   updateUserFavoriteProducts,
   getUserFavoriteProducts,
+  updateUserProfile,
 } from '~/apiServices/userServices';
 
 import { routes as routesConfig } from '~/configs';
@@ -19,8 +20,13 @@ export const userSlice = createSlice({
     name: '',
     avatar: '',
     addreses: [],
+    sex: '',
+    // addreses{
+    //  address: '',
+    //  phoneNumber: '',
+    //  active: false,
+    // }
     addressActive: 0,
-    phoneNumber: '',
     roles: [],
     favoriteProducts: [],
     wishList: [], //array of objects
@@ -31,9 +37,10 @@ export const userSlice = createSlice({
       state.loggedIn = false;
       state.name = '';
       state.email = '';
+      state.avatar = '';
       state.addreses = [];
+      state.sex = '';
       state.addressActive = 0;
-      state.phoneNumber = '';
       state.roles = [];
       state.favoriteProducts = [];
       state.wishList = [];
@@ -72,6 +79,9 @@ export const userSlice = createSlice({
       })
       .addCase(getWishList.fulfilled, (state, action) => {
         state.wishList = action.payload;
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        Object.assign(state, action.payload);
       });
   },
 });
@@ -119,6 +129,14 @@ export const register = createAsyncThunk(
   async ({ name, email, password }) => {
     const status = await registerUser({ name, email, password });
     return status;
+  },
+);
+
+export const updateProfile = createAsyncThunk(
+  'user/updateProfile',
+  async ({ email, name, sex }) => {
+    const newUserInfo = await updateUserProfile({ email, name, sex });
+    return newUserInfo;
   },
 );
 

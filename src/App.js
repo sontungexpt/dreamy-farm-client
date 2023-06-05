@@ -24,9 +24,9 @@ function App() {
   // enable navigate outside of react components
 
   // logic for routes
-  const { email } = useSelector((state) => state.user);
+  const { loggedIn } = useSelector((state) => state.user);
 
-  function handleRoutes(routes, isProtected = false) {
+  function handleRoutes(routes, isBlocked = false) {
     return routes.map((route, index) => {
       let Layout = DefaultLayout;
       if (route.layout) {
@@ -44,7 +44,7 @@ function App() {
           element={
             <ErroredRoute>
               <ProtectedRoute
-                isAllowed={!isProtected}
+                isAllowed={!isBlocked}
                 redirectPath={route.redirectPath}
               >
                 <GlobalNavigate>

@@ -31,10 +31,10 @@ const notifyMessage = async (callback) => {
     }
     return res.data;
   } catch (error) {
-    if (error?.response?.status === 404) {
-      history.navigate(routesConfig.e404, { replace: true });
-      return null;
-    }
+    // if (error?.response?.status === 404) {
+    //   history.navigate(routesConfig.e404, { replace: true });
+    //   return null;
+    // }
     toast.error(t('Something went wrong'));
     console.log(error);
   }
@@ -47,5 +47,10 @@ export const get = async (url, params) => {
 
 export const post = async (url, data) => {
   const res = await notifyMessage(async () => await axios.post(url, data));
+  return res;
+};
+
+export const put = async (url, data) => {
+  const res = await notifyMessage(async () => await axios.put(url, data));
   return res;
 };

@@ -17,43 +17,22 @@ function Orders() {
       numberOfItem: 3,
       orderState: 'Complete',
     },
-    {
-      orderDate: '10/10/2021',
-      orderName: 'Order 3',
-      orderPrice: 600000,
-      numberOfItem: 2,
-      orderState: 'Complete',
-    },
-    {
-      orderDate: '10/10/2021',
-      orderName: 'Order 4',
-      orderPrice: 900000,
-      numberOfItem: 4,
-      orderState: 'Complete',
-    },
-    {
-      orderDate: '10/10/2021',
-      orderName: 'Order 5',
-      orderPrice: 1000000,
-      numberOfItem: 6,
-      orderState: 'Complete',
-    },
   ];
-
-  const orderItems = ordersData.map((order) => (
-    <OrderItem
-      orderDate={order.orderDate}
-      orderName={order.orderName}
-      orderPrice={order.orderPrice}
-      orderState={order.orderState}
-      numberOfItem={order.numberOfItem}
-    />
-  ));
 
   return (
     <div>
       <h2>Orders</h2>
-      <div style={{ marginTop: '20px' }}>{orderItems}</div>
+      <div style={{ marginTop: '20px' }}>
+        {ordersData.map((order) => (
+          <OrderItem
+            orderDate={order.orderDate}
+            orderName={order.orderName}
+            orderPrice={order.orderPrice}
+            orderState={order.orderState}
+            numberOfItem={order.numberOfItem}
+          />
+        ))}
+      </div>
     </div>
   );
 }

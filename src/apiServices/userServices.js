@@ -51,10 +51,20 @@ export const getUserFavoriteProducts = async (email) => {
   return data;
 };
 
-export const addFeedback = async (email, content) => {
+export const addFeedback = async ({ email, content }) => {
   const res = await request.post(apis.users.feedback, {
     email,
     content,
+  });
+  const { data } = res;
+  return data;
+};
+
+export const updateUserProfile = async ({ email, name, sex }) => {
+  const res = await request.put(apis.users.updateProfile, {
+    email,
+    name,
+    sex,
   });
   const { data } = res;
   return data;

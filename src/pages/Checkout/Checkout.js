@@ -7,7 +7,6 @@ import { routes as routesConfig } from '~/configs';
 import { checkoutConfigs as configs } from '~/configs/pages';
 
 import SelectOtherAddress from './SelectOtherAddress';
-import SelectOtherPhoneNumber from './SelectOtherPhoneNumber';
 import Selector from '~/components/Selector';
 import LoadMore from '~/components/LoadMore';
 import Button from '~/components/Button';
@@ -44,12 +43,6 @@ function Checkout() {
             <Trans>Billing address</Trans>
           </h1>
           <SelectOtherAddress addresses={addresses} />
-        </section>
-        <section className={styles.section}>
-          <h1 className={styles.header}>
-            <Trans>Phone number</Trans>
-          </h1>
-          <SelectOtherPhoneNumber />
         </section>
         <section className={styles.section}>
           <h1 className={styles.header}>

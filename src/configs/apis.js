@@ -18,6 +18,7 @@ const apis = {
     updateUserFavoriteProducts: '/user/updateFavoriteProducts',
     getUserFavoriteProducts: '/user/getFavoriteProducts',
     feedback: '/user/feedback',
+    updateProfile: '/user/updateProfile',
   },
   recipes: {
     getRecipes: '/recipes',

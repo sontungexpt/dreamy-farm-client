@@ -91,6 +91,10 @@ const publicRoutes = [
   { path: routesConfig.recipes, element: Recipes },
   { path: routesConfig.recipeDetail, element: RecipeDetail },
   { path: routesConfig.aboutUs, element: AboutUs },
+  {
+    path: routesConfig.shoppingCart,
+    element: ShoppingCart,
+  },
 
   // Accounts
   {
@@ -119,11 +123,6 @@ const publicRoutes = [
 ];
 
 const privateRoutes = [
-  {
-    path: routesConfig.shoppingCart,
-    element: ShoppingCart,
-    redirectPath: routesConfig.login,
-  },
   {
     path: routesConfig.checkout,
     element: Checkout,
