@@ -23,6 +23,9 @@ const apis = {
     getRecipes: '/recipes',
     addRecipe: '/recipes/add',
   },
+  orders: {
+    getOrderDetails: '/admin/orders/details',
+  },
 };
 
 export default apis;

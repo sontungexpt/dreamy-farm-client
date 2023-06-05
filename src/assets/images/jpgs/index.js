@@ -14,6 +14,7 @@ const jpgImages = {
   farmHerb: require('./farm-herb.jpg'),
   farmMeat: require('./farm-meat.png'),
   farmVegetable: require('./farm-veggie.jpg'),
+  orderItem: require('./orderItem.jpg'),
 };
 
 export default jpgImages;

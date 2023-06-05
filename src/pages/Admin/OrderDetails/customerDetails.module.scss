@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 925px;
+  height: 290px;
+  border: 2px solid rgba(33, 33, 33, 0.5);
+  justify-content: center;
+  margin-right: 20px;
+  margin-top: -410px;
+}
+
+.header {
+  width: 85%;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--box-shadow-color);
+}
+
+.userInfo {
+  margin-top: 3px;
+  margin-left: 20px;
+  font-size: 2rem;
+  color: #333333;
+  opacity: 0.8;
+}
+
+.svgIcon {
+  margin-right: 20px;
+}

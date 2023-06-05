@@ -33,6 +33,22 @@ const Checkout = lazy(() => import('~/pages/Checkout'));
 const OrderConfirm = lazy(() => import('~/pages/OrderConfirm'));
 const ProductDetail = lazy(() => import('~/pages/ProductDetail'));
 const RecipeDetail = lazy(() => import('~/pages/RecipeDetail'));
+// Admin pages
+const AdminProductsManagement = lazy(() =>
+  import('~/pages/Admin/ProductManagement'),
+);
+const adminProductsAdd = lazy(() => import('~/pages/Admin/ProductAdd'));
+const adminProductsEdit = lazy(() => import('~/pages/Admin/ProductManagement'));
+const adminUserManagement = lazy(() =>
+  import('~/pages/Admin/ProductManagement'),
+);
+const adminUserProfile = lazy(() => import('~/pages/Admin/ProductManagement'));
+const adminRecipeAdd = lazy(() => import('~/pages/Admin/ProductManagement'));
+const adminRecipeEdit = lazy(() => import('~/pages/Admin/ProductManagement'));
+const adminOrderDetails = lazy(() => import('~/pages/Admin/OrderDetails'));
+const adminOrderManagement = lazy(() =>
+  import('~/pages/Admin/ProductManagement'),
+);
 
 // Accounts lazy load
 const Login = lazy(() =>
@@ -91,6 +107,43 @@ const publicRoutes = [
   { path: routesConfig.recipes, element: Recipes },
   { path: routesConfig.recipeDetail, element: RecipeDetail },
   { path: routesConfig.aboutUs, element: AboutUs },
+  // admin
+  {
+    path: routesConfig.adminProductsManagement,
+    element: AdminProductsManagement,
+  },
+  {
+    path: routesConfig.adminProductsAdd,
+    element: adminProductsAdd,
+  },
+  {
+    path: routesConfig.adminProductsEdit,
+    element: adminProductsEdit,
+  },
+  {
+    path: routesConfig.adminRecipeAdd,
+    element: adminRecipeAdd,
+  },
+  {
+    path: routesConfig.adminRecipeEdit,
+    element: adminRecipeEdit,
+  },
+  {
+    path: routesConfig.adminOrderManagement,
+    element: adminOrderManagement,
+  },
+  {
+    path: routesConfig.adminOrderDetails,
+    element: adminOrderDetails,
+  },
+  {
+    path: routesConfig.adminUserManagement,
+    element: adminUserManagement,
+  },
+  {
+    path: routesConfig.adminUserProfile,
+    element: adminUserProfile,
+  },
 
   // Accounts
   {
