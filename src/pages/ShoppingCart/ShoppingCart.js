@@ -1,9 +1,9 @@
 import { clsx } from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  increaseProductCount,
-  decreaseProductCount,
-  removeProduct,
+  unitIncreaseProductAndCalcPrice,
+  unitDecreaseProductAndCalcPrice,
+  removeAndCalcPrice,
 } from '~/redux/slices/orderSlice';
 
 import styles from './ShoppingCart.module.scss';
@@ -23,15 +23,15 @@ function ShoppingCart() {
   } = useSelector((state) => state.order);
 
   const handleRemove = (id, type) => {
-    dispatch(removeProduct({ id, type }));
+    dispatch(removeAndCalcPrice({ id, type }));
   };
 
   const handleIncrease = (id, type) => {
-    dispatch(increaseProductCount({ id, type }));
+    dispatch(unitIncreaseProductAndCalcPrice({ id, type }));
   };
 
   const handleDecrease = (id, type) => {
-    dispatch(decreaseProductCount({ id, type }));
+    dispatch(unitDecreaseProductAndCalcPrice({ id, type }));
   };
 
   return (
@@ -55,16 +55,16 @@ function ShoppingCart() {
             controlClassName={styles.control}
             noDataClassName={styles.noData}
             itemsPerLoad={3}
-            renderItem={(item) => (
+            renderItem={(item, index) => (
               <ItemShoppingCart
-                key={item.id}
+                key={index}
                 id={item.id}
                 name={item.name}
+                image={item.image}
+                type={item.type}
                 initialCount={item.count}
                 initialPrice={item.type.price * item.count}
                 disabledInputCounter={true}
-                image={item.image}
-                type={item.type}
                 onIncrease={() => handleIncrease(item.id, item.type)}
                 onDecrease={() => handleDecrease(item.id, item.type)}
                 onRemove={() => handleRemove(item.id, item.type)}
