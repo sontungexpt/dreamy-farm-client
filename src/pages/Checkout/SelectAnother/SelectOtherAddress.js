@@ -35,11 +35,13 @@ function SelectOtherAddress({ addresses }) {
   const handleCancel = () => {
     modalRef.current.close();
   };
+
   const [showNewAddress, setShowNewAddress] = useState(false);
   const [newAddress, setNewAddress] = useState({
     phone: '',
     address: '',
   });
+
   const handleAddNewAddress = () => {
     setShowNewAddress(!showNewAddress);
   };
@@ -54,15 +56,26 @@ function SelectOtherAddress({ addresses }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { phone, address } = newAddress;
+
     // Do something with the new address (e.g., save to state or send to server)
     console.log(newAddress);
+
+    // Update the selected address with the new address
+    const updatedAddress = { phone, address };
+    addresses.push(updatedAddress);
+    setSelectedAddress(addresses.length - 1);
+
     // Reset the form fields
     setNewAddress({
       phone: '',
       address: '',
     });
+
     // Hide the "Add new address" section
     setShowNewAddress(false);
+
+    handleSave();
   };
 
   return (
@@ -81,10 +94,7 @@ function SelectOtherAddress({ addresses }) {
           <p className={clsx(styles.selectText)}>
             {selectedAddress !== null ? (
               <>
-                <p>
-                  {addresses[selectedAddress].name} -{' '}
-                  {addresses[selectedAddress].phone}
-                </p>
+                <p>{addresses[selectedAddress].phone}</p>
                 <p>{addresses[selectedAddress].address}</p>
               </>
             ) : (
