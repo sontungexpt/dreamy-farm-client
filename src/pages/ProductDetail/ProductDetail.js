@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getProduct } from '~/apiServices/productServices';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProductAndCalcTotalPrice } from '~/redux/slices/orderSlice';
+import { addAndCalcPrice } from '~/redux/slices/orderSlice';
 import { updateFavoriteProducts } from '~/redux/slices/userSlice';
 
 //configs
@@ -28,7 +28,9 @@ function ProductDetail() {
   const [price, setPrice] = useState(0);
 
   //global state
-  const { email, favoriteProducts } = useSelector((state) => state.user);
+  const { loggedIn, email, favoriteProducts } = useSelector(
+    (state) => state.user,
+  );
 
   //hooks
   const { slug } = useParams();
@@ -61,7 +63,7 @@ function ProductDetail() {
 
   const handleAdd = () => {
     dispatch(
-      addProductAndCalcTotalPrice({
+      addAndCalcPrice({
         id: product.slug,
         name: product.name,
         image: product.image,
@@ -118,6 +120,7 @@ function ProductDetail() {
                   activeIcon={<FilledHeartIcon />}
                   unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
                   initialActive={product.isFavorite}
+                  disableToggle={!loggedIn}
                   onClick={handleClickFavorite}
                 />
               </div>

@@ -4,13 +4,13 @@ import { clsx } from 'clsx';
 import styles from './Product.module.scss';
 import Image from '~/components/Image';
 
-function Product({ image, title, price, active }) {
+function Product({ image, title, price, activeClassName }) {
   return (
     <div
       className={clsx([
         styles.wrapper,
         {
-          [styles.active]: active,
+          [styles.activeClassName]: activeClassName,
         },
       ])}
     >

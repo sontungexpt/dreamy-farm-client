@@ -16,11 +16,12 @@ import {
   Phone as PhoneIcon,
 } from '~/assets/images/icons/SvgIcons';
 
-function SelectOtherAddress({ addresses }) {
+function SelectOtherAddress({ addreses }) {
   const modalRef = useRef(null);
   const selectorRef = useRef(null);
   const dispatch = useDispatch();
-  const address = useSelector((state) => state.order.address);
+  const { address: orderAdress } = useSelector((state) => state.order);
+  const { addressActive } = useSelector((state) => state.user);
 
   const handleSave = () => {
     dispatch(setAddress(selectorRef.current.activeItem));
@@ -35,19 +36,16 @@ function SelectOtherAddress({ addresses }) {
     <>
       <Card
         name="address"
-        checked={address !== ''}
+        checked={addressActive?.address && addressActive?.phoneNumber}
         onChange={() => {}}
         onClick={() => modalRef.current.open()}
-        // title={address || 'No address'}
-        // icon={<AddressIcon color="var(--blue-color)" />}
-
         titles={[
           {
-            title: address,
+            title: addressActive?.address || 'Select other address',
             icon: <AddressIcon color="var(--blue-color)" />,
           },
           {
-            title: '0392211343',
+            title: addressActive?.phoneNumber || 'Select other phone number',
             icon: <PhoneIcon color="var(--green-color)" />,
           },
         ]}
@@ -55,7 +53,7 @@ function SelectOtherAddress({ addresses }) {
       />
       <Modal ref={modalRef} className={styles.innerModal}>
         <Selector
-          data={addresses}
+          data={addreses}
           ref={selectorRef}
           className="row"
           initialActiveIndex={0}
@@ -97,7 +95,7 @@ function SelectOtherAddress({ addresses }) {
 }
 
 SelectOtherAddress.propTypes = {
-  addresses: PropTypes.array,
+  addreses: PropTypes.array,
 };
 
 export default SelectOtherAddress;

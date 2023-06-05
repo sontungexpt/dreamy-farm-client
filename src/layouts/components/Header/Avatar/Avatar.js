@@ -33,8 +33,8 @@ function Avatar({ className }) {
       anchorClassName={styles.anchor}
       floaterClassName={styles.floater}
       whenHover
-      placement="bottom-start"
       floatingProps={{
+        placement: 'bottom-end',
         middleware: [
           offset(() => ({
             mainAxis: 4,

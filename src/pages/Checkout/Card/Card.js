@@ -81,7 +81,6 @@ Card.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   onClick: PropTypes.func,
-  checked: PropTypes.bool,
 };
 
 export default Card;

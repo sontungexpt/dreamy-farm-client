@@ -1,41 +1,60 @@
-import { useState } from 'react';
 import styles from './OrderItem.module.scss';
-import { AngleUp, AngleDown } from '~/assets/images/icons/SvgIcons';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
 
 function OrderItem({
   orderName,
   orderDate,
   orderPrice,
   numberOfItem,
-  orderState,
+  orderState, // Complete, Pending, Cancel
+  className,
 }) {
-  const [orderExpand, setOrderExpland] = useState(false);
-  const handleExpland = () => {
-    setOrderExpland((prev) => !prev);
-  };
-
   return (
-    <div className={styles.border}>
-      <div className={styles.textContent}>
-        <p style={{ fontWeight: 'bold' }}>{orderName}</p>
-        <p>
+    <div
+      className={clsx([
+        styles.border,
+        {
+          [className]: className,
+        },
+      ])}
+    >
+      <div className={styles.infoWrapper}>
+        <h3>{orderName}</h3>
+        <p className={styles.subtitle}>
           {orderDate} • Rp{orderPrice} • Item:{numberOfItem} products
         </p>
       </div>
       <div className={styles.currentState}>
         <span
-          className={styles.stateColor}
-          style={{ color: orderState === 'Complete' ? 'green' : '#F2C94C' }}
+          className={clsx([
+            styles.stateColor,
+            {
+              [styles.stateColorComplete]: orderState === 'Complete',
+            },
+            {
+              [styles.stateColorPending]: orderState === 'Pending',
+            },
+            {
+              [styles.stateColorCancel]: orderState === 'Cancel',
+            },
+          ])}
         >
           •
         </span>
-        <p className={styles.stateContent}>{orderState}</p>
-      </div>
-      <div onClick={handleExpland} className={styles.moreInfoImage}>
-        {orderExpand ? <AngleUp color="black" /> : <AngleDown color="black" />}
+        {orderState}
       </div>
     </div>
   );
 }
+
+OrderItem.propTypes = {
+  orderName: PropTypes.string.isRequired,
+  orderDate: PropTypes.string.isRequired,
+  orderPrice: PropTypes.number.isRequired,
+  numberOfItem: PropTypes.number.isRequired,
+  orderState: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};
 
 export default OrderItem;

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { clsx } from 'clsx';
+import { useState } from 'react';
 
 import styles from './ItemShoppingCart.module.scss';
 
@@ -12,27 +13,35 @@ function ItemShoppingCart({
   type,
   name,
   image,
+  className,
+
+  initialPrice,
   initialCount,
+
   hasBtnRemove = true,
   hasCounter = true,
-  className,
+  disabledInputCounter = false,
 
   onIncrease,
   onDecrease,
   onRemove,
+  onCountChange,
 }) {
+  const [price, setPrice] = useState(initialPrice);
   const handleRemove = (event) => {
     event.stopPropagation();
     event.preventDefault();
     onRemove && onRemove();
   };
 
-  const handleIncrease = () => {
-    onIncrease && onIncrease();
+  const handleIncrease = (curr, next) => {
+    setPrice(next * type.price);
+    onIncrease && onIncrease(curr, next);
   };
 
-  const handleDecrease = () => {
-    onDecrease && onDecrease();
+  const handleDecrease = (curr, next) => {
+    setPrice(next * type.price);
+    onDecrease && onDecrease(curr, next);
   };
 
   return (
@@ -57,7 +66,7 @@ function ItemShoppingCart({
               <h3 className={styles.name}>{name}</h3>
               <div className={styles.priceWrapper}>
                 <PriceTag className={styles.icon} color="var(--red-color)" />
-                <h4 className={styles.price}>{type.price}đ </h4>
+                <h4 className={styles.price}>{price}đ </h4>
               </div>
             </div>
             <div className={styles.row2}>
@@ -71,10 +80,12 @@ function ItemShoppingCart({
             {hasCounter ? (
               <Counter
                 minValue={0}
+                disabledInputChange={disabledInputCounter}
                 onIncrease={handleIncrease}
                 onDecrease={handleDecrease}
                 className={styles.quantity}
                 initialCount={initialCount}
+                onCountChange={onCountChange}
               />
             ) : (
               <h4 className={styles.quantityTitle}>
@@ -95,10 +106,14 @@ ItemShoppingCart.propTypes = {
     name: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
+  className: PropTypes.string,
+
   initialCount: PropTypes.number.isRequired,
+  initialPrice: PropTypes.number.isRequired,
 
   hasBtnRemove: PropTypes.bool,
   hasCounter: PropTypes.bool,
+  disabledInputCounter: PropTypes.bool,
 
   onIncrease: PropTypes.func,
   onDecrease: PropTypes.func,

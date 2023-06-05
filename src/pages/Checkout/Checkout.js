@@ -16,7 +16,7 @@ import Card from './Card';
 
 function Checkout() {
   const dispatch = useDispatch();
-  const addresses = [
+  const addreses = [
     '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
     '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
     '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
@@ -31,7 +31,7 @@ function Checkout() {
     count: productCount,
   } = useSelector((state) => state.order);
 
-  const handlPaymentMethodChange = (method) => {
+  const handlePaymentMethodChange = (method) => {
     dispatch(setPaymentMethod(method));
   };
 
@@ -42,7 +42,7 @@ function Checkout() {
           <h1 className={styles.header}>
             <Trans>Billing address</Trans>
           </h1>
-          <SelectOtherAddress addresses={addresses} />
+          <SelectOtherAddress addreses={addreses} />
         </section>
         <section className={styles.section}>
           <h1 className={styles.header}>
@@ -52,7 +52,7 @@ function Checkout() {
             data={configs.payments}
             itemClassName={clsx([styles.card, 'l-12 m-12 c-12'])}
             onInactiveItemClick={(item) =>
-              handlPaymentMethodChange(item.method)
+              handlePaymentMethodChange(item.method)
             }
             renderItem={(item) => (
               <Card
@@ -82,6 +82,7 @@ function Checkout() {
             noDataLabel={<Trans>There is no data to load</Trans>}
             autoHidden={false}
             canCollapse={true}
+            loadAllFirst={true}
             controlClassName={styles.control}
             noDataClassName={styles.noData}
             itemsPerLoad={3}
@@ -90,6 +91,7 @@ function Checkout() {
                 key={index}
                 price={item.type.price}
                 name={item.name}
+                initialPrice={item.type.price * item.count}
                 initialCount={item.count}
                 image={item.image}
                 id={item.id}

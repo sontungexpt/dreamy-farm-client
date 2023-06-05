@@ -55,31 +55,17 @@ function Header() {
           <li className={styles.navbarItem}>
             <SearchBar
               inputClassName={styles.inputSearchBar}
-              data={[
-                {
-                  title: 'Apple',
-                  price: 100,
-                },
-                {
-                  title: 'Organge',
-                  price: 400,
-                },
-                {
-                  title: 'afda',
-                  price: 300,
-                },
-              ]}
               mediumLength
               placeholder={t('Search products')}
               floaterWrapperTitle="Products"
-              searchValue={(item) => item.title}
+              searchValue={(item) => item.name}
               renderItem={(item, active) => (
                 <Product
-                  key={item.title}
+                  key={item._id}
                   image={item.image}
                   title={item.title}
                   price={item.price}
-                  active={active}
+                  activeClassName={active}
                 />
               )}
             />

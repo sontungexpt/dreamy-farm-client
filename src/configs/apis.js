@@ -7,6 +7,7 @@ const apis = {
     frozens: '/products/frozens',
     meats_seafoods: '/products/meats-seafoods',
     dairy_eggs: '/products/dairy-eggs',
+    search: '/products/search',
     detail: (slug) => `/products/detail/${slug}`,
     category: (category) => `/products/${category}`,
   },

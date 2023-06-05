@@ -12,6 +12,8 @@ function Counter(
   {
     onIncrease, //onIncrease(current, next)
     onDecrease, //onDecrease(current, idealNextValue)
+    onCountChange, //onChange(value) - when value change by input - not work if disabledChange = true
+    disabledInputChange = false, //disable change value by input
     //idealNextValue is the value after decrease
     //the ui may not update if the next value is less than min value
 
@@ -45,11 +47,14 @@ function Counter(
   }
 
   function handleChangeInput(e) {
+    if (disabledInputChange) return;
     const re = /^[0-9\b]+$/; //rules
     if (e.target.value === '') {
       setValue(minValue);
+      onCountChange && onCountChange(minValue);
     } else if (re.test(e.target.value)) {
       setValue(Number.parseInt(e.target.value));
+      onCountChange && onCountChange(Number.parseInt(e.target.value));
     }
   }
 
@@ -65,6 +70,7 @@ function Counter(
     >
       <span
         className={clsx([
+          styles.iconWrapper,
           {
             [iconWrapperClassName]: iconWrapperClassName,
           },
@@ -79,18 +85,33 @@ function Counter(
           ])}
         />
       </span>
-      <input
-        className={clsx([
-          {
-            [inputClassName]: inputClassName,
-          },
-        ])}
-        type="text"
-        value={value}
-        onChange={handleChangeInput}
-      />
+      {disabledInputChange ? (
+        <span
+          className={clsx([
+            styles.inputSpan,
+            {
+              [inputClassName]: inputClassName,
+            },
+          ])}
+        >
+          {value}
+        </span>
+      ) : (
+        <input
+          className={clsx([
+            styles.input,
+            {
+              [inputClassName]: inputClassName,
+            },
+          ])}
+          type="text"
+          value={value}
+          onChange={handleChangeInput}
+        />
+      )}
       <span
         className={clsx([
+          styles.iconWrapper,
           {
             [iconWrapperClassName]: iconWrapperClassName,
           },

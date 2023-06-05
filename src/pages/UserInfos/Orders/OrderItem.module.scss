@@ -1,46 +1,52 @@
 .border {
   display: flex;
-  position: relative;
-  height: 90px;
-  width: 100%;
-  margin-top: 30px;
-  border: 1px Gray solid;
-  border-radius: 5px;
   align-items: center;
+  justify-content: space-between;
+
+  height: 120px;
+
+  border: 1px var(--darker-gray-color) solid;
+  border-radius: 5px;
 }
 
-p {
-  display: inline-block;
+.orderInfos {
+  margin-top: 14px;
 }
 
-.textContent {
-  display: flex;
-  font-size: 2rem;
+.infoWrapper {
+  // display: flex;
+  font-size: 2.2rem;
   margin-left: 25px;
-  flex-direction: column;
-}
+  // flex-direction: column;
 
-.stateColor {
-  margin-top: 5px;
-  margin-right: 10px;
-  font-size: 4rem;
-}
-
-.stateContent {
-  font-size: 2rem;
+  .subtitle {
+    font-size: 2rem;
+    margin-top: 10px;
+  }
 }
 
 .currentState {
   display: flex;
-  position: absolute;
-  left: 70%;
   align-items: center;
-  margin-left: auto;
-  line-height: 1;
-}
+  font-size: 2rem;
+  min-width: 180px;
+  margin-right: 25px;
 
-.moreInfoImage {
-  position: absolute;
-  margin-top: 10px;
-  left: 95%;
+  .stateColor {
+    margin-top: 9px;
+    margin-right: 10px;
+    font-size: 5rem;
+  }
+
+  .stateColorComplete {
+    color: var(--green-color);
+  }
+
+  .stateColorPending {
+    color: var(--yellow-color);
+  }
+
+  .stateColorCanceled {
+    color: var(--red-color);
+  }
 }

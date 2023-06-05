@@ -40,7 +40,7 @@ function Floater({
     whileElementsMounted: autoUpdate,
     open: isOpen,
     onOpenChange: setIsOpen,
-    placement: 'bottom-start',
+    placement: 'bottom-end',
     ...floatingProps,
     middleware: [offset(10), flip(), shift(), ...floatingProps.middleware],
   });

@@ -35,7 +35,7 @@
   max-width: 100%;
   font-weight: 600;
   text-align: center;
-  color: #444;
+  color: var(--darker-gray-color);
 }
 
 .price {
@@ -44,6 +44,6 @@
   text-align: center;
 }
 
-.active {
-  background-color: #e5e5e5;
+.activeClassName {
+  background-color: var(--separator-color);
 }

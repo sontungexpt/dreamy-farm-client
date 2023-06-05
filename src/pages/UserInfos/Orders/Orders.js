@@ -1,14 +1,15 @@
 import OrderItem from './OrderItem';
+import { useState, useEffect } from 'react';
 import styles from './Orders.module.scss';
 
 function Orders() {
-  const ordersData = [
+  const [orders, setOrders] = useState([
     {
       orderDate: '10/10/2021',
       orderName: 'Order 1',
       orderPrice: 700000,
       numberOfItem: 5,
-      orderState: 'In transmit',
+      orderState: 'Pending',
     },
     {
       orderDate: '10/10/2021',
@@ -17,14 +18,20 @@ function Orders() {
       numberOfItem: 3,
       orderState: 'Complete',
     },
-  ];
+  ]); // [OrderItem, OrderItem, OrderItem
+
+  useEffect(() => {
+    // call api
+    // setOrders();
+  }, []);
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <h2>Orders</h2>
-      <div style={{ marginTop: '20px' }}>
-        {ordersData.map((order) => (
+      <div className={styles.content}>
+        {orders.map((order) => (
           <OrderItem
+            className={styles.orderItem}
             orderDate={order.orderDate}
             orderName={order.orderName}
             orderPrice={order.orderPrice}

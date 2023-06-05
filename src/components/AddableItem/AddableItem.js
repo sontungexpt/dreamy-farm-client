@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateFavoriteProducts } from '~/redux/slices/userSlice';
-import { addProductAndCalcTotalPrice } from '~/redux/slices/orderSlice';
+import { addAndCalcPrice } from '~/redux/slices/orderSlice';
 
 import styles from './AddableItem.module.scss';
 import { routes as routeConfigs } from '~/configs';
@@ -37,7 +37,7 @@ function AddableItem({
     event.preventDefault();
 
     dispatch(
-      addProductAndCalcTotalPrice({
+      addAndCalcPrice({
         id: slug,
         name: name,
         count: 1,

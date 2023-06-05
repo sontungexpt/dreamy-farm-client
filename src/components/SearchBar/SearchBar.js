@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { clsx } from 'clsx';
 import {
   autoUpdate,
@@ -16,6 +16,8 @@ import {
   FloatingPortal,
 } from '@floating-ui/react';
 
+import { search } from '~/apiServices/searchServices';
+import { useDebounce } from '~/hooks';
 import styles from './SearchBar.module.scss';
 import { Search as SearchIcon } from '~/assets/images/icons/SvgIcons';
 import ItemWrapper from './ItemWrapper';
@@ -25,22 +27,20 @@ function SearchBar({
   noIcon, //optional
   onlyIcon, //optional
   iconLeft, //optional
+
   smallLength, //optional
   mediumLength, //optional
   largeLength, //optional
   smallHeight, //optional
-  floaterWrapperClassName, //optional
   floaterWrapperTitle, //optional
   mediumHeight, //optional
   largeHeight, //optional
+
+  floaterWrapperClassName, //optional
   inputClassName,
 
   // the function to be executed when the user presses enter
   onEnter, //optional
-
-  api,
-  //array of objects to be searched
-  data, //required
 
   //function to get the data to be compared with the input value
   // example comparativeData(item) {return item.name}
@@ -54,8 +54,9 @@ function SearchBar({
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [activeIndex, setActiveIndex] = useState(null);
-  const [items, setItems] = useState([]);
 
+  const debouncedInputValue = useDebounce(inputValue, 600);
+  const [items, setItems] = useState([]);
   const listRef = useRef([]);
 
   const { refs, floatingStyles, context } = useFloating({
@@ -93,23 +94,28 @@ function SearchBar({
   );
 
   function onChange(event) {
-    const value = event.target.value;
+    const { value } = event.target;
     setInputValue(value);
+  }
 
-    if (value) {
+  useEffect(() => {
+    if (!debouncedInputValue) {
+      setIsOpen(false);
+      setItems([]);
+      return;
+    }
+
+    const handleSearch = async () => {
+      const products = await search(debouncedInputValue);
+      console.log(products);
+
+      setItems(products);
       setIsOpen(true);
       setActiveIndex(0);
-      if (data) {
-        setItems(
-          data.filter((item) =>
-            searchValue(item).toLowerCase().includes(value.toLowerCase()),
-          ),
-        );
-      }
-    } else {
-      setIsOpen(false);
-    }
-  }
+    };
+    handleSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedInputValue]);
 
   return (
     <div
@@ -150,7 +156,7 @@ function SearchBar({
           ref: refs.setReference,
           onChange,
           value: inputValue,
-          'aria-autocomplete': 'list',
+
           onKeyDown(event) {
             if (
               event.key === 'Enter' &&
@@ -227,7 +233,6 @@ function SearchBar({
 }
 
 SearchBar.propTypes = {
-  inputClassName: PropTypes.string,
   placeholder: PropTypes.string,
   noIcon: PropTypes.bool,
   onlyIcon: PropTypes.bool,
@@ -235,13 +240,15 @@ SearchBar.propTypes = {
   smallLength: PropTypes.bool,
   mediumLength: PropTypes.bool,
   largeLength: PropTypes.bool,
-  floaterWrapperClassName: PropTypes.string,
-  floaterWrapperTitle: PropTypes.string,
-  mediumHeight: PropTypes.bool,
   smallHeight: PropTypes.bool,
   largeHeight: PropTypes.bool,
+  mediumHeight: PropTypes.bool,
+
+  inputClassName: PropTypes.string,
+  floaterWrapperClassName: PropTypes.string,
+  floaterWrapperTitle: PropTypes.string,
+
   onEnter: PropTypes.func,
-  data: PropTypes.array.isRequired,
   searchValue: PropTypes.func.isRequired,
   renderItem: PropTypes.func.isRequired,
 };

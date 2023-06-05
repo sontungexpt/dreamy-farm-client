@@ -3,92 +3,116 @@ import { toast } from 'react-toastify';
 import i18next from 'i18next';
 import { checkoutConfigs } from '~/configs/pages';
 
+const getUid = (id, type) => `${id}-${type.name}`;
+
 export const counterSlice = createSlice({
   name: 'order',
   initialState: {
-    // products in cart (if same type, count++)
-    // one product has one type
-    products: [],
-    totalPrice: 0,
-    count: 0,
-    address: '',
-    paymentMethod: checkoutConfigs.payments[0].method,
-    // products: [
-    //  {
-    //  id: 1,
-    //  name: '',
-    //  count: 0,
-    //  type:{
-    //    name: ''
-    //    price: 0
-    //  image: ""
+    products: {},
+    // products: {
+    // uid is unique key for product and uid === '{id}-{type.name}'
+    //  uid: {
+    //    id: 1, //required
+    //    status: 'ready', // 'ready' or 'busy'
+    //    name: '', //required
+    //    count: 1, //required default 1
+    //    type:{
+    //      name: '' //required
+    //      price: 0 //required
+    //    },
+    //    image: "", //optional
     //  }
+
+    // totalPrice of all products in cart
+    totalPrice: 0,
+
+    // total product count in cart (regardless of type)
+    count: 0,
+
+    address: {},
+    // address: {
+    //   address: '',
+    //   phoneNumber: '',
+    // }
+    paymentMethod: checkoutConfigs.payments[0].method, //cash or credit card
+
+    // if true, can move to checkout page
+    // true if products.length > 0 and all products.status === 'ready'
+    // status: 'ready'  or 'busy'
+    canMoveToCheckout: false,
+
+    // errors to validate before create order
+    errors: [],
   },
+
   reducers: {
+    // when add product to cart
     addProduct: (state, action) => {
-      const productAdd = action.payload;
-      productAdd.count = productAdd.count || 1;
+      const { id, name, image, type, count } = action.payload;
 
-      // if exist, product count++
-      const duplicateIndex = state.products.findIndex(
-        (product) =>
-          product.id === productAdd.id &&
-          product.type.name === productAdd.type.name,
-      );
+      const uid = getUid(id, type);
 
-      if (duplicateIndex !== -1) {
-        state.products[duplicateIndex].count += productAdd.count;
-      } else {
-        state.products.push(productAdd);
-      }
+      const countProvied = count || 1;
+      const currentCount = state.products[uid]?.count || 0;
 
-      state.count += productAdd.count;
+      state.products[uid] = {
+        id,
+        status: 'ready',
+        name,
+        image,
+        type,
+        count: currentCount + countProvied,
+      };
+      state.count += countProvied;
+
       toast.success(i18next.t('Add to shopping cart successfully'));
     },
 
+    // when remove product from cart
+    // dispatch(removeProduct({ id, type }));
     removeProduct: (state, action) => {
       const { id, type } = action.payload;
-      const duplicateIndex = state.products.findIndex(
-        (product) => product.id === id && product.type.name === type.name,
-      );
-      if (duplicateIndex !== -1) {
-        state.count -= state.products[duplicateIndex].count;
-        state.products.splice(duplicateIndex, 1);
-      }
+      const uid = getUid(id, type);
+
+      state.count -= state.products[uid].count;
+      delete state.products[uid];
     },
 
     calcTotalPrice: (state) => {
-      const totalPrice = state.products.reduce(
-        (accumulator, product) =>
-          accumulator + parseFloat(product.type.price * product.count),
-        0,
-      );
+      let totalPrice = 0;
+      Object.keys(state.products).forEach((uid) => {
+        const product = state.products[uid];
+        totalPrice += product.type.price * product.count;
+      });
       state.totalPrice = totalPrice;
     },
 
-    increaseProductCount: (state, action) => {
-      const { id, type } = action.payload;
-      const duplicateIndex = state.products.findIndex(
-        (product) => product.id === id && product.type.name === type.name,
-      );
-      if (duplicateIndex !== -1) {
-        state.products[duplicateIndex].count++;
-        state.count++;
-      }
+    changeProductCount: (state, action) => {
+      const { id, type, count } = action.payload;
+      const uid = getUid(id, type);
+      state.count -= state.products[uid].count;
+
+      state.products[uid].count = count;
+      state.count += count;
     },
 
-    decreaseProductCount: (state, action) => {
+    unitIncreaseProductCount: (state, action) => {
       const { id, type } = action.payload;
-      const duplicateIndex = state.products.findIndex(
-        (product) => product.id === id && product.type.name === type.name,
-      );
-      if (duplicateIndex !== -1) {
-        state.products[duplicateIndex].count--;
-        if (state.products[duplicateIndex].count <= 0) {
-          state.products.splice(duplicateIndex, 1);
-        }
-        state.count--;
+      const uid = getUid(id, type);
+      state.products[uid].count += 1;
+      state.count += 1;
+    },
+
+    unitDecreaseProductCount: (state, action) => {
+      const { id, type } = action.payload;
+      const uid = getUid(id, type);
+      state.products[uid].count -= 1;
+
+      if (state.products[uid].count === 0) {
+        delete state.products[uid];
       }
+
+      state.count -= 1;
     },
 
     setAddress: (state, action) => {
@@ -101,25 +125,56 @@ export const counterSlice = createSlice({
   },
 });
 
-export const addProductAndCalcTotalPrice = (product) => (dispatch) => {
+export const addAndCalcPrice = (product) => (dispatch) => {
+  const { id, name, image, type, count } = product;
   dispatch(
     counterSlice.actions.addProduct({
-      id: product.slug,
-      name: product.name,
-      image: product.image,
-      type: product.type,
-      count: product.count,
+      id,
+      name,
+      image,
+      type,
+      count,
     }),
   );
+
   dispatch(counterSlice.actions.calcTotalPrice());
 };
+
+export const removeAndCalcPrice = (product) => (dispatch) => {
+  const { id, type } = product;
+  dispatch(counterSlice.actions.removeProduct({ id, type }));
+  dispatch(counterSlice.actions.calcTotalPrice());
+};
+
+export const changeProductCountAndCalcPrice =
+  (product, count) => (dispatch) => {
+    const { id, type } = product;
+    dispatch(counterSlice.actions.changeProductCount({ id, type, count }));
+    dispatch(counterSlice.actions.calcTotalPrice());
+  };
+
+export const unitIncreaseProductAndCalcPrice =
+  ({ id, type }) =>
+  (dispatch) => {
+    dispatch(counterSlice.actions.unitIncreaseProductCount({ id, type }));
+    dispatch(counterSlice.actions.calcTotalPrice());
+  };
+
+export const unitDecreaseProductAndCalcPrice =
+  ({ id, type }) =>
+  (dispatch) => {
+    dispatch(counterSlice.actions.unitDecreaseProductCount({ id, type }));
+    dispatch(counterSlice.actions.calcTotalPrice());
+  };
 
 export const {
   calcTotalPrice,
   addProduct,
   removeProduct,
-  increaseProductCount,
-  decreaseProductCount,
+  changeProductCount,
+  unitDecreaseProductCount,
+  unitIncreaseProductCount,
+
   setAddress,
   setPaymentMethod,
 } = counterSlice.actions;

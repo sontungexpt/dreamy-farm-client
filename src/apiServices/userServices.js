@@ -34,7 +34,7 @@ export const registerUser = async ({ name, email, password }) => {
 };
 
 export const updateUserFavoriteProducts = async (email, productId, method) => {
-  const res = await request.post(apis.users.updateUserFavoriteProducts, {
+  const res = await request.put(apis.users.updateUserFavoriteProducts, {
     email,
     productId,
     method,

@@ -14,20 +14,25 @@ import history from '~/utils/navigateSite';
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    status: 'idle',
     loggedIn: false,
+    status: 'idle',
+
+    //user info
     email: '',
     name: '',
     avatar: '',
     addreses: [],
-    sex: '',
     // addreses{
-    //  address: '',
-    //  phoneNumber: '',
-    //  active: false,
+    //    address: '',
+    //    phoneNumber: '',
+    //    active: false,
     // }
-    addressActive: 0,
-    roles: [],
+    addressActive: {
+      address: '',
+      phoneNumber: '',
+    },
+    sex: '',
+    roles: [], // ['admin', 'user', 'moderator']
     favoriteProducts: [],
     wishList: [], //array of objects
   },
@@ -59,10 +64,17 @@ export const userSlice = createSlice({
           state.status = 'idle';
           return;
         }
-
         // login success
+        // assing user info to state
         Object.assign(state, action.payload);
+
+        //assign addressActive
+        state.addressActive = state.addreses.find((address) => address.active);
+
+        // set loggedIn to true
         state.loggedIn = true;
+
+        // set status to idle
         state.status = 'idle';
         history.navigate(routesConfig.root, { replace: true });
       })

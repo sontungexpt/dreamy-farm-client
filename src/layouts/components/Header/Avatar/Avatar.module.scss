@@ -11,7 +11,7 @@
 
 .floater {
   min-width: 240px;
-  border-radius: 4px;
+  border-radius: 6px;
   position: relative;
   z-index: 100;
   overflow: hidden;
@@ -25,7 +25,7 @@
   height: 100%;
   color: var(--primary-color);
   font-size: 2.2rem;
-  padding: 14px 15px;
+  padding: 10px 15px;
   &:hover {
     background-color: var(--gray-color);
 
