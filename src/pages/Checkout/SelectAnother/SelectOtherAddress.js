@@ -11,7 +11,6 @@ function AddressListItem({ address, index, selected, handleSelect }) {
   return (
     <BillingAddress
       key={index}
-      name={address.name}
       phone={address.phone}
       address={address.address}
       selected={selected}
@@ -35,6 +34,35 @@ function SelectOtherAddress({ addresses }) {
 
   const handleCancel = () => {
     modalRef.current.close();
+  };
+  const [showNewAddress, setShowNewAddress] = useState(false);
+  const [newAddress, setNewAddress] = useState({
+    phone: '',
+    address: '',
+  });
+  const handleAddNewAddress = () => {
+    setShowNewAddress(!showNewAddress);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewAddress((prevAddress) => ({
+      ...prevAddress,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Do something with the new address (e.g., save to state or send to server)
+    console.log(newAddress);
+    // Reset the form fields
+    setNewAddress({
+      phone: '',
+      address: '',
+    });
+    // Hide the "Add new address" section
+    setShowNewAddress(false);
   };
 
   return (
@@ -77,6 +105,36 @@ function SelectOtherAddress({ addresses }) {
                 handleSelect={() => handleSelectAddress(index)}
               />
             ))}
+            {showNewAddress && (
+              <div>
+                <form onSubmit={handleSubmit}>
+                  <div>
+                    <label htmlFor="phone">Phone:</label>
+                    <input
+                      type="text"
+                      id="phone"
+                      name="phone"
+                      value={newAddress.phone}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="address">Address:</label>
+                    <input
+                      type="text"
+                      id="address"
+                      name="address"
+                      value={newAddress.address}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <button type="submit">Save Address</button>
+                </form>
+              </div>
+            )}
+
+            {/* Add new address button */}
+            <button onClick={handleAddNewAddress}>Add new address</button>
           </div>
           <div className={styles.modalButtons}>
             <Button className={styles.cancelButton} onClick={handleCancel}>

@@ -11,6 +11,7 @@ import { routes as routesConfig } from '~/configs';
 
 function Checkout() {
   const { t } = useTranslation('translations');
+
   const addresses = [
     {
       phone: '0123456789',
