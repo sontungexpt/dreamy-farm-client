@@ -4,8 +4,6 @@ import { clsx } from 'clsx';
 import OptionCard from '~/pages/UserInfos/Address/OptionCard/OptionCard';
 
 function AddressCard({
-  city,
-  name,
   phone,
   address,
   onEdit,
@@ -16,16 +14,9 @@ function AddressCard({
   return (
     <button className={clsx(['grid', styles.addressCard])}>
       <div className={styles.info}>
-        <div className={styles.city}>
-          <Address className={styles.icon} color="var(--black-color)" />
-          <h3>{city}</h3>
-          {isDefault && <span className={styles.defaultMark}>Default</span>}
-        </div>
-        <div className={styles.name}>
-          <p>{name}</p>
-        </div>
         <div className={styles.phone}>
           <p>{phone}</p>
+          {isDefault && <span className={styles.defaultMark}>Default</span>}
         </div>
         <div className={styles.address}>
           <p>{address}</p>

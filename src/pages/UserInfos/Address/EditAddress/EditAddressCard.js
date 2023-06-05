@@ -31,14 +31,6 @@ function EditAddressCard() {
             </div>
             <div className={clsx(['col l-12 m-12 c-12', styles.info])}>
               <Input
-                labelIcon={<NoFilledUserIcon color="var(--blue-color)" />}
-                className={styles.input}
-                label={t('Name')}
-                id="name"
-                type="text"
-                name="name"
-              />
-              <Input
                 labelIcon={<PhoneIcon color="var(--yellow-color)" />}
                 className={styles.input}
                 label={t('Phone number')}
