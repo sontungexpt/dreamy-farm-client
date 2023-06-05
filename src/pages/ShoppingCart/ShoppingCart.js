@@ -59,9 +59,10 @@ function ShoppingCart() {
               <ItemShoppingCart
                 key={item.id}
                 id={item.id}
-                price={item.type.price}
                 name={item.name}
                 initialCount={item.count}
+                initialPrice={item.type.price * item.count}
+                disabledInputCounter={true}
                 image={item.image}
                 type={item.type}
                 onIncrease={() => handleIncrease(item.id, item.type)}
