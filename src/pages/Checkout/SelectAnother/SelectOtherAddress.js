@@ -55,27 +55,7 @@ function SelectOtherAddress({ addresses }) {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const { phone, address } = newAddress;
-
-    // Do something with the new address (e.g., save to state or send to server)
-    console.log(newAddress);
-
-    // Update the selected address with the new address
-    const updatedAddress = { phone, address };
-    addresses.push(updatedAddress);
-    setSelectedAddress(addresses.length - 1);
-
-    // Reset the form fields
-    setNewAddress({
-      phone: '',
-      address: '',
-    });
-
-    // Hide the "Add new address" section
     setShowNewAddress(false);
-
-    // handleSave();
   };
 
   return (
@@ -116,10 +96,10 @@ function SelectOtherAddress({ addresses }) {
               />
             ))}
             {showNewAddress && (
-              <div>
+              <div className={styles.newAddress}>
                 <form onSubmit={handleSubmit}>
                   <div>
-                    <label htmlFor="phone">Phone:</label>
+                    <label className={styles.phone}>Phone: </label>
                     <input
                       type="text"
                       id="phone"
@@ -129,7 +109,7 @@ function SelectOtherAddress({ addresses }) {
                     />
                   </div>
                   <div>
-                    <label htmlFor="address">Address:</label>
+                    <label className={styles.addresses}>Address: </label>
                     <input
                       type="text"
                       id="address"
@@ -138,13 +118,19 @@ function SelectOtherAddress({ addresses }) {
                       onChange={handleChange}
                     />
                   </div>
-                  <button type="submit">Save Address</button>
+                  <Button type="submit" className={styles.saveAddressButton}>
+                    Save Address
+                  </Button>
                 </form>
               </div>
             )}
 
-            {/* Add new address button */}
-            <button onClick={handleAddNewAddress}>Add new address</button>
+            <Button
+              onClick={handleAddNewAddress}
+              className={styles.addNewAddressButton}
+            >
+              Add new address
+            </Button>
           </div>
           <div className={styles.modalButtons}>
             <Button className={styles.cancelButton} onClick={handleCancel}>
