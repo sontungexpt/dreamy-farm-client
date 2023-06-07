@@ -61,14 +61,12 @@
     }
 
     .saveAddressButton {
-      background-color: var(--primary-color);
-      color: var(--white-color);
+      border-color: black;
       width: 100px;
     }
 
     .addNewAddressButton {
-      background-color: var(--primary-color);
-      color: var(--white-color);
+      border-color: black;
     }
   }
 }
