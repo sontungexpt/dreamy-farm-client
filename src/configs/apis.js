@@ -24,7 +24,7 @@ const apis = {
     addRecipe: '/recipes/add',
   },
   orders: {
-    getOrderDetails: '/admin/orders/details',
+    getOrderDetails: '/orders/details',
   },
 };
 

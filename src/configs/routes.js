@@ -11,17 +11,7 @@ const routes = {
   shoppingCart: '/shoppingCart',
   checkout: '/checkout',
   orderConfirm: '/orderConfirm',
-
-  //admin
-  adminProductsManagement: '/admin/products/management',
-  adminProductsAdd: '/admin/products/add',
-  adminProductsEdit: '/admin/products/edit',
-  adminUserManagement: '/admin/users/management',
-  adminUserProfile: '/admin/users/profile',
-  adminRecipeAdd: '/admin/recipes/add',
-  adminRecipeEdit: '/admin/recipes/edit',
-  adminOrderManagement: '/admin/orders/management',
-  adminOrderDetails: '/admin/orders/details',
+  orderDetails: '/order/details',
 
   // accounts pages
   login: '/accounts/',
