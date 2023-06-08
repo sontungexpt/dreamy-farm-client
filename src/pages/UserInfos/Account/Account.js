@@ -17,7 +17,12 @@ import {
 
 function Account() {
   const { t } = useTranslation('translations');
-  const { email, name: nameUser, sex } = useSelector((state) => state.user);
+  const {
+    email,
+    name: nameUser,
+    sex,
+    avatar,
+  } = useSelector((state) => state.user);
   const [nameUpdate, setNameUpdate] = useState(nameUser || '');
   const [genderUpdate, setGenderUpdate] = useState(sex || '');
   const dispatch = useDispatch();
@@ -50,7 +55,7 @@ function Account() {
         <div className={clsx([styles.content])}>
           <div className={clsx(['row', styles.row])}>
             <div className={clsx(['col', 'l-4', 'm-4', 'c-12', styles.avatar])}>
-              <Avatar src="https://i.pinimg.com/564x/17/d0/e3/17d0e35d3566f6fd5d643ff21b513220.jpg" />
+              <Avatar src={avatar} />
             </div>
             <div className={clsx(['col l-8 m-8 c-12', styles.info])}>
               <Input

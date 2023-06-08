@@ -35,8 +35,10 @@ const RecipeDetail = () => {
         <h2 className={styles.headerTitle}>{recipe.name}</h2>
         <ClockIcon className={styles.clockIcon} color="var(--green-color)" />
         <span className={styles.estimateCookTime}>
-          20
-          <Trans>mins</Trans>
+          {/*get the time*/}
+          {recipe.totalTime.replace(/[^0-9]/g, '') + ' '}
+          {/*get the unit of time*/}
+          <Trans>{recipe.totalTime.replace(/[0-9]/g, '')}</Trans>
         </span>
       </div>
       <div className="row">
@@ -66,13 +68,13 @@ const RecipeDetail = () => {
         </h2>
         <ul className={clsx([styles.list, styles.stepList])}>
           {recipe?.steps.map((step, index) => (
-            <div>
+            <>
               <h3 className={styles.stepTitle}>
                 <Trans>Step</Trans>
                 {` ${index + 1}`}:
               </h3>
               <li className={styles.listItem}>{step}</li>
-            </div>
+            </>
           ))}
         </ul>
       </section>

@@ -69,7 +69,6 @@ export const counterSlice = createSlice({
     },
 
     // when remove product from cart
-    // dispatch(removeProduct({ id, type }));
     removeProduct: (state, action) => {
       const { id, type } = action.payload;
       const uid = getUid(id, type);

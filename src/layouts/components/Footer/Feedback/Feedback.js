@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { clsx } from 'clsx';
+
 import PropTypes from 'prop-types';
 import Button from '~/components/Button';
 import { addFeedback } from '~/apiServices/userServices';
@@ -11,11 +12,14 @@ function Feedback({
   title = 'Send feedback',
   placeholder = 'Enter your feedback',
   sendTitle = 'Send',
+
   className,
   titleClassName,
   textareaClassName,
   sendButtonClassName,
+
   onSubmit,
+
   ...props
 }) {
   const { t } = useTranslation();
@@ -38,6 +42,7 @@ function Feedback({
       email,
       content: feedback,
     });
+    setFeedback('');
   };
   return (
     <form onSubmit={handleSendFeedback}>
@@ -87,12 +92,14 @@ function Feedback({
 
 Feedback.propTypes = {
   title: PropTypes.string,
-  className: PropTypes.string,
-  titleClassName: PropTypes.string,
   placeholder: PropTypes.string,
   sendTitle: PropTypes.string,
+
+  className: PropTypes.string,
+  titleClassName: PropTypes.string,
   textareaClassName: PropTypes.string,
   sendButtonClassName: PropTypes.string,
+
   onSubmit: PropTypes.func,
 };
 
