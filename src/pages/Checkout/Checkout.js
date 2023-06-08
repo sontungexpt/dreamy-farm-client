@@ -82,8 +82,6 @@ function Checkout() {
   };
   const handleSelectAddress = (index) => {
     setSelectedAddress(index);
-    // Reset the selected payment method when a new address is selected
-    setSelectedPaymentMethod(null);
   };
   const handleCloseCreditCardInfo = () => {
     setShowCreditCardInfo(false);
@@ -138,7 +136,10 @@ function Checkout() {
             checked={selectedPaymentMethod === 'creditCard'}
             onChange={() => handleSelectPaymentMethod('creditCard')}
           />
-          <label>Credit Card</label>
+          <label>
+            {' '}
+            <CreditCard /> Credit Card
+          </label>
         </div>
         {showCreditCardInfo && (
           <div>

@@ -109,7 +109,7 @@ function SelectOtherAddress({ addresses }) {
                     />
                   </div>
                   <div>
-                    <label className={styles.addresses}>Address: </label>
+                    <label className={styles.address}>Address: </label>
                     <input
                       type="text"
                       id="address"
@@ -118,9 +118,14 @@ function SelectOtherAddress({ addresses }) {
                       onChange={handleChange}
                     />
                   </div>
-                  <Button type="submit" className={styles.saveAddressButton}>
-                    Save Address
-                  </Button>
+                  <div className={styles.saveAddressButton}>
+                    <Button
+                      onclink={handleSubmit}
+                      className={styles.saveAddressButton}
+                    >
+                      Save Address
+                    </Button>
+                  </div>
                 </form>
               </div>
             )}
