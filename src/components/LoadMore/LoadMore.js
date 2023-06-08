@@ -28,7 +28,7 @@ function LoadMore({
   const workData = useMemo(() => {
     return objectToArray(data);
   }, [data]);
-  const getPageCount = () => Math.ceil(data.length / itemsPerLoad);
+  const getPageCount = () => Math.ceil(workData.length / itemsPerLoad);
 
   //state
   const [pageOffset, setPageOffset] = useState(() => {
@@ -41,12 +41,7 @@ function LoadMore({
 
   const displayItems = useMemo(() => {
     const itemsVisited = pageOffset * itemsPerLoad;
-    if (Array.isArray(workData)) {
-      return workData.slice(0, itemsVisited + itemsPerLoad);
-    }
     return workData.slice(0, itemsVisited + itemsPerLoad);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workData, pageOffset, itemsPerLoad]);
 
   //handler

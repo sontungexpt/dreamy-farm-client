@@ -94,9 +94,7 @@ function SearchBar({
     const { value } = event.target;
     setInputValue(value);
 
-    if (value) {
-      // setOpen(true);
-      // setActiveIndex(0);
+    if (value.trim()) {
       setIsLoading(true);
     } else {
       setIsLoading(false);
@@ -114,7 +112,6 @@ function SearchBar({
 
   function handleClickItem(item) {
     openDetail(item);
-    // setInputValue(item);
     setOpen(false);
     refs.domReference.current?.focus();
   }
