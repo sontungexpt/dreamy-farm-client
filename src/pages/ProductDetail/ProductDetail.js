@@ -5,7 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getProduct } from '~/apiServices/productServices';
 import { useDispatch, useSelector } from 'react-redux';
 import { addAndCalcPrice } from '~/redux/slices/orderSlice';
-import { updateFavoriteProducts } from '~/redux/slices/userSlice';
+import { updateWishList } from '~/redux/slices/userSlice';
 
 //configs
 import styles from './ProductDetail.module.scss';
@@ -28,9 +28,7 @@ function ProductDetail() {
   const [price, setPrice] = useState(0);
 
   //global state
-  const { loggedIn, email, favoriteProducts } = useSelector(
-    (state) => state.user,
-  );
+  const { loggedIn, email, wishList } = useSelector((state) => state.user);
 
   //hooks
   const { slug } = useParams();
@@ -46,7 +44,9 @@ function ProductDetail() {
     const handleGetProductDetail = async () => {
       const productRes = await getProduct(slug);
 
-      const isFavorite = favoriteProducts.includes(productRes._id);
+      const isFavorite = wishList.includes(
+        (item) => (item._id = productRes._id),
+      );
       if (productRes) {
         setProduct((prev) => ({
           ...prev,
@@ -78,18 +78,18 @@ function ProductDetail() {
     event.preventDefault();
     if (active) {
       dispatch(
-        updateFavoriteProducts({
+        updateWishList({
           email,
           productId: product._id,
-          method: 'add',
+          method: 'remove',
         }),
       );
     } else {
       dispatch(
-        updateFavoriteProducts({
+        updateWishList({
           email,
           productId: product._id,
-          method: 'remove',
+          method: 'add',
         }),
       );
     }

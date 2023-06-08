@@ -10,13 +10,11 @@ import { getWishList } from '~/redux/slices/userSlice';
 
 function WishList() {
   const dispatch = useDispatch();
-  const { wishList, email, favoriteProducts } = useSelector(
-    (state) => state.user,
-  );
+  const { wishList, email } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getWishList(email));
-  }, [favoriteProducts, dispatch, email]);
+  }, [dispatch, email]);
 
   return (
     <div className={clsx(['grid', styles.wrapper])}>
@@ -31,19 +29,19 @@ function WishList() {
         <PaginatePage
           className={styles.container}
           data={wishList}
-          renderItem={(item, index) => (
-            <div key={index} className={clsx(['col', 'l-3', 'm-4', 'c-6'])}>
+          itemsPerPage={8}
+          renderItem={({ product }, index) => (
+            <div key={index} className="col l-3 m-4 c-6">
               <AddableItem
+                id={product._id}
+                name={product.name}
+                image={product.image}
+                type={product.types[0]}
+                slug={product.slug}
                 isFavorite={true}
-                id={item._id}
-                name={item.name}
-                image={item.image}
-                type={item.types[0]}
-                slug={item.slug}
               />
             </div>
           )}
-          itemsPerPage={8}
         />
       </div>
     </div>

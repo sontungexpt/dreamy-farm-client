@@ -33,8 +33,8 @@ export const userSlice = createSlice({
     },
     sex: '',
     roles: [], // ['admin', 'user', 'moderator']
-    favoriteProducts: [],
-    wishList: [], //array of objects
+
+    wishList: [], //array of favorite products
   },
   reducers: {
     logout: (state) => {
@@ -47,7 +47,6 @@ export const userSlice = createSlice({
       state.sex = '';
       state.addressActive = 0;
       state.roles = [];
-      state.favoriteProducts = [];
       state.wishList = [];
 
       window.localStorage.removeItem('DreamyFarmToken');
@@ -60,13 +59,16 @@ export const userSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         // wrong email or password
-        if (!action.payload) {
+        if (!action.payload.wishList || !action.payload.userInfos) {
           state.status = 'idle';
           return;
         }
         // login success
         // assing user info to state
-        Object.assign(state, action.payload);
+        Object.assign(state, action.payload.userInfos);
+
+        // assign wishList
+        state.wishList = action.payload.wishList;
 
         //assign addressActive
         state.addressActive = state.addreses.find((address) => address.active);
@@ -86,8 +88,8 @@ export const userSlice = createSlice({
           history.navigate(routesConfig.login, { replace: true });
         }
       })
-      .addCase(updateFavoriteProducts.fulfilled, (state, action) => {
-        state.favoriteProducts = action.payload;
+      .addCase(updateWishList.fulfilled, (state, action) => {
+        state.wishList = action.payload;
       })
       .addCase(getWishList.fulfilled, (state, action) => {
         state.wishList = action.payload;
@@ -109,26 +111,23 @@ export const login = createAsyncThunk(
 
       // get user infos
       const userInfos = await getUserInfos(token);
-      return userInfos;
+      const wishList = await getUserFavoriteProducts(email);
+      return { userInfos, wishList };
     }
   },
 );
 
-export const updateFavoriteProducts = createAsyncThunk(
-  'user/updateFavoriteProducts',
+export const updateWishList = createAsyncThunk(
+  'user/updateWishList',
   async ({ email, productId, method }) => {
-    const favoriteProducts = await updateUserFavoriteProducts(
-      email,
-      productId,
-      method,
-    );
+    const wishList = await updateUserFavoriteProducts(email, productId, method);
 
-    return favoriteProducts || [];
+    return wishList || [];
   },
 );
 
 export const getWishList = createAsyncThunk(
-  'user/getWishlist',
+  'user/getWishList',
   async (email) => {
     const wishList = await getUserFavoriteProducts(email);
 

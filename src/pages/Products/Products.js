@@ -24,7 +24,7 @@ function Products() {
 
     return configs.categories[0];
   });
-  const { favoriteProducts } = useSelector((state) => state.user);
+  const { wishList } = useSelector((state) => state.user);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -41,8 +41,8 @@ function Products() {
   }, [category]);
 
   const handleIsFavorite = (id) => {
-    if (favoriteProducts) {
-      return favoriteProducts.includes(id);
+    if (wishList) {
+      return wishList.some((item) => item.product._id === id);
     }
   };
 

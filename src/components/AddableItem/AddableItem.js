@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateFavoriteProducts } from '~/redux/slices/userSlice';
+import { updateWishList } from '~/redux/slices/userSlice';
 import { addAndCalcPrice } from '~/redux/slices/orderSlice';
 
 import styles from './AddableItem.module.scss';
@@ -54,11 +54,9 @@ function AddableItem({
     event.stopPropagation();
     event.preventDefault();
     if (active) {
-      dispatch(updateFavoriteProducts({ email, productId: id, method: 'add' }));
+      dispatch(updateWishList({ email, productId: id, method: 'remove' }));
     } else {
-      dispatch(
-        updateFavoriteProducts({ email, productId: id, method: 'remove' }),
-      );
+      dispatch(updateWishList({ email, productId: id, method: 'add' }));
     }
   };
 

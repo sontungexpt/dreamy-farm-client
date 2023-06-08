@@ -11,10 +11,11 @@ function PaginatePage({
   renderSpacingClassName,
 
   responsive,
-  // responsive:{ pageRangeDisplayed,
-  // marginPagesDisplayed,
-  // marginPages: func,return number,
-  // pageRange: func,return number
+  // responsive:{
+  //    pageRangeDisplayed,
+  //    marginPagesDisplayed,
+  //    marginPages: func,return number,
+  //    pageRange: func,return number
   // }
   nextLabel = 'Next',
   previousLabel = 'Prev',
@@ -36,6 +37,7 @@ function PaginatePage({
 
   // logic
   const pageCount = Math.ceil(data.length / itemsPerPage);
+
   const displayItems = useMemo(() => {
     const itemsVisited = pageOffset * itemsPerPage;
     return data.slice(itemsVisited, itemsVisited + itemsPerPage);

@@ -24,7 +24,7 @@ import {
 function Header() {
   const { t } = useTranslation('translations');
   const { count } = useSelector((state) => state.order);
-  const { favoriteProducts } = useSelector((state) => state.user);
+  const { wishList } = useSelector((state) => state.user);
 
   return (
     <header className={styles.wrapper}>
@@ -69,7 +69,7 @@ function Header() {
                 activeIcon={<FilledHeartIcon />}
                 unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
                 disableToggle={true}
-                customEvent={() => favoriteProducts.length > 0}
+                customEvent={() => wishList.length > 0}
               />
             </Link>
           </li>

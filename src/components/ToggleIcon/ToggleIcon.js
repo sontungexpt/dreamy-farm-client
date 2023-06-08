@@ -18,15 +18,12 @@ function ToggleIcon({
   type = 'button',
   ...props
 }) {
-  const [active, setActive] = useState(() => {
-    if (typeof initialActive === 'function') {
-      return initialActive();
-    }
-    return initialActive;
-  });
+  const [active, setActive] = useState(
+    typeof initialActive === 'function' ? initialActive() : initialActive,
+  );
 
   const handleClick = (event) => {
-    onClick && onClick(event, !active);
+    onClick && onClick(event, active);
 
     if (typeof disableToggle === 'function') {
       disableToggle = disableToggle();
