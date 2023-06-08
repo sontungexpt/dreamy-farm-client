@@ -7,6 +7,8 @@ import React, { useState, useMemo } from 'react';
 import SelectOtherAddress from './SelectAnother/SelectOtherAddress';
 import LoadMore from '~/components/LoadMore';
 import Item from './Item/Item';
+import CreditCardInfo from './CreditCard/CreditCard';
+import { Modal } from '~/components/ModalButton';
 import { routes as routesConfig } from '~/configs';
 
 function Checkout() {
@@ -110,18 +112,24 @@ function Checkout() {
             <span>{t('Cash on delivery')}</span>
           </div>
         </div>
-        <div className={styles.paymentWrapper}>
+        <div className={styles.paymentMethod}>
           <input
             type="radio"
+            id="creditCard"
             name="paymentMethod"
             value="creditCard"
             checked={selectedPaymentMethod === 'creditCard'}
             onChange={() => handleSelectPaymentMethod('creditCard')}
           />
-          <div className={styles.methodContainer}>
-            <CreditCard className={styles.creditCard} />
-            <span>{t('Credit card')}</span>
-          </div>
+          <label htmlFor="creditCard" className={styles.radioButtonLabel}>
+            {t('Credit Card')}
+            {selectedPaymentMethod === 'creditCard' && (
+              <div className={styles.creditCardInfo}>
+                <CreditCard className={styles.creditCard} />
+                <CreditCardInfo />
+              </div>
+            )}
+          </label>
         </div>
       </div>
       <div className={styles.orderDetail}>

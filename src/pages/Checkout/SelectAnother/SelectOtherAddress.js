@@ -129,7 +129,7 @@ function SelectOtherAddress({ addresses }) {
               onClick={handleAddNewAddress}
               className={styles.addNewAddressButton}
             >
-              Add new address
+              +Add new address
             </Button>
           </div>
           <div className={styles.modalButtons}>
