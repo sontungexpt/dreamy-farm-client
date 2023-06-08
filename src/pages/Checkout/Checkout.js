@@ -87,6 +87,7 @@ function Checkout() {
   };
   const handleCloseCreditCardInfo = () => {
     setShowCreditCardInfo(false);
+    setSelectedPaymentMethod('creditCard'); // Keep the credit card radio button selected
   };
 
   const totalPrice = useMemo(() => {
@@ -128,7 +129,7 @@ function Checkout() {
             <span>{t('Cash on delivery')}</span>
           </div>
         </div>
-        <div className={styles.paymentMethod}>
+        <div className={styles.paymentWrapper}>
           <input
             type="radio"
             id="creditCard"
@@ -137,17 +138,15 @@ function Checkout() {
             checked={selectedPaymentMethod === 'creditCard'}
             onChange={() => handleSelectPaymentMethod('creditCard')}
           />
-          <label htmlFor="creditCard" className={styles.radioButtonLabel}>
-            <CreditCard className={styles.creditCard} />
-            {t('Credit Card')}
-          </label>
-          {selectedPaymentMethod === 'creditCard' && (
-            <div className={styles.creditCardInfo}>
-              <CreditCardInfo onClose={() => handleSelectPaymentMethod(null)} />
-            </div>
-          )}
+          <label>Credit Card</label>
         </div>
+        {showCreditCardInfo && (
+          <div>
+            <CreditCardInfo onClose={handleCloseCreditCardInfo} />
+          </div>
+        )}
       </div>
+
       <div className={styles.orderDetail}>
         <div className={clsx(['col', styles.header])}>
           <h1>{t('Order detail')}</h1>

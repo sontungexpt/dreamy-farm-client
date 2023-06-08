@@ -28,7 +28,7 @@ function CreditCardInfo({ onClose }) {
 
     // Close the modal
     // setShowCreditCardInfo(false);
-    setIsFormSubmitted(true);
+    onClose();
   };
 
   const handleClose = (event) => {
@@ -36,9 +36,6 @@ function CreditCardInfo({ onClose }) {
     // setShowCreditCardInfo(false);
     onClose();
   };
-  useEffect(() => {
-    setIsFormSubmitted(false);
-  }, []);
 
   return (
     <div className={styles.selectCard}>
@@ -76,10 +73,8 @@ function CreditCardInfo({ onClose }) {
                 required
               />
             </div>
-            <Button type="submit">Submit</Button>
-            <Button type="button" onClick={handleClose}>
-              Close
-            </Button>
+            <Button onClick={handleSubmit}>Submit</Button>
+            <Button onClick={handleClose}>Close</Button>
           </form>
         </div>
       </div>
