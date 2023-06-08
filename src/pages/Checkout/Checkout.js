@@ -3,7 +3,7 @@ import Button from '~/components/Button/Button';
 import { Wallet, CreditCard } from '~/assets/images/icons/SvgIcons';
 import { clsx } from 'clsx';
 import { useTranslation } from 'react-i18next';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import SelectOtherAddress from './SelectAnother/SelectOtherAddress';
 import LoadMore from '~/components/LoadMore';
 import Item from './Item/Item';
@@ -62,17 +62,33 @@ function Checkout() {
   ]);
 
   const [selectedAddress, setSelectedAddress] = useState(0);
+  const [showCreditCardInfo, setShowCreditCardInfo] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
+  const modalRef = useRef(null);
 
+  const handleSelectPaymentMethod = (method) => {
+    setSelectedPaymentMethod(method);
+
+    // Show credit card form if the selected method is 'creditCard'
+    if (method === 'creditCard') {
+      setShowCreditCardInfo(true);
+    } else {
+      setShowCreditCardInfo(false);
+    }
+  };
+
+  const handleCloseModal = () => {
+    modalRef.current.close();
+  };
   const handleSelectAddress = (index) => {
     setSelectedAddress(index);
     // Reset the selected payment method when a new address is selected
     setSelectedPaymentMethod(null);
   };
-
-  const handleSelectPaymentMethod = (method) => {
-    setSelectedPaymentMethod(method);
+  const handleCloseCreditCardInfo = () => {
+    setShowCreditCardInfo(false);
   };
+
   const totalPrice = useMemo(() => {
     const totalPrice = products.reduce(
       (accumulator, product) => accumulator + parseFloat(product.price),
@@ -122,14 +138,14 @@ function Checkout() {
             onChange={() => handleSelectPaymentMethod('creditCard')}
           />
           <label htmlFor="creditCard" className={styles.radioButtonLabel}>
+            <CreditCard className={styles.creditCard} />
             {t('Credit Card')}
-            {selectedPaymentMethod === 'creditCard' && (
-              <div className={styles.creditCardInfo}>
-                <CreditCard className={styles.creditCard} />
-                <CreditCardInfo />
-              </div>
-            )}
           </label>
+          {selectedPaymentMethod === 'creditCard' && (
+            <div className={styles.creditCardInfo}>
+              <CreditCardInfo onClose={() => handleSelectPaymentMethod(null)} />
+            </div>
+          )}
         </div>
       </div>
       <div className={styles.orderDetail}>
