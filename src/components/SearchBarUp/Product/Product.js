@@ -4,7 +4,7 @@ import { clsx } from 'clsx';
 import styles from './Product.module.scss';
 import Image from '~/components/Image';
 
-function Product({ image, title, description, active, activeClassName }) {
+function Product({ image, title, active, activeClassName }) {
   return (
     <div
       className={clsx([
@@ -17,19 +17,12 @@ function Product({ image, title, description, active, activeClassName }) {
         },
       ])}
     >
-      <div className="row">
-        <div className="col l-4 m-4 c-4">
-          <div className={styles.imageWrapper}>
-            <Image className={styles.image} src={image} alt={title} />
-          </div>
-        </div>
-        <div className="col l-8 m-8 c-8">
-          <div className={styles.info}>
-            <h3 className={styles.title}>{title}</h3>
-            <p className={styles.description}>{description}</p>
-          </div>
+      <div className={styles.paddingImage}>
+        <div className={styles.imageWrapper}>
+          <Image className={styles.image} src={image} alt={title} />
         </div>
       </div>
+      <h3 className={styles.title}>{title}</h3>
     </div>
   );
 }

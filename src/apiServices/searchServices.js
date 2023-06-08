@@ -1,11 +1,11 @@
 import * as request from '~/utils/request';
 import { apis } from '~/configs';
 
-export const search = async (q, type) => {
+export const search = async ({ keySearch, page, limit }) => {
   const res = await request.get(apis.products.search, {
-    q: q,
-    type: type || 'less',
+    keySearch,
+    page,
+    limit,
   });
-  console.log('res', res);
   return res.data;
 };

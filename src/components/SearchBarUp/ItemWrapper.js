@@ -8,7 +8,7 @@ function ItemWrapper(
 ) {
   const id = useId();
   return (
-    <li
+    <div
       ref={ref}
       role="option"
       id={id}
@@ -24,7 +24,7 @@ function ItemWrapper(
       ])}
     >
       {children}
-    </li>
+    </div>
   );
 }
 

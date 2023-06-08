@@ -54,13 +54,8 @@ function Header() {
         <ul className={styles.navbarList}>
           <li className={styles.navbarItem}>
             <SearchBar
-              floaterHeaderTitle="Products"
               renderItem={(item, index, active) => (
-                <Product
-                  title={item}
-                  description="this is apple this is organge this is banana "
-                  active={active}
-                />
+                <Product title={item.name} image={item.image} active={active} />
               )}
             />
           </li>

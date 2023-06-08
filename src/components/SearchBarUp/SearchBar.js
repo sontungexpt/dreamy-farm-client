@@ -21,6 +21,8 @@ import styles from './SearchBar.module.scss';
 import ItemWrapper from './ItemWrapper';
 import Loader from '~/components/Loader';
 import { Search as SearchIcon } from '~/assets/images/icons/SvgIcons';
+import { history } from '~/utils';
+import { routes as routesConfig } from '~/configs';
 
 function SearchBar({
   placeholder,
@@ -75,28 +77,44 @@ function SearchBar({
     [role, dismiss, listNav],
   );
 
+  function openDetail(item) {
+    if (item.typeSearch === 'product') {
+      history.navigate(routesConfig.moveProductDetail(item.slug), {
+        replace: true,
+      });
+    }
+    if (item.typeSearch === 'recipe') {
+      history.navigate(routesConfig.moveRecipeDetail(item.slug), {
+        replace: true,
+      });
+    }
+  }
+
   function handleChangeInput(event) {
     const { value } = event.target;
     setInputValue(value);
 
-    // if (value) {
-    //   setOpen(true);
-    //   setActiveIndex(0);
-    // } else {
-    //   setOpen(false);
-    // }
+    if (value) {
+      // setOpen(true);
+      // setActiveIndex(0);
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+      setOpen(false);
+    }
   }
 
   function handleEnter(event) {
     if (event.key === 'Enter' && activeIndex != null && items[activeIndex]) {
-      setInputValue(items[activeIndex]);
+      openDetail(items[activeIndex]);
       setActiveIndex(null);
       setOpen(false);
     }
   }
 
   function handleClickItem(item) {
-    setInputValue(item);
+    openDetail(item);
+    // setInputValue(item);
     setOpen(false);
     refs.domReference.current?.focus();
   }
@@ -104,24 +122,21 @@ function SearchBar({
   useEffect(() => {
     if (!debouncedInputValue.trim()) {
       setOpen(false);
+      setIsLoading(false);
       setItems([]);
       return;
     }
-
-    setIsLoading(true);
     const handleSearch = async () => {
-      const products = await search(debouncedInputValue, 'less');
-
-      setItems(products);
-      if (products.length > 0) {
+      const items = await search({ keySearch: debouncedInputValue });
+      setItems(items);
+      if (items.length > 0) {
         setOpen(true);
+        setActiveIndex(0);
       }
-
-      setActiveIndex(0);
     };
     handleSearch();
     setIsLoading(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint - disable - next - line react - hooks / exhaustive - deps
   }, [debouncedInputValue]);
 
   return (

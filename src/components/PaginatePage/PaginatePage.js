@@ -19,6 +19,8 @@ function PaginatePage({
   nextLabel = 'Next',
   previousLabel = 'Prev',
 
+  onPageChange,
+
   data,
   renderItem,
   itemsPerPage,
@@ -117,6 +119,7 @@ function PaginatePage({
         nextLabel={t(nextLabel)}
         previousLabel={t(previousLabel)}
         onPageChange={({ selected }) => {
+          onPageChange && onPageChange(selected);
           setPageOffset(selected);
         }}
         renderOnZeroPageCount={null}
@@ -139,6 +142,8 @@ PaginatePage.propTypes = {
     marginPages: PropTypes.func,
     pageRange: PropTypes.func,
   }),
+  renderSpacingClassName: PropTypes.string,
+  onPageChange: PropTypes.func,
   nextLabel: PropTypes.string,
   previousLabel: PropTypes.string,
   data: PropTypes.array.isRequired,

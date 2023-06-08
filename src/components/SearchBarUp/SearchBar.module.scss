@@ -4,8 +4,8 @@
   justify-content: space-between;
 
   border: 1px solid var(--black-color);
-  border-radius: 8px;
-  width: 300px;
+  border-radius: 12px;
+  width: 260px;
 
   input {
     width: 100%;
@@ -26,11 +26,7 @@
   overflow: hidden;
 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--gray-color);
   border-radius: 4px;
   user-select: none;
-
-  .itemWrapper {
-    display: block;
-    height: 100%;
-  }
 }

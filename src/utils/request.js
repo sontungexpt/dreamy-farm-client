@@ -1,8 +1,6 @@
 import axios from 'axios';
 import i18next from 'i18next';
 import { toast } from 'react-toastify';
-import history from './navigateSite';
-import { routes as routesConfig } from '~/configs';
 
 const t = i18next.t.bind(i18next);
 // const request = axios.create({
@@ -19,6 +17,7 @@ const notifyMessage = async (callback) => {
         'Get recipes successfully',
         'Product found',
         'Recipe found',
+        'Search successfully',
       ];
 
       if (message) {
@@ -29,7 +28,6 @@ const notifyMessage = async (callback) => {
         toast[status](t(message));
       }
     }
-    console.log(res);
     return res.data;
   } catch (error) {
     // if (error?.response?.status === 404) {
