@@ -48,7 +48,7 @@ function Home() {
                     category: category,
                     page: 'Home',
                   }}
-                  subTitle="Show now"
+                  subTitle="Show how"
                   to={category.to}
                   image={category.img}
                 />
