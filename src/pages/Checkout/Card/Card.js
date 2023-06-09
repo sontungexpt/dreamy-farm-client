@@ -2,6 +2,7 @@ import styles from './Card.module.scss';
 import Trans from '~/components/Trans';
 import PropTypes from 'prop-types';
 import { clsx } from 'clsx';
+import CreditCardInfo from '../CreditCard/CreditCard';
 
 function Card({
   name,
@@ -71,14 +72,6 @@ function Card({
         <div className={styles.title}>
           {icon && <span className={styles.icon}>{icon}</span>}
           <Trans>{title}</Trans>
-        </div>
-      )}
-      {showCreditCardSection && value === 'credit' && (
-        <div className={styles.creditCardSection}>
-          {/* Render credit card input fields here */}
-          <input type="text" placeholder="Credit Card Number" />
-          <input type="text" placeholder="Expiration Date" />
-          <input type="text" placeholder="CVV" />
         </div>
       )}
     </div>

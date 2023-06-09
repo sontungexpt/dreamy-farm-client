@@ -75,19 +75,13 @@ function Checkout() {
               />
             )}
           />
+          {showCreditCardSection && (
+            <section className={styles.section}>
+              <CreditCardInfo />
+            </section>
+          )}
         </section>
 
-        {showCreditCardSection && (
-          <section className={styles.section}>
-            <h1 className={styles.header}>
-              <Trans>Credit Card Information</Trans>
-            </h1>
-            {/* Render credit card input fields here */}
-            <input type="text" placeholder="Credit Card Number" />
-            <input type="text" placeholder="Expiration Date" />
-            <input type="text" placeholder="CVV" />
-          </section>
-        )}
         <section className={styles.section}>
           <h1 className={clsx([styles.header, styles.orderHeader])}>
             <Trans>Order detail</Trans>
