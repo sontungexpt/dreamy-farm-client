@@ -23,13 +23,15 @@ function ToggleIcon({
   );
 
   const handleClick = (event) => {
-    onClick && onClick(event, active);
-
     if (typeof disableToggle === 'function') {
       disableToggle = disableToggle();
     }
-    if (disableToggle) return;
+    if (disableToggle) {
+      onClick && onClick(event);
+      return;
+    }
 
+    onClick && onClick(event, active);
     setActive(!active);
     if (active) {
       onUnActive && onUnActive(event);

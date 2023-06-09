@@ -18,6 +18,7 @@ const notifyMessage = async (callback) => {
         'Product found',
         'Recipe found',
         'Search successfully',
+        'Get favorite products successfully',
       ];
 
       if (message) {

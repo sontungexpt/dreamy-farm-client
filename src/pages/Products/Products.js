@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import styles from './Products.module.scss';
 import { productsPageConfigs as configs } from '~/configs/pages';
 import { getProductsAtCategory } from '~/apiServices/productServices';
+import { routes as routesConfig } from '~/configs';
 import history from '~/utils/navigateSite';
 
 import PaginatePage from '~/components/PaginatePage';
@@ -14,6 +15,7 @@ import Trans from '~/components/Trans';
 
 function Products() {
   const [category, setCategory] = useState(() => {
+    // get category from history state when change page from Home
     const { state } = history.location;
     if (state) {
       const { page, category } = state;
@@ -21,7 +23,6 @@ function Products() {
         return category;
       }
     }
-
     return configs.categories[0];
   });
   const { wishList } = useSelector((state) => state.user);
@@ -33,7 +34,7 @@ function Products() {
       if (productsRes) {
         setProducts(productsRes);
       } else {
-        history.navigate('/404', { replace: true });
+        history.navigate(routesConfig.e404, { replace: true });
       }
     };
     handleGetProducts();
@@ -70,8 +71,8 @@ function Products() {
           <PaginatePage
             className={styles.container}
             data={products}
-            renderItem={(item, index) => (
-              <div key={index} className="col l-3 m-4 c-6">
+            renderItem={(item) => (
+              <div key={item._id} className="col l-3 m-4 c-6">
                 <AddableItem
                   id={item._id}
                   name={item.name}

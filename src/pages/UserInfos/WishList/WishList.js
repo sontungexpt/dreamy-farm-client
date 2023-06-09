@@ -1,20 +1,13 @@
 import { clsx } from 'clsx';
-import { useEffect } from 'react';
 import styles from './WishList.module.scss';
 
 import PaginatePage from '~/components/PaginatePage';
 import AddableItem from '~/components/AddableItem';
 import Trans from '~/components/Trans';
-import { useSelector, useDispatch } from 'react-redux';
-import { getWishList } from '~/redux/slices/userSlice';
+import { useSelector } from 'react-redux';
 
 function WishList() {
-  const dispatch = useDispatch();
-  const { wishList, email } = useSelector((state) => state.user);
-
-  useEffect(() => {
-    dispatch(getWishList(email));
-  }, [dispatch, email]);
+  const { wishList } = useSelector((state) => state.user);
 
   return (
     <div className={clsx(['grid', styles.wrapper])}>
@@ -30,8 +23,8 @@ function WishList() {
           className={styles.container}
           data={wishList}
           itemsPerPage={8}
-          renderItem={({ product }, index) => (
-            <div key={index} className="col l-3 m-4 c-6">
+          renderItem={({ product }) => (
+            <div key={product._id} className="col l-3 m-4 c-6">
               <AddableItem
                 id={product._id}
                 name={product.name}

@@ -30,7 +30,7 @@ function AddableItem({
   onAdd,
 }) {
   const dispatch = useDispatch();
-  const { email } = useSelector((state) => state.user);
+  const { email, loggedIn } = useSelector((state) => state.user);
 
   const handleAdd = (event) => {
     event.stopPropagation();
@@ -67,7 +67,7 @@ function AddableItem({
         <div>
           <h3 className={styles.name}>{name}</h3>
           <ToggleIcon
-            disableToggle={!email}
+            disableToggle={!loggedIn}
             initialActive={isFavorite}
             className={styles.favorite}
             activeIcon={<FilledHeartIcon />}
