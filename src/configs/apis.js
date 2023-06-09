@@ -15,7 +15,7 @@ const apis = {
     login: '/user/login',
     register: '/user/register',
     forgotPassword: '/user/forgot-password',
-    userInfos: '/user/userInfos',
+    userInfos: '/user/infos',
     updateUserFavoriteProducts: '/user/favoriteProducts/update',
     getUserFavoriteProducts: '/user/favoriteProducts/get',
     feedback: '/user/feedback',
