@@ -1,48 +1,40 @@
 import { clsx } from 'clsx';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import styles from './WishList.module.scss';
 
 import PaginatePage from '~/components/PaginatePage';
 import AddableItem from '~/components/AddableItem';
+import Trans from '~/components/Trans';
+import { useSelector } from 'react-redux';
 
 function WishList() {
-  const { t } = useTranslation('translations');
-  const [items, setItems] = useState([
-    'Apple',
-    'Noodle',
-    'Fish',
-    'French fries',
-    'Water',
-    'Organe',
-    'Tomato',
-    'Kiwi',
-    'Banana',
-    'Potato',
-    'Milk',
-    'Bread',
-    'Rice',
-    'Sugar',
-    'Salt',
-    'Pepper',
-  ]);
+  const { wishList } = useSelector((state) => state.user);
+
   return (
     <div className={clsx(['grid', styles.wrapper])}>
       <div className={styles.header}>
-        <h2>{t('Wishlist')}</h2>
-        <div className={styles.wishListCount}>({items.length})</div>
+        <h2>
+          <Trans>Wishlist</Trans>
+        </h2>
+        <div className={styles.wishListCount}>{wishList.length}</div>
       </div>
 
       <div className={styles.main}>
         <PaginatePage
           className={styles.container}
-          data={items}
-          renderItem={(item, index) => (
-            <div key={index} className={clsx(['col', 'l-3', 'm-4', 'c-6'])}>
-              <AddableItem price="100" name={item} />
+          data={wishList}
+          itemsPerPage={8}
+          renderItem={({ product }) => (
+            <div key={product._id} className="col l-3 m-4 c-6">
+              <AddableItem
+                id={product._id}
+                name={product.name}
+                image={product.image}
+                type={product.types[0]}
+                slug={product.slug}
+                isFavorite={true}
+              />
             </div>
           )}
-          itemsPerPage={8}
         />
       </div>
     </div>

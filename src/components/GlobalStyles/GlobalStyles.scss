@@ -1,11 +1,9 @@
 @import 'normalize.css';
 @import url('https://fonts.googleapis.com/css2?family=Rhodium+Libre&display=swap');
-// @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap');
 
 html {
   font-size: 62.5%;
   font-family: 'Rhodium Libre', sans-serif;
-  // font-family: 'EB Garamond', serif;
   box-sizing: border-box;
 }
 
@@ -48,10 +46,13 @@ a {
   --footer-color: #1b4c29db;
 
   --green-color: #00a650;
+  --light-green-color: #47d864;
   --red-color: #ee2c4a;
   --yellow-color: #eda500;
+  --light-yellow-color: #ffc021;
   --blue-color: #0046ab;
   --light-blue-color: #89b4fa;
+  --sky-blue-color: #2f86eb;
   --gray-color: #ccc;
   --purple-color: #c688eb;
   --pink-color: #e4a4e4;

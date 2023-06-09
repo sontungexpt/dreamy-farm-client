@@ -14,6 +14,7 @@ import {
 } from '@floating-ui/react';
 import { useState } from 'react';
 import clsx from 'clsx';
+import ItemWrapper from './ItemWrapper';
 
 function Floater({
   className,
@@ -22,6 +23,10 @@ function Floater({
 
   anchor,
   innerFloater,
+
+  data,
+  renderItem, // just work when data is provided
+  floaterItemClassName, // just work when data is provided
 
   whenHover = false,
   whenFocus = false,
@@ -35,7 +40,7 @@ function Floater({
     whileElementsMounted: autoUpdate,
     open: isOpen,
     onOpenChange: setIsOpen,
-    placement: 'bottom-start',
+    placement: 'bottom-end',
     ...floatingProps,
     middleware: [offset(10), flip(), shift(), ...floatingProps.middleware],
   });
@@ -88,20 +93,45 @@ function Floater({
       >
         {anchor}
       </div>
-      {isOpen && (
-        <ul
-          className={clsx([
-            {
-              [floaterClassName]: floaterClassName,
-            },
-          ])}
-          ref={refs.setFloating}
-          style={floatingStyles}
-          {...getFloatingProps()}
-        >
-          {innerFloater}
-        </ul>
-      )}
+      {isOpen &&
+        (data ? (
+          <ul
+            className={clsx([
+              {
+                [floaterClassName]: floaterClassName,
+              },
+            ])}
+            ref={refs.setFloating}
+            style={floatingStyles}
+            {...getFloatingProps()}
+          >
+            {data.map((item, index) => (
+              <ItemWrapper
+                key={index}
+                className={clsx([
+                  {
+                    [floaterItemClassName]: floaterItemClassName,
+                  },
+                ])}
+              >
+                {renderItem(item, index)}
+              </ItemWrapper>
+            ))}
+          </ul>
+        ) : (
+          <ul
+            className={clsx([
+              {
+                [floaterClassName]: floaterClassName,
+              },
+            ])}
+            ref={refs.setFloating}
+            style={floatingStyles}
+            {...getFloatingProps()}
+          >
+            {innerFloater}
+          </ul>
+        ))}
     </div>
   );
 }

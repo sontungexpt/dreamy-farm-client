@@ -11,13 +11,16 @@ function PaginatePage({
   renderSpacingClassName,
 
   responsive,
-  // responsive:{ pageRangeDisplayed,
-  // marginPagesDisplayed,
-  // marginPages: func,return number,
-  // pageRange: func,return number
+  // responsive:{
+  //    pageRangeDisplayed,
+  //    marginPagesDisplayed,
+  //    marginPages: func,return number,
+  //    pageRange: func,return number
   // }
   nextLabel = 'Next',
   previousLabel = 'Prev',
+
+  onPageChange,
 
   data,
   renderItem,
@@ -34,6 +37,7 @@ function PaginatePage({
 
   // logic
   const pageCount = Math.ceil(data.length / itemsPerPage);
+
   const displayItems = useMemo(() => {
     const itemsVisited = pageOffset * itemsPerPage;
     return data.slice(itemsVisited, itemsVisited + itemsPerPage);
@@ -117,6 +121,7 @@ function PaginatePage({
         nextLabel={t(nextLabel)}
         previousLabel={t(previousLabel)}
         onPageChange={({ selected }) => {
+          onPageChange && onPageChange(selected);
           setPageOffset(selected);
         }}
         renderOnZeroPageCount={null}
@@ -139,6 +144,8 @@ PaginatePage.propTypes = {
     marginPages: PropTypes.func,
     pageRange: PropTypes.func,
   }),
+  renderSpacingClassName: PropTypes.string,
+  onPageChange: PropTypes.func,
   nextLabel: PropTypes.string,
   previousLabel: PropTypes.string,
   data: PropTypes.array.isRequired,

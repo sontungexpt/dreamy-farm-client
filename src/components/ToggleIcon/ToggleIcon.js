@@ -5,41 +5,50 @@ import styles from './ToggleIcon.module.scss';
 
 function ToggleIcon({
   className,
+  disableToggle = false,
   activeIcon,
   unActiveIcon,
-  onClick,
+
+  initialActive = false,
   customEvent,
-  onUnClick,
+
+  onClick,
+  onActive,
+  onUnActive,
+  type = 'button',
   ...props
 }) {
-  const [isClick, setIsClick] = useState(false);
+  const [active, setActive] = useState(
+    typeof initialActive === 'function' ? initialActive() : initialActive,
+  );
 
   const handleClick = (event) => {
-    event.stopPropagation();
+    if (typeof disableToggle === 'function') {
+      disableToggle = disableToggle();
+    }
+    if (disableToggle) {
+      onClick && onClick(event);
+      return;
+    }
 
-    setIsClick(!isClick);
-    if (isClick) {
-      onUnClick && onUnClick();
+    onClick && onClick(event, active);
+    setActive(!active);
+    if (active) {
+      onUnActive && onUnActive(event);
     } else {
-      onClick && onClick();
+      onActive && onActive(event);
     }
   };
 
   return (
-    <div
+    <button
       {...props}
+      type={type}
       className={clsx([styles.wrapper, { [className]: className }])}
+      onClick={handleClick}
     >
-      {customEvent ? (
-        customEvent() ? (
-          activeIcon
-        ) : (
-          unActiveIcon
-        )
-      ) : (
-        <span onClick={handleClick}>{isClick ? activeIcon : unActiveIcon}</span>
-      )}
-    </div>
+      {(customEvent && customEvent()) || active ? activeIcon : unActiveIcon}
+    </button>
   );
 }
 
@@ -47,9 +56,12 @@ ToggleIcon.propTypes = {
   className: PropTypes.string,
   activeIcon: PropTypes.node.isRequired,
   unActiveIcon: PropTypes.node.isRequired,
+  onActive: PropTypes.func,
+  onUnActive: PropTypes.func,
   onClick: PropTypes.func,
-  onUnClick: PropTypes.func,
-  customEvent: PropTypes.func,
+  disableToggle: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  initialActive: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  type: PropTypes.string,
 };
 
 export default ToggleIcon;

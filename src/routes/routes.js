@@ -5,9 +5,9 @@ import { lazy } from 'react';
 import { routes as routesConfig } from '~/configs';
 
 // Layouts
-const AccountLayout = lazy(() =>
+const CenterContentLayout = lazy(() =>
   import('~/layouts').then((module) => ({
-    default: module.AccountLayout,
+    default: module.CenterContentLayout,
   })),
 );
 
@@ -32,6 +32,7 @@ const ShoppingCart = lazy(() => import('~/pages/ShoppingCart'));
 const Checkout = lazy(() => import('~/pages/Checkout'));
 const OrderConfirm = lazy(() => import('~/pages/OrderConfirm'));
 const ProductDetail = lazy(() => import('~/pages/ProductDetail'));
+const RecipeDetail = lazy(() => import('~/pages/RecipeDetail'));
 
 // Accounts lazy load
 const Login = lazy(() =>
@@ -88,40 +89,40 @@ const publicRoutes = [
   { path: routesConfig.products, element: Products },
   { path: routesConfig.productDetail, element: ProductDetail },
   { path: routesConfig.recipes, element: Recipes },
+  { path: routesConfig.recipeDetail, element: RecipeDetail },
   { path: routesConfig.aboutUs, element: AboutUs },
+  {
+    path: routesConfig.shoppingCart,
+    element: ShoppingCart,
+  },
 
   // Accounts
   {
     path: routesConfig.login,
     element: Login,
-    layout: AccountLayout,
+    layout: CenterContentLayout,
   },
 
   {
     path: routesConfig.register,
     element: Register,
-    layout: AccountLayout,
+    layout: CenterContentLayout,
   },
 
   {
     path: routesConfig.forgotPassword,
     element: ForgotPassword,
-    layout: AccountLayout,
+    layout: CenterContentLayout,
   },
 
   {
-    path: routesConfig.e404,
+    path: '*',
     element: E404,
     layout: null,
   },
 ];
 
 const privateRoutes = [
-  {
-    path: routesConfig.shoppingCart,
-    element: ShoppingCart,
-    redirectPath: routesConfig.login,
-  },
   {
     path: routesConfig.checkout,
     element: Checkout,
@@ -130,6 +131,7 @@ const privateRoutes = [
   {
     path: routesConfig.orderConfirm,
     element: OrderConfirm,
+    layout: CenterContentLayout,
     redirectPath: routesConfig.login,
   },
   {

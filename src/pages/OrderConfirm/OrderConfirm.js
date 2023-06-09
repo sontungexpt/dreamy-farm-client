@@ -1,11 +1,12 @@
-import styles from './OrderConfirm.module.scss';
-import { GreenTick } from '~/assets/images/icons/SvgIcons';
 import { clsx } from 'clsx';
 import { useTranslation } from 'react-i18next';
+
+import styles from './OrderConfirm.module.scss';
+import { GreenTick } from '~/assets/images/icons/SvgIcons';
 function OrderConfirm() {
   const { t } = useTranslation('translations');
   return (
-    <div className={clsx(['grid', 'wide', styles.body])}>
+    <div className={styles.wrapper}>
       <div className={clsx([styles.greenTick])}>
         <GreenTick />
       </div>

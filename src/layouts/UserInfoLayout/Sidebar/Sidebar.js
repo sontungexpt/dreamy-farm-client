@@ -4,12 +4,22 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './Sidebar.module.scss';
 import { userInfoConfigs as configs } from '~/configs/pages';
+import { useDispatch } from 'react-redux';
+import { logout } from '~/redux/slices/userSlice';
 
 import Menu, { MenuItem } from './Menu';
 import { Setting as SettingIcon } from '~/assets/images/icons/SvgIcons';
 
 function Sidebar({ className, ...props }) {
   const { t } = useTranslation('translations');
+  const dispatch = useDispatch();
+
+  const handleLogout = (title) => {
+    if (title === 'Logout') {
+      dispatch(logout());
+    }
+  };
+
   return (
     <aside
       {...props}
@@ -37,6 +47,7 @@ function Sidebar({ className, ...props }) {
               key={index}
               title={t(title)}
               icon={<Icon color={colorIcon} className={styles.icon} />}
+              onClick={() => handleLogout(title)}
             />
           ),
         )}

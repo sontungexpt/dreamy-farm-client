@@ -1,12 +1,14 @@
 //libraries
 import { clsx } from 'clsx';
-import { useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useRef, useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { getProduct } from '~/apiServices/productServices';
+import { useDispatch, useSelector } from 'react-redux';
+import { addAndCalcPrice } from '~/redux/slices/orderSlice';
+import { updateWishList } from '~/redux/slices/userSlice';
 
 //configs
 import styles from './ProductDetail.module.scss';
-import { productsPageConfigs as configs } from '~/configs/pages';
 
 //components
 import Counter from '~/components/Counter';
@@ -18,65 +20,149 @@ import {
   EmptyHeart as EmptyHeartIcon,
 } from '~/assets/images/icons/SvgIcons';
 import Selector from '~/components/Selector';
+import Trans from '~/components/Trans';
 
-function ProductDetail({ image, price, description }) {
-  const { id } = useParams();
-  const { t } = useTranslation('translations');
+function ProductDetail() {
+  //state
+  const [product, setProduct] = useState();
+  const [price, setPrice] = useState(0);
+
+  //global state
+  const { loggedIn, email, wishList } = useSelector((state) => state.user);
+
+  //hooks
+  const { slug } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  //ref
   const counterRef = useRef();
-  const selectedPriceRangeRef = useRef();
+  const typeRef = useRef();
+
+  //effect
+  useEffect(() => {
+    const handleGetProductDetail = async () => {
+      const productRes = await getProduct(slug);
+
+      const isFavorite = wishList.includes(
+        (item) => (item._id = productRes._id),
+      );
+      if (productRes) {
+        setProduct((prev) => ({
+          ...prev,
+          ...productRes,
+          isFavorite,
+        }));
+      } else {
+        navigate('/e404', { replace: true });
+      }
+    };
+    handleGetProductDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]);
+
+  const handleAdd = () => {
+    dispatch(
+      addAndCalcPrice({
+        id: product.slug,
+        name: product.name,
+        image: product.image,
+        type: typeRef.current.activeItem,
+        count: counterRef.current.value,
+      }),
+    );
+  };
+
+  const handleClickFavorite = (event, active) => {
+    event.stopPropagation();
+    event.preventDefault();
+    if (active) {
+      dispatch(
+        updateWishList({
+          email,
+          productId: product._id,
+          method: 'remove',
+        }),
+      );
+    } else {
+      dispatch(
+        updateWishList({
+          email,
+          productId: product._id,
+          method: 'add',
+        }),
+      );
+    }
+  };
+
+  // make sure product is loaded to render
+  if (!product) return null;
 
   return (
     <div className={clsx(['grid', 'wide', styles.wrapper])}>
       <div className="row">
         <div className={clsx(['col', 'l-6', 'm-6', 'c-12', styles.col1])}>
           <div className={styles.imageFixed}>
-            <Image className={styles.image} src={image} alt="Image Item" />
+            <Image
+              className={styles.image}
+              src={product.image}
+              alt="Image Item"
+            />
           </div>
         </div>
         <div className={clsx(['col', 'l-6', 'm-6', 'c-12'])}>
           <div className={styles.container}>
             <div>
               <div className={styles.header}>
-                <h3 className={styles.name}>{id}</h3>
+                <h3 className={styles.name}>{product.name}</h3>
                 <ToggleIcon
                   className={styles.favorite}
-                  clickIcon={<FilledHeartIcon />}
-                  unClickIcon={<EmptyHeartIcon color="var(--red-color)" />}
+                  activeIcon={<FilledHeartIcon />}
+                  unActiveIcon={<EmptyHeartIcon color="var(--red-color)" />}
+                  initialActive={product.isFavorite}
+                  disableToggle={!loggedIn}
+                  onClick={handleClickFavorite}
                 />
               </div>
               <p className={styles.price}>{price} đ</p>
             </div>
 
             <Selector
-              ref={selectedPriceRangeRef}
-              className={styles.type}
-              itemClassName={styles.typeButton}
+              ref={typeRef}
+              className={clsx([styles.type, 'row'])}
+              itemClassName={clsx(['col', 'l-4', 'm-4', 'c-6'])}
               itemActiveClassName={styles.active}
-              data={configs.priceRanges}
-              renderItem={(item) => item}
+              onActiveChange={(item) =>
+                setPrice(item.price * counterRef.current.value)
+              }
+              data={product.types}
+              renderItem={(item) => (
+                <div className={styles.typeButton}>{item.name}</div>
+              )}
             />
 
-            <Counter ref={counterRef} className={styles.quantity} />
+            <Counter
+              ref={counterRef}
+              onIncrease={(curr, next) =>
+                setPrice(typeRef.current.activeItem.price * next)
+              }
+              onDecrease={(curr, next) =>
+                setPrice(typeRef.current.activeItem.price * next)
+              }
+              className={styles.quantity}
+            />
 
-            <Button
-              onClick={() => {
-                console.log(counterRef.current.value);
-                console.log(selectedPriceRangeRef.current.activeIndex);
-              }}
-              primary
-              className={styles.addBtn}
-            >
-              {t('Add to cart')}
+            <Button onClick={handleAdd} primary className={styles.addBtn}>
+              <Trans>Add to cart</Trans>
             </Button>
           </div>
         </div>
       </div>
       <div className={styles.description}>
-        <h3>{t('Description')}</h3>
-        <p>
-          {description ||
-            'Beli aneka produk di Toko YouReady secara online sekarang. Kamu bisa beli produk dari Toko YouReady dengan aman & mudah dari Kota Bandung. Ingin belanja lebih hemat & terjangkau di Toko YouReady? Kamu bisa gunakan fitur Cicilan 0% dari berbagai bank dan fitur Bebas Ongkir di Toko YouReady sehingga kamu bisa belanja online dengan nyaman di Tokopedia. Beli aneka produk terbaru di Toko YouReady dengan mudah dari genggaman tangan kamu menggunakan Aplikasi Tokopedia. Cek terus juga Toko YouReady untuk update Produk, Kode Voucher hingga Promo Terbaru dari Toko YouReady Terbaru secara online di Tokopedia'}
-        </p>
+        <h3>
+          <Trans>Description</Trans>
+        </h3>
+        <p>{product.description || <Trans>No description</Trans>}</p>
       </div>
     </div>
   );

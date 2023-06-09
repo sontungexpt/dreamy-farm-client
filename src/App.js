@@ -9,6 +9,9 @@ import { publicRoutes, privateRoutes } from '~/routes';
 import Loader from '~/components/Loader';
 import ProtectedRoute from '~/components/Routes/ProtectedRoute';
 import ErroredRoute from '~/components/Routes/ErroredRoute';
+import { ToastContainer } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import GlobalNavigate from './components/GlobalNavigate';
 
 //layouts
 const DefaultLayout = lazy(() =>
@@ -18,7 +21,12 @@ const DefaultLayout = lazy(() =>
 );
 
 function App() {
-  function handleRoutes(routes, isProtected = false) {
+  // enable navigate outside of react components
+
+  // logic for routes
+  const { loggedIn } = useSelector((state) => state.user);
+
+  function handleRoutes(routes, isBlocked = false) {
     return routes.map((route, index) => {
       let Layout = DefaultLayout;
       if (route.layout) {
@@ -36,12 +44,14 @@ function App() {
           element={
             <ErroredRoute>
               <ProtectedRoute
-                isAllowed={!isProtected}
+                isAllowed={!isBlocked}
                 redirectPath={route.redirectPath}
               >
-                <Layout>
-                  <Page />
-                </Layout>
+                <GlobalNavigate>
+                  <Layout>
+                    <Page />
+                  </Layout>
+                </GlobalNavigate>
               </ProtectedRoute>
             </ErroredRoute>
           }
@@ -70,6 +80,18 @@ function App() {
             {handleRoutes(privateRoutes)}
           </Routes>
         </Suspense>
+        <ToastContainer
+          position="top-center"
+          autoClose={2500}
+          hideProgressBar
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
       </div>
     </Router>
   );

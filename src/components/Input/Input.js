@@ -74,7 +74,7 @@ function Input({
         />
       </div>
 
-      {required && (
+      {required && errorMessage && (
         <span
           className={clsx([
             styles.error,
@@ -83,7 +83,7 @@ function Input({
             },
           ])}
         >
-          {errorMessage || 'This field is required'}
+          {errorMessage}
         </span>
       )}
     </div>
