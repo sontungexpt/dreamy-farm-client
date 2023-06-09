@@ -86,9 +86,9 @@ function Checkout() {
             controlClassName={styles.control}
             noDataClassName={styles.noData}
             itemsPerLoad={3}
-            renderItem={(item, index) => (
+            renderItem={(item, index, key) => (
               <ItemShoppingCart
-                key={index}
+                key={key}
                 price={item.type.price}
                 name={item.name}
                 initialPrice={item.type.price * item.count}
