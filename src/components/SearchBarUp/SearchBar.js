@@ -40,8 +40,7 @@ function SearchBar({
   const [activeIndex, setActiveIndex] = useState(null);
   const [items, setItems] = useState([]);
   const listRef = useRef([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const debouncedInputValue = useDebounce(inputValue, 600);
+  const { isLoading, debounceValue } = useDebounce(inputValue, 500);
 
   const { refs, floatingStyles, context } = useFloating({
     whileElementsMounted: autoUpdate,
@@ -94,12 +93,7 @@ function SearchBar({
     const { value } = event.target;
     setInputValue(value);
 
-    if (value.trim()) {
-      setIsLoading(true);
-    } else {
-      setIsLoading(false);
-      setOpen(false);
-    }
+    if (!value.trim()) setOpen(false);
   }
 
   function handleEnter(event) {
@@ -117,14 +111,13 @@ function SearchBar({
   }
 
   useEffect(() => {
-    if (!debouncedInputValue.trim()) {
+    if (!debounceValue.trim()) {
       setOpen(false);
-      setIsLoading(false);
       setItems([]);
       return;
     }
     const handleSearch = async () => {
-      const items = await search({ keySearch: debouncedInputValue });
+      const items = await search({ keySearch: debounceValue.trim() });
       setItems(items);
       if (items.length > 0) {
         setOpen(true);
@@ -132,9 +125,7 @@ function SearchBar({
       }
     };
     handleSearch();
-    setIsLoading(false);
-    // eslint - disable - next - line react - hooks / exhaustive - deps
-  }, [debouncedInputValue]);
+  }, [debounceValue]);
 
   return (
     <div

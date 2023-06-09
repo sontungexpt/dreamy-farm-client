@@ -54,6 +54,7 @@ function Header() {
         <ul className={styles.navbarList}>
           <li className={styles.navbarItem}>
             <SearchBar
+              placeholder="Search products"
               renderItem={(item, index, active) => (
                 <Product title={item.name} image={item.image} active={active} />
               )}
