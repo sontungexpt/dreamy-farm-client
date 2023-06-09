@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
+import LinkCondition from '~/components/LinkCondition';
 import PropTypes from 'prop-types';
 import { clsx } from 'clsx';
-
 import styles from './Button.module.scss';
 
 function Button({
@@ -11,13 +10,17 @@ function Button({
   iconClassName, //optional
 
   alignLeft, //optional
+  alignRight, //optional
   leftIcon, //optional
   rightIcon, //optional
   small, //optional
   primary, //optional
   to, //optional
+  isAllowed = true, //optional // boolean or callback
+  errorMessage, //optional
   href, //optional
   onClick, //optional
+  hoverZoom, //optional
   whiteOutline, //optional
   blackOutline, //optional
   primaryOutline, //optional
@@ -33,8 +36,10 @@ function Button({
   };
 
   if (to) {
+    props.isAllowed = isAllowed;
+    props.errorMessage = errorMessage;
     props.to = to;
-    Component = Link;
+    Component = LinkCondition;
   } else if (href) {
     props.href = href;
     Component = 'a';
@@ -57,6 +62,9 @@ function Button({
           [styles.alignLeft]: alignLeft,
         },
         {
+          [styles.alignRight]: alignRight,
+        },
+        {
           [styles.whiteOutline]: whiteOutline,
         },
         {
@@ -76,6 +84,9 @@ function Button({
         },
         {
           [styles.primaryText]: primaryText,
+        },
+        {
+          [styles.hoverZoom]: hoverZoom,
         },
       ])}
       {...props}
@@ -121,11 +132,14 @@ function Button({
 
 Button.propTypes = {
   alignLeft: PropTypes.bool, //optional
+  alignRight: PropTypes.bool, //optional
   leftIcon: PropTypes.node, //optional
   rightIcon: PropTypes.node, //optional
   small: PropTypes.bool, //optional
   primary: PropTypes.bool, //optional
   to: PropTypes.string, //optional
+  isAllowed: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]), //optional
+  errorMessage: PropTypes.string, //optional
   href: PropTypes.string, //optional
   onClick: PropTypes.func, //optional
   children: PropTypes.node.isRequired, //optional
@@ -133,9 +147,11 @@ Button.propTypes = {
   whiteOutline: PropTypes.bool, //optional
   blackOutline: PropTypes.bool, //optional
   primaryOutline: PropTypes.bool, //optional
+  hoverZoom: PropTypes.bool, //optional
   whiteText: PropTypes.bool, //optional
   disabled: PropTypes.bool, //optional
   disabledText: PropTypes.bool, //optional
+  primaryText: PropTypes.bool, //optional
 };
 
 export default Button;

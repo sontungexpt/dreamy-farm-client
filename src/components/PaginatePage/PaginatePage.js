@@ -11,13 +11,16 @@ function PaginatePage({
   renderSpacingClassName,
 
   responsive,
-  // responsive:{ pageRangeDisplayed,
-  // marginPagesDisplayed,
-  // marginPages: func,return number,
-  // pageRange: func,return number
+  // responsive:{
+  //    pageRangeDisplayed,
+  //    marginPagesDisplayed,
+  //    marginPages: func,return number,
+  //    pageRange: func,return number
   // }
   nextLabel = 'Next',
   previousLabel = 'Prev',
+
+  onPageChange,
 
   data,
   renderItem,
@@ -34,6 +37,7 @@ function PaginatePage({
 
   // logic
   const pageCount = Math.ceil(data.length / itemsPerPage);
+
   const displayItems = useMemo(() => {
     const itemsVisited = pageOffset * itemsPerPage;
     return data.slice(itemsVisited, itemsVisited + itemsPerPage);
@@ -95,6 +99,10 @@ function PaginatePage({
     >
       <div
         className={clsx([
+          // NOTE:
+          // default using flexbox to render items in a row and wrap
+          // to next row when overflow the container width (responsive)
+          // you just need add col class to each item to render items in a column
           'row',
           styles.container,
           {
@@ -113,6 +121,7 @@ function PaginatePage({
         nextLabel={t(nextLabel)}
         previousLabel={t(previousLabel)}
         onPageChange={({ selected }) => {
+          onPageChange && onPageChange(selected);
           setPageOffset(selected);
         }}
         renderOnZeroPageCount={null}
@@ -135,6 +144,8 @@ PaginatePage.propTypes = {
     marginPages: PropTypes.func,
     pageRange: PropTypes.func,
   }),
+  renderSpacingClassName: PropTypes.string,
+  onPageChange: PropTypes.func,
   nextLabel: PropTypes.string,
   previousLabel: PropTypes.string,
   data: PropTypes.array.isRequired,

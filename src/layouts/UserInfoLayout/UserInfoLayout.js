@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+
 import styles from './UserInfoLayout.module.scss';
 
 import Header from '~/layouts/components/Header';

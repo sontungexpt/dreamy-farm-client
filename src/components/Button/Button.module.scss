@@ -31,6 +31,12 @@
   justify-content: flex-start;
 }
 
+.button.alignRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .button.primary {
   background-color: var(--primary-color);
   color: var(--white-color);
@@ -54,6 +60,14 @@
   &:hover {
     color: var(--button-hover-color1);
     cursor: pointer;
+  }
+}
+
+.button.hoverZoom {
+  transition: 0.2s;
+  will-change: transform;
+  &:hover {
+    transform: scale(1.1);
   }
 }
 

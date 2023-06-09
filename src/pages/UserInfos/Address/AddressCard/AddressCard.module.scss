@@ -9,32 +9,27 @@
   margin-left: 0;
   position: relative;
 }
-
 .addressCard .info {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
-
 .addressCard .threedots {
   position: absolute;
   top: 5px;
   right: 5px;
 }
-
-.addressCard .phone {
-  display: flex;
-  align-items: center;
+.addressCard .threedots {
+  position: absolute;
+  top: 35px;
+  right: 10px;
+  cursor: pointer;
+  margin-right: 10px;
 }
-
-.addressCard .defaultMark {
-  margin-left: 20px;
+.defaultMark {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
   border: 1px solid black;
-  padding: 2px 6px;
   border-radius: 4px;
-}
-
-.addressCard p {
-  margin: 0;
-  text-align: left;
 }

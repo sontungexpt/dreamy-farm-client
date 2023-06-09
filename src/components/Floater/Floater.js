@@ -13,23 +13,36 @@ import {
   safePolygon,
 } from '@floating-ui/react';
 import { useState } from 'react';
+import clsx from 'clsx';
+import ItemWrapper from './ItemWrapper';
 
 function Floater({
+  className,
+  anchorClassName,
+  floaterClassName,
+
   anchor,
-  render,
+  innerFloater,
+
+  data,
+  renderItem, // just work when data is provided
+  floaterItemClassName, // just work when data is provided
+
   whenHover = false,
   whenFocus = false,
   whenClick = false,
-  floatingProps = {},
+  floatingProps = {
+    middleware: [],
+  },
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const { refs, floatingStyles, context } = useFloating({
     whileElementsMounted: autoUpdate,
     open: isOpen,
     onOpenChange: setIsOpen,
-    placement: 'bottom-start',
-    middleware: [offset(10), flip(), shift()],
+    placement: 'bottom-end',
     ...floatingProps,
+    middleware: [offset(10), flip(), shift(), ...floatingProps.middleware],
   });
 
   const hover = useHover(context, {
@@ -41,6 +54,7 @@ function Floater({
       buffer: 1,
     }),
   });
+
   const click = useClick(context, {
     enabled: whenClick,
   });
@@ -59,20 +73,65 @@ function Floater({
     dismiss,
     role,
   ]);
+
   return (
-    <div>
-      <span ref={refs.setReference} {...getReferenceProps()}>
+    <div
+      className={clsx([
+        {
+          [className]: className,
+        },
+      ])}
+    >
+      <div
+        className={clsx([
+          {
+            [anchorClassName]: anchorClassName,
+          },
+        ])}
+        ref={refs.setReference}
+        {...getReferenceProps()}
+      >
         {anchor}
-      </span>
-      {isOpen && (
-        <span
-          ref={refs.setFloating}
-          style={floatingStyles}
-          {...getFloatingProps()}
-        >
-          {render}
-        </span>
-      )}
+      </div>
+      {isOpen &&
+        (data ? (
+          <ul
+            className={clsx([
+              {
+                [floaterClassName]: floaterClassName,
+              },
+            ])}
+            ref={refs.setFloating}
+            style={floatingStyles}
+            {...getFloatingProps()}
+          >
+            {data.map((item, index) => (
+              <ItemWrapper
+                key={index}
+                className={clsx([
+                  {
+                    [floaterItemClassName]: floaterItemClassName,
+                  },
+                ])}
+              >
+                {renderItem(item, index)}
+              </ItemWrapper>
+            ))}
+          </ul>
+        ) : (
+          <ul
+            className={clsx([
+              {
+                [floaterClassName]: floaterClassName,
+              },
+            ])}
+            ref={refs.setFloating}
+            style={floatingStyles}
+            {...getFloatingProps()}
+          >
+            {innerFloater}
+          </ul>
+        ))}
     </div>
   );
 }

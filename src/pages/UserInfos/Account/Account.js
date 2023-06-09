@@ -1,27 +1,50 @@
 import { clsx } from 'clsx';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateProfile } from '~/redux/slices/userSlice';
 
 import styles from './Account.module.scss';
 
-import Input from './components/Input';
-import Avatar from './components/Avatar';
+import Input from '~/components/Input';
+import Avatar from './Avatar';
 import Button from '~/components/Button/Button';
 import {
   Pencil as PencilIcon,
   NoFilledUser as NoFilledUserIcon,
-  Mail as MailIcon,
-  Phone as PhoneIcon,
   Gender as GenderIcon,
 } from '~/assets/images/icons/SvgIcons';
 
 function Account() {
   const { t } = useTranslation('translations');
+  const {
+    email,
+    name: nameUser,
+    sex,
+    avatar,
+  } = useSelector((state) => state.user);
+  const [nameUpdate, setNameUpdate] = useState(nameUser || '');
+  const [genderUpdate, setGenderUpdate] = useState(sex || '');
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      updateProfile({
+        email,
+        name: nameUpdate,
+        sex: genderUpdate,
+      }),
+    );
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className={clsx(['grid', styles.wrapper])}>
         <div className={styles.header}>
           <h2>{t('Account Informations')}</h2>
           <Button
+            type="submit"
             leftIcon={<PencilIcon className={styles.pencilIcon} />}
             className={styles.updateBtn}
             primaryText
@@ -32,7 +55,7 @@ function Account() {
         <div className={clsx([styles.content])}>
           <div className={clsx(['row', styles.row])}>
             <div className={clsx(['col', 'l-4', 'm-4', 'c-12', styles.avatar])}>
-              <Avatar src="https://i.pinimg.com/564x/17/d0/e3/17d0e35d3566f6fd5d643ff21b513220.jpg" />
+              <Avatar src={avatar} />
             </div>
             <div className={clsx(['col l-8 m-8 c-12', styles.info])}>
               <Input
@@ -42,22 +65,8 @@ function Account() {
                 id="name"
                 type="text"
                 name="name"
-              />
-              <Input
-                labelIcon={<MailIcon color="var(--red-color)" />}
-                className={styles.input}
-                label={t('Email')}
-                id="email"
-                type="email"
-                name="email"
-              />
-              <Input
-                labelIcon={<PhoneIcon color="var(--yellow-color)" />}
-                className={styles.input}
-                label={t('Phone')}
-                id="phone"
-                type="text"
-                name="phone"
+                value={nameUpdate}
+                onChange={(e) => setNameUpdate(e.target.value)}
               />
               <Input
                 labelIcon={<GenderIcon color="var(--green-color)" />}
@@ -66,6 +75,8 @@ function Account() {
                 type="text"
                 id="gender"
                 name="gender"
+                value={genderUpdate}
+                onChange={(e) => setGenderUpdate(e.target.value)}
               />
             </div>
           </div>
