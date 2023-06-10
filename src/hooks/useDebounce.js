@@ -22,6 +22,7 @@ function useDebounce(value, delay) {
 
   return {
     isLoading,
+    setIsLoading,
     debounceValue,
   };
 }

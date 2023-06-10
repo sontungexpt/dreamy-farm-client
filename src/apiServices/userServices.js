@@ -69,3 +69,13 @@ export const updateUserProfile = async ({ email, name, sex }) => {
   const { data } = res;
   return data;
 };
+
+export const addAddress = async ({ address, email, phoneNumber }) => {
+  const res = await request.put(apis.users.addAddress, {
+    email,
+    address,
+    phoneNumber,
+  });
+  const { data } = res;
+  return data;
+};

@@ -1,127 +1,59 @@
 import styles from './Address.module.scss';
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 import AddressCard from './AddressCard/AddressCard.js';
-import { clsx } from 'clsx';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import Trans from '~/components/Trans';
 import PaginatePage from '~/components/PaginatePage';
 import NewAddressCard from './NewAddressCard';
 
 function Address() {
-  const [addresses, setAddresses] = useState([
-    {
-      city: 'Ho Chi Minh',
-      name: 'Agelia',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-      isDefault: false,
-    },
-    {
-      city: 'Ho Chi Minh',
-      name: 'Stella',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-
-      isDefault: false,
-    },
-    {
-      city: 'Ho Chi Minh',
-      name: 'Katina',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-      isDefault: false,
-    },
-    {
-      city: 'Ho Chi Minh',
-      name: 'Agelia',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-      isDefault: false,
-    },
-    {
-      city: 'Ho Chi Minh',
-      name: 'Agelia',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-      isDefault: false,
-    },
-    {
-      city: 'Ho Chi Minh',
-      name: 'Anaa',
-      phone: '98765431',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-      isDefault: false,
-    },
-    {
-      city: 'Ho Chi Minh',
-      name: 'Agelia',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-      isDefault: false,
-    },
-    {
-      city: 'Ho Chi Minh',
-      name: 'Agelia',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-      isDefault: false,
-    },
-    {
-      city: 'Ho Chi Minh',
-      name: 'Agelia',
-      phone: '0123456789',
-      address: '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-      isDefault: false,
-    },
-  ]);
-
+  const { addreses } = useSelector((state) => state.user);
   const handleDeleteAddress = (index) => {
-    setAddresses((prevAddresses) => {
-      const updatedAddresses = [...prevAddresses];
-      updatedAddresses.splice(index, 1);
-      return updatedAddresses;
-    });
+    // setAddresses((prevAddresses) => {
+    //   const updatedAddresses = [...prevAddresses];
+    //   updatedAddresses.splice(index, 1);
+    //   return updatedAddresses;
+    // });
   };
+
   const handleSelectPrimary = (index) => {
-    setAddresses((prevAddresses) => {
-      const updatedAddresses = [...prevAddresses];
-      updatedAddresses.forEach((address, i) => {
-        address.isDefault = i === index;
-      });
-      return updatedAddresses;
-    });
+    // setAddresses((prevAddresses) => {
+    //   const updatedAddresses = [...prevAddresses];
+    //   updatedAddresses.forEach((address, i) => {
+    //     address.isDefault = i === index;
+    //   });
+    //   return updatedAddresses;
+    // });
   };
-  const { t } = useTranslation('translations');
 
   return (
-    <div className={clsx(['grid', 'l-10', 'm-10', 'c-12'])}>
-      <div className={clsx(['row', styles.wrapper])}>
-        <h2 className={styles.header}>{t('Address')}</h2>
-        <div className={styles.addButtonWrapper}>
-          <div className={styles.addButton}>
-            <NewAddressCard />
-          </div>
-        </div>
-
-        <PaginatePage
-          className={clsx(['l-12', 'm-12', 'c-12', styles.addressContainer])}
-          data={addresses}
-          renderItem={(address, index) => (
-            <div key={index} className={styles.addressRow}>
-              <AddressCard
-                city={address.city}
-                name={address.name}
-                phone={address.phone}
-                address={address.address}
-                onDelete={() => handleDeleteAddress(index)}
-                onSelectPrimary={() => handleSelectPrimary(index)}
-                isDefault={address.isDefault}
-              />
-            </div>
-          )}
-          itemsPerPage={4}
-        />
+    <div className={styles.wrapper}>
+      <div className={styles.header}>
+        <h2 className={styles.title}>
+          <Trans>Address</Trans>
+        </h2>
+        <NewAddressCard />
       </div>
+
+      <PaginatePage
+        className={styles.addresses}
+        renderSpacingClassName={styles.renderSpacing}
+        paginationClassName={styles.pagination}
+        itemsPerPage={6}
+        data={addreses}
+        renderItem={(address, index) => (
+          <div key={index} className="col l-6 m-12 c-12">
+            <AddressCard
+              className={styles.addressCard}
+              phone={address.phoneNumber}
+              address={address.address}
+              onDelete={() => handleDeleteAddress(index)}
+              onSelectPrimary={() => handleSelectPrimary(index)}
+              isDefault={address.active}
+            />
+          </div>
+        )}
+      />
     </div>
   );
 }

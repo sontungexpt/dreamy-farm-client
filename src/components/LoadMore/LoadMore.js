@@ -70,7 +70,16 @@ function LoadMore({
           },
         ])}
       >
-        {displayItems.map((item, index) => renderItem(item, index))}
+        {displayItems.map((item, index) =>
+          renderItem(
+            item,
+            index,
+            Object.keys(data)[index],
+            // key
+            // if data is an array, key is index
+            // if data is an object, key is the key of the object
+          ),
+        )}
       </div>
       {(() => {
         if (workData.length > 0) {

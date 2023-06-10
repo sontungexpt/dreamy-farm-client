@@ -25,9 +25,7 @@ const RecipeDetail = () => {
   }, [slug]);
 
   // make sure recipe is loaded
-  if (!recipe) {
-    return null;
-  }
+  if (!recipe) return null;
 
   return (
     <div className={clsx(['grid', 'wide', styles.wrapper])}>

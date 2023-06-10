@@ -9,6 +9,7 @@ import styles from './PaginatePage.module.scss';
 function PaginatePage({
   className,
   renderSpacingClassName,
+  paginationClassName,
 
   responsive,
   // responsive:{
@@ -104,7 +105,6 @@ function PaginatePage({
           // to next row when overflow the container width (responsive)
           // you just need add col class to each item to render items in a column
           'row',
-          styles.container,
           {
             [renderSpacingClassName]: renderSpacingClassName,
           },
@@ -125,7 +125,12 @@ function PaginatePage({
           setPageOffset(selected);
         }}
         renderOnZeroPageCount={null}
-        className={styles.pagination}
+        className={clsx([
+          styles.pagination,
+          {
+            [paginationClassName]: paginationClassName,
+          },
+        ])}
         pageLinkClassName={styles.page}
         activeLinkClassName={styles.active}
         previousLinkClassName={styles.control}
@@ -138,6 +143,7 @@ function PaginatePage({
 
 PaginatePage.propTypes = {
   className: PropTypes.string,
+  paginationClassName: PropTypes.string,
   responsive: PropTypes.shape({
     pageRangeDisplayed: PropTypes.number,
     marginPagesDisplayed: PropTypes.number,

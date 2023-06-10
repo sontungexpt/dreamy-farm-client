@@ -55,9 +55,9 @@ function ShoppingCart() {
             controlClassName={styles.control}
             noDataClassName={styles.noData}
             itemsPerLoad={3}
-            renderItem={(item, index) => (
+            renderItem={(item, index, key) => (
               <ItemShoppingCart
-                key={index}
+                key={key}
                 id={item.id}
                 name={item.name}
                 image={item.image}

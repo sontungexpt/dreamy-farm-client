@@ -61,6 +61,9 @@ function ProductDetail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
+  // make sure product is loaded to render
+  if (!product) return null;
+
   const handleAdd = () => {
     dispatch(
       addAndCalcPrice({
@@ -94,9 +97,6 @@ function ProductDetail() {
       );
     }
   };
-
-  // make sure product is loaded to render
-  if (!product) return null;
 
   return (
     <div className={clsx(['grid', 'wide', styles.wrapper])}>
