@@ -11,9 +11,8 @@ function OptionCard() {
 
   return (
     <div>
-      <Button
+      <span
         className={styles.option}
-        rightIcon={<ThreeDots className={styles.threedots} />}
         onClick={() =>
           createModal({
             innerModal: (
@@ -44,7 +43,9 @@ function OptionCard() {
             ),
           })
         }
-      />
+      >
+        <ThreeDots className={styles.threedots} />
+      </span>
       {getLatestModal()}
     </div>
   );
