@@ -4,16 +4,16 @@ import {
   Phone as PhoneIcon,
 } from '~/assets/images/icons/SvgIcons';
 import { clsx } from 'clsx';
-import OptionCard from '~/pages/UserInfos/Address/OptionCard/OptionCard';
+import OptionCard from './OptionCard';
 import PropTypes from 'prop-types';
 
 function AddressCard({
-  phone,
+  phoneNumber,
   address,
-  onEdit,
+  onSaveEdit,
   onDelete,
   onSelectPrimary,
-  isDefault = false,
+  actived = false,
   className,
 }) {
   return (
@@ -29,8 +29,8 @@ function AddressCard({
       <div className={styles.info}>
         <div className={styles.infoElement}>
           <PhoneIcon className={styles.icon} color="var(--red-color)" />
-          <span>{phone}</span>
-          {isDefault && <span className={styles.defaultMark}>Default</span>}
+          <span>{phoneNumber}</span>
+          {actived && <span className={styles.defaultMark}>Default</span>}
         </div>
         <div className={styles.infoElement}>
           <AddressIcon className={clsx([styles.icon, styles.addressIcon])} />
@@ -39,10 +39,12 @@ function AddressCard({
       </div>
       <div className={styles.threedots}>
         <OptionCard
+          address={address}
+          phoneNumber={phoneNumber}
           onDelete={onDelete}
-          onEdit={onEdit}
+          onSaveEdit={onSaveEdit}
           onSelectPrimary={onSelectPrimary}
-          isDefault={isDefault}
+          actived={actived}
         />
       </div>
     </div>
@@ -50,12 +52,12 @@ function AddressCard({
 }
 
 AddressCard.propTypes = {
-  phone: PropTypes.string,
+  phoneNumber: PropTypes.string,
   address: PropTypes.string,
-  onEdit: PropTypes.func,
+  onSaveEdit: PropTypes.func,
   onDelete: PropTypes.func,
   onSelectPrimary: PropTypes.func,
-  isDefault: PropTypes.bool,
+  actived: PropTypes.bool,
   className: PropTypes.string,
 };
 

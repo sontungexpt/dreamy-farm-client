@@ -1,5 +1,7 @@
 import styles from './Address.module.scss';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useCallback } from 'react';
+import { updateUserAddress, deleteUserAddress } from '~/redux/slices/userSlice';
 
 import AddressCard from './AddressCard/AddressCard.js';
 import Trans from '~/components/Trans';
@@ -7,24 +9,40 @@ import PaginatePage from '~/components/PaginatePage';
 import NewAddressCard from './NewAddressCard';
 
 function Address() {
-  const { addreses } = useSelector((state) => state.user);
-  const handleDeleteAddress = (index) => {
-    // setAddresses((prevAddresses) => {
-    //   const updatedAddresses = [...prevAddresses];
-    //   updatedAddresses.splice(index, 1);
-    //   return updatedAddresses;
-    // });
-  };
+  const { addreses, email } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-  const handleSelectPrimary = (index) => {
-    // setAddresses((prevAddresses) => {
-    //   const updatedAddresses = [...prevAddresses];
-    //   updatedAddresses.forEach((address, i) => {
-    //     address.isDefault = i === index;
-    //   });
-    //   return updatedAddresses;
-    // });
-  };
+  const handleDeleteAddress = useCallback(
+    (address, phoneNumber) => {
+      dispatch(deleteUserAddress({ email, address, phoneNumber }));
+    },
+    [dispatch, email],
+  );
+
+  const handleUpdateAddress = useCallback(
+    ({
+      oldAddress,
+      oldPhoneNumber,
+      currentActive,
+      newAddress,
+      newPhoneNumber,
+      newActive,
+    }) => {
+      if (currentActive && currentActive === false) return;
+
+      dispatch(
+        updateUserAddress({
+          email,
+          oldAddress,
+          oldPhoneNumber,
+          newActive,
+          newAddress,
+          newPhoneNumber,
+        }),
+      );
+    },
+    [dispatch, email],
+  );
 
   return (
     <div className={styles.wrapper}>
@@ -45,11 +63,28 @@ function Address() {
           <div key={index} className="col l-6 m-12 c-12">
             <AddressCard
               className={styles.addressCard}
-              phone={address.phoneNumber}
+              phoneNumber={address.phoneNumber}
               address={address.address}
-              onDelete={() => handleDeleteAddress(index)}
-              onSelectPrimary={() => handleSelectPrimary(index)}
-              isDefault={address.active}
+              actived={address.active}
+              onSaveEdit={(newPhoneNumber, newAddress) =>
+                handleUpdateAddress({
+                  oldAddress: address.address,
+                  oldPhoneNumber: address.phoneNumber,
+                  newAddress: newAddress,
+                  newPhoneNumber: newPhoneNumber,
+                })
+              }
+              onDelete={() =>
+                handleDeleteAddress(address.address, address.phoneNumber)
+              }
+              onSelectPrimary={() =>
+                handleUpdateAddress({
+                  oldAddress: address.address,
+                  oldPhoneNumber: address.phoneNumber,
+                  currentActive: address.active,
+                  newActive: true,
+                })
+              }
             />
           </div>
         )}

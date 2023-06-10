@@ -25,6 +25,8 @@ function NewAddressCard() {
   const modalRef = useRef(null);
   const handleAddNewAddress = () => {
     dispatch(addUserAddress({ address, phoneNumber, email }));
+    setAddress('');
+    setPhoneNumber('');
     modalRef.current.close();
   };
 
@@ -68,14 +70,19 @@ function NewAddressCard() {
               onChange={(e) => setAddress(e.target.value)}
             />
           </div>
-          <div className={clsx(['grid', 'l-o-6', styles.buttonWrapper])}>
+          <div className={styles.buttonWrapper}>
             <Button
-              className={clsx([styles.cancelButton])}
+              blackOutline
+              className={styles.controlButton}
               onClick={() => modalRef.current.close()}
             >
               <Trans>Cancel</Trans>
             </Button>
-            <Button className={styles.saveButton} onClick={handleAddNewAddress}>
+            <Button
+              primary
+              className={styles.controlButton}
+              onClick={handleAddNewAddress}
+            >
               <Trans>Save</Trans>
             </Button>
           </div>

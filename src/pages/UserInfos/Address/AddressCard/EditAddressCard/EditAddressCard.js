@@ -1,15 +1,31 @@
-import styles from './EditAddressCard.module.scss';
 import { clsx } from 'clsx';
+import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
+import { useState } from 'react';
+
+import styles from './EditAddressCard.module.scss';
 import Button from '~/components/Button';
 import Input from '~/components/Input/Input';
-import { useTranslation } from 'react-i18next';
 import {
   Phone as PhoneIcon,
   Location as LocationIcon,
 } from '~/assets/images/icons/SvgIcons';
 
-function EditAddressCard({ close }) {
+function EditAddressCard({
+  onSave,
+  close,
+
+  initialAddress,
+  initialPhoneNumber,
+}) {
+  const [phoneNumber, setPhoneNumber] = useState(initialPhoneNumber || '');
+  const [address, setAddress] = useState(initialAddress || '');
   const { t } = useTranslation('translations');
+
+  const handleSave = () => {
+    onSave && onSave(phoneNumber, address);
+    close();
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -24,6 +40,8 @@ function EditAddressCard({ close }) {
           id="phone"
           type="numeric"
           name="phone"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
         />
         <Input
           labelIcon={<LocationIcon color="var(--green-color)" />}
@@ -32,17 +50,28 @@ function EditAddressCard({ close }) {
           id="address"
           type="text"
           name="address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
         />
       </div>
-      <div className={clsx(['grid', 'l-o-6', styles.buttonWrapper])}>
-        <Button onClick={() => close()} className={clsx([styles.cancelButton])}>
+      <div className={styles.buttonWrapper}>
+        <Button blackOutline onClick={() => close()} className={styles.button}>
           {t('Cancel')}
         </Button>
-        <Button onClick={() => close()} className={clsx([styles.saveButton])}>
+        <Button primary onClick={handleSave} className={styles.button}>
           {t('Save')}
         </Button>
       </div>
     </div>
   );
 }
+
+EditAddressCard.propTypes = {
+  onSave: PropTypes.func,
+  close: PropTypes.func.isRequired,
+
+  initialAddress: PropTypes.string,
+  initialPhoneNumber: PropTypes.string,
+};
+
 export default EditAddressCard;

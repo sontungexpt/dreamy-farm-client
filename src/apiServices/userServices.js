@@ -79,3 +79,35 @@ export const addAddress = async ({ address, email, phoneNumber }) => {
   const { data } = res;
   return data;
 };
+
+export const updateAddress = async ({
+  newAddress,
+  email,
+  newPhoneNumber,
+  oldAddress,
+  oldPhoneNumber,
+  newActive,
+}) => {
+  const res = await request.put(apis.users.updateAddress, {
+    email,
+    oldPhoneNumber,
+    oldAddress,
+    newPhoneNumber,
+    newAddress,
+    newActive,
+  });
+
+  const { data } = res;
+  return data;
+};
+
+export const deleteAddress = async ({ email, address, phoneNumber }) => {
+  const res = await request.put(apis.users.deleteAddress, {
+    email,
+    address,
+    phoneNumber,
+  });
+
+  const { data } = res;
+  return data;
+};

@@ -7,6 +7,8 @@ import {
   getUserFavoriteProducts,
   updateUserProfile,
   addAddress,
+  updateAddress,
+  deleteAddress,
 } from '~/apiServices/userServices';
 
 import { routes as routesConfig } from '~/configs';
@@ -97,6 +99,12 @@ export const userSlice = createSlice({
       })
       .addCase(addUserAddress.fulfilled, (state, action) => {
         if (action.payload) state.addreses = action.payload;
+      })
+      .addCase(updateUserAddress.fulfilled, (state, action) => {
+        if (action.payload) state.addreses = action.payload;
+      })
+      .addCase(deleteUserAddress.fulfilled, (state, action) => {
+        if (action.payload) state.addreses = action.payload;
       });
   },
 });
@@ -156,6 +164,36 @@ export const addUserAddress = createAsyncThunk(
   'user/addUserAddress',
   async ({ email, address, phoneNumber }) => {
     const newAddreses = await addAddress({ email, address, phoneNumber });
+    return newAddreses;
+  },
+);
+
+export const updateUserAddress = createAsyncThunk(
+  'user/updateUserAddress',
+  async ({
+    oldAddress,
+    oldPhoneNumber,
+    email,
+    newPhoneNumber,
+    newAddress,
+    newActive,
+  }) => {
+    const newAddreses = await updateAddress({
+      oldAddress,
+      oldPhoneNumber,
+      email,
+      newAddress,
+      newPhoneNumber,
+      newActive,
+    });
+    return newAddreses;
+  },
+);
+
+export const deleteUserAddress = createAsyncThunk(
+  'user/deleteUserAddress',
+  async ({ email, address, phoneNumber }) => {
+    const newAddreses = await deleteAddress({ email, address, phoneNumber });
     return newAddreses;
   },
 );
