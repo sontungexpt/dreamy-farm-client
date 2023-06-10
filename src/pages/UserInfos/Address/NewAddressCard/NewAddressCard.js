@@ -24,6 +24,12 @@ function NewAddressCard() {
 
   const modalRef = useRef(null);
   const handleAddNewAddress = () => {
+    // if phoneNumber or address is not valid return immediately
+    // if(something)
+    // return;
+    
+    
+    // logic if address and phoneNumber is valid
     dispatch(addUserAddress({ address, phoneNumber, email }));
     setAddress('');
     setPhoneNumber('');
