@@ -6,6 +6,7 @@ import {
   updateUserFavoriteProducts,
   getUserFavoriteProducts,
   updateUserProfile,
+  addAddress,
 } from '~/apiServices/userServices';
 
 import { routes as routesConfig } from '~/configs';
@@ -27,10 +28,6 @@ export const userSlice = createSlice({
     //    phoneNumber: '',
     //    active: false,
     // }
-    addressActive: {
-      address: '',
-      phoneNumber: '',
-    },
     sex: '',
     roles: [], // ['admin', 'user', 'moderator']
 
@@ -45,11 +42,15 @@ export const userSlice = createSlice({
       state.avatar = '';
       state.addreses = [];
       state.sex = '';
-      state.addressActive = 0;
       state.roles = [];
       state.wishList = [];
 
       window.localStorage.removeItem('DreamyFarmToken');
+    },
+
+    findAddressActive: (state) => {
+      const activeAddress = state.addreses.find((address) => address.active);
+      return activeAddress;
     },
   },
   extraReducers: (builder) => {
@@ -69,9 +70,6 @@ export const userSlice = createSlice({
 
         // assign wishList
         state.wishList = action.payload.wishList;
-
-        //assign addressActive
-        state.addressActive = state.addreses.find((address) => address.active);
 
         // set loggedIn to true
         state.loggedIn = true;
@@ -96,6 +94,9 @@ export const userSlice = createSlice({
       })
       .addCase(updateProfile.fulfilled, (state, action) => {
         Object.assign(state, action.payload);
+      })
+      .addCase(addUserAddress.fulfilled, (state, action) => {
+        if (action.payload) state.addreses = action.payload;
       });
   },
 });
@@ -148,6 +149,14 @@ export const updateProfile = createAsyncThunk(
   async ({ email, name, sex }) => {
     const newUserInfo = await updateUserProfile({ email, name, sex });
     return newUserInfo;
+  },
+);
+
+export const addUserAddress = createAsyncThunk(
+  'user/addUserAddress',
+  async ({ email, address, phoneNumber }) => {
+    const newAddreses = await addAddress({ email, address, phoneNumber });
+    return newAddreses;
   },
 );
 

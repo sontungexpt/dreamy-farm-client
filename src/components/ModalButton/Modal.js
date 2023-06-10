@@ -6,6 +6,7 @@ import {
   useRef,
 } from 'react';
 import { clsx } from 'clsx';
+import ReactDOM from 'react-dom';
 
 import styles from './Modal.module.scss';
 import { Close as CloseIcon } from '~/assets/images/icons/SvgIcons';
@@ -76,57 +77,57 @@ function Modal(
   }, [isOpen, onClose, onOpen]);
 
   return (
-    <>
-      {isOpen && (
+    isOpen &&
+    ReactDOM.createPortal(
+      <div
+        className={clsx([
+          styles.modal,
+          {
+            [wrapperClassName]: wrapperClassName,
+          },
+        ])}
+      >
+        <div ref={overlay} className={styles.overlay}></div>
         <div
           className={clsx([
-            styles.modal,
+            styles.body,
             {
-              [wrapperClassName]: wrapperClassName,
+              [className]: className,
             },
           ])}
         >
-          <div ref={overlay} className={styles.overlay}></div>
-          <div
-            className={clsx([
-              styles.body,
-              {
-                [className]: className,
-              },
-            ])}
-          >
-            {closeBtn && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsOpen(false);
-                }}
-                className={clsx([
-                  styles.closeBtn,
-                  {
-                    [closeBtnClassName]: closeBtnClassName,
-                  },
-                ])}
-              >
-                {closeBtn.icon ? (
-                  closeBtn.icon
-                ) : (
-                  <CloseIcon
-                    className={clsx([
-                      styles.closeIcon,
-                      {
-                        [closeIconClassName]: closeIconClassName,
-                      },
-                    ])}
-                  />
-                )}
-              </button>
-            )}
-            {children}
-          </div>
+          {closeBtn && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsOpen(false);
+              }}
+              className={clsx([
+                styles.closeBtn,
+                {
+                  [closeBtnClassName]: closeBtnClassName,
+                },
+              ])}
+            >
+              {closeBtn.icon ? (
+                closeBtn.icon
+              ) : (
+                <CloseIcon
+                  className={clsx([
+                    styles.closeIcon,
+                    {
+                      [closeIconClassName]: closeIconClassName,
+                    },
+                  ])}
+                />
+              )}
+            </button>
+          )}
+          {children}
         </div>
-      )}
-    </>
+      </div>,
+      document.body,
+    )
   );
 }
 

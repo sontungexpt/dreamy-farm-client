@@ -20,6 +20,9 @@ const apis = {
     getUserFavoriteProducts: '/user/favoriteProducts/get',
     feedback: '/user/feedback',
     updateProfile: '/user/updateProfile',
+    addAddress: '/user/addAddress',
+    updateAddress: '/user/updateAddress',
+    deleteAddress: '/user/deleteAddress',
   },
   recipes: {
     getRecipes: '/recipes',
