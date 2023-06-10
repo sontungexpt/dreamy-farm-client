@@ -77,7 +77,7 @@ function Checkout() {
           />
           {showCreditCardSection && (
             <section className={styles.section}>
-              <CreditCardInfo />
+              <CreditCardInfo onClose={() => setShowCreditCardSection(false)} />
             </section>
           )}
         </section>
