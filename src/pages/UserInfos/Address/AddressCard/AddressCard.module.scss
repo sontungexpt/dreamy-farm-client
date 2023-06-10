@@ -9,28 +9,16 @@
   margin-left: 0;
   position: relative;
 }
-
 .addressCard .info {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
-
-.addressCard .city {
-  display: flex;
-  align-items: center;
+.addressCard .threedots {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
-
-.addressCard h3,
-.addressCard p {
-  margin: 0;
-  text-align: left;
-}
-
-.addressCard .icon {
-  margin-right: 10px;
-}
-
 .addressCard .threedots {
   position: absolute;
   top: 35px;

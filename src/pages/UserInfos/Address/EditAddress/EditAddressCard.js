@@ -1,7 +1,7 @@
 import styles from './EditAddressCard.module.scss';
 import { clsx } from 'clsx';
 import Button from '~/components/Button';
-import Input from '~/components/Input';
+import Input from '~/components/Input/Input';
 import { useTranslation } from 'react-i18next';
 import { useRef } from 'react';
 import { Modal } from '~/components/ModalButton';
@@ -30,14 +30,6 @@ function EditAddressCard() {
               <h2>{t('Edit address')}</h2>
             </div>
             <div className={clsx(['col l-12 m-12 c-12', styles.info])}>
-              <Input
-                labelIcon={<NoFilledUserIcon color="var(--blue-color)" />}
-                className={styles.input}
-                label={t('Name')}
-                id="name"
-                type="text"
-                name="name"
-              />
               <Input
                 labelIcon={<PhoneIcon color="var(--yellow-color)" />}
                 className={styles.input}
