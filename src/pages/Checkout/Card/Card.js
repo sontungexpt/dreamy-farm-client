@@ -2,6 +2,7 @@ import styles from './Card.module.scss';
 import Trans from '~/components/Trans';
 import PropTypes from 'prop-types';
 import { clsx } from 'clsx';
+import CreditCardInfo from '../CreditCard/CreditCard';
 
 function Card({
   name,
@@ -23,8 +24,17 @@ function Card({
   onClick,
 
   hoverEffect,
+  showCreditCardSection,
   ...props
 }) {
+  const handleCardClick = () => {
+    if (onClick) {
+      onClick();
+    }
+    if (value === 'creditCard' && onChange) {
+      onChange(value);
+    }
+  };
   return (
     <div
       {...props}
@@ -81,6 +91,8 @@ Card.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   onClick: PropTypes.func,
+  hoverEffect: PropTypes.bool,
+  showCreditCardSection: PropTypes.bool,
 };
 
 export default Card;

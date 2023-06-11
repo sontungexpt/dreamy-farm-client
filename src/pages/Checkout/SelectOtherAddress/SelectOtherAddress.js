@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { clsx } from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAddress } from '~/redux/slices/orderSlice';
@@ -22,7 +22,8 @@ function SelectOtherAddress({ addreses }) {
   const dispatch = useDispatch();
   const { address: orderAdress } = useSelector((state) => state.order);
   const { addressActive } = useSelector((state) => state.user);
-
+  const [showNewAddressForm, setShowNewAddressForm] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState('');
   const handleSave = () => {
     dispatch(setAddress(selectorRef.current.activeItem));
     modalRef.current.close();
@@ -30,6 +31,12 @@ function SelectOtherAddress({ addreses }) {
 
   const handleCancel = () => {
     modalRef.current.close();
+  };
+  const handleAddNewAddress = () => {
+    setShowNewAddressForm(true);
+  };
+  const handleSaveNewAddress = () => {
+    setShowNewAddressForm(false);
   };
 
   return (
@@ -81,6 +88,30 @@ function SelectOtherAddress({ addreses }) {
             />
           )}
         />
+        <Button className={styles.addNewAddress} onClick={handleAddNewAddress}>
+          +Add New Address
+        </Button>
+        {showNewAddressForm && (
+          <div className={styles.newAddressForm}>
+            <div className={styles.addressLabel}>
+              <p className={styles.newAddress}>Address: </p>
+              <input type="text" id="newAddress" />
+            </div>
+            <div className={styles.phoneLabel}>
+              <p className={styles.newPhoneNumber}>Phone Number: </p>
+              <input type="text" id="newPhoneNumber" />
+            </div>
+            <div className={styles.saveAddressButton}>
+              <Button
+                className={styles.saveAddressButton}
+                onClick={handleSaveNewAddress}
+              >
+                Save New Address
+              </Button>
+            </div>
+          </div>
+        )}
+
         <div className={styles.footer}>
           <Button className={styles.control} onClick={handleCancel}>
             <Trans>Cancel</Trans>

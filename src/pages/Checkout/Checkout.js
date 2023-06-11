@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { setPaymentMethod } from '~/redux/slices/orderSlice';
 import { clsx } from 'clsx';
+import { useState } from 'react';
 
 import styles from './Checkout.module.scss';
 import { routes as routesConfig } from '~/configs';
@@ -13,9 +14,11 @@ import Button from '~/components/Button';
 import ItemShoppingCart from '~/components/ItemShoppingCart';
 import Trans from '~/components/Trans';
 import Card from './Card';
+import CreditCardInfo from './CreditCard/CreditCard';
 
 function Checkout() {
   const dispatch = useDispatch();
+  const [showCreditCardSection, setShowCreditCardSection] = useState(false);
   const addreses = [
     '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
     '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
@@ -33,6 +36,11 @@ function Checkout() {
 
   const handlePaymentMethodChange = (method) => {
     dispatch(setPaymentMethod(method));
+    if (method === 'credit') {
+      setShowCreditCardSection(true);
+    } else {
+      setShowCreditCardSection(false);
+    }
   };
 
   return (
@@ -63,10 +71,17 @@ function Checkout() {
                 checked={paymentMethod === item.method}
                 title={item.title}
                 icon={item.icon}
+                showCreditCardSection={showCreditCardSection}
               />
             )}
           />
+          {showCreditCardSection && (
+            <section className={styles.creditSection}>
+              <CreditCardInfo onClose={() => setShowCreditCardSection(false)} />
+            </section>
+          )}
         </section>
+
         <section className={styles.section}>
           <h1 className={clsx([styles.header, styles.orderHeader])}>
             <Trans>Order detail</Trans>
