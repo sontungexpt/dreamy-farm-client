@@ -39,7 +39,6 @@ class Validator {
         }
         return;
       }
-
       if (validationMethod(fieldValue, ...args, state) !== rule.validWhen) {
         this.errors[rule.field] = rule.message;
         this.isValid = false;

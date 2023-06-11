@@ -9,9 +9,11 @@ function OrderItem({
   numberOfItem,
   orderState, // Complete, Pending, Cancel
   className,
+  ...props
 }) {
   return (
     <div
+      {...props}
       className={clsx([
         styles.border,
         {

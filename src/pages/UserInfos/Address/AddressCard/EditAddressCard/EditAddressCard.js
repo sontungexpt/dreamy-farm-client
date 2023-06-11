@@ -11,6 +11,9 @@ import {
   Location as LocationIcon,
 } from '~/assets/images/icons/SvgIcons';
 
+import { useValidation } from '~/hooks';
+import { userSampleRules } from '~/hooks/useValidation';
+
 function EditAddressCard({
   onSave,
   close,
@@ -18,13 +21,30 @@ function EditAddressCard({
   initialAddress,
   initialPhoneNumber,
 }) {
-  const [phoneNumber, setPhoneNumber] = useState(initialPhoneNumber || '');
-  const [address, setAddress] = useState(initialAddress || '');
+  const [newAddress, setNewAddress] = useState({
+    address: initialAddress || '',
+    phoneNumber: initialPhoneNumber || '',
+  });
   const { t } = useTranslation('translations');
+  const { errors, handleSubmit, handleFocus, handleBlur } = useValidation(
+    newAddress,
+    userSampleRules,
+  );
 
   const handleSave = () => {
-    onSave && onSave(phoneNumber, address);
-    close();
+    handleSubmit(() => {
+      onSave && onSave(newAddress.phoneNumber, newAddress.address);
+      close();
+    });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setNewAddress((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   return (
@@ -37,21 +57,29 @@ function EditAddressCard({
           labelIcon={<PhoneIcon color="var(--yellow-color)" />}
           className={styles.input}
           label={t('Phone number')}
-          id="phone"
+          id="edit-address-phoneNumber"
           type="numeric"
-          name="phone"
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
+          name="phoneNumber"
+          required
+          errorMessage={errors.phoneNumber}
+          value={newAddress.phoneNumber}
+          onChange={handleInputChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
         <Input
           labelIcon={<LocationIcon color="var(--green-color)" />}
           className={styles.input}
           label={t('Address')}
-          id="address"
+          id="edit-address-address"
           type="text"
           name="address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
+          required
+          errorMessage={errors.address}
+          value={newAddress.address}
+          onChange={handleInputChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
       </div>
       <div className={styles.buttonWrapper}>

@@ -11,52 +11,26 @@ import styles from './Login.module.scss';
 import Button from '~/components/Button/Button';
 import Input from '~/components/Input';
 
-import validator from '~/pages/Accounts/validator';
+import { useValidation } from '~/hooks';
+import { userSampleRules } from '~/hooks/useValidation';
 
 function Login() {
   const [account, setAccount] = useState({
     email: '',
     password: '',
-    errors: {},
   });
+  const { errors, handleSubmit, handleFocus, handleBlur } = useValidation(
+    account,
+    userSampleRules,
+  );
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-
-    const errors = validator.validate(account);
-    if (validator.isNoErrors(errors)) {
+    handleSubmit(() => {
       dispatch(login(account));
-    } else {
-      setAccount((prevState) => ({
-        ...prevState,
-        errors,
-      }));
-    }
-  };
-
-  const handleFocus = (e) => {
-    const { name } = e.target;
-
-    setAccount((prevState) => ({
-      ...prevState,
-      errors: {
-        ...prevState.errors,
-        [name]: '',
-      },
-    }));
-  };
-
-  const handleBlur = () => {
-    const errors = validator.validate(account);
-    setAccount((prevState) => ({
-      ...prevState,
-      errors: {
-        ...prevState.errors,
-        ...errors,
-      },
-    }));
+    });
   };
 
   const handleInputChange = (e) => {
@@ -69,7 +43,7 @@ function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.wrapper}>
+    <form onSubmit={handleLogin} className={styles.wrapper}>
       <h1 className={styles.header}>{t('Login to your account')}</h1>
 
       <Input
@@ -81,7 +55,7 @@ function Login() {
         type="text"
         name="email"
         value={account.email}
-        errorMessage={account.errors.email}
+        errorMessage={errors.email}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleInputChange}
@@ -95,7 +69,7 @@ function Login() {
         type="password"
         name="password"
         value={account.password}
-        errorMessage={account.errors.password}
+        errorMessage={errors.password}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleInputChange}

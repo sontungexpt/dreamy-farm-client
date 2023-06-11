@@ -5,7 +5,7 @@ function useDebounce(value, delay) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (value.trim()) setIsLoading(true);
+    if (typeof value === 'string' && value.trim()) setIsLoading(true);
     const handler = setTimeout(() => {
       setDebounceValue(value);
       setIsLoading(false);
@@ -13,7 +13,7 @@ function useDebounce(value, delay) {
 
     return () => {
       // make sure debounceValue is updated when value is changed
-      setDebounceValue('');
+      if (typeof value === 'string') setDebounceValue('');
       clearTimeout(handler);
     };
 

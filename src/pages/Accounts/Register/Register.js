@@ -10,7 +10,8 @@ import { routes as routesConfig } from '~/configs';
 
 import Button from '~/components/Button/Button';
 import Input from '~/components/Input';
-import validator from '~/pages/Accounts/validator';
+import { useValidation } from '~/hooks';
+import { userSampleRules } from '~/hooks/useValidation';
 
 function Register() {
   const [account, setAccount] = useState({
@@ -18,47 +19,20 @@ function Register() {
     email: '',
     password: '',
     confirmPassword: '',
-    errors: {},
   });
+  const { errors, handleSubmit, handleFocus, handleBlur } = useValidation(
+    account,
+    userSampleRules,
+  );
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const handleSubmit = async (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
-
-    const errors = validator.validate(account);
-    if (validator.isNoErrors(errors)) {
+    handleSubmit(() => {
       dispatch(register(account));
-    } else {
-      setAccount((prevState) => ({
-        ...prevState,
-        errors,
-      }));
-    }
-  };
-
-  const handleFocus = (e) => {
-    const { name } = e.target;
-
-    setAccount((prevState) => ({
-      ...prevState,
-      errors: {
-        ...prevState.errors,
-        [name]: '',
-      },
-    }));
-  };
-
-  const handleBlur = () => {
-    const errors = validator.validate(account);
-    setAccount((prevState) => ({
-      ...prevState,
-      errors: {
-        ...prevState.errors,
-        ...errors,
-      },
-    }));
+    });
   };
 
   const handleInputChange = (e) => {
@@ -70,7 +44,7 @@ function Register() {
     }));
   };
   return (
-    <form onSubmit={handleSubmit} className={styles.wrapper}>
+    <form onSubmit={handleRegister} className={styles.wrapper}>
       <h1 className={styles.header}>{t('Create an account')}</h1>
 
       <Input
@@ -85,7 +59,7 @@ function Register() {
         onChange={handleInputChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        errorMessage={account.errors.name}
+        errorMessage={errors.name}
       />
       <Input
         required
@@ -99,7 +73,7 @@ function Register() {
         onChange={handleInputChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        errorMessage={account.errors.email}
+        errorMessage={errors.email}
       />
       <Input
         required
@@ -113,7 +87,7 @@ function Register() {
         onChange={handleInputChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        errorMessage={account.errors.password}
+        errorMessage={errors.password}
       />
       <Input
         required
@@ -127,16 +101,10 @@ function Register() {
         onChange={handleInputChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        errorMessage={account.errors.confirmPassword}
+        errorMessage={errors.confirmPassword}
       />
 
-      <Button
-        onClick={handleSubmit}
-        primary
-        hoverZoom
-        className={styles.loginBtn}
-        type="submit"
-      >
+      <Button primary hoverZoom className={styles.loginBtn} type="submit">
         {t('Create account')}
       </Button>
       <span className={styles.loginText}>

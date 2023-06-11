@@ -29,8 +29,9 @@ function Orders() {
     <div className={styles.wrapper}>
       <h2>Orders</h2>
       <div className={styles.content}>
-        {orders.map((order) => (
+        {orders.map((order, index) => (
           <OrderItem
+            key={index}
             className={styles.orderItem}
             orderDate={order.orderDate}
             orderName={order.orderName}

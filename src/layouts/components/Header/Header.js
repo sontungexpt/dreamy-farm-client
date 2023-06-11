@@ -15,7 +15,6 @@ import Logo from '~/assets/images/icons/Logo';
 import CartIcon from './CartIcon';
 import Avatar from './Avatar';
 import ToggleIcon from '~/components/ToggleIcon';
-import LinkCondition from '~/components/LinkCondition';
 import {
   EmptyHeart as EmptyHeartIcon,
   FilledHeart as FilledHeartIcon,
@@ -23,7 +22,6 @@ import {
 
 function Header() {
   const { t } = useTranslation('translations');
-  const { count } = useSelector((state) => state.order);
   const { wishList } = useSelector((state) => state.user);
 
   return (
@@ -75,14 +73,14 @@ function Header() {
             </Link>
           </li>
           <li className={styles.navbarItem}>
-            <LinkCondition
-              isAllowed={count > 0}
+            <Link
+              isAllowed={true}
               to={routesConfig.shoppingCart}
               className={styles.navbarLink}
               errorMessage="Your cart is empty"
             >
               <CartIcon />
-            </LinkCondition>
+            </Link>
           </li>
           <li className={styles.navbarItem}>
             <Avatar />

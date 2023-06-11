@@ -7,7 +7,7 @@ import styles from './NewAddressCard.module.scss';
 
 import Trans from '~/components/Trans';
 import Button from '~/components/Button';
-import Input from '~/components/Input/Input';
+import Input from '~/components/Input';
 import { Modal } from '~/components/ModalButton';
 import {
   Phone as PhoneIcon,
@@ -15,27 +15,44 @@ import {
   Plus as PlusIcon,
 } from '~/assets/images/icons/SvgIcons';
 
-function NewAddressCard() {
-  const [address, setAddress] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const { email } = useSelector((state) => state.user);
+import { useValidation } from '~/hooks';
+import { userSampleRules } from '~/hooks/useValidation';
 
-  const dispatch = useDispatch();
+function NewAddressCard() {
+  const [newAddress, setNewAddress] = useState({
+    address: '',
+    phoneNumber: '',
+  });
+  const { email } = useSelector((state) => state.user);
+  const { errors, handleSubmit, handleFocus, handleBlur } = useValidation(
+    newAddress,
+    userSampleRules,
+  );
 
   const modalRef = useRef(null);
+  const dispatch = useDispatch();
+
   const handleAddNewAddress = () => {
-    // if phoneNumber or address is not valid return immediately
-    // if(something)
-    // return;
-    
-    
-    // logic if address and phoneNumber is valid
-    dispatch(addUserAddress({ address, phoneNumber, email }));
-    setAddress('');
-    setPhoneNumber('');
-    modalRef.current.close();
+    handleSubmit(() => {
+      dispatch(
+        addUserAddress({
+          email,
+          address: newAddress.address,
+          phoneNumber: newAddress.phoneNumber,
+        }),
+      );
+      modalRef.current.close();
+    });
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setNewAddress((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
   return (
     <div>
       <Button
@@ -59,21 +76,29 @@ function NewAddressCard() {
               labelIcon={<PhoneIcon color="var(--yellow-color)" />}
               className={styles.input}
               label={<Trans>Phone number</Trans>}
-              id="phone"
+              required
+              id="new-address-phoneNumber"
               type="text"
-              name="phone"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
+              name="phoneNumber"
+              errorMessage={errors.phoneNumber}
+              value={newAddress.phoneNumber}
+              onChange={handleInputChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
             <Input
               labelIcon={<LocationIcon color="var(--green-color)" />}
               className={styles.input}
               label={<Trans>Address</Trans>}
-              id="address"
+              id="new-address-address"
               type="text"
               name="address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              value={newAddress.address}
+              required
+              errorMessage={errors.address}
+              onChange={handleInputChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
           </div>
           <div className={styles.buttonWrapper}>
