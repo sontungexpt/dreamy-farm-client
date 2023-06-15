@@ -3,9 +3,9 @@ import i18next from 'i18next';
 import { toast } from 'react-toastify';
 
 const t = i18next.t.bind(i18next);
-// const request = axios.create({
-//   baseURL: 'https://localhost:3001',
-// });
+const request = axios.create({
+  baseURL: 'http://localhost:3001',
+});
 
 const notifyMessage = async (callback) => {
   try {
@@ -41,16 +41,18 @@ const notifyMessage = async (callback) => {
 };
 
 export const get = async (url, params) => {
-  const res = await notifyMessage(async () => await axios.get(url, { params }));
+  const res = await notifyMessage(
+    async () => await request.get(url, { params }),
+  );
   return res;
 };
 
 export const post = async (url, data) => {
-  const res = await notifyMessage(async () => await axios.post(url, data));
+  const res = await notifyMessage(async () => await request.post(url, data));
   return res;
 };
 
 export const put = async (url, data) => {
-  const res = await notifyMessage(async () => await axios.put(url, data));
+  const res = await notifyMessage(async () => await request.put(url, data));
   return res;
 };

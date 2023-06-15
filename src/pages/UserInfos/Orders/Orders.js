@@ -29,7 +29,9 @@ function Orders() {
             orderDate={order.createdAt}
             orderName={order._id}
             orderPrice={order.price}
-            orderState={order.status}
+            orderState={
+              order.status.charAt(0).toUpperCase() + order.status.slice(1)
+            }
             numberOfItem={order.products.length}
           />
         ))}
