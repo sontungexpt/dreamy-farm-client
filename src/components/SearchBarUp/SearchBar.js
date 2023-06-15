@@ -23,6 +23,7 @@ import Loader from '~/components/Loader';
 import { Search as SearchIcon } from '~/assets/images/icons/SvgIcons';
 import { history } from '~/utils';
 import { routes as routesConfig } from '~/configs';
+import { useTranslation } from 'react-i18next';
 
 function SearchBar({
   placeholder,
@@ -35,6 +36,7 @@ function SearchBar({
 
   renderItem,
 }) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [activeIndex, setActiveIndex] = useState(null);
@@ -141,13 +143,12 @@ function SearchBar({
         {...getReferenceProps({
           ref: refs.setReference,
           onChange: handleChangeInput,
-          placeholder: placeholder,
           value: inputValue,
           onKeyDown: handleEnter,
           'aria-autocomplete': 'list',
         })}
         type="text"
-        placeholder={placeholder}
+        placeholder={t(placeholder)}
         className={clsx([
           {
             [inputClassName]: inputClassName,
