@@ -75,13 +75,6 @@ function Login() {
         onChange={handleInputChange}
       />
 
-      <Link
-        to={routesConfig.forgotPassword}
-        className={styles.navigateToForgot}
-      >
-        {t('Forgot password?')}
-      </Link>
-
       <Button type="submit" primary hoverZoom className={styles.loginBtn}>
         {t('Login now')}
       </Button>
@@ -96,4 +89,10 @@ function Login() {
   );
 }
 
+// <Link
+//   to={routesConfig.forgotPassword}
+//   className={styles.navigateToForgot}
+// >
+//   {t('Forgot password?')}
+// </Link>
 export default Login;
