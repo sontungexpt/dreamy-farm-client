@@ -9,6 +9,7 @@ import {
   addAddress,
   updateAddress,
   deleteAddress,
+  createOrder,
 } from '~/apiServices/userServices';
 
 import { routes as routesConfig } from '~/configs';
@@ -25,7 +26,7 @@ export const userSlice = createSlice({
     name: '',
     avatar: '',
     addreses: [],
-    // addreses{
+    // addreses: {
     //    address: '',
     //    phoneNumber: '',
     //    active: false,
@@ -48,11 +49,6 @@ export const userSlice = createSlice({
       state.wishList = [];
 
       window.localStorage.removeItem('DreamyFarmToken');
-    },
-
-    findAddressActive: (state) => {
-      const activeAddress = state.addreses.find((address) => address.active);
-      return activeAddress;
     },
   },
   extraReducers: (builder) => {
@@ -195,6 +191,21 @@ export const deleteUserAddress = createAsyncThunk(
   async ({ email, address, phoneNumber }) => {
     const newAddreses = await deleteAddress({ email, address, phoneNumber });
     return newAddreses;
+  },
+);
+
+export const createUserOrder = createAsyncThunk(
+  'user/createUserOrder',
+  // temp solution is embed products into order
+  async ({ email, address, phoneNumber, products, paymentMethod, price }) => {
+    await createOrder({
+      email,
+      address,
+      phoneNumber,
+      products,
+      paymentMethod,
+      price,
+    });
   },
 );
 

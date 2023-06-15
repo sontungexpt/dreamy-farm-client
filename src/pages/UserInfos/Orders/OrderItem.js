@@ -32,13 +32,16 @@ function OrderItem({
           className={clsx([
             styles.stateColor,
             {
-              [styles.stateColorComplete]: orderState === 'Complete',
+              [styles.stateColorComplete]:
+                orderState.toLowerCase() === 'Complete'.toLowerCase(),
             },
             {
-              [styles.stateColorPending]: orderState === 'Pending',
+              [styles.stateColorPending]:
+                orderState.toLowerCase() === 'Pending'.toLowerCase(),
             },
             {
-              [styles.stateColorCancel]: orderState === 'Cancel',
+              [styles.stateColorCancel]:
+                orderState.toLowerCase() === 'Cancel'.toLowerCase(),
             },
           ])}
         >

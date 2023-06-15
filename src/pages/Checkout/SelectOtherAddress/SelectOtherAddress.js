@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { clsx } from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAddress } from '~/redux/slices/orderSlice';
@@ -16,12 +16,12 @@ import {
   Phone as PhoneIcon,
 } from '~/assets/images/icons/SvgIcons';
 
-function SelectOtherAddress({ addreses }) {
+function SelectOtherAddress() {
+  const dispatch = useDispatch();
   const modalRef = useRef(null);
   const selectorRef = useRef(null);
-  const dispatch = useDispatch();
-  const { address: orderAdress } = useSelector((state) => state.order);
-  const { addressActive } = useSelector((state) => state.user);
+  const { addreses } = useSelector((state) => state.user);
+  const { address: addressOrder } = useSelector((state) => state.order);
 
   const handleSave = () => {
     dispatch(setAddress(selectorRef.current.activeItem));
@@ -32,20 +32,25 @@ function SelectOtherAddress({ addreses }) {
     modalRef.current.close();
   };
 
+  useEffect(() => {
+    const activeIndex = addreses.findIndex((address) => address.active);
+    dispatch(setAddress(addreses[activeIndex]));
+  }, [addreses, dispatch]);
+
   return (
     <>
       <Card
-        name="address"
-        checked={addressActive?.address && addressActive?.phoneNumber}
+        name="address-order"
+        checked={addressOrder?.address && addressOrder?.phoneNumber}
         onChange={() => {}}
         onClick={() => modalRef.current.open()}
         titles={[
           {
-            title: addressActive?.address || 'Select other address',
+            title: addressOrder?.address || 'Select other address',
             icon: <AddressIcon color="var(--blue-color)" />,
           },
           {
-            title: addressActive?.phoneNumber || 'Select other phone number',
+            title: addressOrder?.phoneNumber || 'Select other phone number',
             icon: <PhoneIcon color="var(--green-color)" />,
           },
         ]}
@@ -60,7 +65,7 @@ function SelectOtherAddress({ addreses }) {
           itemClassName={clsx(['col l-12 c-12 m-12', styles.item])}
           renderItem={(address, index, active) => (
             <Card
-              name="address"
+              name="chooose-other-address"
               checked={active}
               onChange={() => {}}
               key={index}
@@ -69,11 +74,11 @@ function SelectOtherAddress({ addreses }) {
               //
               titles={[
                 {
-                  title: address,
+                  title: address.address,
                   icon: <AddressIcon color="var(--blue-color)" />,
                 },
                 {
-                  title: '0392211343',
+                  title: address.phoneNumber,
                   icon: <PhoneIcon color="var(--green-color)" />,
                 },
               ]}

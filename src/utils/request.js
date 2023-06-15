@@ -15,6 +15,7 @@ const notifyMessage = async (callback) => {
       // NOTE: no need to notify message
       const notShowMessages = [
         'Get recipes successfully',
+        'Get orders successfully',
         'Product found',
         'Recipe found',
         'Search successfully',

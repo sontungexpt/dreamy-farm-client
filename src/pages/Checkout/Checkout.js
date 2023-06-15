@@ -1,10 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { setPaymentMethod } from '~/redux/slices/orderSlice';
+import { createUserOrder } from '~/redux/slices/userSlice';
 import { clsx } from 'clsx';
+import { toast } from 'react-toastify';
 
 import styles from './Checkout.module.scss';
 import { routes as routesConfig } from '~/configs';
 import { checkoutConfigs as configs } from '~/configs/pages';
+import { history } from '~/utils';
+import { objectToArray } from '~/utils';
 
 import SelectOtherAddress from './SelectOtherAddress';
 import Selector from '~/components/Selector';
@@ -16,23 +20,42 @@ import Card from './Card';
 
 function Checkout() {
   const dispatch = useDispatch();
-  const addreses = [
-    '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-    '86 Le Thanh Ton, Ben Nghe, District 1, Ho Chi Minh',
-  ];
   const {
     products,
     totalPrice,
     paymentMethod,
     count: productCount,
+    address: addressOrder,
   } = useSelector((state) => state.order);
+  const { email } = useSelector((state) => state.user);
 
   const handlePaymentMethodChange = (method) => {
     dispatch(setPaymentMethod(method));
+  };
+
+  const handleCompleteCheckout = () => {
+    if (
+      (products.length <= 0 ||
+        addressOrder.phoneNumber === '' ||
+        addressOrder.address === '' ||
+        paymentMethod === '',
+      totalPrice === 0)
+    ) {
+      toast.error('Vui lòng nhập đầy đủ thông tin');
+      return;
+    }
+
+    dispatch(
+      createUserOrder({
+        email,
+        address: addressOrder.address,
+        phoneNumber: addressOrder.phoneNumber,
+        products: objectToArray(products),
+        price: totalPrice,
+        paymentMethod,
+      }),
+    );
+    history.navigate(routesConfig.orderConfirm);
   };
 
   return (
@@ -42,7 +65,7 @@ function Checkout() {
           <h1 className={styles.header}>
             <Trans>Billing address</Trans>
           </h1>
-          <SelectOtherAddress addreses={addreses} />
+          <SelectOtherAddress />
         </section>
         <section className={styles.section}>
           <h1 className={styles.header}>
@@ -109,9 +132,9 @@ function Checkout() {
             </h2>
             <h1 className={styles.price}>{totalPrice}đ</h1>
             <Button
-              to={routesConfig.orderConfirm}
               primary
               className={clsx([styles.completeBtn])}
+              onClick={handleCompleteCheckout}
             >
               <Trans>Complete Checkout</Trans>
             </Button>

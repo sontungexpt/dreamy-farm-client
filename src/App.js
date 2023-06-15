@@ -77,7 +77,7 @@ function App() {
         >
           <Routes>
             {handleRoutes(publicRoutes)}
-            {handleRoutes(privateRoutes)}
+            {handleRoutes(privateRoutes, !loggedIn)}
           </Routes>
         </Suspense>
         <ToastContainer

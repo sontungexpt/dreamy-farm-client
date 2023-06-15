@@ -1,28 +1,21 @@
 import OrderItem from './OrderItem';
 import { useState, useEffect } from 'react';
 import styles from './Orders.module.scss';
+import { getOrders } from '~/apiServices/userServices';
+import { useSelector } from 'react-redux';
 
 function Orders() {
-  const [orders, setOrders] = useState([
-    {
-      orderDate: '10/10/2021',
-      orderName: 'Order 1',
-      orderPrice: 700000,
-      numberOfItem: 5,
-      orderState: 'Pending',
-    },
-    {
-      orderDate: '10/10/2021',
-      orderName: 'Order 2',
-      orderPrice: 800000,
-      numberOfItem: 3,
-      orderState: 'Complete',
-    },
-  ]); // [OrderItem, OrderItem, OrderItem
+  const [orders, setOrders] = useState([]); // [OrderItem, OrderItem, OrderItem
+  const { email } = useSelector((state) => state.user);
 
   useEffect(() => {
-    // call api
-    // setOrders();
+    const handlegetOrders = async () => {
+      const ordersRes = await getOrders(email);
+      if (ordersRes) setOrders(ordersRes);
+      else setOrders([]);
+    };
+    handlegetOrders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -33,11 +26,11 @@ function Orders() {
           <OrderItem
             key={index}
             className={styles.orderItem}
-            orderDate={order.orderDate}
-            orderName={order.orderName}
-            orderPrice={order.orderPrice}
-            orderState={order.orderState}
-            numberOfItem={order.numberOfItem}
+            orderDate={order.createdAt}
+            orderName={order._id}
+            orderPrice={order.price}
+            orderState={order.status}
+            numberOfItem={order.products.length}
           />
         ))}
       </div>

@@ -111,3 +111,33 @@ export const deleteAddress = async ({ email, address, phoneNumber }) => {
   const { data } = res;
   return data;
 };
+
+export const getOrders = async (email) => {
+  const res = await request.get(apis.orders.getOrders, {
+    email,
+  });
+
+  const { data } = res;
+  return data;
+};
+
+export const createOrder = async ({
+  email,
+  address,
+  phoneNumber,
+  products, // just post productId
+  paymentMethod,
+  price,
+}) => {
+  const res = await request.post(apis.orders.createOrder, {
+    email,
+    address,
+    phoneNumber,
+    products,
+    paymentMethod,
+    price,
+  });
+
+  const { data } = res;
+  return data;
+};

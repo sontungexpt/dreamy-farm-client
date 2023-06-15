@@ -24,6 +24,11 @@ const apis = {
     updateAddress: '/user/updateAddress',
     deleteAddress: '/user/deleteAddress',
   },
+  orders: {
+    getOrders: '/order/get',
+    createOrder: '/order/create',
+  },
+
   recipes: {
     getRecipes: '/recipes',
     addRecipe: '/recipes/add',

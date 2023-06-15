@@ -13,9 +13,7 @@ export const counterSlice = createSlice({
     // uid is unique key for product and uid === '{id}-{type.name}'
     //  uid: {
     //    id: 1, //required
-    //    status: 'ready', // 'ready' or 'busy'
-    //    name: '', //required
-    //    count: 1, //required default 1
+    //    status: 'ready', // 'ready' or 'busy' name: '', //required count: 1, //required default 1
     //    type:{
     //      name: '' //required
     //      price: 0 //required
@@ -29,11 +27,11 @@ export const counterSlice = createSlice({
     // total product count in cart (regardless of type)
     count: 0,
 
-    address: {},
-    // address: {
-    //   address: '',
-    //   phoneNumber: '',
-    // }
+    address: {
+      address: '',
+      phoneNumber: '',
+    },
+
     paymentMethod: checkoutConfigs.payments[0].method, //cash or credit card
 
     // if true, can move to checkout page
