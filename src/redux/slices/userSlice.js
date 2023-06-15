@@ -101,6 +101,9 @@ export const userSlice = createSlice({
       })
       .addCase(deleteUserAddress.fulfilled, (state, action) => {
         if (action.payload) state.addreses = action.payload;
+      })
+      .addCase(createUserOrder.fulfilled, (state, action) => {
+        return;
       });
   },
 });

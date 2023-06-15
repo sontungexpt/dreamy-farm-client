@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setPaymentMethod } from '~/redux/slices/orderSlice';
+import { setPaymentMethod, clearOrder } from '~/redux/slices/orderSlice';
 import { createUserOrder } from '~/redux/slices/userSlice';
 import { clsx } from 'clsx';
 import { toast } from 'react-toastify';
@@ -56,6 +56,7 @@ function Checkout() {
       }),
     );
     history.navigate(routesConfig.orderConfirm);
+    dispatch(clearOrder());
   };
 
   return (

@@ -8,6 +8,7 @@ import images from '~/assets/images/jpgs/index';
 import { productsPageConfigs as configs } from '~/configs/pages';
 import { routes as routesConfig } from '~/configs';
 import PreivewCard from '~/components/PreivewCard';
+import Trans from '~/components/Trans';
 
 function Home() {
   const [recipes, setRecipes] = useState([]);
@@ -28,14 +29,14 @@ function Home() {
         }}
       >
         <Link to={routesConfig.products} className={styles.headerLink}>
-          Shop Now!
+          <Trans>Shop Now!</Trans>
         </Link>
       </div>
 
       <div className={clsx('grid', 'wide', styles.wrapperContent)}>
         <div className={styles.categoriesPart}>
           <Link to={routesConfig.products} className={styles.brandTitle}>
-            Categories
+            <Trans>Categories</Trans>
           </Link>
           <div className="row">
             {configs.categories.map((category, index) => (
@@ -59,7 +60,7 @@ function Home() {
 
         <div className={styles.recipesPart}>
           <Link to={routesConfig.recipes} className={styles.brandTitle}>
-            Recipes
+            <Trans>Recipes</Trans>
           </Link>
           <div className="row">
             {recipes.map((recipe, index) => (

@@ -44,6 +44,18 @@ export const counterSlice = createSlice({
   },
 
   reducers: {
+    clearOrder: (state) => {
+      state.products = {};
+      state.totalPrice = 0;
+      state.count = 0;
+      state.address = {
+        address: '',
+        phoneNumber: '',
+      };
+      state.paymentMethod = checkoutConfigs.payments[0].method;
+      state.canMoveToCheckout = false;
+      state.errors = [];
+    },
     // when add product to cart
     addProduct: (state, action) => {
       const { id, name, image, type, count } = action.payload;
@@ -174,5 +186,6 @@ export const {
 
   setAddress,
   setPaymentMethod,
+  clearOrder,
 } = counterSlice.actions;
 export default counterSlice.reducer;
