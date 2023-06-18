@@ -55,7 +55,6 @@ each time
   ![Preview 11](./gitsources/previews/dreamy_farm_11.png)
   ![Preview 12](./gitsources/previews/dreamy_farm_12.png)
   ![Preview 14](./gitsources/previews/dreamy_farm_14.png)
-  ![Preview 15](./gitsources/previews/dreamy_farm_15.png)
   ![Preview 17](./gitsources/previews/dreamy_farm_17.png)
 
 </details>
