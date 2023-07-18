@@ -140,9 +140,9 @@
 
     Example:
 
-    ```
+    ```scss
     .containerStyle {
-        background-color: red;
+      background-color: red;
     }
     ```
 
@@ -159,8 +159,8 @@
 
     Example:
 
-    ```
-    import styles from "./styles.module.scss";
+    ```js
+    import styles from './styles.module.scss';
     ```
 
   - The className will be something like this: className={styles.container} or
