@@ -79,6 +79,13 @@ function Login() {
         {t('Login now')}
       </Button>
 
+      <Link
+        to={routesConfig.forgotPassword}
+        className={styles.navigateToForgot}
+      >
+        {t('Forgot password?')}
+      </Link>
+
       <p>
         {t("Don't have an account?")}
         <Link to={routesConfig.register} className={styles.navigateToSignUp}>
@@ -89,10 +96,4 @@ function Login() {
   );
 }
 
-// <Link
-//   to={routesConfig.forgotPassword}
-//   className={styles.navigateToForgot}
-// >
-//   {t('Forgot password?')}
-// </Link>
 export default Login;

@@ -3,7 +3,7 @@
 ## 1. Features
 
 - **Searchbar**: search products and recipes (priority products) 5 results for
-each time
+  each time
 
 - **Login, Register**: with password encryption
 
@@ -42,20 +42,20 @@ each time
 <details>
   <summary>Show Images</summary>
 
-  ![Preview 1](./gitsources/previews/dreamy_farm_1.png)
-  ![Preview 2](./gitsources/previews/dreamy_farm_2.png)
-  ![Preview 3](./gitsources/previews/dreamy_farm_3.png)
-  ![Preview 4](./gitsources/previews/dreamy_farm_4.png)
-  ![Preview 5](./gitsources/previews/dreamy_farm_5.png)
-  ![Preview 6](./gitsources/previews/dreamy_farm_6.png)
-  ![Preview 7](./gitsources/previews/dreamy_farm_7.png)
-  ![Preview 8](./gitsources/previews/dreamy_farm_8.png)
-  ![Preview 9](./gitsources/previews/dreamy_farm_9.png)
-  ![Preview 10](./gitsources/previews/dreamy_farm_10.png)
-  ![Preview 11](./gitsources/previews/dreamy_farm_11.png)
-  ![Preview 12](./gitsources/previews/dreamy_farm_12.png)
-  ![Preview 14](./gitsources/previews/dreamy_farm_14.png)
-  ![Preview 17](./gitsources/previews/dreamy_farm_17.png)
+![Preview 1](./gitsources/previews/dreamy_farm_1.png)
+![Preview 2](./gitsources/previews/dreamy_farm_2.png)
+![Preview 3](./gitsources/previews/dreamy_farm_3.png)
+![Preview 4](./gitsources/previews/dreamy_farm_4.png)
+![Preview 5](./gitsources/previews/dreamy_farm_5.png)
+![Preview 6](./gitsources/previews/dreamy_farm_6.png)
+![Preview 7](./gitsources/previews/dreamy_farm_7.png)
+![Preview 8](./gitsources/previews/dreamy_farm_8.png)
+![Preview 9](./gitsources/previews/dreamy_farm_9.png)
+![Preview 10](./gitsources/previews/dreamy_farm_10.png)
+![Preview 11](./gitsources/previews/dreamy_farm_11.png)
+![Preview 12](./gitsources/previews/dreamy_farm_12.png)
+![Preview 14](./gitsources/previews/dreamy_farm_14.png)
+![Preview 17](./gitsources/previews/dreamy_farm_17.png)
 
 </details>
 
@@ -63,10 +63,14 @@ each time
 
 - **Step 1. Install mongodb (because this project use local db)**
 
-- **Step 2. Clone backend repo**
+- **Step 2. Clone backend repo and this repo**
 
   ```
   git clone https://github.com/sontungexpt/dreamy-farm-server.git
+  ```
+
+  ```
+  git clone https://github.com/sontungexpt/dreamy-farm-client.git
   ```
 
 - **Step 3. Run mongodb**
@@ -98,7 +102,6 @@ each time
   ```
   npm start
   ```
-
 
 ## 4. Authors
 
